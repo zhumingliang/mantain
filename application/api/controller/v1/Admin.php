@@ -16,7 +16,7 @@ use app\api\model\UserT;
 use app\api\validate\AdminValidate;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
-use app\lib\exception\AdminException;
+use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
 use think\Db;

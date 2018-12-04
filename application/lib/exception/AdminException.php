@@ -13,6 +13,6 @@ class AdminException extends BaseException
 {
     public $code = 401;
     public $msg = '新增小区账户失败';
-    public $errorCode = 240001;
+    public $errorCode = 30001;
 
 }

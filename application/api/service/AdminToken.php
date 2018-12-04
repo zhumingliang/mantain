@@ -185,7 +185,7 @@ class AdminToken extends Token
         $key = empty($key) ? self::generateToken() : $key;
         $value = json_encode($cachedValue);
         $expire_in = config('setting.token_expire_in');
-        $request = Cache::remember($key, $value, $expire_in);
+        $request = Cache::set($key, $value, $expire_in);
 
 
         if (!$request) {
@@ -198,7 +198,6 @@ class AdminToken extends Token
         $cachedValue['token'] = $key;
         unset($cachedValue['phone']);
         unset($cachedValue['type']);
-        unset($cachedValue['role_id']);
         unset($cachedValue['department']);
         unset($cachedValue['card']);
         return $cachedValue;
@@ -214,7 +213,7 @@ class AdminToken extends Token
             'card' => $admin->card,
             'type' => $admin->type,
             'account' => $admin->account,
-            'role_id' => $admin->role_id,
+            'role' => $admin->role,
             'department' => $admin->department,
         ];
 

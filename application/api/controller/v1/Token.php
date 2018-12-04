@@ -36,10 +36,11 @@ class Token extends Controller
      * @apiParam (请求参数说明) {String} account  账号
      * @apiParam (请求参数说明) {String} pwd   用户密码
      * @apiSuccessExample {json} 返回样例:
-     * {"u_id":1,"username":"朱明良","account":"admin","token":"dee6d40181d08d8a75e9f17063031962"}     * @apiSuccess (返回参数说明) {int} u_id 用户id
+     * {"u_id":1,"username":"朱明良","account":"admin","role":1,"token":"7488c7a7b1f79ed99b319f141637519c"}
      * @apiSuccess (返回参数说明) {int} u_id 用户id
      * @apiSuccess (返回参数说明) {String} username 用户名称
      * @apiSuccess (返回参数说明) {String} account 账号
+     * @apiSuccess (返回参数说明) {int} role 用户角色：暂定
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要放在header里传入，有效期 2 hours
      * @return \think\response\Json
      * @throws \think\Exception
