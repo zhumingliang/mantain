@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/12/5
- * Time: 10:33 AM
+ * Date: 2018/12/6
+ * Time: 1:25 AM
  */
 
 namespace app\api\model;
@@ -11,7 +11,7 @@ namespace app\api\model;
 
 use think\Model;
 
-class MeetingPlaceV extends Model
+class SpaceMultiT extends Model
 {
 
 }

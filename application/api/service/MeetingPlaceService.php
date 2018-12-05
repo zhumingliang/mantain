@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\MeetingplaceReceptT;
 use app\api\model\MeetingplaceT;
+use app\api\model\MeetingplaceV;
 use app\api\model\ReceptDetailT;
 use app\lib\exception\OperationException;
 use think\Db;
@@ -27,6 +28,8 @@ class MeetingPlaceService
         Db::startTrans();
         try {
             //新增基本信息
+            $params['user_count'] = $this->getUserCount($params['users']);
+            $params['money'] = $this->getMoney($params['detail']);
             $mp = MeetingplaceT::create($params);
             if (!$mp) {
                 throw new OperationException(
@@ -64,8 +67,6 @@ class MeetingPlaceService
 
                 }
             }
-
-
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();
@@ -75,7 +76,35 @@ class MeetingPlaceService
 
     }
 
-    private function saveUsers($mp_id, $users)
+    public function getList($time_begin, $time_end, $department, $username, $status,$page,$size)
+    {
+        $list = MeetingplaceV::getList($page,$size,$time_begin, $time_end, $department, $username, $status);
+        return $list;
+
+
+    }
+
+    private function getUserCount($users)
+    {
+        $users_arr = explode('A', $users);
+        return count($users_arr);
+
+    }
+
+    private function getMoney($detail)
+    {
+        $detail_arr = explode('A', $detail);
+        $money = 0;
+        foreach ($detail_arr as $k => $v) {
+            $d = explode(',', $v);
+            $money += $d[3];
+
+        }
+        return $money;
+    }
+
+    private
+    function saveUsers($mp_id, $users)
     {
         $users_arr = explode('A', $users);
         $list = [];
@@ -94,8 +123,8 @@ class MeetingPlaceService
         return $res;
     }
 
-
-    private function saveDetail($mp_id, $detail)
+    private
+    function saveDetail($mp_id, $detail)
     {
         $detail_arr = explode('A', $detail);
         $list = [];
