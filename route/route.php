@@ -17,7 +17,7 @@ Route::get('hello/:name', 'index/hello');
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
 
-Route::post('api/:version/access/save', 'api/:version.AccessControl/save');
+Route::rule('api/:version/access/save', 'api/:version.AccessControl/save');
 Route::get('api/:version/access/list', 'api/:version.AccessControl/getList');
 
 Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
