@@ -12,7 +12,6 @@ namespace app\api\validate;
 class MeetingValidate extends BaseValidate
 {
     protected $rule = [
-        'id'=>'require|isPositiveInteger',
         'meeting_date' => 'require|isNotEmpty',
         'address' => 'require|isNotEmpty',
         'time_begin' => 'require|isNotEmpty',

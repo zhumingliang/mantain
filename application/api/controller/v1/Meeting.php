@@ -61,7 +61,7 @@ class Meeting extends BaseController
         $admin_id = TokenService::getCurrentUid();
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
-        $params['status'] = CommonEnum::STATE_IS_OK;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         $id = MeetingT::create($params);
         if (!$id) {
             throw new OperationException();

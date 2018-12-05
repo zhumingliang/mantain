@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/12/3
- * Time: 4:31 PM
+ * Date: 2018/12/5
+ * Time: 10:12 AM
  */
 
 namespace app\api\model;
@@ -11,11 +11,11 @@ namespace app\api\model;
 
 use think\Model;
 
-class AccessControlV extends Model
+class RecreationalV extends Model
 {
 
     public static function getList($page, $size, $time_begin, $time_end, $department,
-                                   $username, $status, $access)
+                                   $username, $status, $space)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -34,9 +34,9 @@ class AccessControlV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->where(function ($query) use ($access) {
-                if ($access && $access != "全部") {
-                    $query->where('FIND_IN_SET("' . $access . '", access)');
+            ->where(function ($query) use ($space) {
+                if ($space && $space != "全部") {
+                    $query->where('FIND_IN_SET("' . $space . '", space)');
                 }
             })
             ->order('create_time desc')

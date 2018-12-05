@@ -67,8 +67,8 @@ class AccessControl extends BaseController
      * @apiDescription  获取预约申请—门禁权限列表
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/access/list??department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&access=全部&page=1&size=20
-     * @apiParam (请求参数说明) {String}  department 默认传入全部
-     * @apiParam (请求参数说明) {String}  username 申请人
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  申请人/默认传入全部
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
