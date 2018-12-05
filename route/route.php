@@ -29,8 +29,3 @@ Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save')
 
 Route::post('api/:version/recreational/save', 'api/:version.Recreational/save');
 Route::get('api/:version/recreational/list', 'api/:version.Recreational/getList');
-
-
-return [
-
-];
