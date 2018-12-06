@@ -68,7 +68,7 @@ class MeetingPlace extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  教育培训—会场预订列表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/meeting/place/list??department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&page=1&size=20
+     * http://maintain.mengant.cn/api/v1/meeting/place/list?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&page=1&size=20
      * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
      * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
      * @apiParam (请求参数说明) {String}  time_begin 开始时间

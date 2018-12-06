@@ -30,6 +30,12 @@ Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList
 Route::post('api/:version/multi/save', 'api/:version.Multi/save');
 Route::get('api/:version/multi/list', 'api/:version.Multi/getList');
 
+Route::post('api/:version/official/save', 'api/:version.Official/save');
+Route::get('api/:version/official/list', 'api/:version.Official/getList');
+
+Route::post('api/:version/car/save', 'api/:version.Car/save');
+Route::get('api/:version/car/list', 'api/:version.Car/getList');
+
 
 Route::post('api/:version/recreational/save', 'api/:version.Recreational/save');
 Route::get('api/:version/recreational/list', 'api/:version.Recreational/getList');
