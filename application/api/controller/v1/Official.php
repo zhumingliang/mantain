@@ -33,8 +33,8 @@ class Official extends BaseController
      *       "table_number": 1,
      *       "product": "考察",
      *       "content": "业务规范",
-     *       "meal": 中餐,
-     *       "meal_type": 工作餐,
+     *       "meal": "中餐",
+     *       "meal_type": "工作餐",
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 12：00",
      *     }

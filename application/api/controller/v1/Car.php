@@ -21,7 +21,7 @@ use app\lib\exception\SuccessMessage;
 class Car extends BaseController
 {
     /**
-     * @api {POST} /api/v1/car/save  16-CMS-预约申请—公务用车申请
+     * @api {POST} /api/v1/car/save  18-CMS-预约申请—公务用车申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  公务用车申请
@@ -68,7 +68,7 @@ class Car extends BaseController
 
 
     /**
-     * @api {GET} /api/v1/car/list 17-预约申请—预约申请—公务用车申请列表
+     * @api {GET} /api/v1/car/list 19-预约申请—预约申请—公务用车申请列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription 公务用车申请列表
