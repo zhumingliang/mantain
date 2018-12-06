@@ -27,6 +27,10 @@ Route::post('api/:version/meeting/delete', 'api/:version.Meeting/delete');
 Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save');
 Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList');
 
+Route::post('api/:version/meeting/recept/save', 'api/:version.MeetingRecept/save');
+Route::get('api/:version/meeting/recept/list', 'api/:version.MeetingRecept/getList');
+
+
 Route::post('api/:version/multi/save', 'api/:version.Multi/save');
 Route::get('api/:version/multi/list', 'api/:version.Multi/getList');
 
