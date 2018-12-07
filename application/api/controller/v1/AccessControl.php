@@ -105,9 +105,37 @@ class AccessControl extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $access, $page = 1, $size = 20)
     {
-
         $list = (new AccessService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $access);
         return json($list);
+    }
+
+
+    /**
+     * @api {GET} /api/v1/access/export 26-获取预约申请—门禁权限列表-导出列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取预约申请—门禁权限列表-导出列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/access/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&access=全部
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {String}  access 开通功能
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $status
+     * @param $access
+     * @return \think\response\Json
+     */
+    public function export($time_begin, $time_end, $department, $username, $status,
+                            $access)
+    {
+        (new AccessService())->export($time_begin, $time_end, $department, $username, $status, $access);
+        return json(new SuccessMessage());
     }
 
 }

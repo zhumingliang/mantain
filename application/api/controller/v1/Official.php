@@ -35,6 +35,7 @@ class Official extends BaseController
      *       "content": "业务规范",
      *       "meal": "中餐",
      *       "meal_type": "工作餐",
+     *       "meal_space": "饭堂",
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 12：00",
      *     }
@@ -47,6 +48,7 @@ class Official extends BaseController
      * @apiParam (请求参数说明) {String} product  项目
      * @apiParam (请求参数说明) {String} content  内容
      * @apiParam (请求参数说明) {int} meal  餐次
+     * @apiParam (请求参数说明) {String} meal_space  就餐地点
      * @apiParam (请求参数说明) {String} meal_type  餐类
      *
      * @apiSuccessExample {json} 返回样例:
@@ -132,6 +134,36 @@ class Official extends BaseController
     {
         $list = (new OfficialService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $meal, $meal_type);
         return json($list);
+    }
+
+    /**
+     * @api {GET} /api/v1/official/export 28-预约申请—公务接待-围餐预定申请列表-导出
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  围餐预定申请列表-导出
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/official/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&meal=全部&meal_type=全部
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {String}  meal 餐次/默认传入全部
+     * @apiParam (请求参数说明) {String}  meal_type 餐类/默认传入全部
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $status
+     * @param $meal
+     * @param $meal_type
+     * @return \think\response\Json
+     */
+    public function export($time_begin, $time_end, $department, $username, $status,
+                            $meal, $meal_type)
+    {
+         (new OfficialService())->export( $time_begin, $time_end, $department, $username, $status, $meal, $meal_type);
+        return json(new SuccessMessage());
     }
 
 }

@@ -128,8 +128,8 @@ class MeetingPlace extends BaseController
      */
     public function export($time_begin, $time_end, $department, $username, $status)
     {
-        $list = (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
-        return json($list);
+        (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
+        return json(new SuccessMessage());
     }
 
 }

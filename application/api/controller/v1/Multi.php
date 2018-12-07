@@ -140,12 +140,13 @@ class Multi extends BaseController
      * @param $username
      * @param $status
      * @param $space
+     * @return \think\response\Json
      */
     public function export($time_begin, $time_end, $department, $username, $status,
-                            $space)
+                           $space)
     {
-        (new MultiService())->export($time_begin, $time_end, $department, $username, $status,$space);
-
+        (new MultiService())->export($time_begin, $time_end, $department, $username, $status, $space);
+        return json(new SuccessMessage());
     }
 
 }

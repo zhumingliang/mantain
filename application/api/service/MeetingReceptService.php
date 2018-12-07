@@ -16,7 +16,7 @@ use app\lib\exception\OperationException;
 use think\Db;
 use think\Exception;
 
-class MeetingReceptService
+class MeetingReceptService extends BaseService
 {
 
     public function save($params)
@@ -79,11 +79,41 @@ class MeetingReceptService
         return $res;
     }
 
-    public function getList($time_begin, $time_end, $department, $username, $status,$page,$size)
+    public function getList($time_begin, $time_end, $department, $username, $status, $page, $size)
     {
-        $list = MeetingReceptV::getList($page,$size,$time_begin, $time_end, $department, $username, $status);
+        $list = MeetingReceptV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return $list;
+    }
 
+
+    public function export($time_begin, $time_end, $department, $username, $status)
+    {
+        $list = MeetingReceptV::export($time_begin, $time_end, $department, $username, $status);
+        $list = $this->prefixStatus($list);
+        $header = array(
+            '日期',
+            '申请人',
+            '部门',
+            '公务活动项目',
+            '来访单位',
+            '领队人',
+            '职务',
+            '级别',
+            '厅级人数',
+            '处级人数',
+            '处级以下人数',
+            '男',
+            '女',
+            '使用会场',
+            '会议时间',
+            '会议人数',
+            '拟住宿酒店',
+            '用餐信息（用餐日期,餐次,用餐人数,就餐地点,费用）',
+            '拟陪同人员名单',
+            '状态',
+        );
+        $file_name = '预约申请—会议、接待—导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
 
     }
 

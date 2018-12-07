@@ -41,4 +41,34 @@ class MeetingReceptV extends Model
 
     }
 
+    public static function export( $time_begin, $time_end, $department,
+                                  $username, $status)
+    {
+        $time_end = addDay(1, $time_end);
+        $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
+            ->where(function ($query) use ($department) {
+                if ($department && $department != "全部") {
+                    $query->where('department', '=', $department);
+                }
+            })
+            ->where(function ($query) use ($username) {
+                if ($username && $username != "全部") {
+                    $query->where('username', '=', $username);
+                }
+            })
+            ->where(function ($query) use ($status) {
+                if ($status != 3) {
+                    $query->where('status', '=', $status);
+                }
+            })
+            ->field('create_time,username,department,project,unit,leader,post,grade,departmental,
+            section,under_section,male,female,meeting_place,meeting_date,meeting_count,hotel,
+            meals,accompany,status')
+            ->order('create_time desc')
+            ->select()
+            ->toArray();
+        return $list;
+
+
+    }
 }

@@ -137,10 +137,13 @@ class Car extends BaseController
      * @param $username
      * @param $status
      * @param $reason
+     * @return \think\response\Json
      */
     public function export($time_begin, $time_end, $department, $username, $status,
                             $reason)
     {
          (new CarService())->export($time_begin, $time_end, $department, $username, $status, $reason);
+        return json(new SuccessMessage());
+
     }
 }
