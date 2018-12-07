@@ -37,7 +37,7 @@ class Car extends BaseController
      * @apiParam (请求参数说明) {String} address  目的地
      * @apiParam (请求参数说明) {String} count   人数
      * @apiParam (请求参数说明) {String} reason   用车原因
-     * @apiParam (请求参数说明) {int} members  出行人数
+     * @apiParam (请求参数说明) {int} members  出行人员
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
@@ -96,7 +96,7 @@ class Car extends BaseController
      * @apiSuccess (返回参数说明) {String} address  目的地
      * @apiSuccess (返回参数说明) {String} count   人数
      * @apiSuccess (返回参数说明) {String} reason   用车原因
-     * @apiSuccess (返回参数说明) {int} members  出行人数
+     * @apiSuccess (返回参数说明) {int} members  出行人员
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
      *
@@ -118,4 +118,29 @@ class Car extends BaseController
     }
 
 
+    /**
+     * @api {GET} /api/v1/car/export 22-预约申请—预约申请—公务用车申请列表-导出
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 公务用车申请列表-导出
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/car/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&reason=全部
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {String}  reason 用车原因/默认传入全部
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $status
+     * @param $reason
+     */
+    public function export($time_begin, $time_end, $department, $username, $status,
+                            $reason)
+    {
+         (new CarService())->export($time_begin, $time_end, $department, $username, $status, $reason);
+    }
 }

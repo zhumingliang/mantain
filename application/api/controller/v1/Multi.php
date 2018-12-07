@@ -71,7 +71,7 @@ class Multi extends BaseController
      * @api {GET} /api/v1/multi/list 15-预约申请—场地使用—功能室申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  文体活动场地申请列表
+     * @apiDescription  场地使用—功能室申请
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/multi/list?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&space=全部&page=1&size=20
      * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
@@ -114,8 +114,38 @@ class Multi extends BaseController
                             $space, $page = 1, $size = 20)
     {
 
-        $list = (new MultiService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size, $space, $space);
+        $list = (new MultiService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size, $space);
         return json($list);
+    }
+
+    /**
+     * @api {GET} /api/v1/multi/export 24-预约申请—场地使用—功能室申请-导出报表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  功能室申请-导出报表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/multi/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=0&space=全部
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {String}  space 申请场地
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     *
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $status
+     * @param $space
+     */
+    public function export($time_begin, $time_end, $department, $username, $status,
+                            $space)
+    {
+        (new MultiService())->export($time_begin, $time_end, $department, $username, $status,$space);
+
     }
 
 }

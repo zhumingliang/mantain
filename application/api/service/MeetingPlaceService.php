@@ -84,6 +84,14 @@ class MeetingPlaceService
 
     }
 
+    public function export($time_begin, $time_end, $department, $username, $status)
+    {
+        $list = MeetingplaceV::getList($time_begin, $time_end, $department, $username, $status);
+        return $list;
+
+
+    }
+
     private function getUserCount($users)
     {
         $users_arr = explode('A', $users);
