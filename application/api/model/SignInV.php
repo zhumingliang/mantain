@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/12/6
- * Time: 11:06 PM
+ * Date: 2018/12/10
+ * Time: 2:04 AM
  */
 
 namespace app\api\model;
@@ -11,10 +11,16 @@ namespace app\api\model;
 
 use think\Model;
 
-class MeetingReceptV extends Model
+class SignInV extends Model
 {
-    public static function getList($page, $size, $time_begin, $time_end, $department,
-                                   $username, $status)
+    public function getCreateTimeAttr($value)
+    {
+        return date("Y-m-d", strtotime($value));
+    }
+
+    public static function getList($time_begin, $time_end,
+                                   $department, $username,
+                                   $address, $theme, $page, $size)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -28,9 +34,14 @@ class MeetingReceptV extends Model
                     $query->where('username', '=', $username);
                 }
             })
-            ->where(function ($query) use ($status) {
-                if ($status != 3) {
-                    $query->where('status', '=', $status);
+            ->where(function ($query) use ($address) {
+                if ($address && $address != "全部") {
+                    $query->where('address', '=', $address);
+                }
+            })
+            ->where(function ($query) use ($theme) {
+                if ($theme) {
+                    $query->where('theme', 'like', $theme);
                 }
             })
             ->order('create_time desc')
@@ -38,11 +49,11 @@ class MeetingReceptV extends Model
             ->toArray();
         return $list;
 
-
     }
 
-    public static function export( $time_begin, $time_end, $department,
-                                  $username, $status)
+    public static function export($time_begin, $time_end,
+                                  $department, $username,
+                                  $address, $theme)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -56,19 +67,22 @@ class MeetingReceptV extends Model
                     $query->where('username', '=', $username);
                 }
             })
-            ->where(function ($query) use ($status) {
-                if ($status != 3) {
-                    $query->where('status', '=', $status);
+            ->where(function ($query) use ($address) {
+                if ($address && $address != "全部") {
+                    $query->where('status', '=', $address);
                 }
             })
-            ->field('create_time,official_time,username,department,project,unit,leader,post,grade,departmental,
-            section,under_section,male,female,meeting_place,meeting_date,meeting_count,hotel,
-            meals,accompany,status')
+            ->where(function ($query) use ($theme) {
+                if ($theme) {
+                    $query->where('theme', 'like', $theme);
+                }
+            })
             ->order('create_time desc')
             ->select()
             ->toArray();
         return $list;
 
-
     }
+
+
 }

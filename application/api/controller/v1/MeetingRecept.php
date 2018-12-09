@@ -26,6 +26,8 @@ class MeetingRecept extends BaseController
      * @apiExample {post}  请求样例:
      *    {
      *       "apply_date": "2018-12-30",
+     *       "time_begin": "2018-12-28",
+     *       "time_end": "2018-12-30",
      *       "project": "公务活动项目",
      *       "unit": "税务局",
      *       "leader": "张科长",
@@ -44,6 +46,8 @@ class MeetingRecept extends BaseController
      *       "meals": "用餐日期,餐次,用餐人数,就餐地点,费用A用餐日期,餐次,用餐人数,就餐地点,费用",
      *     }
      * @apiParam (请求参数说明) {String} apply_date   申请日期
+     * @apiParam (请求参数说明) {String} time_begin   公务开始时间
+     * @apiParam (请求参数说明) {String} time_begin   公务截止时间
      * @apiParam (请求参数说明) {String} project  公务活动项目
      * @apiParam (请求参数说明) {String} unit  来访单位
      * @apiParam (请求参数说明) {String} leader  领队
@@ -99,13 +103,14 @@ class MeetingRecept extends BaseController
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
-     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"create_time":"2018-12-07 00:13:49","id":6,"admin_id":1,"username":"朱明良","department":"办公室","apply_date":"2018-12-10","unit":"税务局","count":20,"leader":"张科长","project":"公务活动","meeting_date":"2018-12-30 00:00:00","meeting_place":"1号会议室","status":0}]}
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"create_time":"2018-12-07 00:13:49","official_time":"2018-12-28至2018-12-30","id":6,"admin_id":1,"username":"朱明良","department":"办公室","apply_date":"2018-12-10","unit":"税务局","count":20,"leader":"张科长","project":"公务活动","meeting_date":"2018-12-30 00:00:00","meeting_place":"1号会议室","status":0}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} id 申请id
      * @apiSuccess (返回参数说明) {String} apply_date 日期
+     * @apiSuccess (返回参数说明) {String} official_time 公务时间
      * @apiSuccess (返回参数说明) {String} unit 来访单位
      * @apiSuccess (返回参数说明) {int} count 人数
      * @apiSuccess (返回参数说明) {int} leader 领队

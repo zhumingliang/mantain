@@ -92,6 +92,7 @@ class MeetingReceptService extends BaseService
         $list = $this->prefixStatus($list);
         $header = array(
             '日期',
+            '公务时间',
             '申请人',
             '部门',
             '公务活动项目',

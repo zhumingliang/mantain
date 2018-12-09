@@ -13,7 +13,7 @@ use think\Model;
 
 class MeetingplaceV extends Model
 {
-    public static function getList($time_begin, $time_end, $department,
+    public static function getList($page, $size, $time_begin, $time_end, $department,
                                    $username, $status)
     {
         $time_end = addDay(1, $time_end);
@@ -33,6 +33,7 @@ class MeetingplaceV extends Model
                     $query->where('status', '=', $status);
                 }
             })
+            ->hidden(['users', 'detail'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
@@ -42,8 +43,8 @@ class MeetingplaceV extends Model
     }
 
 
-    public static function export( $time_begin, $time_end, $department,
-                                   $username, $status)
+    public static function export($time_begin, $time_end, $department,
+                                  $username, $status)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -62,9 +63,10 @@ class MeetingplaceV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->field('')
+             ->field('create_time,username,department,meals_count,letter_size,letter_title,
+             users,detail,money,status')
             ->order('create_time desc')
-            ->toArray()
+            ->select()
             ->toArray();
         return $list;
 

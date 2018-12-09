@@ -26,6 +26,10 @@ Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
 Route::post('api/:version/meeting/update', 'api/:version.Meeting/update');
 Route::post('api/:version/meeting/delete', 'api/:version.Meeting/delete');
 Route::post('api/:version/meeting/sign/in', 'api/:version.Meeting/signIn');
+Route::get('api/:version/meeting/list', 'api/:version.Meeting/getMeetingList');
+Route::get('api/:version/meeting/sign/in/list', 'api/:version.Meeting/getSignInList');
+Route::get('api/:version/meeting/export', 'api/:version.Meeting/exportMeeting');
+Route::get('api/:version/meeting/sign/in/export', 'api/:version.Meeting/exportSignIn');
 
 Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save');
 Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList');

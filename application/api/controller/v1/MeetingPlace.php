@@ -83,7 +83,9 @@ class MeetingPlace extends BaseController
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} id 申请id
-     * @apiSuccess (返回参数说明) {String} apply_date 日期
+     * @apiSuccess (返回参数说明) {String} create_time 日期
+     * @apiSuccess (返回参数说明) {String} username 申请人
+     * @apiSuccess (返回参数说明) {String} department 部门
      * @apiSuccess (返回参数说明) {String} letter_title 公函标题
      * @apiSuccess (返回参数说明) {String} letter_size 公函字号
      * @apiSuccess (返回参数说明) {int} meals_count 陪餐人数
@@ -119,6 +121,7 @@ class MeetingPlace extends BaseController
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+
      * @param $time_begin
      * @param $time_end
      * @param $department

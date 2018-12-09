@@ -14,4 +14,5 @@ use think\Model;
 class SignInT extends Model
 {
 
+
 }

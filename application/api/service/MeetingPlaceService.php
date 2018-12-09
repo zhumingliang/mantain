@@ -17,7 +17,7 @@ use app\lib\exception\OperationException;
 use think\Db;
 use think\Exception;
 
-class MeetingPlaceService
+class MeetingPlaceService extends BaseService
 {
     /**
      * @param $params
@@ -76,9 +76,9 @@ class MeetingPlaceService
 
     }
 
-    public function getList($time_begin, $time_end, $department, $username, $status,$page,$size)
+    public function getList($time_begin, $time_end, $department, $username, $status, $page, $size)
     {
-        $list = MeetingplaceV::getList($page,$size,$time_begin, $time_end, $department, $username, $status);
+        $list = MeetingplaceV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return $list;
 
 
@@ -86,9 +86,22 @@ class MeetingPlaceService
 
     public function export($time_begin, $time_end, $department, $username, $status)
     {
-        $list = MeetingplaceV::getList($time_begin, $time_end, $department, $username, $status);
-        return $list;
-
+        $list = MeetingplaceV::export($time_begin, $time_end, $department, $username, $status);
+        $list = $this->prefixStatus($list);
+        $header = array(
+            '日期',
+            '申请人',
+            '部门',
+            '陪餐人数',
+            '公函字号',
+            '公函标题',
+            '接待对象（单位,姓名,职务）',
+            '接待明细（时间,项目,地点,费用）',
+            '总费用',
+            '状态'
+        );
+        $file_name = '预约申请—教育培训—会场预订—导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
 
     }
 
