@@ -11,8 +11,10 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\MeetingT;
+use app\api\service\MeetingService;
 use app\api\validate\MeetingValidate;
 use app\api\service\Token as TokenService;
+use app\index\controller\News;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
@@ -29,9 +31,9 @@ class Meeting extends BaseController
      *    {
      *       "meeting_date": "2018-12-30",
      *       "address": "101会议室",
-     *       "time_begin": "09：00",
-     *       "time_end": "09：30",
-     *       "meeting_begin": "10：00",
+     *       "time_begin": "2018-12-30 09：00",
+     *       "time_end": "2018-12-30 09：30",
+     *       "meeting_begin": "2018-12-30 10：00",
      *       "theme": "全体职工大会",
      *       "outline": "年终总结",
      *       "remark": "必须参加"
@@ -80,9 +82,9 @@ class Meeting extends BaseController
      *       "id": "1",
      *       "meeting_date": "2018-12-30",
      *       "address": "101会议室",
-     *       "time_begin": "09：00",
-     *       "time_end": "09：30",
-     *       "meeting_begin": "10：00",
+     *       "time_begin": "2018-12-30 09：00",
+     *       "time_end": "2018-12-30 09：30",
+     *       "meeting_begin": "2018-12-30 10：00",
      *       "theme": "全体职工大会",
      *       "outline": "年终总结",
      *       "remark": "必须参加"
@@ -158,8 +160,32 @@ class Meeting extends BaseController
         return json(new SuccessMessage());
     }
 
-    public function signIn()
+    /**
+     * @api {POST} /api/v1/meeting/sign/in  29-CMS-会议签到
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  会议签到
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "card": "123456"
+     *     }
+     * @apiParam (请求参数说明) {String} card  员工卡号
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $card
+     * @return \think\response\Json
+     */
+    public function signIn($card)
     {
+        (new MeetingService())->signIn($card);
+        return json(new SuccessMessage());
+    }
+
+    public function getMeetingList($time_begin,$time_end,$address,$theme,$page=1,$size=20)
+    {
+
 
     }
 

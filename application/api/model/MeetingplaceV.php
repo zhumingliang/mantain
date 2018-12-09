@@ -13,7 +13,7 @@ use think\Model;
 
 class MeetingplaceV extends Model
 {
-    public static function getList($page, $size, $time_begin, $time_end, $department,
+    public static function getList($time_begin, $time_end, $department,
                                    $username, $status)
     {
         $time_end = addDay(1, $time_end);

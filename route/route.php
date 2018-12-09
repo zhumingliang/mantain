@@ -25,6 +25,7 @@ Route::get('api/:version/access/export', 'api/:version.AccessControl/export');
 Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
 Route::post('api/:version/meeting/update', 'api/:version.Meeting/update');
 Route::post('api/:version/meeting/delete', 'api/:version.Meeting/delete');
+Route::post('api/:version/meeting/sign/in', 'api/:version.Meeting/signIn');
 
 Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save');
 Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList');
