@@ -14,7 +14,7 @@ use think\Model;
 class OfficialReceptV extends Model
 {
     public static function getList($page, $size, $time_begin, $time_end, $department,
-                                   $username, $status, $meal, $meal_type)
+                                   $username, $status, $meal_type)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -33,16 +33,12 @@ class OfficialReceptV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->where(function ($query) use ($meal) {
-                if ($meal && $meal != "全部") {
-                    $query->where('meal', '=', $meal);
-                }
-            })
             ->where(function ($query) use ($meal_type) {
                 if ($meal_type && $meal_type != "全部") {
                     $query->where('meal_type', '=', $meal_type);
                 }
             })
+            ->hidden(['meals'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
@@ -52,7 +48,7 @@ class OfficialReceptV extends Model
     }
 
     public static function export($time_begin, $time_end, $department,
-                                         $username, $status, $meal, $meal_type)
+                                         $username, $status, $meal_type)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -71,18 +67,13 @@ class OfficialReceptV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->where(function ($query) use ($meal) {
-                if ($meal && $meal != "全部") {
-                    $query->where('meal', '=', $meal);
-                }
-            })
             ->where(function ($query) use ($meal_type) {
                 if ($meal_type && $meal_type != "全部") {
                     $query->where('meal_type', '=', $meal_type);
                 }
             })
-            ->field('create_time,username,department,phone,cuisine,member,
-            table_number,meal_space,product,content,meal,meal_type,time_begin,time_end,status')
+            ->field('create_time,username,department,phone,product,content,
+            member,table_number,meal_space,meal_type,meals,meal_date,status')
             ->order('create_time desc')
             ->select()->toArray();
         return $list;
