@@ -38,7 +38,6 @@ class OfficialReceptV extends Model
                     $query->where('meal_type', '=', $meal_type);
                 }
             })
-            ->hidden(['meals'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
