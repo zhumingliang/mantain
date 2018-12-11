@@ -71,7 +71,8 @@ class TaskFlow{
 	 **/
 	public function end_process($run_process,$check_con)
 	{
-		return Db::name('run_process')->where('id',$run_process)->update(['status'=>2,'remark'=>$check_con,'bl_time'=>time()]);
+		$res= Db::name('run_process')->where('id',$run_process)->update(['status'=>2,'remark'=>$check_con,'bl_time'=>time()]);
+        return $res;
 	}
 	/**
 	 *运行记录
@@ -99,6 +100,6 @@ class TaskFlow{
 	 **/
 	public function up($run_id,$flow_process)
 	{
-		return Db::name('run')->where('id',$run_id)->update(['run_flow_process'=>$flow_process]);	
+		return Db::name('run')->where('id',$run_id)->update(['run_flow_process'=>$flow_process]);
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
 namespace app\index\Controller;
+use app\lib\exception\SuccessMessage;
 use think\Controller;
 use think\Db;
 use workflow\workflow;
@@ -51,7 +52,7 @@ class Flow extends Controller {
 				}
 
 
-			if($st != 1){
+			if($st == 1){
 				 return '<span class="btn  radius size-S" onclick=layer_show(\'审核\',"'.$url.'","850","650")>审核</span>';
 				}else{
 				 return '<span class="btn  radius size-S">无权限</span>';
@@ -161,7 +162,7 @@ class Flow extends Controller {
 		$data = $this->request->param();
 		$workflow = new workflow();
 		$flowinfo = $workflow->workdoaction($data,$this->uid);
-		return msg_return('Success!');
+		print_r($flowinfo);
 	}
 	public function ajax_back(){
 		$pid = input('back_id');

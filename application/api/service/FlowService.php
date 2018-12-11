@@ -31,7 +31,6 @@ class FlowService
         $uid = Token::getCurrentUid();
         $workflow = new workflow();
         $flow = $workflow->startworkflow($data, $uid);
-        print_r($flow);
         return $flow['code'];
     }
 
@@ -79,7 +78,7 @@ class FlowService
     {
         $workflow = new workflow();
         $flowinfo = $workflow->workdoaction($data, Token::getCurrentUid());
-        return msg_return('Success!');
+        return 1;
     }
 
     public function getInfo($wf_fid = 22, $wf_type = "access_control_t")

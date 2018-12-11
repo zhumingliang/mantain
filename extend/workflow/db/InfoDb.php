@@ -163,12 +163,15 @@ class InfoDB
                     ->where('is_del', 'eq', 0)
                     ->where('status', 'eq', 0)
                     ->find();
+
                 $info = Db::name('run_process')
                     ->where('run_id', 'eq', $result['id'])
                     ->where('run_flow', 'eq', $result['flow_id'])
                     ->where('run_flow_process', 'eq', $result['run_flow_process'])
                     ->where('status', 'eq', 0)
                     ->find();
+
+
                 if ($result) {
                     $workflow ['sing_st'] = 0;
                     $workflow ['flow_id'] = $result['flow_id'];
@@ -227,7 +230,10 @@ class InfoDB
      */
     public static function UpdateBill($wf_fid, $wf_type, $status = 1)
     {
-        $result = Db::name($wf_type)->where('id', 'eq', $wf_fid)->update(['status' => $status]);
+        $result = Db::name($wf_type)
+            ->where('id', 'eq', $wf_fid)
+            ->update(['status' => $status]);
+
         if (!$result) {
             return false;
         }

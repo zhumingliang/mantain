@@ -16,7 +16,7 @@ return [
     'hostname'        => '55a32a9887e03.gz.cdb.myqcloud.com',
     // 数据库名
    'database'        => 'maintain',
-    //'database'        => 'tpflow',
+   // 'database'        => 'tpflow',
     // 用户名
     'username'        => 'cdb_outerroot',
     // 密码
