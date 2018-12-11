@@ -51,7 +51,7 @@ class Flow extends Controller {
 				}
 
 
-			if($st == 1){
+			if($st != 1){
 				 return '<span class="btn  radius size-S" onclick=layer_show(\'审核\',"'.$url.'","850","650")>审核</span>';
 				}else{
 				 return '<span class="btn  radius size-S">无权限</span>';
@@ -98,6 +98,15 @@ class Flow extends Controller {
 	public function statr_save()
 	{
 		$data = $this->request->param();
+	//Array
+        //(
+        //    [wf_type] => news
+        //    [wf_fid] => 16
+        //    [wf_id] => 5
+        //    [new_type] => 0
+        //    [check_con] => 同意
+        //)
+
 		$workflow = new workflow();
 		$flow = $workflow->startworkflow($data,$this->uid);
 		if($flow['code']==1){
@@ -118,14 +127,37 @@ class Flow extends Controller {
 		$wf_fid = input('wf_fid');
 		$wf_type = input('wf_type');
 		$info = ['wf_title'=>input('wf_title'),'wf_fid'=>$wf_fid,'wf_type'=>$wf_type];
+
 		$workflow = new workflow();
 		$flowinfo = $workflow->workflowInfo($wf_fid,$wf_type);
+
+		//echo  json_encode($flowinfo);
+
+
 		$this->assign('info',$info);
 		$this->assign('flowinfo',$flowinfo);
 		return $this->fetch();
 	}
 	public function do_check_save()
 	{
+        /**
+         *
+         * art
+        btodo
+        check_con	委屈委屈
+        flow_id	13
+        flow_process	106
+        npid	107
+        run_id	20
+        run_process	35
+        sing_st	0
+        submit_to_save	ok
+        wf_backflow
+        wf_fid	13
+        wf_singflow
+        wf_title	2
+        wf_type	news
+         */
 		$data = $this->request->param();
 		$workflow = new workflow();
 		$flowinfo = $workflow->workdoaction($data,$this->uid);

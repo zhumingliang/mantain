@@ -42,19 +42,19 @@ require_once BEASE_URL . '/msg/mail.php';
 		 **/
 		function startworkflow($config,$uid)
 		{
-			$wf_id = $config['wf_id'];
-			$wf_fid = $config['wf_fid'];
-			$wf_type = $config['wf_type'];
+			$wf_id = $config['wf_id'];//工作流id
+			$wf_fid = $config['wf_fid'];//走流程的申请id
+			$wf_type = $config['wf_type'];//流程列别：
 			//判断流程是否存在
 			$wf = FlowDb::getWorkflow($wf_id);
 			if(!$wf){
 				return ['msg'=>'未找到工作流！','code'=>'-1'];
 			}
 			//判断单据是否存在
-			$wf = InfoDB::getbill($wf_fid,$wf_type);
+			/*$wf = InfoDB::getbill($wf_fid,$wf_type);
 			if(!$wf){
 				return ['msg'=>'单据不存在！','code'=>'-1'];
-			}
+			}*/
 			
 			//根据流程获取流程第一个步骤
 			$wf_process = ProcessDb::getWorkflowProcess($wf_id);

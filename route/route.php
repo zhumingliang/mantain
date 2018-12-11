@@ -20,6 +20,7 @@ Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
 Route::rule('api/:version/access/save', 'api/:version.AccessControl/save');
 Route::get('api/:version/access/list', 'api/:version.AccessControl/getList');
 Route::get('api/:version/access/export', 'api/:version.AccessControl/export');
+Route::get('api/:version/access', 'api/:version.AccessControl/getTheAccess');
 
 
 Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
@@ -56,3 +57,7 @@ Route::get('api/:version/car/export', 'api/:version.Car/export');
 Route::post('api/:version/recreational/save', 'api/:version.Recreational/save');
 Route::get('api/:version/recreational/list', 'api/:version.Recreational/getList');
 Route::get('api/:version/recreational/export', 'api/:version.Recreational/export');
+
+
+Route::post('api/:version/flow/check', 'api/:version.Flow/check');
+Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');

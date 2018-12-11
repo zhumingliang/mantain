@@ -21,6 +21,7 @@ class ProcessDb{
 		$info = Db::name('flow_process')
 				->field('id,process_name,process_type,process_to,auto_person,auto_sponsor_ids,auto_role_ids,auto_sponsor_text,auto_role_text,range_user_ids,range_user_text,is_sing,sign_look,is_back')
 				->find($pid);
+
 		if($info['auto_person']==3){ //办理人员
 			$ids = explode(",",$info['range_user_text']);
 			$info['todo'] = ['ids'=>explode(",",$info['range_user_ids']),'text'=>explode(",",$info['range_user_text'])];
@@ -152,7 +153,8 @@ class ProcessDb{
             foreach($run_log as $k=>$v)
             {
                 //echo $v['uid'];
-                $run_log[$k]['user'] =Db::name('user')->where('id','eq',$v['uid'])->value('username');
+               // $run_log[$k]['user'] =Db::name('user')->where('id','eq',$v['uid'])->value('username');
+                $run_log[$k]['user'] =Db::name('admin_t')->where('id','eq',$v['uid'])->value('username');
             }
         }
 
