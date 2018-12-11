@@ -93,12 +93,12 @@ class Flow extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/access 34-获取预约申请—查看审核
+     * @api {GET} /api/v1/flow/info 34-获取预约申请—查看审核
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  获取预约申请—门禁权限列表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/access?id=22&wf_type=access_control_t
+     * http://maintain.mengant.cn/api/v1/flow/info?id=22&wf_type=access_control_t
      * @apiParam (请求参数说明) {String}  id  列表id
      * @apiParam (请求参数说明) {String} wf_type   流程类别：门禁申请：access_control_t；公务接待：official_recept_t
      * @apiSuccessExample {json}返回样例:
@@ -109,7 +109,7 @@ class Flow extends BaseController
      * @param $wf_type
      * @return array
      */
-    public function getflow($wf_fid, $wf_type)
+    public function getInfo($wf_fid, $wf_type)
     {
         $check = (new FlowService())->btn($wf_fid, $wf_type, $status = 1);
         $info = (new FlowService())->getInfo($wf_fid, $wf_type);
