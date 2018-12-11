@@ -153,4 +153,15 @@ class Official extends BaseController
         return json(new SuccessMessage());
     }
 
+
+    /**
+     * @param $id
+     * @return \think\response\Json
+     */
+    public function getTheOfficial($id)
+    {
+        $info = (new OfficialService())->getTheFlow($id);
+        return json($info);
+    }
+
 }

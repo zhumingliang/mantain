@@ -48,6 +48,8 @@ Route::get('api/:version/multi/export', 'api/:version.Multi/export');
 Route::post('api/:version/official/save', 'api/:version.Official/save');
 Route::get('api/:version/official/list', 'api/:version.Official/getList');
 Route::get('api/:version/official/export', 'api/:version.Official/export');
+Route::get('api/:version/official', 'api/:version.AccessControl/getTheOfficial');
+
 
 Route::post('api/:version/car/save', 'api/:version.Car/save');
 Route::get('api/:version/car/list', 'api/:version.Car/getList');
