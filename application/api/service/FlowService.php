@@ -43,7 +43,8 @@ class FlowService
 
         switch ($status) {
             case 0:
-                return '<span class="btn  radius size-S" onclick=layer_show(\'发起工作流\',"' . $url_star . '","450","350")>发起工作流</span>';
+                return 2;
+                //return '<span class="btn  radius size-S" onclick=layer_show(\'发起工作流\',"' . $url_star . '","450","350")>发起工作流</span>';
                 break;
             case 1:
                 $st = 0;
@@ -78,16 +79,25 @@ class FlowService
     {
         $workflow = new workflow();
         $flowinfo = $workflow->workdoaction($data, Token::getCurrentUid());
+
         return 1;
     }
 
-    public function getInfo($wf_fid = 22, $wf_type = "access_control_t")
+    public function getInfo($wf_fid, $wf_type)
     {
         $info = ['wf_title' => input('wf_title'), 'wf_fid' => $wf_fid, 'wf_type' => $wf_type];
         $workflow = new workflow();
         $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
         return $flowinfo;
 
+    }
+
+
+    public function getInfoForComplete($wf_fid, $wf_type)
+    {
+        $workflow = new workflow();
+        $flowinfo = $workflow->workflowInfoForComplete($wf_fid, $wf_type);
+        return $flowinfo;
     }
 
 }

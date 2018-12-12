@@ -102,6 +102,25 @@ require_once BEASE_URL . '/msg/mail.php';
 			$wf = InfoDB::workflowInfo($wf_fid,$wf_type);
 			return $wf;
 		}
+
+
+
+        /**
+         * 流程状态查询
+         *
+         * @$wf_fid 单据编号
+         * @$wf_type 单据表
+         **/
+        function workflowInfoForComplete($wf_fid,$wf_type)
+        {
+            $workflowInfo = array ();
+            if ($wf_fid == '' || $wf_type == '') {
+                return ['msg'=>'单据编号，单据表不可为空！','code'=>'-1'];
+            }
+            $wf = InfoDB::workflowInfoForComplete($wf_fid,$wf_type);
+            return $wf;
+        }
+
 		/*
 		 * 获取下一步骤信息
 		 *
