@@ -15,8 +15,8 @@ return [
     // 服务器地址
     'hostname' => '55a32a9887e03.gz.cdb.myqcloud.com',
     // 数据库名
-    //'database' => 'maintain',
-     'database'        => 'tpflow',
+    'database' => 'maintain',
+    // 'database'        => 'tpflow',
     // 用户名
     'username' => 'cdb_outerroot',
     // 密码
@@ -30,8 +30,8 @@ return [
     // 数据库编码默认采用utf8
     'charset' => 'utf8',
     // 数据库表前缀
-    'prefix'          => 'wf_',
-    //'prefix' => 'maintain_',
+    //'prefix'          => 'wf_',
+    'prefix' => 'maintain_',
     // 数据库调试模式
     'debug' => true,
     // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
