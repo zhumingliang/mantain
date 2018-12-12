@@ -19,12 +19,12 @@ class Flowdesign extends Admin
      */
     protected function type()
     {
-       /* $wf_type = [
+       $wf_type = [
             'news' => '新闻信息',
             'cnt' => '合同信息',
             'paper' => '证件信息'
-        ];*/
-        $wf_type = [
+        ];
+        /*$wf_type = [
             'access_control_t' => '门禁权限',
             'recreational' => '场地使用-文体活动',
             'meeting_place' => '教育培训—会场预订',
@@ -32,7 +32,7 @@ class Flowdesign extends Admin
             'meeting_recept' => '会议接待',
             'car' => '公务用车',
 
-        ];
+        ];*/
         $this->assign('type', $wf_type);
     }
 

@@ -33,10 +33,12 @@ class Flow extends BaseController
      *       "run_process": 1,
      *       "wf_fid": 1,
      *       "wf_type": "access_control_t",
+     *       "submit_to_save": "ok",
      *
      *     }
      * @apiParam (请求参数说明) {String} check_con   审核意见
      * @apiParam (请求参数说明) {String} wf_type   流程类别：门禁申请：access_control_t；公务接待：official_recept_t
+     * @apiParam (请求参数说明) {String} submit_to_save   审批类别：ok：同意；back ： 不同意
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
@@ -52,7 +54,7 @@ class Flow extends BaseController
      * @param $wf_fid
      * @return \think\response\Json
      */
-    public function checkPass($check_con, $flow_id, $flow_process, $npid, $run_id, $run_process, $wf_fid, $wf_type)
+    public function checkPass($check_con, $flow_id, $flow_process, $npid, $run_id, $run_process, $wf_fid, $wf_type,$submit_to_save='ok')
     {
         /**
          *
@@ -82,7 +84,7 @@ class Flow extends BaseController
             'run_id' => $run_id,
             'run_process' => $run_process,
             'sing_st' => 0,
-            'submit_to_save' => "ok",
+            'submit_to_save' => $submit_to_save,
             'wf_fid' => $wf_fid,
             'wf_singflow' => "",
             'wf_backflow' => "",

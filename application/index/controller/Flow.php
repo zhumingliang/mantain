@@ -52,7 +52,7 @@ class Flow extends Controller {
 				}
 
 
-			if($st == 1){
+			if($st != 1){
 				 return '<span class="btn  radius size-S" onclick=layer_show(\'审核\',"'.$url.'","850","650")>审核</span>';
 				}else{
 				 return '<span class="btn  radius size-S">无权限</span>';
