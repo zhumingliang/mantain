@@ -44,9 +44,7 @@ class Car extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     *
      * @return \think\response\Json
-     * @throws OperationException
      * @throws \app\lib\exception\ParameterException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -58,10 +56,11 @@ class Car extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
-        $id = CarT::create($params);
-        if (!$id) {
-            throw new OperationException();
-        }
+        (new CarService())->save($params);
+        /*    $id = CarT::create($params);
+            if (!$id) {
+                throw new OperationException();
+            }*/
         return json(new SuccessMessage());
 
     }
@@ -140,9 +139,9 @@ class Car extends BaseController
      * @return \think\response\Json
      */
     public function export($time_begin, $time_end, $department, $username, $status,
-                            $reason)
+                           $reason)
     {
-         (new CarService())->export($time_begin, $time_end, $department, $username, $status, $reason);
+        (new CarService())->export($time_begin, $time_end, $department, $username, $status, $reason);
         return json(new SuccessMessage());
 
     }

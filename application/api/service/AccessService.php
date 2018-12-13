@@ -57,7 +57,6 @@ class AccessService extends BaseService
 
     }
 
-
     private function saveCheck($wf_fid, $wf_type = "access_control_t")
     {
 

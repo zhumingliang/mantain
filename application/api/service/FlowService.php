@@ -145,7 +145,7 @@ class FlowService
      */
     private function getWfId($wf_type)
     {
-        $flow = Flow::where('wf_type', $wf_type)
+        $flow = Flow::where('type', $wf_type)
             ->where('status', 0)
             ->find();
         if ($flow) {
