@@ -96,6 +96,7 @@ class FlowService
     public function saveCheck($wf_fid, $wf_type)
     {
         $wf_id = $this->getWfId($wf_type);
+
         if (!$wf_id) {
             return -1;
         }
@@ -146,7 +147,7 @@ class FlowService
     private function getWfId($wf_type)
     {
         $flow = Flow::where('type', $wf_type)
-            ->where('status', 0)
+            ->where('status' ,'=',0)
             ->find();
         if ($flow) {
             return $flow->id;
