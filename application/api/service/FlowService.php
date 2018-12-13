@@ -46,20 +46,20 @@ class FlowService
      */
     public function btn($wf_fid, $wf_type, $status)
     {
-        $url = url("/index/flow/do_check/", ["wf_type" => $wf_type, "wf_title" => '2', 'wf_fid' => $wf_fid]);
-        $url_star = url("/index/flow/start/", ["wf_type" => $wf_type, "wf_title" => '2', 'wf_fid' => $wf_fid]);
-
         $id = Db::name('log')->insertGetId(['msg' => $wf_fid . '-' . $status]);
 
         switch ($status) {
             case 0:
                 return 2;
-                //return '<span class="btn  radius size-S" onclick=layer_show(\'发起工作流\',"' . $url_star . '","450","350")>发起工作流</span>';
                 break;
             case 1:
                 $st = 0;
                 $workflow = new workflow();
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
+                $preprocess = $flowinfo['preprocess'];
+                if (key_exists(0, $preprocess)) {
+                    return 2;
+                }
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
                     if (in_array($this->uid, $user)) {
@@ -75,9 +75,8 @@ class FlowService
 
                 if ($st == 1) {
                     return 1;
-                    // return '<span class="btn  radius size-S" onclick=layer_show(\'审核\',"'.$url.'","850","650")>审核</span>';
                 } else {
-                    return 2;// '<span class="btn  radius size-S">无权限</span>';
+                    return 2;
                 }
                 break;
             default:
@@ -146,7 +145,7 @@ class FlowService
     private function getWfId($wf_type)
     {
         $flow = Flow::where('type', $wf_type)
-            ->where('status' ,'=',0)
+            ->where('status', '=', 0)
             ->find();
         if ($flow) {
             return $flow->id;
