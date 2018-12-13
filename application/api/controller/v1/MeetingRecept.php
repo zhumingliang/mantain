@@ -87,7 +87,6 @@ class MeetingRecept extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/meeting/recept/list 21-预约申请—会议、接待列表
      * @apiGroup  CMS
