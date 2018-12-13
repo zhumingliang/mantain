@@ -13,5 +13,11 @@ use think\Model;
 
 class OfficialReceptT extends Model
 {
+    public function meals()
+    {
+        return $this->hasMany('OfficialMealT',
+            'mr_id', 'id');
+    }
+
 
 }

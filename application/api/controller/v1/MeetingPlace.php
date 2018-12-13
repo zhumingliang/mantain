@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\MeetingplaceT;
 use app\api\service\MeetingPlaceService;
 use app\api\validate\MeetingPlaceValidate;
 use app\api\service\Token as TokenService;
@@ -121,7 +122,6 @@ class MeetingPlace extends BaseController
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
-
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -133,6 +133,51 @@ class MeetingPlace extends BaseController
     {
         (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
+    }
+
+    /**
+     * @api {GET} /api/v1/meeting/place 36-预约申请—教育培训—会场预订-详情
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  教育培训—会场预订列表-详情
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting/place?id=17
+     * @apiParam (请求参数说明) {String}  id 申请id
+     * @apiSuccessExample {json}返回样例:
+     * {"id":17,"apply_date":"2018-12-30","letter_size":"asasassa1231231","letter_title":"公函标题","meals_count":10,"create_time":"2018-12-06 00:47:10","update_time":"2018-12-06 00:47:10","admin_id":1,"status":0,"user_count":2,"money":200,"users":[{"unit":"国税局","name":"张三","post":"股长"},{"unit":"地税局","name":"李四","post":"科长"}],"detail":[{"recept_time":"2018-10-10","content":"午餐","address":"饭堂","money":100},{"recept_time":"2018-10-10","content":"午餐","address":"饭堂","money":100}]}
+     * @apiSuccess (返回参数说明) {int} id 申请id
+     * @apiSuccess (返回参数说明) {String} create_time 日期
+     * @apiSuccess (返回参数说明) {String} username 申请人
+     * @apiSuccess (返回参数说明) {String} department 部门
+     * @apiSuccess (返回参数说明) {String} letter_title 公函标题
+     * @apiSuccess (返回参数说明) {String} letter_size 公函字号
+     * @apiSuccess (返回参数说明) {int} meals_count 陪餐人数
+     * @apiSuccess (返回参数说明) {int} user_count   接待人数
+     * @apiSuccess (返回参数说明) {int} money   费用合计
+     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
+     * @apiSuccess (返回参数说明) {Obj} users  接待对象信息
+     * @apiSuccess (返回参数说明) {String} unit  单位
+     * @apiSuccess (返回参数说明) {String} name  姓名
+     * @apiSuccess (返回参数说明) {String} post  职务
+     * @apiSuccess (返回参数说明) {Obj} detail  接待明细
+     * @apiSuccess (返回参数说明) {String} recept_time  时间
+     * @apiSuccess (返回参数说明) {String} content  项目内容
+     * @apiSuccess (返回参数说明) {String} address  地点
+     * @apiSuccess (返回参数说明) {String} money  费用
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMeetingPlace($id)
+    {
+        $obj = MeetingplaceT::where('id', $id)
+            ->with(['users', 'detail'])
+            ->find();
+        return json($obj);
+
+
     }
 
 }

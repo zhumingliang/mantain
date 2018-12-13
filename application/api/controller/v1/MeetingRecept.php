@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\MeetingReceptT;
 use app\api\service\MeetingReceptService;
 use app\api\validate\MeetingReceptValidate;
 use app\api\service\Token as TokenService;
@@ -157,6 +158,52 @@ class MeetingRecept extends BaseController
     {
         (new MeetingReceptService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
+    }
+
+    /**
+     * @api {GET} /api/v1/meeting/recept 37-预约申请—会议、接待-详情
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  预约申请—会议、接待-详情
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting/recept?id=6
+     * @apiParam (请求参数说明) {String}  id 申请id
+     * @apiSuccessExample {json}返回样例:
+     * {"id":6,"admin_id":1,"status":0,"apply_date":"2018-12-10","project":"公务活动","unit":"税务局","leader":"张科长","post":"科长","grade":"科级","departmental":1,"section":1,"under_section":10,"male":10,"female":10,"meeting_place":"1号会议室","meeting_date":"2018-12-30 00:00:00","meeting_count":20,"hotel":"阳光国际大酒店","accompany":"张三，李四","create_time":"2018-12-07 00:13:49","update_time":"2018-12-07 00:13:49","meals":[{"meal_date":"2018-12-10 00:00:00","meal_type":"中餐","count":20,"address":"饭堂","money":2000},{"meal_date":"2018-12-10 00:00:00","meal_type":"晚餐","count":20,"address":"饭堂","money":3000}],"time_begin":"2018-12-10","time_end":"2018-12-10"}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 申请id
+     * @apiSuccess (返回参数说明) {String} apply_date 日期
+     * @apiSuccess (返回参数说明) {String} time_begin   公务开始时间
+     * @apiSuccess (返回参数说明) {String} time_begin   公务截止时间
+     * @apiSuccess (返回参数说明) {String} unit 来访单位
+     * @apiSuccess (返回参数说明) {int} count 人数
+     * @apiSuccess (返回参数说明) {int} leader 领队
+     * @apiSuccess (返回参数说明) {int} project   公务活动
+     * @apiSuccess (返回参数说明) {int} meeting_date   会议时间
+     * @apiSuccess (返回参数说明) {int} meeting_place   会议地点
+     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
+     * @apiSuccess (返回参数说明) {Obj} meals 就餐信息
+     * @apiSuccess (返回参数说明) {String} meal_type 餐次
+     * @apiSuccess (返回参数说明) {String} meal_date 就餐日期
+     * @apiSuccess (返回参数说明) {int} count 就餐人数
+     * @apiSuccess (返回参数说明) {String} address 就餐地点
+     * @apiSuccess (返回参数说明) {int} money 费用
+     *
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMeetingRecept($id)
+    {
+        $obj = MeetingReceptT::where('id', $id)
+            ->with('meals')
+            ->find();
+        return json($obj);
     }
 
 

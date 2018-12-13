@@ -14,4 +14,17 @@ use think\Model;
 class MeetingplaceT extends Model
 {
 
+    public function users()
+    {
+        return $this->hasMany('MeetingplaceReceptT',
+            'mp_id', 'id');
+    }
+
+    public function detail()
+    {
+        return $this->hasMany('ReceptDetailT',
+            'mp_id', 'id');
+    }
+
+
 }

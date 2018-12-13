@@ -155,6 +155,51 @@ class Official extends BaseController
 
 
     /**
+     * @api {GET} /api/v1/official 38-预约申请—公务接待-围餐预定-详情
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  围餐预定申请详情
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/official?id=13
+     * @apiParam (请求参数说明) {String}  id 申请id
+     * @apiSuccessExample {json}返回样例:
+     * {"id":13,"admin_id":1,"phone":"13725305169","member":80,"table_number":10,"product":"公务接待","content":"跨年啦","status":1,"create_time":"2018-12-12 10:36:50","update_time":"2018-12-12 10:36:50","meal_space":"金瑞酒店","meal_date":"2018-12-31 00:00:00","meals":[{"meal_type":"早餐","cuisine":"水煮蛋"},{"meal_type":"午餐","cuisine":"煎鸡蛋"},{"meal_type":"晚餐","cuisine":"木耳炒鸡蛋"}],"meal_type":"会议餐"}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 申请id
+     * @apiSuccess (返回参数说明) {String} create_time 日期
+     * @apiSuccess (返回参数说明) {String} username 申请人
+     * @apiSuccess (返回参数说明) {String} department 部门
+     * @apiSuccess (返回参数说明) {String} phone 联系人电话
+     * @apiSuccess (返回参数说明) {int} member  人数
+     * @apiSuccess (返回参数说明) {int} table_number  桌数
+     * @apiSuccess (返回参数说明) {String} product  项目
+     * @apiSuccess (返回参数说明) {String} content  内容
+     * @apiSuccess (返回参数说明) {int} meal_space 就餐地点
+     * @apiSuccess (返回参数说明) {String} meal_type 餐类
+     * @apiSuccess (返回参数说明) {String} meal_date  就餐时间
+     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
+     * @apiSuccess (返回参数说明) {Obj} meals  菜式信息
+     * @apiSuccess (返回参数说明) {String} meal_type 餐次
+     * @apiSuccess (返回参数说明) {String} cuisine 菜式
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getOfficial($id)
+    {
+        $obj = OfficialReceptT::where('id', $id)->with('meals')
+            ->find();
+        return json($obj);
+
+    }
+
+
+    /**
      * @param $id
      * @return \think\response\Json
      */

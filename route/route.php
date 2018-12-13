@@ -35,10 +35,12 @@ Route::get('api/:version/meeting/sign/in/export', 'api/:version.Meeting/exportSi
 Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save');
 Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList');
 Route::get('api/:version/meeting/place/export', 'api/:version.MeetingPlace/export');
+Route::get('api/:version/meeting/place', 'api/:version.MeetingPlace/getMeetingPlace');
 
 Route::post('api/:version/meeting/recept/save', 'api/:version.MeetingRecept/save');
 Route::get('api/:version/meeting/recept/list', 'api/:version.MeetingRecept/getList');
 Route::get('api/:version/meeting/recept/export', 'api/:version.MeetingRecept/export');
+Route::get('api/:version/meeting/recept', 'api/:version.MeetingRecept/getMeetingRecept');
 
 
 Route::post('api/:version/multi/save', 'api/:version.Multi/save');
@@ -48,7 +50,7 @@ Route::get('api/:version/multi/export', 'api/:version.Multi/export');
 Route::post('api/:version/official/save', 'api/:version.Official/save');
 Route::get('api/:version/official/list', 'api/:version.Official/getList');
 Route::get('api/:version/official/export', 'api/:version.Official/export');
-Route::get('api/:version/official', 'api/:version.AccessControl/getTheOfficial');
+Route::get('api/:version/official', 'api/:version.Official/getOfficial');
 
 
 Route::post('api/:version/car/save', 'api/:version.Car/save');
