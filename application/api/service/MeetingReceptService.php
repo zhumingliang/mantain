@@ -47,6 +47,8 @@ class MeetingReceptService extends BaseService
 
                 }
             }
+
+
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();

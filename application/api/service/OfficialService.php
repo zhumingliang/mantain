@@ -47,8 +47,7 @@ class OfficialService extends BaseService
 
                 }
             }
-
-            //启动工作流
+          /*  //启动工作流
             $flow_date = [
                 'wf_type' => 'official_recept_t',
                 'wf_id' => 4,
@@ -62,7 +61,8 @@ class OfficialService extends BaseService
                 throw new FlowException();
             }
             //保存流程
-            $check_res = $this->saveCheck($mp->id);
+            $check_res = $this->saveCheck($mp->id);*/
+            $check_res=(new FlowService())->saveCheck($mp->id,'official_recept_t');
             if (!$check_res == 1) {
                 Db::rollback();
                 throw new FlowException();

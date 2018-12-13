@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\Flow;
 use think\Db;
 use workflow\workflow;
 
@@ -34,6 +35,15 @@ class FlowService
         return $flow['code'];
     }
 
+    /**
+     * 获取当前角色-审核-状态
+     * @param $wf_fid
+     * @param $wf_type
+     * @param $status
+     * @return int|string
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
     public function btn($wf_fid, $wf_type, $status)
     {
         $url = url("/index/flow/do_check/", ["wf_type" => $wf_type, "wf_title" => '2', 'wf_fid' => $wf_fid]);
@@ -75,14 +85,97 @@ class FlowService
         }
     }
 
+    /**
+     * 用户发起流程并进行初步审核
+     * @param $wf_fid
+     * @param string $wf_type
+     * @return int
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function saveCheck($wf_fid, $wf_type)
+    {
+        $wf_id = $this->getWfId($wf_type);
+        if (!$wf_id) {
+            return -1;
+        }
+        //启动工作流
+        $flow_date = [
+            'wf_type' => $wf_type,
+            'wf_id' => $wf_id,
+            'wf_fid' => $wf_fid,
+            'new_type' => 0,
+            'check_con' => '同意',
+        ];
+        $res = (new FlowService())->statr_save($flow_date);
+        if (!$res == 1) {
+            return -1;
+        }
+
+        $info = (new FlowService())->getInfo($wf_fid, $wf_type);
+        $data = [
+            'art' => "",
+            'btodo' => "",
+            'check_con' => "同意",
+            'flow_id' => $info['flow_id'],
+            'flow_process' => $info['flow_process'],
+            'npid' => $info['nexprocess']['id'],
+            'run_id' => $info['run_id'],
+            'run_process' => $info['run_process'],
+            'sing_st' => 0,
+            'submit_to_save' => "ok",
+            'wf_fid' => $wf_fid,
+            'wf_singflow' => "",
+            'wf_backflow' => "",
+            'wf_title' => 2,
+            'wf_type' => $wf_type,
+        ];
+        $res = $this->check($data);
+        return $res;
+    }
+
+
+    /**
+     * 获取指定类别的流程id
+     * @param $wf_type
+     * @return int|mixed
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function getWfId($wf_type)
+    {
+        $flow = Flow::where('wf_type', $wf_type)
+            ->where('status', 0)
+            ->find();
+        if ($flow) {
+            return $flow->id;
+        }
+        return -1;
+
+
+    }
+
+    /**
+     * 审核流程
+     * @param $data
+     * @return int
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
     public function check($data)
     {
         $workflow = new workflow();
         $flowinfo = $workflow->workdoaction($data, Token::getCurrentUid());
-
         return 1;
     }
 
+    /**
+     * 流程未完成时-获取流程信息
+     * @param $wf_fid
+     * @param $wf_type
+     * @return array
+     */
     public function getInfo($wf_fid, $wf_type)
     {
         $info = ['wf_title' => input('wf_title'), 'wf_fid' => $wf_fid, 'wf_type' => $wf_type];
@@ -92,7 +185,12 @@ class FlowService
 
     }
 
-
+    /**
+     * 流程完成式-获取流程信息
+     * @param $wf_fid
+     * @param $wf_type
+     * @return array
+     */
     public function getInfoForComplete($wf_fid, $wf_type)
     {
         $workflow = new workflow();

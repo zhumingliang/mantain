@@ -26,22 +26,24 @@ class AccessService extends BaseService
             if (!$access->id) {
                 throw new OperationException();
             }
-            //启动工作流
-            $flow_date = [
-                'wf_type' => 'access_control_t',
-                'wf_id' => 3,
-                'wf_fid' => $access->id,
-                'new_type' => 0,
-                'check_con' => '同意',
-            ];
-            $res = (new FlowService())->statr_save($flow_date);
-            if (!$res == 1) {
-                Db::rollback();
-                throw new FlowException();
-            }
-            //保存流程
-            $check_res = $this->saveCheck($access->id);
+            /*        //启动工作流
+                    $flow_date = [
+                        'wf_type' => 'access_control_t',
+                        'wf_id' => 3,
+                        'wf_fid' => $access->id,
+                        'new_type' => 0,
+                        'check_con' => '同意',
+                    ];
+                    $res = (new FlowService())->statr_save($flow_date);
+                    if (!$res == 1) {
+                        Db::rollback();
+                        throw new FlowException();
+                    }
+                    //保存流程
+                    $check_res = $this->saveCheck($access->id);*/
 
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($access->id, 'access_control_t');
             if (!$check_res == 1) {
                 Db::rollback();
                 throw new FlowException();
