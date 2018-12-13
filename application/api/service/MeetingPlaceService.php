@@ -70,7 +70,7 @@ class MeetingPlaceService extends BaseService
             }
 
             //启动工作流
-            $check_res = (new FlowService())->saveCheck($mp->id, 'meeting_place_t');
+            $check_res = (new FlowService())->saveCheck($mp->id, 'meetingplace_t');
             if (!$check_res == 1) {
                 Db::rollback();
                 throw new FlowException();

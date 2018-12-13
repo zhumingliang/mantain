@@ -28,7 +28,7 @@ class Flowdesign extends Admin
             'access_control_t' => '门禁权限',
             'space_recreational_t' => '场地使用-文体活动',
             'space_multi_t' => '场地使用-功能室',
-            'meeting_place_t' => '教育培训—会场预订',
+            'meetingplace_t' => '教育培训—会场预订',
             'official_recept_t' => '公务接待',
             'meeting_recept_t' => '会议接待',
             'car_t' => '公务用车',

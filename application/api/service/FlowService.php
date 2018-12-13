@@ -56,10 +56,9 @@ class FlowService
                 $st = 0;
                 $workflow = new workflow();
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
-
-                if ($flowinfo['status']['status'] == 2) {
+              /*  if ($flowinfo['status']['status'] == 2) {
                     return 2;
-                }
+                }*/
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
                     if (in_array($this->uid, $user)) {
@@ -106,12 +105,12 @@ class FlowService
             'new_type' => 0,
             'check_con' => '同意',
         ];
-        $res = (new FlowService())->statr_save($flow_date);
+        $res = $this->statr_save($flow_date);
         if (!$res == 1) {
             return -1;
         }
 
-        $info = (new FlowService())->getInfo($wf_fid, $wf_type);
+        $info = $this->getInfo($wf_fid, $wf_type);
         $data = [
             'art' => "",
             'btodo' => "",

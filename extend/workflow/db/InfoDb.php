@@ -174,7 +174,6 @@ class InfoDB
                     ->find();
 
 
-
                 if ($result) {
                     $workflow ['sing_st'] = 0;
                     $workflow ['flow_id'] = $result['flow_id'];
