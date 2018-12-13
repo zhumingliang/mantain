@@ -12,6 +12,7 @@ namespace app\api\service;
 use app\api\model\MeetingReceptMealT;
 use app\api\model\MeetingReceptT;
 use app\api\model\MeetingReceptV;
+use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use think\Db;
 use think\Exception;
@@ -48,7 +49,12 @@ class MeetingReceptService extends BaseService
                 }
             }
 
-
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($mp->id, 'meeting_recept_t');
+            if (!$check_res == 1) {
+                Db::rollback();
+                throw new FlowException();
+            }
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();

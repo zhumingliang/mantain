@@ -13,6 +13,7 @@ use app\api\model\MeetingplaceReceptT;
 use app\api\model\MeetingplaceT;
 use app\api\model\MeetingplaceV;
 use app\api\model\ReceptDetailT;
+use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use think\Db;
 use think\Exception;
@@ -68,9 +69,12 @@ class MeetingPlaceService extends BaseService
                 }
             }
 
-
-
-
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($mp->id, 'meeting_place_t');
+            if (!$check_res == 1) {
+                Db::rollback();
+                throw new FlowException();
+            }
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();

@@ -10,15 +10,50 @@ namespace app\api\service;
 
 
 use app\api\model\RecreationalV;
+use app\api\model\SpaceRecreationalT;
+use app\lib\exception\FlowException;
+use app\lib\exception\OperationException;
+use think\Db;
+use think\Exception;
 
 class RecreationalService extends BaseService
 {
+
+    public function save($params)
+    {
+        Db::startTrans();
+        try {
+            //新增基本信息
+            $mp = SpaceRecreationalT::create($params);
+            if (!$mp) {
+                throw new OperationException(
+                    ['code' => 401,
+                        'msg' => '新增基本信息失败',
+                        'errorCode' => 40001
+                    ]);
+
+            }
+
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($mp->id, 'space_recreational_t');
+            if (!$check_res == 1) {
+                Db::rollback();
+                throw new FlowException();
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
     public function getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space)
     {
         $list = RecreationalV::getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space);
         return $list;
     }
-
 
     public function export($time_begin, $time_end, $department, $username, $status, $space)
     {

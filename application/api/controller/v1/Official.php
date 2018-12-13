@@ -67,7 +67,6 @@ class Official extends BaseController
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
         (new OfficialService())->save($params);
-
         return json(new SuccessMessage());
 
     }

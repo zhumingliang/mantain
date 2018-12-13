@@ -43,10 +43,7 @@ class Multi extends BaseController
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
-     *
      * @return \think\response\Json
-     * @throws OperationException
      * @throws \app\lib\exception\ParameterException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -58,10 +55,7 @@ class Multi extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
-        $id = SpaceMultiT::create($params);
-        if (!$id) {
-            throw new OperationException();
-        }
+        (new MultiService())->save($params);
         return json(new SuccessMessage());
 
     }

@@ -59,10 +59,7 @@ class Recreational extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
-        $id = SpaceRecreationalT::create($params);
-        if (!$id) {
-            throw new OperationException();
-        }
+        (new RecreationalService())->save($params);
         return json(new SuccessMessage());
 
     }

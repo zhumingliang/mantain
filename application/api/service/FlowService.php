@@ -96,7 +96,6 @@ class FlowService
     public function saveCheck($wf_fid, $wf_type)
     {
         $wf_id = $this->getWfId($wf_type);
-
         if (!$wf_id) {
             return -1;
         }
