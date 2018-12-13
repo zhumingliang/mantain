@@ -56,10 +56,10 @@ class FlowService
                 $st = 0;
                 $workflow = new workflow();
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
-               /* $preprocess = $flowinfo['preprocess'];
-                if (key_exists(0, $preprocess)) {
+
+                if ($flowinfo['status']['status'] == 2) {
                     return 2;
-                }*/
+                }
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
                     if (in_array($this->uid, $user)) {
