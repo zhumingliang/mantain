@@ -60,7 +60,6 @@ class AccessToken
     {
 
         $token = Curl::get($this->tokenUrl);
-        LogT::create(['msg' => $token]);
         $token = json_decode($token, true);
         if (!$token) {
             throw new Exception('获取AccessToken异常');

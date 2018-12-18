@@ -4,6 +4,8 @@
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/AccessToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AccessToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/UserTokenService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/UserTokenService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,14 +35,14 @@
           <entry key="gitignore" value="3" />
           <entry key="html" value="8" />
           <entry key="json" value="1" />
-          <entry key="php" value="600" />
+          <entry key="php" value="601" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="8" />
           <entry key="JSON" value="1" />
-          <entry key="PHP" value="600" />
+          <entry key="PHP" value="601" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
@@ -48,13 +50,13 @@
         <counts>
           <entry key="dummy" value="26" />
           <entry key="json" value="26" />
-          <entry key="php" value="13145" />
+          <entry key="php" value="13322" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="26" />
-          <entry key="PHP" value="13145" />
+          <entry key="PHP" value="13322" />
           <entry key="PLAIN_TEXT" value="26" />
         </counts>
       </usages-collector>
@@ -72,16 +74,16 @@
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="407">
-              <caret line="84" column="51" lean-forward="true" selection-start-line="84" selection-start-column="51" selection-end-line="84" selection-end-column="51" />
+              <caret line="84" column="49" lean-forward="true" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/UserTokenService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+            <state relative-caret-position="690">
+              <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
               <folding>
                 <element signature="e#125#148#0#PHP" expanded="true" />
               </folding>
@@ -89,11 +91,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extend/zml/tp_tools/Curl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3">
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/service/AccessToken.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="71" column="35" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+            <state relative-caret-position="302">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
               <folding>
                 <element signature="e#123#146#0#PHP" expanded="true" />
               </folding>
@@ -104,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/wx.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="9" column="35" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="35" />
+            <state relative-caret-position="351">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -179,12 +190,12 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Admin.php" />
         <option value="$PROJECT_DIR$/config/setting.php" />
         <option value="$PROJECT_DIR$/application/api/service/AccessTokenAuth.php" />
-        <option value="$PROJECT_DIR$/config/wx.php" />
         <option value="$PROJECT_DIR$/application/api/model/LogT.php" />
-        <option value="$PROJECT_DIR$/application/api/service/UserTokenService.php" />
         <option value="$PROJECT_DIR$/route/route.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
         <option value="$PROJECT_DIR$/application/api/service/AccessToken.php" />
+        <option value="$PROJECT_DIR$/config/wx.php" />
+        <option value="$PROJECT_DIR$/application/api/service/UserTokenService.php" />
       </list>
     </option>
   </component>
@@ -340,21 +351,7 @@
       <workItem from="1544680589379" duration="15025000" />
       <workItem from="1544726782656" duration="1797000" />
       <workItem from="1544765389261" duration="348000" />
-      <workItem from="1545009679895" duration="18617000" />
-    </task>
-    <task id="LOCAL-00001" summary="初始化">
-      <created>1542683210807</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1542683210807</updated>
-    </task>
-    <task id="LOCAL-00002" summary="初始化">
-      <created>1542724561508</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1542724561508</updated>
+      <workItem from="1545009679895" duration="19964000" />
     </task>
     <task id="LOCAL-00003" summary="初始化">
       <created>1542724776523</created>
@@ -685,11 +682,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545148678219</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="初始化">
+      <created>1545148804599</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1545148804599</updated>
+    </task>
+    <task id="LOCAL-00051" summary="初始化">
+      <created>1545148879407</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1545148879407</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150857000" />
+    <option name="totallyTimeSpent" value="152204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -1125,41 +1136,43 @@
     <entry file="file://$PROJECT_DIR$/application/api/service/Token.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="84" column="49" lean-forward="true" selection-start-line="84" selection-start-column="49" selection-end-line="84" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/extend/zml/tp_tools/Curl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2107" />
+        <state relative-caret-position="3">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/wx.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="84" column="51" lean-forward="true" selection-start-line="84" selection-start-column="51" selection-end-line="84" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/UserTokenService.php">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
-          <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#125#148#0#PHP" expanded="true" />
-          </folding>
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/AccessToken.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="71" column="35" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+        <state relative-caret-position="302">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding>
             <element signature="e#123#146#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/UserTokenService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+          <folding>
+            <element signature="e#125#148#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
