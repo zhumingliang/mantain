@@ -14,12 +14,14 @@ use app\api\model\TestT;
 use app\api\model\UserT;
 use app\api\service\AdminToken;
 use app\api\service\UserToken;
+use app\api\service\UserTokenService;
 use app\api\validate\TokenGet;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
 use think\Controller;
 use think\facade\Cache;
+use think\facade\Request;
 
 class Token extends Controller
 {
@@ -75,4 +77,24 @@ class Token extends Controller
         Cache::rm($token);
         return json(new SuccessMessage());
     }
+
+    public function getWXToken()
+    {
+        if (isset($_GET['code'])) {
+            $token = (new UserTokenService())->getToken();
+
+
+        } else {
+            //跳转进行code获取
+            $codeUrl = config('wx.wx_code_url');
+            $appID = config('wx.app_id');
+            $WEB_HOST = config('setting.domain') . Request::path();
+            $codeUrl = sprintf($codeUrl, $appID, urlencode($WEB_HOST));
+            header("Location:" . $codeUrl);
+            exit;
+        }
+
+
+    }
+
 }
