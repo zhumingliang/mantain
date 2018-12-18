@@ -32,6 +32,9 @@ class Flowdesign extends Admin
             'official_recept_t' => '公务接待',
             'meeting_recept_t' => '会议接待',
             'car_t' => '公务用车',
+            'car_t' => '领用申请',
+            'car_t' => '借用归还',
+            'car_t' => '采购申请',
 
         ];
         $this->assign('type', $wf_type);

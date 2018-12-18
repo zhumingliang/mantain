@@ -65,3 +65,8 @@ Route::get('api/:version/recreational/export', 'api/:version.Recreational/export
 
 Route::post('api/:version/flow/check/pass', 'api/:version.Flow/checkPass');
 Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
+
+
+Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
+Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');
+

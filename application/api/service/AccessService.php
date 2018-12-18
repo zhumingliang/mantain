@@ -26,22 +26,6 @@ class AccessService extends BaseService
             if (!$access->id) {
                 throw new OperationException();
             }
-            /*        //启动工作流
-                    $flow_date = [
-                        'wf_type' => 'access_control_t',
-                        'wf_id' => 3,
-                        'wf_fid' => $access->id,
-                        'new_type' => 0,
-                        'check_con' => '同意',
-                    ];
-                    $res = (new FlowService())->statr_save($flow_date);
-                    if (!$res == 1) {
-                        Db::rollback();
-                        throw new FlowException();
-                    }
-                    //保存流程
-                    $check_res = $this->saveCheck($access->id);*/
-
             //启动工作流
             $check_res = (new FlowService())->saveCheck($access->id, 'access_control_t');
             if (!$check_res == 1) {
@@ -56,45 +40,6 @@ class AccessService extends BaseService
         }
 
     }
-
-    private function saveCheck($wf_fid, $wf_type = "access_control_t")
-    {
-
-        $info = (new FlowService())->getInfo($wf_fid, $wf_type);
-        $data = [
-            'art' => "",
-            'btodo' => "",
-            'check_con' => "同意",
-            'flow_id' => $info['flow_id'],
-            'flow_process' => $info['flow_process'],
-            'npid' => $info['nexprocess']['id'],
-            'run_id' => $info['run_id'],
-            'run_process' => $info['run_process'],
-            'sing_st' => 0,
-            'submit_to_save' => "ok",
-            'wf_fid' => $wf_fid,
-            'wf_singflow' => "",
-            'wf_backflow' => "",
-            'wf_title' => 2,
-            'wf_type' => "access_control_t",
-        ];
-        $res = (new FlowService())->check($data);
-        return $res;
-    }
-
-    public function getTheFlow($wf_fid, $wf_type = "access_control_t")
-    {
-        $check = (new FlowService())->btn($wf_fid, $wf_type, $status = 1);
-        $info = (new FlowService())->getInfo($wf_fid, $wf_type);
-
-        return [
-            'check' => $check,
-            'info' => $info
-        ];
-
-
-    }
-
 
     public function getList($page, $size, $time_begin, $time_end, $department, $username, $status, $access)
     {

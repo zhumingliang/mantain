@@ -55,6 +55,7 @@ class Multi extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         (new MultiService())->save($params);
         return json(new SuccessMessage());
 

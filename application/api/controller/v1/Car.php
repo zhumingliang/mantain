@@ -56,11 +56,8 @@ class Car extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         (new CarService())->save($params);
-        /*    $id = CarT::create($params);
-            if (!$id) {
-                throw new OperationException();
-            }*/
         return json(new SuccessMessage());
 
     }

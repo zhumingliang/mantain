@@ -19,7 +19,7 @@ use workflow\workflow;
 class Flow extends BaseController
 {
     /**
-     * @api {POST} /api/v1/flow/check/pass  35-CMS-流程审核-通过
+     * @api {POST} /api/v1/flow/check/pass  35-CMS-流程审核-通过/不同意/取消
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  流程审核-通过
@@ -38,7 +38,7 @@ class Flow extends BaseController
      *     }
      * @apiParam (请求参数说明) {String} check_con   审核意见
      * @apiParam (请求参数说明) {String} wf_type   流程类别：门禁申请：access_control_t；公务接待：official_recept_t；场地使用-文体活动：space_recreational_t；场地使用-功能室：space_multi_t；教育培训—会场预订:meetingplace_t;会议接待:meeting_recept_t;公务用车:car_t
-     * @apiParam (请求参数说明) {String} submit_to_save   审批类别：ok：同意；back ： 不同意
+     * @apiParam (请求参数说明) {String} submit_to_save   审批类别：ok：同意；back ：不同意；cancel:取消
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}

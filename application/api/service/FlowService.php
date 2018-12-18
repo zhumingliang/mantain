@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\Flow;
+use app\lib\exception\FlowException;
 use think\Db;
 use workflow\workflow;
 
@@ -56,9 +57,6 @@ class FlowService
                 $st = 0;
                 $workflow = new workflow();
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
-              /*  if ($flowinfo['status']['status'] == 2) {
-                    return 2;
-                }*/
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
                     if (in_array($this->uid, $user)) {
@@ -163,9 +161,35 @@ class FlowService
      */
     public function check($data)
     {
+
         $workflow = new workflow();
-        $flowinfo = $workflow->workdoaction($data, Token::getCurrentUid());
-        return 1;
+        $submit_to_save = $data['submit_to_save'];
+        if ($submit_to_save == 'cancel') {
+            $this->flowCancel($data['wf_fid'], $data['wf_type']);
+            return 1;
+
+        } else {
+            $workflow->workdoaction($data, Token::getCurrentUid());
+            return 1;
+        }
+
+    }
+
+
+    private function flowCancel($wf_fid, $wf_type)
+    {
+        $res = Db::name($wf_type)->where('id', $wf_fid)->update(['state' => 2]);
+        if ($res) {
+            throw new FlowException(
+                [
+                    'code' => 401,
+                    'msg' => '取消流程失败',
+                    'errorCode' => 70002
+                ]
+            );
+        }
+
+
     }
 
     /**

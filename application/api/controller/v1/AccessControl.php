@@ -53,6 +53,7 @@ class AccessControl extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
+        $params['state'] = CommonEnum::STATE_IS_OK;
         (new AccessService())->save($params);
         return json(new SuccessMessage());
 

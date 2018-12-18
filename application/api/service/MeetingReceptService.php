@@ -64,7 +64,6 @@ class MeetingReceptService extends BaseService
 
     }
 
-
     private
     function saveMeals($mr_id, $meals)
     {

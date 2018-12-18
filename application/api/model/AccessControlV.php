@@ -9,6 +9,7 @@
 namespace app\api\model;
 
 
+use app\lib\enum\CommonEnum;
 use think\Model;
 
 class AccessControlV extends Model
@@ -19,6 +20,7 @@ class AccessControlV extends Model
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
+            ->where('state',CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', '=', $department);
@@ -53,6 +55,7 @@ class AccessControlV extends Model
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
+            ->where('state',CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', '=', $department);
