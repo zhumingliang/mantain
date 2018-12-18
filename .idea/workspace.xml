@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/AccessToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AccessToken.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/UserTokenService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/UserTokenService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,13 +48,13 @@
         <counts>
           <entry key="dummy" value="26" />
           <entry key="json" value="26" />
-          <entry key="php" value="13322" />
+          <entry key="php" value="13335" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="26" />
-          <entry key="PHP" value="13322" />
+          <entry key="PHP" value="13335" />
           <entry key="PLAIN_TEXT" value="26" />
         </counts>
       </usages-collector>
@@ -82,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/service/UserTokenService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+            <state relative-caret-position="715">
+              <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
               <folding>
                 <element signature="e#125#148#0#PHP" expanded="true" />
               </folding>
@@ -351,21 +349,7 @@
       <workItem from="1544680589379" duration="15025000" />
       <workItem from="1544726782656" duration="1797000" />
       <workItem from="1544765389261" duration="348000" />
-      <workItem from="1545009679895" duration="19964000" />
-    </task>
-    <task id="LOCAL-00003" summary="初始化">
-      <created>1542724776523</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1542724776523</updated>
-    </task>
-    <task id="LOCAL-00004" summary="初始化">
-      <created>1543885748748</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1543885748748</updated>
+      <workItem from="1545009679895" duration="20109000" />
     </task>
     <task id="LOCAL-00005" summary="初始化">
       <created>1544022653049</created>
@@ -696,11 +680,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545148879407</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="初始化">
+      <created>1545150336071</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1545150336071</updated>
+    </task>
+    <task id="LOCAL-00053" summary="初始化">
+      <created>1545150423850</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1545150423850</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152204000" />
+    <option name="totallyTimeSpent" value="152349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -1169,8 +1167,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/UserTokenService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+        <state relative-caret-position="715">
+          <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
           <folding>
             <element signature="e#125#148#0#PHP" expanded="true" />
           </folding>

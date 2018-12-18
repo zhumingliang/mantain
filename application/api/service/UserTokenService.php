@@ -18,7 +18,7 @@ class UserTokenService
     public function getToken($code)
     {
         $userId = $this->getUserId($code);
-        $this->getUserInfo($userId);
+        //$this->getUserInfo($userId);
 
 
     }
@@ -35,8 +35,9 @@ class UserTokenService
             throw new Exception($token['errmsg']);
         }
         $user_info = json_decode($user_info);
-        $userId = $user_info->UserId;
-        return $userId;
+        var_dump($user_info);
+       // $userId = $user_info['UserId'];
+        //return $userId;
 
     }
 
