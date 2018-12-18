@@ -25,6 +25,7 @@ class UserTokenService extends Token
         if (!$admin) {
             $mobile = $this->getMobile($userId);
             $admin = AdminT::where('phone', $mobile)->find();
+            AdminT::update(['phone' => $mobile], ['user_id' => $userId]);
             if (!$admin) {
                 throw  new TokenException(
                     [
@@ -48,7 +49,7 @@ class UserTokenService extends Token
 
 
     }
-    
+
     private function saveToCache($key, $cachedValue)
     {
         $key = empty($key) ? self::generateToken() : $key;
