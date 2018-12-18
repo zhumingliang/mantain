@@ -78,10 +78,11 @@ class Token extends Controller
         return json(new SuccessMessage());
     }
 
+
     public function getWXToken()
     {
         if (isset($_GET['code'])) {
-            $token = (new UserTokenService())->getToken();
+            $token = (new UserTokenService())->getToken($_GET['code']);
 
 
         } else {
