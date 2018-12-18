@@ -25,10 +25,9 @@ class UserTokenService extends Token
         if (!$admin) {
             $mobile = $this->getMobile($userId);
             $admin = AdminT::where('phone', $mobile)->find();
-          //  AdminT::update(['phone' => $mobile], ['user_id' => $userId]);
-          $res=  AdminT::update(['phone' => $mobile], ['user_id' => $userId])->fetchSql(true);
-          var_dump($res)  ;
-          if (!$admin) {
+            //  AdminT::update(['phone' => $mobile], ['user_id' => $userId]);
+            AdminT::update(['phone' => $mobile], ['user_id' => $userId]);
+            if (!$admin) {
                 throw  new TokenException(
                     [
                         'code' => 401,
