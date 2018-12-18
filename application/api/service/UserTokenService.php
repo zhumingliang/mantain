@@ -51,9 +51,9 @@ class UserTokenService
         if (!empty($token['errcode'])) {
             throw new Exception($token['errmsg']);
         }
-        LogT::create(['msg' => $user_info]);
+
         $user_info = json_decode($user_info);
-        print_r($user_info);
+        echo $user_info->mobile;
 
     }
 
