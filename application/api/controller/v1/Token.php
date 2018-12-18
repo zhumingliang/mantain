@@ -106,8 +106,7 @@ class Token extends Controller
             $appID = config('wx.app_id');
             $WEB_HOST = config('setting.domain') . Request::path();
             $codeUrl = sprintf($codeUrl, $appID, urlencode($WEB_HOST));
-            header("Location:" . $codeUrl);
-            exit;
+            Header("Location: $codeUrl");
         }
 
 
