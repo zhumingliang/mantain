@@ -34,15 +34,18 @@ class Meeting extends BaseController
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 09：30",
      *       "meeting_begin": "2018-12-30 10：00",
+     *       "meeting_end": "2018-12-30 12：00",
      *       "theme": "全体职工大会",
      *       "outline": "年终总结",
      *       "remark": "必须参加"
+     *
      *     }
      * @apiParam (请求参数说明) {String} meeting_date   日期
      * @apiParam (请求参数说明) {String} address   签到地点
      * @apiParam (请求参数说明) {String} time_begin   签到开始时间
      * @apiParam (请求参数说明) {String} time_end   签到截止时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
+     * @apiParam (请求参数说明) {String} meeting_begin   会议截止时间
      * @apiParam (请求参数说明) {String} theme   会议主题
      * @apiParam (请求参数说明) {String} outline   内容概要
      * @apiParam (请求参数说明) {String} remark   备注

@@ -42,6 +42,7 @@ class MeetingRoom extends BaseController
         return json($rooms);
 
     }
+
     /**
      * @api {GET} /api/v1/meeting/room/check 40-检测会议室在指定时间内是否可以被使用
      * @apiGroup  CMS
@@ -49,9 +50,13 @@ class MeetingRoom extends BaseController
      * @apiDescription  检测会议室在指定时间内是否可以被使用
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/meeting/room/check?name=会议室1&time_begin=2018-12-22 10:00&time_end=2018-12-22 12:00
+     * @apiParam (请求参数说明) {String}  name 会议室名称
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiSuccessExample {json}返回样例:
-      * {"res":1}
+     * {"res":1}
      * @apiSuccess (返回参数说明) {int} res 状态：1 | 可以被预定；2 | 不可以
+     * @param $type
      * @param $name
      * @param $time_begin
      * @param $time_end
@@ -64,7 +69,7 @@ class MeetingRoom extends BaseController
     {
         $res = (new MeetingRoomService())->checkRoom($name, $time_begin, $time_end);
         return json([
-            'res'=>$res
+            'res' => $res
         ]);
 
     }

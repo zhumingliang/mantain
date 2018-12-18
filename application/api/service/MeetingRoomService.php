@@ -9,8 +9,7 @@
 namespace app\api\service;
 
 
-use app\api\model\SpaceMultiT;
-use app\lib\enum\CommonEnum;
+use app\api\model\MeetingRoomV;
 
 class MeetingRoomService
 {
@@ -26,10 +25,9 @@ class MeetingRoomService
      */
     public function checkRoom($name, $time_begin, $time_end)
     {
+
         //获取指定会议室所有未完成流程申请
-        $list = SpaceMultiT::where('state', CommonEnum::STATE_IS_OK)
-            ->whereIn('status', [0, 1])
-            ->where('space', $name)
+        $list = MeetingRoomV::where('room', $name)
             ->order('create_time desc')
             ->select();
 
