@@ -215,6 +215,7 @@ class AdminToken extends Token
             'account' => $admin->account,
             'role' => $admin->role,
             'department' => $admin->department,
+            'category'=>'pc'
         ];
 
         return $cachedValue;

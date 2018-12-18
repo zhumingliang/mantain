@@ -79,11 +79,26 @@ class Token extends Controller
     }
 
 
+    /**
+     * @api {GET} /api/v1/token/user 42-微信端获取授权token
+     * @apiGroup  WX
+     * @apiVersion 1.0.1
+     * @apiDescription  微信端获取授权token
+     * @apiSuccessExample {json} 返回样例:
+     * {"u_id":1,"username":"朱明良","account":"admin","role":1,"token":"7488c7a7b1f79ed99b319f141637519c"}
+     * @apiSuccess (返回参数说明) {int} u_id 用户id
+     * @apiSuccess (返回参数说明) {String} username 用户名称
+     * @apiSuccess (返回参数说明) {String} account 账号
+     * @apiSuccess (返回参数说明) {int} role 用户角色：暂定
+     * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要放在header里传入，有效期 2 hours
+     * @return \think\response\Json
+     * @throws TokenException
+     */
     public function getWXToken()
     {
         if (isset($_GET['code'])) {
             $token = (new UserTokenService())->getToken($_GET['code']);
-
+            return json($token);
 
         } else {
             //跳转进行code获取

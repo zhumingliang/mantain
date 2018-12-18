@@ -9,18 +9,67 @@
 namespace app\api\service;
 
 
+use app\api\model\AdminT;
 use app\api\model\LogT;
+use app\lib\exception\TokenException;
+use think\facade\Cache;
 use think\Exception;
 use zml\tp_tools\Curl;
 
-class UserTokenService
+class UserTokenService extends Token
 {
     public function getToken($code)
     {
         $userId = $this->getUserId($code);
-        $this->getUserInfo($userId);
+        $admin = AdminT::where('user_id', $userId)->find();
+        if (!$admin) {
+            $mobile = $this->getMobile($userId);
+            $admin = AdminT::where('phone', $mobile)->find();
+            if (!$admin) {
+                throw  new TokenException(
+                    [
+                        'code' => 401,
+                        'msg' => '系统中不存在该用户，请先上传用户',
+                        'errorCode' => 200011]
+                );
+            }
+
+            /**
+             * 获取缓存参数
+             */
+            $cachedValue = $this->prepareCachedValue($admin);
+            /**
+             * 缓存数据
+             */
+            $token = $this->saveToCache('', $cachedValue);
+            return $token;
+
+        }
 
 
+    }
+    
+    private function saveToCache($key, $cachedValue)
+    {
+        $key = empty($key) ? self::generateToken() : $key;
+        $value = json_encode($cachedValue);
+        $expire_in = config('setting.token_expire_in');
+        $request = Cache::set($key, $value, $expire_in);
+
+
+        if (!$request) {
+            throw new TokenException([
+                'msg' => '服务器缓存异常',
+                'errorCode' => 20002
+            ]);
+        }
+
+        $cachedValue['token'] = $key;
+        unset($cachedValue['phone']);
+        unset($cachedValue['type']);
+        unset($cachedValue['department']);
+        unset($cachedValue['card']);
+        return $cachedValue;
     }
 
     private function getUserId($code)
@@ -40,7 +89,7 @@ class UserTokenService
 
     }
 
-    private function getUserInfo($userId)
+    private function getMobile($userId)
     {
         $token = (new AccessToken())->get();
         $url = sprintf(config('wx.user_info_url'), $token, $userId);
@@ -53,8 +102,25 @@ class UserTokenService
         }
 
         $user_info = json_decode($user_info);
-        echo $user_info->mobile;
+        return $user_info->mobile;
 
+    }
+
+    private function prepareCachedValue($admin)
+    {
+        $cachedValue = [
+            'u_id' => $admin->id,
+            'phone' => $admin->phone,
+            'username' => $admin->username,
+            'card' => $admin->card,
+            'type' => $admin->type,
+            'account' => $admin->account,
+            'role' => $admin->role,
+            'department' => $admin->department,
+            'category' => 'wx'
+        ];
+
+        return $cachedValue;
     }
 
 }
