@@ -84,7 +84,9 @@ class Token extends Controller
      * @apiGroup  WX
      * @apiVersion 1.0.1
      * @apiDescription  微信端获取授权token
-     * @apiSuccessExample {json} 返回样例:
+     * @apiExample {get}  请求样例:
+     * http://mengant.cn/api/v1/token/user?code=mdksk
+     * @apiParam (请求参数说明) {String} code  微信code
      * {"u_id":1,"username":"朱明良","account":"admin","role":1,"token":"7488c7a7b1f79ed99b319f141637519c"}
      * @apiSuccess (返回参数说明) {int} u_id 用户id
      * @apiSuccess (返回参数说明) {String} username 用户名称
