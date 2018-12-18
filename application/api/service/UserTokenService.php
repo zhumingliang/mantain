@@ -18,7 +18,7 @@ class UserTokenService
     public function getToken($code)
     {
         $userId = $this->getUserId($code);
-        //$this->getUserInfo($userId);
+        $this->getUserInfo($userId);
 
 
     }
@@ -26,7 +26,7 @@ class UserTokenService
     private function getUserId($code)
     {
         $token = (new AccessToken())->get();
-        $user_info_url = sprintf(config('wx.user_info_url'), $token, $code);
+        $user_info_url = sprintf(config('wx.user_id_url'), $token, $code);
         $user_info = Curl::get($user_info_url);
         if (!$token) {
             throw new Exception('获取用户信息异常');
@@ -35,9 +35,8 @@ class UserTokenService
             throw new Exception($token['errmsg']);
         }
         $user_info = json_decode($user_info);
-        var_dump($user_info);
-       // $userId = $user_info['UserId'];
-        //return $userId;
+        $userId = $user_info['UserId'];
+        return $userId;
 
     }
 
