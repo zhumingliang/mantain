@@ -20,7 +20,7 @@ class AccessToken
     const TOKEN_CACHED_KEY = 'access_token';
     const TOKEN_EXPIRE_IN = 7000;
 
-    function __construct($code)
+    function __construct()
     {
         $url = config('wx.access_token_url');
         $url = sprintf($url, config('wx.app_id'), config('wx.app_secret'));
