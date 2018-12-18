@@ -13,7 +13,7 @@ class AccessControlValidate extends BaseValidate
 {
     protected $rule = [
         'access' => 'require|isNotEmpty',
-        'deadline' => 'require|isNotEmpty',
+        //'deadline' => 'require|isNotEmpty',
         'user_type' => 'require|isNotEmpty',
     ];
 
