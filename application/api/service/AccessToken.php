@@ -33,13 +33,13 @@ class AccessToken
      */
     public function get()
     {
-        // return $this->getFromWxServer();
-        $cache_token = $this->getFromCache();
+         return $this->getFromWxServer();
+       /* $cache_token = $this->getFromCache();
         if (!$cache_token) {
             return $this->getFromWxServer();
         } else {
             return $cache_token;
-        }
+        }*/
     }
 
     private function getFromCache()
