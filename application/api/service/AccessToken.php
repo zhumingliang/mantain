@@ -69,7 +69,7 @@ class AccessToken
             throw new Exception($token['errmsg']);
         }
         $this->saveToCache($token);
-        return $token;
+        return $token['access_token'];
     }
 
     private function saveToCache($token)
