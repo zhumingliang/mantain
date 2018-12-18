@@ -13,16 +13,12 @@ use app\api\controller\BaseController;
 use app\api\model\AdminJoinT;
 use app\api\model\AdminT;
 use app\api\model\UserT;
+use app\api\service\AdminService;
 use app\api\validate\AdminValidate;
-use app\lib\enum\CommonEnum;
-use app\lib\enum\UserEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
-use think\Db;
-use think\Exception;
-use think\response\Json;
-use app\api\service\Token as TokenService;
+
 
 class Admin extends BaseController
 {
@@ -132,6 +128,44 @@ class Admin extends BaseController
         return json(new SuccessMessage());
 
 
+    }
+
+    /**
+     * @api {POST} /api/v1/admin/save  41-CMS-新增用户信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  饭堂系统同步用户信息
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "phone": "18956225230",
+     *       "username": "张三",
+     *       "card": "123456",
+     *       "type": "正式员工",
+     *       "department": "机关服务中心",
+     *       "role": "普通员工"
+     *     }
+     * @apiParam (请求参数说明) {String} phone   手机号
+     * @apiParam (请求参数说明) {String} username   用户名
+     * @apiParam (请求参数说明) {String} card   卡号
+     * @apiParam (请求参数说明) {String} type   员工类型
+     * @apiParam (请求参数说明) {String} department   部门
+     * @apiParam (请求参数说明) {String} role   用户角色
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function save()
+    {
+        $params = $this->request->param();
+        $params['role'] = AdminService::getAdminRoleID($params['role']);
+        $res = AdminT::create($params);
+        if (!$res) {
+            throw new OperationException();
+        }
+        return json(new SuccessMessage());
     }
 
 

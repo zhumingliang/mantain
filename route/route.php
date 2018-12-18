@@ -70,3 +70,4 @@ Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
 Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
 Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');
 
+Route::post('api/:version/admin/save', 'api/:version.Admin/save');
