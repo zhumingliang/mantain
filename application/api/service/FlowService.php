@@ -220,4 +220,27 @@ class FlowService
         return $flowinfo;
     }
 
+
+    /**
+     * 判断当前用户有无取消流程权限
+     * @param $wf_fid
+     * @param $wf_type
+     * @return int
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function checkCancelAccess($wf_fid, $wf_type)
+    {
+        $u_id = Token::getCurrentUid();
+        $count = Db::name($wf_type)->where('id', 'eq', $wf_fid)
+            ->where('admin_id', 'eq', $u_id)
+            ->find();
+        return $count ? 1 : 2;
+
+
+    }
+
 }
