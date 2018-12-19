@@ -237,6 +237,32 @@ class Admin extends BaseController
         return json($list);
     }
 
-
+    /**
+     * @api {POST} /api/v1/admin/role/update  48-更新用户角色
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 更新用户角色
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "role_id": 20,
+     *       "admin_id": 1,2,3,4
+     *     }
+     * @apiParam (请求参数说明) {int} role_id   角色id
+     * @apiParam (请求参数说明) {String} admin_id   用户uid，多个用逗号隔开。
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $role_id
+     * @param $admin_id
+     * @return \think\response\Json
+     * @throws OperationException
+     * @throws \app\lib\exception\ParameterException
+     */
+    public function updateRole($role_id, $admin_id)
+    {
+        AdminService::updateRole($role_id, $admin_id);
+        return json(new SuccessMessage());
+    }
 
 }

@@ -9,7 +9,10 @@
 namespace app\api\service;
 
 
+use app\api\model\AdminT;
 use app\api\model\Role;
+use app\lib\exception\OperationException;
+use app\lib\exception\ParameterException;
 
 class AdminService
 {
@@ -18,6 +21,26 @@ class AdminService
         $role = Role::where('name', $role_name)
             ->find();
         return $role->id;
+
+    }
+
+
+    public static function updateRole($role_id, $admin_id)
+    {
+        if (!strlen($admin_id)) {
+            throw new ParameterException();
+
+        }
+        $admin = new AdminT();
+        $admin_arr = explode(',', $admin_id);
+        $list[] = array();
+        for ($i = 0; $i < count($admin_arr); $i++) {
+            $list[] = ['id' => $admin_arr[$i], 'role' => $role_id];
+        }
+        $res = $admin->saveAll($list);
+        if (!$res) {
+            throw new OperationException();
+        }
 
     }
 
