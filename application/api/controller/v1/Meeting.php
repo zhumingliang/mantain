@@ -40,7 +40,9 @@ class Meeting extends BaseController
      *       "meeting_end": "2018-12-30 12：00",
      *       "theme": "全体职工大会",
      *       "outline": "年终总结",
-     *       "remark": "必须参加"
+     *       "remark": "必须参加",
+     *       "host": "办公室",
+     *       "push": "稽查局,财务管理科"
      *
      *     }
      * @apiParam (请求参数说明) {String} meeting_date   日期
@@ -52,6 +54,8 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String} meeting_begin   会议截止时间
      * @apiParam (请求参数说明) {String} theme   会议主题
      * @apiParam (请求参数说明) {String} outline   内容概要
+     * @apiParam (请求参数说明) {String} host   主办部门
+     * @apiParam (请求参数说明) {String} push   推送部门：多个用逗号隔开
      * @apiParam (请求参数说明) {String} remark   备注
      *
      * @apiSuccessExample {json} 返回样例:
@@ -95,7 +99,9 @@ class Meeting extends BaseController
      *       "meeting_begin": "2018-12-30 10：00",
      *       "theme": "全体职工大会",
      *       "outline": "年终总结",
-     *       "remark": "必须参加"
+     *       "remark": "必须参加",
+     *       "host": "办公室",
+     *       "push": "稽查局,财务管理科",
      *     }
      * @apiParam (请求参数说明) {int} id   会议id
      * @apiParam (请求参数说明) {String} meeting_date   日期
@@ -106,6 +112,8 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
      * @apiParam (请求参数说明) {String} theme   会议主题
      * @apiParam (请求参数说明) {String} outline   内容概要
+     * @apiParam (请求参数说明) {String} host   主办部门
+     * @apiParam (请求参数说明) {String} push   推送部门：多个用逗号隔开
      * @apiParam (请求参数说明) {String} remark   备注
      *
      * @apiSuccessExample {json} 返回样例:
@@ -201,11 +209,12 @@ class Meeting extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  会议列表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/meeting/list?address=全部&time_begin=2018-10-01&time_end=2018-12-31&theme=全体会议&page=1&size=20
+     * http://maintain.mengant.cn/api/v1/meeting/list?address=全部&time_begin=2018-10-01&time_end=2018-12-31&theme=全体会议&page=1&size=20&host=办公室
      * @apiParam (请求参数说明) {String}  address 签到地点
      * @apiParam (请求参数说明) {String}  theme 会议主题
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  host 部门/默认传入"全部"
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
@@ -221,19 +230,22 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} address 签到地点
      * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
      * @apiSuccess (返回参数说明) {String} time_end 签到截止时间
-     * @apiSuccess (返回参数说明) {int} meeting_begin   签到截止时间
+     * @apiSuccess (返回参数说明) {String} meeting_begin   签到截止时间
+     * @apiSuccess (返回参数说明) {String} host   主办部门
+     * @apiSuccess (返回参数说明) {String} push   推送部门
      * @apiSuccess (返回参数说明) {String} remark   备注
      * @param $time_begin
      * @param $time_end
      * @param $address
      * @param $theme
+     * @param $host
      * @param int $page
      * @param int $size
      * @return \think\response\Json
      */
-    public function getMeetingList($time_begin, $time_end, $address, $theme, $page = 1, $size = 20)
+    public function getMeetingList($time_begin, $time_end, $address, $theme, $host,$page = 1, $size = 20)
     {
-        $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size);
+        $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host);
         return json($list);
     }
 
@@ -243,11 +255,12 @@ class Meeting extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription 会议-导出报表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/meeting/export?address=全部&time_begin=2018-10-01&time_end=2018-12-31&theme=全体会议
+     * http://maintain.mengant.cn/api/v1/meeting/export?address=全部&time_begin=2018-10-01&time_end=2018-12-31&theme=全体会议&host=办公室
      * @apiParam (请求参数说明) {String}  address 签到地点
      * @apiParam (请求参数说明) {String}  theme 会议主题
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  host 部门/默认传入"全部"
      * @param $time_begin
      * @param $time_end
      * @param $address
@@ -386,10 +399,10 @@ class Meeting extends BaseController
     }
 
 
-    public function getSignInListForWx($meeting_date,$page,$size)
+    public function getSignInListForWx($meeting_date, $page, $size)
     {
 
-        $list = (new MeetingService())->getSignInListForWx($meeting_date,$page,$size);
+        $list = (new MeetingService())->getSignInListForWx($meeting_date, $page, $size);
         return json($list);
 
     }

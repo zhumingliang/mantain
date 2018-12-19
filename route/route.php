@@ -53,6 +53,7 @@ Route::post('api/:version/official/save', 'api/:version.Official/save');
 Route::get('api/:version/official/list', 'api/:version.Official/getList');
 Route::get('api/:version/official/export', 'api/:version.Official/export');
 Route::get('api/:version/official', 'api/:version.Official/getOfficial');
+Route::get('api/:version/official/meal/address', 'api/:version.Official/getAddress');
 
 
 Route::post('api/:version/car/save', 'api/:version.Car/save');
@@ -73,3 +74,5 @@ Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
 Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');
 
 Route::post('api/:version/admin/save', 'api/:version.Admin/save');
+
+Route::get('api/:version/department/list', 'api/:version.Department/getList');

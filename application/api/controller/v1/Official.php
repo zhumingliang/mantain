@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\MealAddressT;
 use app\api\model\OfficialReceptT;
 use app\api\service\OfficialService;
 use app\api\validate\OfficialValidate;
@@ -208,6 +209,30 @@ class Official extends BaseController
     {
         $info = (new OfficialService())->getTheFlow($id);
         return json($info);
+    }
+
+    /**
+     * @api {GET} /api/v1/official/meal/address  45-获取部门列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取部门列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/official/meal/address
+     * @apiSuccessExample {json}返回样例:
+     * [{"id":1,"address":"金瑞酒店"},{"id":2,"address":"机关食堂"}]
+     * @apiSuccess (返回参数说明) {int} id 用餐地点id
+     * @apiSuccess (返回参数说明) {String} address 用餐地点
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getAddress()
+    {
+        $list = MealAddressT::where('state', CommonEnum::STATE_IS_OK)
+            ->field('id,address')
+            ->select();
+        return json($list);
     }
 
 }

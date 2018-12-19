@@ -14,7 +14,7 @@ use think\Model;
 
 class MeetingT extends Model
 {
-    public static function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size)
+    public static function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -27,6 +27,11 @@ class MeetingT extends Model
             ->where(function ($query) use ($theme) {
                 if ($theme && $theme != "全部") {
                     $query->where('theme', 'like', $theme);
+                }
+            })
+            ->where(function ($query) use ($host) {
+                if ($host && $host != "全部") {
+                    $query->where('host', 'like', $host);
                 }
             })
             ->order('create_time desc')
@@ -52,7 +57,7 @@ class MeetingT extends Model
                 }
             })
             ->field('create_time,theme,outline,address,time_begin,time_end,
-            meeting_begin,remark')
+            meeting_begin,host,push,remark')
             ->order('create_time desc')
             ->select()
             ->toArray();

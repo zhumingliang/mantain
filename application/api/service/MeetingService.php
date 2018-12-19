@@ -51,9 +51,9 @@ class MeetingService extends BaseService
     }
 
 
-    public function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size)
+    public function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host)
     {
-        $list = MeetingT::getMeetingList($time_begin, $time_end, $address, $theme, $page, $size);
+        $list = MeetingT::getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host);
         return $list;
 
     }
@@ -70,6 +70,8 @@ class MeetingService extends BaseService
             '签到开始时间',
             '签到截止时间',
             '签到截止时间',
+            '主办部门',
+            '推送部门',
             '备注'
         );
         $file_name = '会议列表—导出' . '-' . date('Y-m-d', time()) . '.csv';

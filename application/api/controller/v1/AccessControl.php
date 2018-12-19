@@ -42,7 +42,6 @@ class AccessControl extends BaseController
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
      * @return \think\response\Json
-     * @throws OperationException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
