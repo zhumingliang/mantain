@@ -24,10 +24,11 @@ class MeetingRoom extends BaseController
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/meeting/rooms
      * @apiSuccessExample {json}返回样例:
-     * [{"id":1,"name":"一楼报告厅","count":"不定（可自由安排会场）","function":"投影"},{"id":2,"name":"二楼报告厅","count":"258个座位","function":"电子屏、视频、电视"},{"id":3,"name":"202会议室","count":"32人（侧：24人）","function":"无纸化电脑（32台）、电子屏、视频、电视"},{"id":4,"name":"203小会议室","count":"30人","function":"投影、电子屏"},{"id":5,"name":"205会客室","count":"12人（可加至16人）","function":"沙发"},{"id":6,"name":"多功能培训室","count":"40人","function":"电子屏、投影"},{"id":7,"name":"职工书屋","count":"不定","function":"投影"}]
+     * [{"id":1,"name":"一楼报告厅","count":"不定（可自由安排会场）","function":"投影","card":null},{"id":2,"name":"二楼报告厅","count":"258个座位","function":"电子屏、视频、电视","card":"a3"},{"id":3,"name":"202会议室","count":"32人（侧：24人）","function":"无纸化电脑（32台）、电子屏、视频、电视","card":"a1"},{"id":4,"name":"203小会议室","count":"30人","function":"投影、电子屏","card":"a2"},{"id":5,"name":"205会客室","count":"12人（可加至16人）","function":"沙发","card":null},{"id":6,"name":"多功能培训室","count":"40人","function":"电子屏、投影","card":null},{"id":7,"name":"职工书屋","count":"不定","function":"投影","card":null}]
      * @apiSuccess (返回参数说明) {int} id 会议室id
      * @apiSuccess (返回参数说明) {String} count 会场座位数量信息
      * @apiSuccess (返回参数说明) {String} function 会场功能
+     * @apiSuccess (返回参数说明) {String} card 会议室签到机编号
      *
      * @return \think\response\Json
      * @throws \think\db\exception\DataNotFoundException
@@ -37,7 +38,7 @@ class MeetingRoom extends BaseController
     public function getRooms()
     {
         $rooms = MeetingRoomT::where('state', CommonEnum::STATE_IS_OK)
-            ->field('id,name,count,function')
+            ->field('id,name,count,function,card')
             ->select();
         return json($rooms);
 

@@ -33,6 +33,7 @@ class Meeting extends BaseController
      *    {
      *       "meeting_date": "2018-12-30",
      *       "address": "101会议室",
+     *       "card": "a1",
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 09：30",
      *       "meeting_begin": "2018-12-30 10：00",
@@ -44,6 +45,7 @@ class Meeting extends BaseController
      *     }
      * @apiParam (请求参数说明) {String} meeting_date   日期
      * @apiParam (请求参数说明) {String} address   签到地点
+     * @apiParam (请求参数说明) {String} card   会议室签到机编号
      * @apiParam (请求参数说明) {String} time_begin   签到开始时间
      * @apiParam (请求参数说明) {String} time_end   签到截止时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
@@ -87,6 +89,7 @@ class Meeting extends BaseController
      *       "id": "1",
      *       "meeting_date": "2018-12-30",
      *       "address": "101会议室",
+     *       "card": "a1",
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 09：30",
      *       "meeting_begin": "2018-12-30 10：00",
@@ -97,6 +100,7 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {int} id   会议id
      * @apiParam (请求参数说明) {String} meeting_date   日期
      * @apiParam (请求参数说明) {String} address   签到地点
+     * @apiParam (请求参数说明) {String} card   会议室签到机编号
      * @apiParam (请求参数说明) {String} time_begin   签到开始时间
      * @apiParam (请求参数说明) {String} time_end   签到截止时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
@@ -172,19 +176,22 @@ class Meeting extends BaseController
      * @apiDescription  会议签到
      * @apiExample {post}  请求样例:
      *    {
-     *       "card": "123456"
+     *       "mobile": 18956225230,
+     *       "card": "a1"
      *     }
-     * @apiParam (请求参数说明) {String} card  员工卡号
+     * @apiParam (请求参数说明) {String} card  考勤机设备号
+     * @apiParam (请求参数说明) {String} mobile  用户手机号
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      * @param $card
+     * @param $mobile
      * @return \think\response\Json
      */
-    public function signIn($card)
+    public function signIn($card,$mobile)
     {
-        (new MeetingService())->signIn($card);
+        (new MeetingService())->signIn($card,$mobile);
         return json(new SuccessMessage());
     }
 
@@ -340,9 +347,21 @@ class Meeting extends BaseController
     }
 
     /**
+     * @api {GET} /api/v1/meeting/info 43-获取指定会议室会议信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取指定会议室会议信息
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting/info?card=a1
+     * @apiParam (请求参数说明) {String}  card  签到机设备号
+     * @apiSuccessExample {json}返回样例:
+     * {"time_begin":"09:00","time_end":"09:30","meeting_begin":"09:30"}
+     * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
+     * @apiSuccess (返回参数说明) {String} time_end 签到截止时间
+     * @apiSuccess (返回参数说明) {String} meeting_begin 会议开始时间
+     *
      * @param $card
      * @return array|\PDOStatement|string|\think\Collection
-     * @throws MeetingException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -352,17 +371,17 @@ class Meeting extends BaseController
         $room = MeetingRoomT::where('card', $card)
             ->find();
         if (!$room) {
-            throw new MeetingException();
+            return json(array());
         }
         //获取这个会议室当天的会议情况
         $meeting = MeetingT::where('state', CommonEnum::STATE_IS_OK)
-            ->where('address', $room->name())
-            ->whereTime('meeting_date', 'today')
+            ->where('address', $room->name)
+            ->where('meeting_date', '=', date('Y-m-d'))
+            ->where('meeting_begin', '>=', date('Y-m-d H:i'))
             ->order('create_time desc')
-            ->field('time_begin,time_end,meeting_date')
-            ->select();
-
-        return $meeting;
+            ->field('DATE_FORMAT(time_begin,"%H:%i") as time_begin,DATE_FORMAT(time_end,"%H:%i") as time_end, DATE_FORMAT(meeting_begin,"%H:%i") as meeting_begin')
+            ->find();
+        return json($meeting);
 
     }
 

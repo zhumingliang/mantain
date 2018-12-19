@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/lib/exception/MeetingException.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/FlowService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/FlowService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/route/route.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/MeetingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MeetingService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,14 +35,14 @@
           <entry key="gitignore" value="3" />
           <entry key="html" value="8" />
           <entry key="json" value="1" />
-          <entry key="php" value="616" />
+          <entry key="php" value="619" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="8" />
           <entry key="JSON" value="1" />
-          <entry key="PHP" value="616" />
+          <entry key="PHP" value="619" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
@@ -51,13 +50,13 @@
         <counts>
           <entry key="dummy" value="26" />
           <entry key="json" value="26" />
-          <entry key="php" value="14025" />
+          <entry key="php" value="14629" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="26" />
-          <entry key="PHP" value="14025" />
+          <entry key="PHP" value="14629" />
           <entry key="PLAIN_TEXT" value="26" />
         </counts>
       </usages-collector>
@@ -72,91 +71,56 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/api/service/FlowService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
-              <folding>
-                <element signature="e#125#148#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="349" column="32" selection-start-line="349" selection-start-column="20" selection-end-line="349" selection-end-column="32" />
+            <state relative-caret-position="567">
+              <caret line="191" column="41" selection-start-line="191" selection-start-column="41" selection-end-line="191" selection-end-column="41" />
               <folding>
-                <element signature="e#499#1881#0#PHP" />
-                <element signature="e#1886#2310#0#PHP" />
-                <element signature="e#2316#3643#0#PHP" />
-                <element signature="e#3648#4111#0#PHP" />
-                <element signature="e#4117#4656#0#PHP" />
-                <element signature="e#4661#5068#0#PHP" />
-                <element signature="e#5074#5587#0#PHP" />
-                <element signature="e#5592#5723#0#PHP" />
-                <element signature="e#5729#7548#0#PHP" />
-                <element signature="e#7553#7800#0#PHP" />
-                <element signature="e#7806#8426#0#PHP" />
-                <element signature="e#8431#8647#0#PHP" />
-                <element signature="e#8654#10553#0#PHP" />
-                <element signature="e#10558#10942#0#PHP" />
-                <element signature="e#10948#11776#0#PHP" />
-                <element signature="e#11782#12134#0#PHP" />
+                <element signature="e#571#1953#0#PHP" />
+                <element signature="e#1958#2382#0#PHP" />
+                <element signature="e#2388#3715#0#PHP" />
+                <element signature="e#3720#4183#0#PHP" />
+                <element signature="e#4189#4728#0#PHP" />
+                <element signature="e#4733#5140#0#PHP" />
+                <element signature="e#5146#5659#0#PHP" />
+                <element signature="e#5747#5880#0#PHP" />
+                <element signature="e#5801#7620#0#PHP" />
+                <element signature="e#7710#7957#0#PHP" />
+                <element signature="e#7878#8498#0#PHP" />
+                <element signature="e#8588#8804#0#PHP" />
+                <element signature="e#8726#10625#0#PHP" />
+                <element signature="e#10715#11099#0#PHP" />
+                <element signature="e#10838#10979#0#PHP" />
+                <element signature="e#11020#11848#0#PHP" />
+                <element signature="e#11854#12206#0#PHP" />
+                <element signature="e#12212#14119#0#PHP" />
+                <element signature="e#12499#13029#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/route/route.php">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Flow.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="97" column="38" lean-forward="true" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+            <state relative-caret-position="508">
+              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding>
                 <element signature="e#130#168#0#PHP" expanded="true" />
-                <element signature="e#343#1706#0#PHP" />
-                <element signature="e#2974#5526#0#PHP" />
-                <element signature="e#5531#6218#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/lib/exception/MeetingException.php">
+        <entry file="file://$PROJECT_DIR$/application/api/service/MeetingService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/lib/exception/FlowException.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/model/MeetingRoomT.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="501">
+              <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <folding>
+                <element signature="e#123#154#0#PHP" expanded="true" />
+                <element signature="e#443#738#0#PHP" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,7 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/api/service/RecreationalService.php" />
         <option value="$PROJECT_DIR$/application/api/service/OfficialService.php" />
         <option value="$PROJECT_DIR$/application/api/model/MeetingplaceT.php" />
         <option value="$PROJECT_DIR$/application/api/model/MeetingplaceReceptT.php" />
@@ -218,7 +181,6 @@
         <option value="$PROJECT_DIR$/application/index/controller/Flowdesign.php" />
         <option value="$PROJECT_DIR$/application/api/model/MeetingRoomV.php" />
         <option value="$PROJECT_DIR$/application/api/service/MeetingRoomService.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php" />
         <option value="$PROJECT_DIR$/application/api/model/Role.php" />
         <option value="$PROJECT_DIR$/application/api/service/AdminService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Admin.php" />
@@ -234,9 +196,11 @@
         <option value="$PROJECT_DIR$/application/api/validate/AccessControlValidate.php" />
         <option value="$PROJECT_DIR$/application/api/model/MeetingRoomT.php" />
         <option value="$PROJECT_DIR$/application/lib/exception/MeetingException.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" />
         <option value="$PROJECT_DIR$/route/route.php" />
         <option value="$PROJECT_DIR$/application/api/service/FlowService.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php" />
+        <option value="$PROJECT_DIR$/application/api/service/MeetingService.php" />
       </list>
     </option>
   </component>
@@ -252,9 +216,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
     <option name="width" value="1680" />
-    <option name="height" value="947" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -356,14 +319,7 @@
       <workItem from="1544680589379" duration="15025000" />
       <workItem from="1544726782656" duration="1797000" />
       <workItem from="1544765389261" duration="348000" />
-      <workItem from="1545009679895" duration="26383000" />
-    </task>
-    <task id="LOCAL-00019" summary="初始化">
-      <created>1544368046848</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1544368046848</updated>
+      <workItem from="1545009679895" duration="32649000" />
     </task>
     <task id="LOCAL-00020" summary="初始化">
       <created>1544380781581</created>
@@ -701,11 +657,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545156259871</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="初始化">
+      <created>1545181280576</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1545181280576</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="158623000" />
+    <option name="totallyTimeSpent" value="164889000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -743,18 +706,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="初始化" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/api/model/SpaceMultiV.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="64" column="62" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="62" />
-          <folding>
-            <element signature="e#121#149#0#PHP" expanded="true" />
-            <element signature="e#177#1411#0#PHP" />
-            <element signature="e#1757#3059#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/model/MeetingplaceV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -905,16 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="488">
           <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="69" column="82" selection-start-line="69" selection-start-column="82" selection-end-line="69" selection-end-column="82" />
-          <folding>
-            <element signature="e#130#168#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1117,31 +1058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="349" column="32" selection-start-line="349" selection-start-column="20" selection-end-line="349" selection-end-column="32" />
-          <folding>
-            <element signature="e#499#1881#0#PHP" />
-            <element signature="e#1886#2310#0#PHP" />
-            <element signature="e#2316#3643#0#PHP" />
-            <element signature="e#3648#4111#0#PHP" />
-            <element signature="e#4117#4656#0#PHP" />
-            <element signature="e#4661#5068#0#PHP" />
-            <element signature="e#5074#5587#0#PHP" />
-            <element signature="e#5592#5723#0#PHP" />
-            <element signature="e#5729#7548#0#PHP" />
-            <element signature="e#7553#7800#0#PHP" />
-            <element signature="e#7806#8426#0#PHP" />
-            <element signature="e#8431#8647#0#PHP" />
-            <element signature="e#8654#10553#0#PHP" />
-            <element signature="e#10558#10942#0#PHP" />
-            <element signature="e#10948#11776#0#PHP" />
-            <element signature="e#11782#12134#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/route/route.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -1164,10 +1080,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/FlowService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
+        <state relative-caret-position="416">
           <caret line="181" column="13" selection-start-line="181" selection-start-column="13" selection-end-line="181" selection-end-column="13" />
           <folding>
             <element signature="e#125#148#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/MeetingService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="e#123#154#0#PHP" expanded="true" />
+            <element signature="e#443#738#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="191" column="41" selection-start-line="191" selection-start-column="41" selection-end-line="191" selection-end-column="41" />
+          <folding>
+            <element signature="e#571#1953#0#PHP" />
+            <element signature="e#1958#2382#0#PHP" />
+            <element signature="e#2388#3715#0#PHP" />
+            <element signature="e#3720#4183#0#PHP" />
+            <element signature="e#4189#4728#0#PHP" />
+            <element signature="e#4733#5140#0#PHP" />
+            <element signature="e#5146#5659#0#PHP" />
+            <element signature="e#5747#5880#0#PHP" />
+            <element signature="e#5801#7620#0#PHP" />
+            <element signature="e#7710#7957#0#PHP" />
+            <element signature="e#7878#8498#0#PHP" />
+            <element signature="e#8588#8804#0#PHP" />
+            <element signature="e#8726#10625#0#PHP" />
+            <element signature="e#10715#11099#0#PHP" />
+            <element signature="e#10838#10979#0#PHP" />
+            <element signature="e#11020#11848#0#PHP" />
+            <element signature="e#11854#12206#0#PHP" />
+            <element signature="e#12212#14119#0#PHP" />
+            <element signature="e#12499#13029#0#PHP" />
           </folding>
         </state>
       </provider>

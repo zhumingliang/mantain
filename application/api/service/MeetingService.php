@@ -9,25 +9,39 @@
 namespace app\api\service;
 
 
+use app\api\model\MeetingRoomT;
 use app\api\model\MeetingT;
 use app\api\model\SignInT;
 use app\api\model\SignInV;
 
 class MeetingService extends BaseService
 {
-    public function signIn($card)
+    public function signIn($card, $mobile)
     {
+        $m_id = $this->checkMeeting($card);
         $data = [
             'card' => $card,
-            'm_id' => $this->checkMeeting()
+            'phone' => $mobile,
+            'm_id' => $m_id
         ];
-        SignInT::create($data);
+        if (!$this->checkSign($m_id, $mobile)) {
+            SignInT::create($data);
+        }
+    }
+
+
+    private function checkSign($m_id, $phone)
+    {
+        $count = SignInT::where('m_id', $m_id)
+            ->where('phone', $phone)
+            ->count();
+        return $count;
 
     }
 
-    private function checkMeeting()
+    private function checkMeeting($card)
     {
-        $meeting = MeetingT::where('time_begin', '<= time', date("Y-m-d H:i:s"))
+        $meeting = MeetingT::where('card', $card)->where('time_begin', '<= time', date("Y-m-d H:i:s"))
             ->where('time_end', '>= time', date("Y-m-d H:i:s"))
             ->find();
         if ($meeting) {
