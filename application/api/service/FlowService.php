@@ -179,7 +179,7 @@ class FlowService
     private function flowCancel($wf_fid, $wf_type)
     {
         $res = Db::name($wf_type)->where('id', $wf_fid)->update(['state' => 2]);
-        if ($res) {
+        if (!$res) {
             throw new FlowException(
                 [
                     'code' => 401,

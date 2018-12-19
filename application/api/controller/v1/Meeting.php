@@ -10,12 +10,14 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\MeetingRoomT;
 use app\api\model\MeetingT;
 use app\api\service\MeetingService;
 use app\api\validate\MeetingValidate;
 use app\api\service\Token as TokenService;
 use app\index\controller\News;
 use app\lib\enum\CommonEnum;
+use app\lib\exception\MeetingException;
 use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
 
@@ -334,6 +336,33 @@ class Meeting extends BaseController
             $department, $username,
             $address, $theme);
         return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @param $card
+     * @return array|\PDOStatement|string|\think\Collection
+     * @throws MeetingException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getInfoForMC($card)
+    {
+        $room = MeetingRoomT::where('card', $card)
+            ->find();
+        if (!$room) {
+            throw new MeetingException();
+        }
+        //获取这个会议室当天的会议情况
+        $meeting = MeetingT::where('state', CommonEnum::STATE_IS_OK)
+            ->where('address', $room->name())
+            ->whereTime('meeting_date', 'today')
+            ->order('create_time desc')
+            ->field('time_begin,time_end,meeting_date')
+            ->select();
+
+        return $meeting;
 
     }
 
