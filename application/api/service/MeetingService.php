@@ -88,6 +88,13 @@ class MeetingService extends BaseService
         return $list;
     }
 
+    public function getSignInListForWx($meeting_date,$page,$size)
+    {
+        $list = SignInV::getListForWx($meeting_date,$page,$size);
+        return $list;
+    }
+
+
     public function exportSignIn($time_begin, $time_end,
                                  $department, $username,
                                  $address, $theme)

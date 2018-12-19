@@ -51,6 +51,18 @@ class SignInV extends Model
 
     }
 
+
+    public static function getListForWX($meeting_date, $page, $size)
+    {
+        $list = self::where('meeting_date', '=', $meeting_date)
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page])
+            ->toArray();
+        return $list;
+
+    }
+
+
     public static function export($time_begin, $time_end,
                                   $department, $username,
                                   $address, $theme)

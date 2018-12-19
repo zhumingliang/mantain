@@ -141,15 +141,13 @@ class Admin extends BaseController
      *       "username": "张三",
      *       "card": "123456",
      *       "type": "正式员工",
-     *       "department": "机关服务中心",
-     *       "role": "普通员工"
+     *       "department": "机关服务中心"
      *     }
      * @apiParam (请求参数说明) {String} phone   手机号
      * @apiParam (请求参数说明) {String} username   用户名
      * @apiParam (请求参数说明) {String} card   卡号
      * @apiParam (请求参数说明) {String} type   员工类型
      * @apiParam (请求参数说明) {String} department   部门
-     * @apiParam (请求参数说明) {String} role   用户角色
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
@@ -160,7 +158,9 @@ class Admin extends BaseController
     public function save()
     {
         $params = $this->request->param();
-        $params['role'] = AdminService::getAdminRoleID($params['role']);
+        $params['account']=$params['phone'];
+        $params['pwd']=sha1('a111111');
+        //$params['role'] = AdminService::getAdminRoleID($params['role']);
         $res = AdminT::create($params);
         if (!$res) {
             throw new OperationException();

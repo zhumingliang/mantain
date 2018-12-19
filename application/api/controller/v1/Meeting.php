@@ -189,9 +189,9 @@ class Meeting extends BaseController
      * @param $mobile
      * @return \think\response\Json
      */
-    public function signIn($card,$mobile)
+    public function signIn($card, $mobile)
     {
-        (new MeetingService())->signIn($card,$mobile);
+        (new MeetingService())->signIn($card, $mobile);
         return json(new SuccessMessage());
     }
 
@@ -382,6 +382,15 @@ class Meeting extends BaseController
             ->field('DATE_FORMAT(time_begin,"%H:%i") as time_begin,DATE_FORMAT(time_end,"%H:%i") as time_end, DATE_FORMAT(meeting_begin,"%H:%i") as meeting_begin')
             ->find();
         return json($meeting);
+
+    }
+
+
+    public function getSignInListForWx($meeting_date,$page,$size)
+    {
+
+        $list = (new MeetingService())->getSignInListForWx($meeting_date,$page,$size);
+        return json($list);
 
     }
 
