@@ -75,7 +75,7 @@ class OfficialReceptV extends Model
                 }
             })
             ->field('create_time,username,department,phone,product,content,
-            member,table_number,meal_space,meal_type,meals,meal_date,status')
+            member,accompany,table_number,meal_space,meal_type,meals,meal_date,status')
             ->order('create_time desc')
             ->select()->toArray();
         return $list;

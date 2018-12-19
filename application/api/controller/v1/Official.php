@@ -31,6 +31,7 @@ class Official extends BaseController
      *       "phone": "18956225230",
      *       "member": 3,
      *       "table_number": 1,
+     *       "accompany": 3,
      *       "product": "考察",
      *       "content": "业务规范",
      *       "meal_type": "会议餐",
@@ -41,6 +42,7 @@ class Official extends BaseController
      * @apiParam (请求参数说明) {String} phone 联系人电话
      * @apiParam (请求参数说明) {String} cuisine  菜式
      * @apiParam (请求参数说明) {int} member  人数
+     * @apiParam (请求参数说明) {int} accompany  陪同人数
      * @apiParam (请求参数说明) {int} table_number  桌数
      * @apiParam (请求参数说明) {String} product  项目
      * @apiParam (请求参数说明) {String} content  内容
@@ -73,7 +75,6 @@ class Official extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/official/list 17-预约申请—公务接待-围餐预定申请列表
      * @apiGroup  CMS
@@ -90,7 +91,7 @@ class Official extends BaseController
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
-     * {"total":3,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":7,"product":"公务接待","content":"整改业务","meal_date":"2018-12-15 00:00:00","meal_space":"金瑞酒店","meal_type":"会议餐","meals":"早餐,水蒸蛋、水蒸蛋、水蒸蛋A午餐,水蒸蛋A晚餐,","member":12,"phone":"13025856587","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-12 03:14:47"},{"id":6,"product":"公务接待","content":"整改业务","meal_date":"2018-12-15 00:00:00","meal_space":"金瑞酒店","meal_type":"培训餐","meals":"早餐,水蒸蛋A午餐,水蒸蛋A晚餐,","member":12,"phone":"13025856587","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-12 03:09:43"},{"id":5,"product":"考察","content":"业务规范","meal_date":"2018-10-02 00:00:00","meal_space":"饭堂","meal_type":"会议餐","meals":"中餐,红烧排骨、西红柿炒鸡蛋A晚餐,红烧排骨、西红柿炒鸡蛋","member":3,"phone":"18956225230","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-09 09:57:06"}]}
+     * {"total":3,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":7,"product":"公务接待","content":"整改业务","meal_date":"2018-12-15 00:00:00","meal_space":"金瑞酒店","meal_type":"会议餐","meals":"早餐,水蒸蛋、水蒸蛋、水蒸蛋A午餐,水蒸蛋A晚餐,","member":12,"accompany":3,"phone":"13025856587","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-12 03:14:47"},{"id":6,"product":"公务接待","content":"整改业务","meal_date":"2018-12-15 00:00:00","meal_space":"金瑞酒店","meal_type":"培训餐","meals":"早餐,水蒸蛋A午餐,水蒸蛋A晚餐,","member":12,"accompany":3,"phone":"13025856587","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-12 03:09:43"},{"id":5,"product":"考察","content":"业务规范","meal_date":"2018-10-02 00:00:00","meal_space":"饭堂","meal_type":"会议餐","meals":"中餐,红烧排骨、西红柿炒鸡蛋A晚餐,红烧排骨、西红柿炒鸡蛋","member":3,"accompany":3,"phone":"18956225230","table_number":1,"status":0,"admin_id":1,"department":"办公室","username":"朱明良","create_time":"2018-12-09 09:57:06"}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -101,6 +102,7 @@ class Official extends BaseController
      * @apiSuccess (返回参数说明) {String} department 部门
      * @apiSuccess (返回参数说明) {String} phone 联系人电话
      * @apiSuccess (返回参数说明) {int} member  人数
+     * @apiSuccess (返回参数说明) {int} accompany  陪同人数
      * @apiSuccess (返回参数说明) {int} table_number  桌数
      * @apiSuccess (返回参数说明) {String} product  项目
      * @apiSuccess (返回参数说明) {String} content  内容

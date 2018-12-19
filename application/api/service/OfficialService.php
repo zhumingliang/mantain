@@ -155,6 +155,7 @@ class OfficialService extends BaseService
             '项目',
             '业务内容',
             '人数',
+            '陪同人数',
             '桌数',
             '就餐地点',
             '餐类',

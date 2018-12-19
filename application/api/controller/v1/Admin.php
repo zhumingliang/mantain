@@ -12,9 +12,12 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\AdminJoinT;
 use app\api\model\AdminT;
+use app\api\model\AdminV;
+use app\api\model\Role;
 use app\api\model\UserT;
 use app\api\service\AdminService;
 use app\api\validate\AdminValidate;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
@@ -158,8 +161,8 @@ class Admin extends BaseController
     public function save()
     {
         $params = $this->request->param();
-        $params['account']=$params['phone'];
-        $params['pwd']=sha1('a111111');
+        $params['account'] = $params['phone'];
+        $params['pwd'] = sha1('a111111');
         //$params['role'] = AdminService::getAdminRoleID($params['role']);
         $res = AdminT::create($params);
         if (!$res) {
@@ -167,6 +170,73 @@ class Admin extends BaseController
         }
         return json(new SuccessMessage());
     }
+
+    /**
+     * @api {GET} /api/v1/admin/list 46-获取用户列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取用户列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/admin/list?username=&phone&department=全部&role=全部&page=1&size=20
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  role 角色/默认传入全部
+     * @apiParam (请求参数说明) {String}  username  姓名
+     * @apiParam (请求参数说明) {String}  phone  手机号
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":11,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":1,"username":"朱明良","phone":"18956225230","role":null,"state":1,"department":"办公室","account":"admin"},{"id":2,"username":"部门负责人","phone":"1","role":"部门负责人","state":1,"department":"测试1","account":"1"},{"id":3,"username":"机服中心","phone":"2","role":"机服中心管理员","state":1,"department":"","account":"2"},{"id":4,"username":"机服中心负责人","phone":"3","role":"机服中心负责人","state":1,"department":"","account":"3"},{"id":5,"username":"部门主管领导","phone":"4","role":"部门主管领导","state":1,"department":"","account":"4"},{"id":6,"username":"普通员工","phone":"5","role":"普通员工","state":1,"department":"","account":"5"},{"id":7,"username":"部门局领导","phone":"6","role":"分管部门局领导","state":1,"department":"","account":"6"},{"id":8,"username":"部门主管局长","phone":"7","role":"部门主管局长","state":1,"department":"","account":"7"},{"id":9,"username":"机服主管局长","phone":"8","role":"机服主管局长","state":1,"department":"","account":"8"},{"id":10,"username":"局长","phone":"9","role":"局长","state":1,"department":"","account":"9"},{"id":11,"username":"队长","phone":"10","role":"车队","state":1,"department":"","account":"10"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 用户id
+     * @apiSuccess (返回参数说明) {String} username 姓名
+     * @apiSuccess (返回参数说明) {String} phone 手机号
+     * @apiSuccess (返回参数说明) {String} account 账号
+     * @apiSuccess (返回参数说明) {int} role 角色
+     * @apiSuccess (返回参数说明) {int} department 部门
+     *
+     * @param $username
+     * @param $phone
+     * @param $department
+     * @param $role
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getList($username, $phone, $department, $role, $page = 1, $size = 20)
+    {
+        $list = AdminV::getList($username, $phone, $department, $role, $page, $size);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/role/list 47-获取用户角色列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取用户列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/role/list
+     * @apiSuccessExample {json}返回样例:
+     * [{"id":26,"name":"管理员"},{"id":27,"name":"普通员工"},{"id":28,"name":"部门负责人"},{"id":29,"name":"分管部门局领导"},{"id":30,"name":"部门主管领导"},{"id":31,"name":"部门主管局长"},{"id":33,"name":"机服中心管理员"},{"id":34,"name":"机服中心负责人"},{"id":35,"name":"机服主管局长"},{"id":36,"name":"局长"},{"id":37,"name":"车队"}]
+     * @apiSuccess (返回参数说明) {int} id 用户id
+     * @apiSuccess (返回参数说明) {String} name 角色名称
+     *
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getRoleList()
+    {
+        $list = Role::where('status', CommonEnum::STATE_IS_OK)
+            ->field('id,name')
+            ->select();
+        return json($list);
+    }
+
 
 
 }
