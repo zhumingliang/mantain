@@ -51,9 +51,9 @@ class MeetingService extends BaseService
     }
 
 
-    public function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host)
+    public function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host)
     {
-        $list = MeetingT::getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host);
+        $list = MeetingT::getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host);
         return $list;
 
     }
@@ -90,9 +90,10 @@ class MeetingService extends BaseService
         return $list;
     }
 
-    public function getSignInListForWx($meeting_date,$page,$size)
+    public function getSignInListForWx($meeting_date, $page, $size)
     {
-        $list = SignInV::getListForWx($meeting_date,$page,$size);
+        $phone =Token::getCurrentTokenVar('phone');
+        $list = SignInV::getListForWx($meeting_date,$phone, $page, $size);
         return $list;
     }
 

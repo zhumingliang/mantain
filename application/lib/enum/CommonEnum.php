@@ -19,9 +19,13 @@ class CommonEnum
 
     const BACK = -1;
 
-    const SAVE = 0 ;
+    const SAVE = 0;
 
     const ING = 1;
 
     const PASS = 2;
+
+    const READY_RECORD = 1;
+
+    const COMPLETE = 2;
 }

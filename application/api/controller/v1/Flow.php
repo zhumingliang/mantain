@@ -10,10 +10,10 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\Run;
 use app\api\service\FlowService;
 use app\lib\exception\SuccessMessage;
 use think\Db;
-use think\response\Json;
 use workflow\workflow;
 
 class Flow extends BaseController
@@ -151,6 +151,13 @@ class Flow extends BaseController
             'info' => $info
         ]);
 
+
+    }
+
+    public function getComplete($type)
+    {
+        $list = Run::getComplete($type);
+        return json($list);
 
     }
 

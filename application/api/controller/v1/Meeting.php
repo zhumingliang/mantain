@@ -243,9 +243,9 @@ class Meeting extends BaseController
      * @param int $size
      * @return \think\response\Json
      */
-    public function getMeetingList($time_begin, $time_end, $address, $theme, $host,$page = 1, $size = 20)
+    public function getMeetingList($time_begin, $time_end, $address, $theme, $host, $page = 1, $size = 20)
     {
-        $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host);
+        $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host);
         return json($list);
     }
 
@@ -398,13 +398,82 @@ class Meeting extends BaseController
 
     }
 
-
-    public function getSignInListForWx($meeting_date, $page, $size)
+    /**
+     * @api {GET} /api/v1/meeting/sign/in/list/wx 49-微信端-获取会议签到列表
+     * @apiGroup  WX
+     * @apiVersion 1.0.1
+     * @apiDescription  会议签到列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting/sign/in/list/wx?meeting_date=2018-10-01&page=1&size=20
+     * @apiParam (请求参数说明) {String}  address 签到地点
+     * @apiParam (请求参数说明) {String}  theme 会议主题
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":1,"per_page":"20","current_page":1,"last_page":1,"data":[{"meeting_date":"2018-12-20","theme":"test","sign_time":"2018-12-19 15:41:19","time_begin":"2018-12-19 15:00:00","time_end":"2018-12-19 19:30:00","meeting_begin":"2018-12-20 09:30:00"}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页
+     * @apiSuccess (返回参数说明) {String} sign_time 签到时间
+     * @apiSuccess (返回参数说明) {String} meeting_date 会议日期
+     * @apiSuccess (返回参数说明) {String} meeting_begin 会议开始时间
+     * @apiSuccess (返回参数说明) {String} theme 会议主题
+     * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
+     * @apiSuccess (返回参数说明) {String} time_end 签到截止时间
+     * @param $meeting_date
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
+     */
+    public function getSignInListForWx($meeting_date, $page = 1, $size = 10)
     {
-
         $list = (new MeetingService())->getSignInListForWx($meeting_date, $page, $size);
         return json($list);
 
     }
+
+    /**
+     * @api {GET} /api/v1/meeting 50-获取指定会议室会议信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取指定会议室会议信息
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting?id=1
+     * @apiParam (请求参数说明) {String}  id  会议id
+     * @apiSuccessExample {json}返回样例:
+     * {"id":8,"meeting_date":"2018-12-20","address":"202会议室","time_begin":"2018-12-19 15:00:00","time_end":"2018-12-19 19:30:00","theme":"test","outline":"test","create_time":"2018-12-19 09:08:18","update_time":"2018-12-19 09:08:18","remark":"test","state":1,"meeting_end":"2018-12-20 12:00:00","meeting_begin":"2018-12-20 09:30:00","card":"a1","host":null,"push":null}
+     * @apiSuccess (返回参数说明) {int} id 会议id
+     * @apiSuccess (返回参数说明) {String} meeting_date   日期
+     * @apiSuccess (返回参数说明) {String} address   签到地点
+     * @apiSuccess (返回参数说明) {String} card   会议室签到机编号
+     * @apiSuccess (返回参数说明) {String} time_begin   签到开始时间
+     * @apiSuccess (返回参数说明) {String} time_end   签到截止时间
+     * @apiSuccess (返回参数说明) {String} meeting_begin   会议开始时间
+     * @apiSuccess (返回参数说明) {String} meeting_begin   会议截止时间
+     * @apiSuccess (返回参数说明) {String} theme   会议主题
+     * @apiSuccess (返回参数说明) {String} outline   内容概要
+     * @apiSuccess (返回参数说明) {String} host   主办部门
+     * @apiSuccess (返回参数说明) {String} push   推送部门：多个用逗号隔开
+     * @apiSuccess (返回参数说明) {String} remark   备注
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getMeetingInfo($id)
+    {
+        $info = MeetingT::where('id', $id)
+            ->hidden(['create_time,update_time,state'])
+            ->find();
+        return json($info);
+
+    }
+
 
 }

@@ -52,12 +52,13 @@ class SignInV extends Model
     }
 
 
-    public static function getListForWX($meeting_date, $page, $size)
+    public static function getListForWX($meeting_date, $phone, $page, $size)
     {
-        $list = self::where('meeting_date', '=', $meeting_date)
+        $list = self::where('phone', $phone)
+            ->where('meeting_date', '=', $meeting_date)
+            ->field('meeting_date,theme,sign_time,time_begin,time_end,meeting_begin')
             ->order('create_time desc')
-            ->paginate($size, false, ['page' => $page])
-            ->toArray();
+            ->paginate($size, false, ['page' => $page]);
         return $list;
 
     }
@@ -89,6 +90,7 @@ class SignInV extends Model
                     $query->where('theme', 'like', $theme);
                 }
             })
+            ->field('meeting_date,username,phone,department,address,sign_time,theme,remark')
             ->order('create_time desc')
             ->select()
             ->toArray();

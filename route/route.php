@@ -25,6 +25,7 @@ Route::get('api/:version/access', 'api/:version.AccessControl/getTheAccess');
 
 
 Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
+Route::get('api/:version/meeting', 'api/:version.Meeting/getMeetingInfo');
 Route::post('api/:version/meeting/update', 'api/:version.Meeting/update');
 Route::post('api/:version/meeting/delete', 'api/:version.Meeting/delete');
 Route::post('api/:version/meeting/sign/in', 'api/:version.Meeting/signIn');
@@ -33,6 +34,7 @@ Route::get('api/:version/meeting/sign/in/list', 'api/:version.Meeting/getSignInL
 Route::get('api/:version/meeting/export', 'api/:version.Meeting/exportMeeting');
 Route::get('api/:version/meeting/sign/in/export', 'api/:version.Meeting/exportSignIn');
 Route::get('api/:version/meeting/info', 'api/:version.Meeting/getInfoForMC');
+Route::get('api/:version/meeting/sign/in/list/wx', 'api/:version.Meeting/getSignInListForWx');
 
 Route::post('api/:version/meeting/place/save', 'api/:version.MeetingPlace/save');
 Route::get('api/:version/meeting/place/list', 'api/:version.MeetingPlace/getList');
@@ -68,6 +70,7 @@ Route::get('api/:version/recreational/export', 'api/:version.Recreational/export
 
 Route::post('api/:version/flow/check/pass', 'api/:version.Flow/checkPass');
 Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
+Route::get('api/:version/flow/complete', 'api/:version.Flow/getComplete');
 
 
 Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');

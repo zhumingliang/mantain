@@ -101,7 +101,7 @@ class FlowService
             'wf_id' => $wf_id,
             'wf_fid' => $wf_fid,
             'new_type' => 0,
-            'check_con' => '同意',
+            'check_con' => '发起申请成功',
         ];
         $res = $this->statr_save($flow_date);
         if (!$res == 1) {

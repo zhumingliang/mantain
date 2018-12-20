@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\AccessControlT;
 use app\api\model\AccessControlV;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use think\Db;
@@ -66,6 +67,18 @@ class AccessService extends BaseService
         );
         $file_name = '门禁权限列表导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
+
+
+    }
+
+
+    public function getListForWX($type,$page, $size)
+    {
+        if ($type==CommonEnum::READY_RECORD){
+
+        }else if ($type==CommonEnum::COMPLETE){
+
+        }
 
 
     }
