@@ -33,8 +33,9 @@ class AdminService
         }
         $admin = new AdminT();
         $admin_arr = explode(',', $admin_id);
-        $list[] = array();
+        $list = array();
         for ($i = 0; $i < count($admin_arr); $i++) {
+
             $list[] = ['id' => $admin_arr[$i], 'role' => $role_id];
         }
         $res = $admin->saveAll($list);
