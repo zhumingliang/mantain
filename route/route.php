@@ -73,9 +73,9 @@ Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
 Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
 Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');
 
-Route::post('api/:version/admin/save', 'api/:version.Admin/save');
-
 Route::get('api/:version/department/list', 'api/:version.Department/getList');
 
 Route::get('api/:version/admin/list', 'api/:version.Admin/getList');
 Route::get('api/:version/role/list', 'api/:version.Admin/getRoleList');
+Route::post('api/:version/admin/save', 'api/:version.Admin/save');
+Route::post('api/:version/admin/role/update', 'api/:version.Admin/updateRole');
