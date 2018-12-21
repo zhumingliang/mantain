@@ -13,20 +13,28 @@ use app\api\model\MeetingRoomT;
 use app\api\model\MeetingT;
 use app\api\model\SignInT;
 use app\api\model\SignInV;
+use app\lib\exception\MeetingException;
 
 class MeetingService extends BaseService
 {
     public function signIn($card, $mobile)
     {
+        $this->checkRoom($card);
         $m_id = $this->checkMeeting($card);
         $data = [
             'card' => $card,
             'phone' => $mobile,
             'm_id' => $m_id
         ];
-        if (!$this->checkSign($m_id, $mobile)) {
-            SignInT::create($data);
+        if ($this->checkSign($m_id, $mobile)) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '您已签到，无需重复签到',
+                    'errorCode' => 80003
+                ]
+            );
         }
+        SignInT::create($data);
     }
 
 
@@ -35,6 +43,7 @@ class MeetingService extends BaseService
         $count = SignInT::where('m_id', $m_id)
             ->where('phone', $phone)
             ->count();
+
         return $count;
 
     }
@@ -44,10 +53,30 @@ class MeetingService extends BaseService
         $meeting = MeetingT::where('card', $card)->where('time_begin', '<= time', date("Y-m-d H:i:s"))
             ->where('time_end', '>= time', date("Y-m-d H:i:s"))
             ->find();
-        if ($meeting) {
-            return $meeting->id;
+        if (!$meeting) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '没有可签到会议',
+                    'errorCode' => 80002
+                ]
+            );
+
         }
-        return 0;
+        return $meeting->id;
+    }
+
+
+    private function checkRoom($card)
+    {
+        $room = MeetingRoomT::where('card', $card)->find();
+        if (!$room) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '没有和签到机匹配的会议室',
+                    'errorCode' => 80004
+                ]
+            );
+        }
     }
 
 
@@ -92,8 +121,8 @@ class MeetingService extends BaseService
 
     public function getSignInListForWx($meeting_date, $page, $size)
     {
-        $phone =Token::getCurrentTokenVar('phone');
-        $list = SignInV::getListForWx($meeting_date,$phone, $page, $size);
+        $phone = Token::getCurrentTokenVar('phone');
+        $list = SignInV::getListForWx($meeting_date, $phone, $page, $size);
         return $list;
     }
 

@@ -196,6 +196,7 @@ class Meeting extends BaseController
      * @param $card
      * @param $mobile
      * @return \think\response\Json
+     * @throws MeetingException
      */
     public function signIn($card, $mobile)
     {
