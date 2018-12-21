@@ -29,7 +29,7 @@ class UserTokenService extends Token
                 throw  new TokenException(
                     [
                         'code' => 401,
-                        'msg' => '系统中不存在该用户，请先上传用户',
+                        'msg' => '系统中不存在您的信息，请联系管理员新增您的信息',
                         'errorCode' => 200011]
                 );
             }
