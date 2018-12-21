@@ -25,8 +25,6 @@ class UserTokenService extends Token
         if (!$admin) {
             $mobile = $this->getMobile($userId);
             $admin = AdminT::where('phone', $mobile)->find();
-            $admin->user_id=$userId;
-            $admin->save();
             if (!$admin) {
                 throw  new TokenException(
                     [
@@ -35,6 +33,8 @@ class UserTokenService extends Token
                         'errorCode' => 200011]
                 );
             }
+            $admin->user_id = $userId;
+            $admin->save();
 
             /**
              * 获取缓存参数
@@ -85,7 +85,7 @@ class UserTokenService extends Token
         if (!empty($token['errcode'])) {
             throw new Exception($token['errmsg']);
         }
-        LogT::create(['msg'=>'userId:'.$user_info]);
+        LogT::create(['msg' => 'userId:' . $user_info]);
         $user_info = json_decode($user_info);
         $userId = $user_info->UserId;
         return $userId;
