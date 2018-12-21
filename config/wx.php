@@ -9,7 +9,7 @@
 return [
     'app_id' => 'wwffcc8e626d73e98f',
 
-    'app_secret' => 'cqJl6DmpJKktD4zGn6DhcCObrchr6QLWYw2HHvyo5fM',
+    'app_secret' => 'PYk_ZsN5iJv-BvxYzAdk8p4EaYTnsYhpgNfdBpgqJKE',
 
     'wx_code_url' => 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=SCOPE&state=STATE#wechat_redirect',
 

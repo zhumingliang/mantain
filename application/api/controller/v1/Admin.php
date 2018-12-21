@@ -265,4 +265,33 @@ class Admin extends BaseController
         return json(new SuccessMessage());
     }
 
+
+    /**
+     * @api {POST} /api/v1/admin/role/update  57-更新用户职务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 更新用户角色
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "mobile": 18956225230,
+     *       "post":科长
+     *     }
+     * @apiParam (请求参数说明) {String} mobile   手机号
+     * @apiParam (请求参数说明) {String} post   职务
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $mobile
+     * @param $post
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function updatePost($mobile, $post)
+    {
+        AdminService::updatePost($mobile, $post);
+        return json(new SuccessMessage());
+    }
+
+
 }

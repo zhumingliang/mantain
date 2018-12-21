@@ -45,4 +45,14 @@ class AdminService
 
     }
 
+
+    public static function updatePost($mobile, $post)
+    {
+        $res = AdminT::update(['post' => $post], ['phone' => $mobile]);
+        if (!$res) {
+            throw new OperationException();
+        }
+
+    }
+
 }

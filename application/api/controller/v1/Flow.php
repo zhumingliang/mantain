@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\Run;
 use app\api\service\FlowService;
 use app\lib\exception\SuccessMessage;
+use app\lib\exception\TokenException;
 use think\Db;
 use workflow\workflow;
 
@@ -156,9 +157,8 @@ class Flow extends BaseController
 
     public function getComplete($type)
     {
-        $list = Run::getComplete($type);
+       $list = Run::getComplete($type);
         return json($list);
-
     }
 
 }

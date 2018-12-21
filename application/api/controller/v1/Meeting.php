@@ -184,24 +184,27 @@ class Meeting extends BaseController
      * @apiDescription  会议签到
      * @apiExample {post}  请求样例:
      *    {
+     *       "id": 13,
      *       "mobile": 18956225230,
      *       "card": "a1"
      *     }
+     * @apiParam (请求参数说明) {int} id  会议id
      * @apiParam (请求参数说明) {String} card  考勤机设备号
      * @apiParam (请求参数说明) {String} mobile  用户手机号
      * @apiSuccessExample {json} 返回样例:
-     * {"msg":"ok","errorCode":0}
-     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
-     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * {"all":33,"sign_in":1}
+     * @apiSuccess (返回参数说明) {int} all 应签到人数
+     * @apiSuccess (返回参数说明) {int} sign_in 实签到人数
      * @param $card
+     * @param $id
      * @param $mobile
      * @return \think\response\Json
      * @throws MeetingException
      */
-    public function signIn($card, $mobile)
+    public function signIn($id, $card, $mobile)
     {
-        (new MeetingService())->signIn($card, $mobile);
-        return json(new SuccessMessage());
+        $info = (new MeetingService())->signIn($id, $card, $mobile);
+        return json($info);
     }
 
     /**
@@ -369,33 +372,22 @@ class Meeting extends BaseController
      * http://maintain.mengant.cn/api/v1/meeting/info?card=a1
      * @apiParam (请求参数说明) {String}  card  签到机设备号
      * @apiSuccessExample {json}返回样例:
-     * {"time_begin":"09:00","time_end":"09:30","meeting_begin":"09:30"}
+     * {"id":13,"time_begin":"18:01","time_end":"23:01","meeting_begin":"18:01","push":"办公室","all":18,"sign_in":0}
+     * @apiSuccess (返回参数说明) {int} id 会议id
      * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
      * @apiSuccess (返回参数说明) {String} time_end 签到截止时间
      * @apiSuccess (返回参数说明) {String} meeting_begin 会议开始时间
+     * @apiSuccess (返回参数说明) {int} all 需要签到总人数
+     * @apiSuccess (返回参数说明) {int} sign_in 已经签到人数
      *
      * @param $card
-     * @return array|\PDOStatement|string|\think\Collection
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
+     * @return \think\response\Json
+     * @throws MeetingException
      */
     public function getInfoForMC($card)
     {
-        $room = MeetingRoomT::where('card', $card)
-            ->find();
-        if (!$room) {
-            return json(array());
-        }
-        //获取这个会议室当天的会议情况
-        $meeting = MeetingT::where('state', CommonEnum::STATE_IS_OK)
-            ->where('address', $room->name)
-            ->where('meeting_date', '=', date('Y-m-d'))
-            ->where('meeting_begin', '>=', date('Y-m-d H:i'))
-            ->order('create_time desc')
-            ->field('DATE_FORMAT(time_begin,"%H:%i") as time_begin,DATE_FORMAT(time_end,"%H:%i") as time_end, DATE_FORMAT(meeting_begin,"%H:%i") as meeting_begin')
-            ->find();
-        return json($meeting);
+        $info = (new MeetingService())->getInfoForMC($card);
+        return json($info);
 
     }
 

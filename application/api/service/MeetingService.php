@@ -9,32 +9,49 @@
 namespace app\api\service;
 
 
+use app\api\model\AdminT;
 use app\api\model\MeetingRoomT;
 use app\api\model\MeetingT;
 use app\api\model\SignInT;
 use app\api\model\SignInV;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\MeetingException;
 
 class MeetingService extends BaseService
 {
-    public function signIn($card, $mobile)
+    public function signIn($id, $card, $mobile)
     {
         $this->checkRoom($card);
-        $m_id = $this->checkMeeting($card);
+        $meeting = $this->checkMeeting($id);
+        $department = $meeting->push . ',' . $meeting->host;
+        $this->checkUser($mobile, $department);
         $data = [
             'card' => $card,
             'phone' => $mobile,
-            'm_id' => $m_id
+            'm_id' => $id
         ];
-        if ($this->checkSign($m_id, $mobile)) {
+        if ($this->checkSign($id, $mobile)) {
             throw new MeetingException(
-                ['code' => 401,
+                [
+                    'code' => 401,
                     'msg' => '您已签到，无需重复签到',
                     'errorCode' => 80003
                 ]
             );
         }
-        SignInT::create($data);
+        $res = SignInT::create($data);
+        if (!$res) {
+            throw  new MeetingException([
+                'code' => 401,
+                'msg' => '签到失败',
+                'errorCode' => 80008
+            ]);
+        }
+        return [
+            'all' => $this->getMeetingMembers($department),
+            'sign_in' => $this->getSignInMembers($id)
+        ];
+
     }
 
 
@@ -48,21 +65,38 @@ class MeetingService extends BaseService
 
     }
 
-    private function checkMeeting($card)
+    private function checkMeeting($id)
     {
-        $meeting = MeetingT::where('card', $card)->where('time_begin', '<= time', date("Y-m-d H:i:s"))
-            ->where('time_end', '>= time', date("Y-m-d H:i:s"))
-            ->find();
+        $meeting = MeetingT::get($id);
         if (!$meeting) {
             throw new MeetingException(
                 ['code' => 401,
-                    'msg' => '没有可签到会议',
+                    'msg' => '签到会议不存在',
                     'errorCode' => 80002
                 ]
             );
 
         }
-        return $meeting->id;
+
+        if (time() < strtotime($meeting->time_begin)) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '签到未开始，请耐心等候！',
+                    'errorCode' => 80009
+                ]
+            );
+        }
+
+        if (time() > strtotime($meeting->time_end)) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '签到已结束！',
+                    'errorCode' => 800010
+                ]
+            );
+
+        }
+        return $meeting;
     }
 
 
@@ -77,6 +111,22 @@ class MeetingService extends BaseService
                 ]
             );
         }
+    }
+
+    private function checkUser($mobile, $department)
+    {
+        $count = AdminT::where('phone', $mobile)
+            ->whereIn('department', $department)
+            ->count('id');
+        if (!$count) {
+            throw new MeetingException(
+                ['code' => 401,
+                    'msg' => '签到失败，您不在本次会议名单之中！',
+                    'errorCode' => 80004
+                ]
+            );
+        }
+
     }
 
 
@@ -147,6 +197,56 @@ class MeetingService extends BaseService
         );
         $file_name = '会议签到列表—导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
+
+    }
+
+
+    public function getInfoForMC($card)
+    {
+        $room = MeetingRoomT::where('card', $card)
+            ->find();
+        if (!$room) {
+            throw new MeetingException([
+                'code' => 401,
+                'msg' => '签到机和会议室绑定关系不存在',
+                'errorCode' => 80007
+            ]);
+        }
+        //获取这个会议室当天的会议情况
+        $meeting = MeetingT::where('state', CommonEnum::STATE_IS_OK)
+            ->where('address', $room->name)
+            ->where('meeting_date', '=', date('Y-m-d'))
+            ->where('meeting_begin', '>=', date('Y-m-d H:i'))
+            ->order('create_time desc')
+            ->field('id,DATE_FORMAT(time_begin,"%H:%i") as time_begin,DATE_FORMAT(time_end,"%H:%i") as time_end, DATE_FORMAT(meeting_begin,"%H:%i") as meeting_begin,push,host')
+            ->find();
+
+        if ($meeting) {
+            $meeting['all'] = $this->getMeetingMembers($meeting->push .','. $meeting->host);
+            $meeting['sign_in'] = $this->getSignInMembers($meeting->id);
+        } else {
+            $meeting['all'] = 0;
+            $meeting['sign_in'] = 0;
+        }
+
+        return $meeting;
+
+    }
+
+    private function getMeetingMembers($push)
+    {
+        $count = AdminT::where('state', CommonEnum::STATE_IS_OK)
+            ->whereIn('department', $push)
+            ->count('id');
+        return $count;
+
+    }
+
+    private function getSignInMembers($id)
+    {
+        $count = SignInT::where('m_id', $id)
+            ->count('id');
+        return $count;
 
     }
 
