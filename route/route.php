@@ -81,6 +81,7 @@ Route::get('api/:version/admin/list', 'api/:version.Admin/getList');
 Route::get('api/:version/role/list', 'api/:version.Admin/getRoleList');
 Route::post('api/:version/admin/save', 'api/:version.Admin/save');
 Route::post('api/:version/admin/role/update', 'api/:version.Admin/updateRole');
+Route::post('api/:version/admin/post/update', 'api/:version.Admin/updatePost');
 
 
 Route::post('api/:version/category/save', 'api/:version.Category/save');

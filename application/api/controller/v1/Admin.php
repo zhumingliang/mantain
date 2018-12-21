@@ -267,10 +267,10 @@ class Admin extends BaseController
 
 
     /**
-     * @api {POST} /api/v1/admin/role/update  57-更新用户职务
+     * @api {POST} /api/v1/admin/post/update  57-更新用户职务
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription 更新用户角色
+     * @apiDescription 更新用户职务
      * @apiExample {post}  请求样例:
      *    {
      *       "mobile": 18956225230,
