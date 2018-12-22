@@ -18,6 +18,15 @@ use zml\tp_tools\Curl;
 
 class UserTokenService extends Token
 {
+    /**
+     * @param $code
+     * @return mixed
+     * @throws Exception
+     * @throws TokenException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function getToken($code)
     {
         $userId = $this->getUserId($code);
@@ -36,17 +45,17 @@ class UserTokenService extends Token
             $admin->user_id = $userId;
             $admin->save();
 
-            /**
-             * 获取缓存参数
-             */
-            $cachedValue = $this->prepareCachedValue($admin);
-            /**
-             * 缓存数据
-             */
-            $token = $this->saveToCache('', $cachedValue);
-            return $token;
-
         }
+
+        /**
+         * 获取缓存参数
+         */
+        $cachedValue = $this->prepareCachedValue($admin);
+        /**
+         * 缓存数据
+         */
+        $token = $this->saveToCache('', $cachedValue);
+        return $token;
 
 
     }
@@ -80,7 +89,7 @@ class UserTokenService extends Token
         $user_info_url = sprintf(config('wx.user_id_url'), $token, $code);
         $user_info = Curl::get($user_info_url);
         if (!$token) {
-            throw new Exception('获取用户信息异常');
+            throw new Exception('获取Token异常');
         }
         if (!empty($token['errcode'])) {
             throw new Exception($token['errmsg']);

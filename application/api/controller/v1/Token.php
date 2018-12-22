@@ -95,6 +95,10 @@ class Token extends Controller
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要放在header里传入，有效期 2 hours
      * @return \think\response\Json
      * @throws TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getWXToken()
     {
