@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\Run;
 use app\api\service\FlowService;
+use app\lib\exception\MeetingException;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
 use think\Db;
@@ -157,8 +158,14 @@ class Flow extends BaseController
 
     public function getComplete($type)
     {
-       $list = Run::getComplete($type);
-        return json($list);
+       /*$list = Run::getComplete($type);
+        return json($list);*/
+
+        throw  new MeetingException([
+            'code' => 401,
+            'msg' => '签到失败',
+            'errorCode' => 80008
+        ]);
     }
 
 }

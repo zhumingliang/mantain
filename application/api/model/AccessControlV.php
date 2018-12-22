@@ -76,7 +76,7 @@ class AccessControlV extends Model
                     $query->where('FIND_IN_SET("' . $access . '", access)');
                 }
             })
-            ->field('create_time,username,department,role_name,user_type,access,deadline,status')
+            ->field('create_time,username,department,role_name,members,user_type,access,deadline,status')
             ->order('create_time desc')
             ->select()
             ->toArray();

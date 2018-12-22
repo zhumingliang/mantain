@@ -60,6 +60,7 @@ class AccessService extends BaseService
             '申请人',
             '部门',
             '职务',
+            '申请人员名单-职务',
             '人员类型',
             '开通功能',
             '工作截止时间（外来人员）',
@@ -67,18 +68,6 @@ class AccessService extends BaseService
         );
         $file_name = '门禁权限列表导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
-
-
-    }
-
-
-    public function getListForWX($type,$page, $size)
-    {
-        if ($type==CommonEnum::READY_RECORD){
-
-        }else if ($type==CommonEnum::COMPLETE){
-
-        }
 
 
     }

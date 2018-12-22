@@ -29,45 +29,39 @@ class MeetingPlaceService extends BaseService
         Db::startTrans();
         try {
             //新增基本信息
-            $params['user_count'] = $this->getUserCount($params['users']);
-            $params['money'] = $this->getMoney($params['detail']);
             $mp = MeetingplaceT::create($params);
             if (!$mp) {
-                throw new OperationException(
-                    ['code' => 401,
-                        'msg' => '新增基本信息失败',
-                        'errorCode' => 40001
-                    ]);
+                throw new OperationException();
 
             }
-            //新增接待对象
-            $users = $params['users'];
-            if (strlen($users)) {
-                $users_res = $this->saveUsers($mp->id, $users);
-                if (!$users_res) {
-                    Db::rollback();
-                    throw new OperationException(
-                        ['code' => 401,
-                            'msg' => '新增接待对象失败',
-                            'errorCode' => 40001
-                        ]);
+            /* //新增接待对象
+             $users = $params['users'];
+             if (strlen($users)) {
+                 $users_res = $this->saveUsers($mp->id, $users);
+                 if (!$users_res) {
+                     Db::rollback();
+                     throw new OperationException(
+                         ['code' => 401,
+                             'msg' => '新增接待对象失败',
+                             'errorCode' => 40001
+                         ]);
 
-                }
-            }
-            //新增接待明细
-            $detail = $params['detail'];
-            if (strlen($detail)) {
-                $detail_res = $this->saveDetail($mp->id, $detail);
-                if (!$detail_res) {
-                    Db::rollback();
-                    throw new OperationException(
-                        ['code' => 401,
-                            'msg' => '新增接待明细失败',
-                            'errorCode' => 40001
-                        ]);
+                 }
+             }
+             //新增接待明细
+             $detail = $params['detail'];
+             if (strlen($detail)) {
+                 $detail_res = $this->saveDetail($mp->id, $detail);
+                 if (!$detail_res) {
+                     Db::rollback();
+                     throw new OperationException(
+                         ['code' => 401,
+                             'msg' => '新增接待明细失败',
+                             'errorCode' => 40001
+                         ]);
 
-                }
-            }
+                 }
+             }*/
 
             //启动工作流
             $check_res = (new FlowService())->saveCheck($mp->id, 'meetingplace_t');
@@ -98,14 +92,12 @@ class MeetingPlaceService extends BaseService
         $list = $this->prefixStatus($list);
         $header = array(
             '日期',
-            '申请人',
-            '部门',
-            '陪餐人数',
-            '公函字号',
-            '公函标题',
-            '接待对象（单位,姓名,职务）',
-            '接待明细（时间,项目,地点,费用）',
-            '总费用',
+            '姓名',
+            '使用单位',
+            '使用时间',
+            '申请使用事由',
+            '场地名称',
+            '场地用途',
             '状态'
         );
         $file_name = '预约申请—教育培训—会场预订—导出' . '-' . date('Y-m-d', time()) . '.csv';

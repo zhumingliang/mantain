@@ -31,10 +31,12 @@ class AccessControl extends BaseController
      *       "access": "资料室",
      *       "deadline": "2018-12-30"
      *       "user_type": "干部职工"
+     *       "members": "张三-副主任,李四-主任"
      *     }
      * @apiParam (请求参数说明) {String} access   申请功能
      * @apiParam (请求参数说明) {String} deadline   截止时间
      * @apiParam (请求参数说明) {String} user_type   人员类型
+     * @apiParam (请求参数说明) {String} members   申请人员名单-职务，数据格式：姓名-职务,姓名-职务;多个人员信息用逗号隔开
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
@@ -74,7 +76,7 @@ class AccessControl extends BaseController
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
-     * {"total":1,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":1,"create_time":"2018-12-03 10:26:55","username":"朱明良","department":"办公室","role_name":"管理员","user_type":"干部职工","access":"资料室,会议室","deadline":"2018-12-30 00:00:00","status":0,"admin_id":1}]}
+     * {"total":1,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":1,"create_time":"2018-12-03 10:26:55","username":"朱明良","department":"办公室","role_name":"管理员","members":"张三-局长","user_type":"干部职工","access":"资料室,会议室","deadline":"2018-12-30 00:00:00","status":0,"admin_id":1}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -86,6 +88,7 @@ class AccessControl extends BaseController
      * @apiSuccess (返回参数说明) {String} role_name 职务
      * @apiSuccess (返回参数说明) {String} user_type 人员类型
      * @apiSuccess (返回参数说明) {String} access 开通功能
+     * @apiSuccess (返回参数说明) {String} members 申请人员名单-职务
      * @apiSuccess (返回参数说明) {String} deadline 工作截止时间
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id

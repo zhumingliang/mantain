@@ -27,19 +27,19 @@ class MeetingPlace extends BaseController
      * @apiDescription  教育培训—会场预订
      * @apiExample {post}  请求样例:
      *    {
-     *       "apply_date": "2018-12-30",
-     *       "letter_size": "公函字号",
-     *       "letter_title": "公函标题",
-     *       "meals_count": 10,
-     *       "users": "单位,姓名,职务A单位,姓名,职务",
-     *       "detail": "时间,项目,地点,费用A时间,项目,地点,费用",
+     *       "unit": "税务局",
+     *       "place": "202会议室",
+     *       "purpose": "会议",
+     *       "reason": 开会,
+     *       "time_begin": "2018-12-22 09:00",
+     *       "time_end": "2018-12-22 12:00",
      *     }
-     * @apiParam (请求参数说明) {String} apply_date   接待时间
-     * @apiParam (请求参数说明) {String} letter_size  公函字号
-     * @apiParam (请求参数说明) {String} letter_title   公函标题
-     * @apiParam (请求参数说明) {int} meals_count   陪餐人数
-     * @apiParam (请求参数说明) {String} users   接待对象，数据格式注意按照规定格式提交：单位,姓名,职务A单位,姓名,职务
-     * @apiParam (请求参数说明) {String} detail   接待明细，数据格式注意按照规定格式提交：时间,项目,地点,费用A时间,项目,地点,费用
+     * @apiParam (请求参数说明) {String} unit   申请单位
+     * @apiParam (请求参数说明) {String} place  场地名称
+     * @apiParam (请求参数说明) {String} purpose   用途
+     * @apiParam (请求参数说明) {int} reason   使用事由
+     * @apiParam (请求参数说明) {String} time_begin   开始时间
+     * @apiParam (请求参数说明) {String} time_end   结束时间
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
@@ -79,7 +79,7 @@ class MeetingPlace extends BaseController
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
-     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"create_time":"2018-12-06 00:47:10","id":17,"admin_id":1,"username":"朱明良","department":"办公室","apply_date":"2018-12-30","letter_title":"公函标题","letter_size":"asasassa1231231","meals_count":10,"status":0,"user_count":2,"money":200},{"create_time":"2018-12-05 22:45:19","id":16,"admin_id":1,"username":"朱明良","department":"办公室","apply_date":"2018-12-30","letter_title":"公函标题","letter_size":"asasassa1231231","meals_count":10,"status":0,"user_count":0,"money":0}]}
+     * {"total":1,"per_page":20,"current_page":1,"last_page":1,"data":[{"id":36,"create_time":"2018-12-22 22:00:29","username":"部门负责人","unit":"税务局","time_begin":"2018-12-22 09:00:00","time_end":"2018-12-22 12:00:00","reason":"开会","place":"202会议室","state":1,"status":1,"purpose":"会议"}]}
      * @apiSuccess (返回参数说明) {int} total 数据总数
      * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
      * @apiSuccess (返回参数说明) {int} current_page 当前页码
@@ -87,15 +87,13 @@ class MeetingPlace extends BaseController
      * @apiSuccess (返回参数说明) {int} id 申请id
      * @apiSuccess (返回参数说明) {String} create_time 日期
      * @apiSuccess (返回参数说明) {String} username 申请人
-     * @apiSuccess (返回参数说明) {String} department 部门
-     * @apiSuccess (返回参数说明) {String} letter_title 公函标题
-     * @apiSuccess (返回参数说明) {String} letter_size 公函字号
-     * @apiSuccess (返回参数说明) {int} meals_count 陪餐人数
-     * @apiSuccess (返回参数说明) {int} user_count   接待人数
-     * @apiSuccess (返回参数说明) {int} money   费用合计
+     * @apiSuccess (返回参数说明) {String} unit   申请单位
+     * @apiSuccess (返回参数说明) {String} place  场地名称
+     * @apiSuccess (返回参数说明) {String} purpose   用途
+     * @apiSuccess (返回参数说明) {int} reason   使用事由
+     * @apiSuccess (返回参数说明) {String} time_begin   开始时间
+     * @apiSuccess (返回参数说明) {String} time_end   结束时间
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
-     * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -105,7 +103,7 @@ class MeetingPlace extends BaseController
      * @param int $size
      * @return \think\response\Json
      */
-    public function getList($time_begin, $time_end, $department, $username, $status, $page = 1, $size = 20)
+    public function getList($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3, $page = 1, $size = 20)
     {
         $list = (new MeetingPlaceService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size);
         return json($list);
@@ -130,7 +128,7 @@ class MeetingPlace extends BaseController
      * @param $status
      * @return \think\response\Json
      */
-    public function export($time_begin, $time_end, $department, $username, $status)
+    public function export($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3)
     {
         (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
@@ -145,26 +143,17 @@ class MeetingPlace extends BaseController
      * http://maintain.mengant.cn/api/v1/meeting/place?id=17
      * @apiParam (请求参数说明) {String}  id 申请id
      * @apiSuccessExample {json}返回样例:
-     * {"id":17,"apply_date":"2018-12-30","letter_size":"asasassa1231231","letter_title":"公函标题","meals_count":10,"create_time":"2018-12-06 00:47:10","update_time":"2018-12-06 00:47:10","admin_id":1,"status":0,"user_count":2,"money":200,"users":[{"unit":"国税局","name":"张三","post":"股长"},{"unit":"地税局","name":"李四","post":"科长"}],"detail":[{"recept_time":"2018-10-10","content":"午餐","address":"饭堂","money":100},{"recept_time":"2018-10-10","content":"午餐","address":"饭堂","money":100}]}
+     * {"id":36,"unit":"税务局","place":"202会议室","purpose":"会议","create_time":"2018-12-22 22:00:29","update_time":"2018-12-22 22:00:29","admin_id":2,"status":1,"reason":"开会","state":1,"time_begin":"2018-12-22 09:00:00","time_end":"2018-12-22 12:00:00"}
      * @apiSuccess (返回参数说明) {int} id 申请id
      * @apiSuccess (返回参数说明) {String} create_time 日期
      * @apiSuccess (返回参数说明) {String} username 申请人
-     * @apiSuccess (返回参数说明) {String} department 部门
-     * @apiSuccess (返回参数说明) {String} letter_title 公函标题
-     * @apiSuccess (返回参数说明) {String} letter_size 公函字号
-     * @apiSuccess (返回参数说明) {int} meals_count 陪餐人数
-     * @apiSuccess (返回参数说明) {int} user_count   接待人数
-     * @apiSuccess (返回参数说明) {int} money   费用合计
+     * @apiSuccess (返回参数说明) {String} unit   申请单位
+     * @apiSuccess (返回参数说明) {String} place  场地名称
+     * @apiSuccess (返回参数说明) {String} purpose   用途
+     * @apiSuccess (返回参数说明) {int} reason   使用事由
+     * @apiSuccess (返回参数说明) {String} time_begin   开始时间
+     * @apiSuccess (返回参数说明) {String} time_end   结束时间
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
-     * @apiSuccess (返回参数说明) {Obj} users  接待对象信息
-     * @apiSuccess (返回参数说明) {String} unit  单位
-     * @apiSuccess (返回参数说明) {String} name  姓名
-     * @apiSuccess (返回参数说明) {String} post  职务
-     * @apiSuccess (返回参数说明) {Obj} detail  接待明细
-     * @apiSuccess (返回参数说明) {String} recept_time  时间
-     * @apiSuccess (返回参数说明) {String} content  项目内容
-     * @apiSuccess (返回参数说明) {String} address  地点
-     * @apiSuccess (返回参数说明) {String} money  费用
      * @param $id
      * @return \think\response\Json
      * @throws \think\db\exception\DataNotFoundException
@@ -174,7 +163,6 @@ class MeetingPlace extends BaseController
     public function getMeetingPlace($id)
     {
         $obj = MeetingplaceT::where('id', $id)
-            ->with(['users', 'detail'])
             ->find();
         return json($obj);
 

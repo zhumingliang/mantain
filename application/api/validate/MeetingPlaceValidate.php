@@ -12,12 +12,12 @@ namespace app\api\validate;
 class MeetingPlaceValidate extends BaseValidate
 {
     protected $rule = [
-        'apply_date' => 'require|isNotEmpty',
-        'letter_size' => 'require|isNotEmpty',
-        'letter_title' => 'require|isNotEmpty',
-        'meals_count' => 'require|isNotEmpty',
-        'users' => 'require|isNotEmpty',
-        //'detail' => 'require|isNotEmpty'
+        'unit' => 'require|isNotEmpty',
+        'place' => 'require|isNotEmpty',
+        'purpose' => 'require|isNotEmpty',
+        'reason' => 'require|isNotEmpty',
+        'time_begin' => 'require|isNotEmpty',
+        'time_end' => 'require|isNotEmpty'
     ];
 
 }

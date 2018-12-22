@@ -45,10 +45,8 @@ class ExceptionHandler extends Handle
         //$request = Request::instance();
         $result = [
             'msg' => $this->msg,
-            'errorCode' => $this->errorCode,
-            //'request_url' => $request->url()
+            'errorCode' => $this->errorCode
         ];
-
         return json($result, $this->code);
     }
 }

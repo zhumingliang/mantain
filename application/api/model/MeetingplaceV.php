@@ -35,7 +35,6 @@ class MeetingplaceV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->hidden(['users', 'detail'])
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
@@ -66,8 +65,7 @@ class MeetingplaceV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-             ->field('create_time,username,department,meals_count,letter_size,letter_title,
-             users,detail,money,status')
+             ->field('create_time,username,unit,CONCAT_WS("-",time_begin,time_end),reason,purpose,status')
             ->order('create_time desc')
             ->select()
             ->toArray();

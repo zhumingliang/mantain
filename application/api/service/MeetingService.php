@@ -16,7 +16,6 @@ use app\api\model\SignInT;
 use app\api\model\SignInV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\MeetingException;
-
 class MeetingService extends BaseService
 {
     public function signIn($id, $card, $mobile)
@@ -35,7 +34,7 @@ class MeetingService extends BaseService
                 [
                     'code' => 401,
                     'msg' => '您已签到，无需重复签到',
-                    'errorCode' => 80003
+                    'errorCode' => 80000
                 ]
             );
         }
@@ -50,6 +49,7 @@ class MeetingService extends BaseService
         return [
             'all' => $this->getMeetingMembers($department),
             'sign_in' => $this->getSignInMembers($id)
+
         ];
 
     }
@@ -70,7 +70,8 @@ class MeetingService extends BaseService
         $meeting = MeetingT::get($id);
         if (!$meeting) {
             throw new MeetingException(
-                ['code' => 401,
+                [
+                    'code' => 401,
                     'msg' => '签到会议不存在',
                     'errorCode' => 80002
                 ]
@@ -105,7 +106,8 @@ class MeetingService extends BaseService
         $room = MeetingRoomT::where('card', $card)->find();
         if (!$room) {
             throw new MeetingException(
-                ['code' => 401,
+                [
+                    'code' => 401,
                     'msg' => '没有和签到机匹配的会议室',
                     'errorCode' => 80004
                 ]
@@ -120,7 +122,8 @@ class MeetingService extends BaseService
             ->count('id');
         if (!$count) {
             throw new MeetingException(
-                ['code' => 401,
+                [
+                    'code' => 401,
                     'msg' => '签到失败，您不在本次会议名单之中！',
                     'errorCode' => 80004
                 ]
@@ -222,7 +225,7 @@ class MeetingService extends BaseService
             ->find();
 
         if ($meeting) {
-            $meeting['all'] = $this->getMeetingMembers($meeting->push .','. $meeting->host);
+            $meeting['all'] = $this->getMeetingMembers($meeting->push . ',' . $meeting->host);
             $meeting['sign_in'] = $this->getSignInMembers($meeting->id);
         } else {
             $meeting['all'] = 0;
