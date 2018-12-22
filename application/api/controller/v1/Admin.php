@@ -298,21 +298,19 @@ class Admin extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  新增门禁权限-获取用户列表(由于用户太多，我默认返回50条数据)
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/admins/access?username=''&post=''
-     * @apiParam (请求参数说明) {String}  username  姓名
-     * @apiParam (请求参数说明) {String}  post  职务
+     * http://maintain.mengant.cn/api/v1/admins/access?key=''
+     * @apiParam (请求参数说明) {String}  key  关键字
      * @apiSuccessExample {json}返回样例:
      * [{"id":43,"username":"张先林","post":"副主任"},{"id":54,"username":"林泉鑫","post":"协税员"},{"id":56,"username":"林超凡","post":"科长"},{"id":85,"username":"林健生","post":"科员"},{"id":111,"username":"林 虹","post":"科员"},{"id":135,"username":"林里清","post":"科员"},{"id":146,"username":"林惠洁","post":"科员"},{"id":165,"username":"林枫浩","post":"科员"},{"id":171,"username":"林炜超","post":"科员"},{"id":210,"username":"林国标","post":"副主任科员"},{"id":243,"username":"林苗秀","post":"协税员"},{"id":251,"username":"林英杰","post":"正科长"},{"id":262,"username":"林创龙","post":"副主任科员"},{"id":322,"username":"林力新","post":"协税员"},{"id":339,"username":"林振宇","post":"事业干部"},{"id":356,"username":"林杰军","post":"科员"},{"id":364,"username":"林均杰","post":"事业干部"},{"id":425,"username":"林耀汉","post":"协税员"},{"id":430,"username":"冯恒林","post":"协税员"},{"id":440,"username":"林祖德","post":"协税员"}]
      * @apiSuccess (返回参数说明) {int} id 用户id
      * @apiSuccess (返回参数说明) {String} username 姓名
      * @apiSuccess (返回参数说明) {String} post 职务
-     * @param string $username
-     * @param string $post
+     * @param string $key
      * @return \think\response\Json
      */
-    public function getListForAccess($username = '', $post = '')
+    public function getListForAccess($key = '')
     {
-        $admins = AdminT::getAdminsForAccess($username, $post);
+        $admins = AdminT::getAdminsForAccess($key);
         return json($admins);
 
 

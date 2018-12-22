@@ -14,21 +14,16 @@ use think\Model;
 
 class AdminT extends Model
 {
-    public static function getAdminsForAccess($username, $post)
+    public static function getAdminsForAccess($key)
     {
         $list = self::where('state', CommonEnum::STATE_IS_OK)
-            ->where(function ($query) use ($username) {
-                if ($username) {
-                    $query->whereLike('username','%'.$username.'%');
-                }
-            })
-            ->where(function ($query) use ($post) {
-                if ($post) {
-                    $query->whereLike('post',  '%'.$post.'%');
+            ->where(function ($query) use ($key) {
+                if ($key) {
+                    $query->whereLike('username|post', '%' . $key . '%');
                 }
             })
             ->field('id,username,post')
-            ->limit(0,50)
+            ->limit(0, 50)
             ->select();
 
         return $list;
