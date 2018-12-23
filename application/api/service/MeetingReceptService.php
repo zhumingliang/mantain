@@ -9,8 +9,10 @@
 namespace app\api\service;
 
 
+use app\api\model\MeetingReceptDetailT;
 use app\api\model\MeetingReceptMealT;
 use app\api\model\MeetingReceptT;
+use app\api\model\MeetingReceptUserT;
 use app\api\model\MeetingReceptV;
 use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
@@ -25,6 +27,7 @@ class MeetingReceptService extends BaseService
         Db::startTrans();
         try {
             //新增基本信息
+            $params['money'] = $this->getMoney($params['detail']);
             $mp = MeetingReceptT::create($params);
             if (!$mp) {
                 throw new OperationException(
@@ -32,13 +35,13 @@ class MeetingReceptService extends BaseService
                         'msg' => '新增基本信息失败',
                         'errorCode' => 40001
                     ]);
-
             }
+
             //新增接待对象
-            $meals = $params['meals'];
-            if (strlen($meals)) {
-                $meals_res = $this->saveMeals($mp->id, $meals);
-                if (!$meals_res) {
+            $users = $params['users'];
+            if (strlen($users)) {
+                $users_res = $this->saveUsers($mp->id, $users);
+                if (!$users_res) {
                     Db::rollback();
                     throw new OperationException(
                         ['code' => 401,
@@ -48,6 +51,22 @@ class MeetingReceptService extends BaseService
 
                 }
             }
+
+            //新增接待明细
+            $detail = $params['detail'];
+            if (strlen($detail)) {
+                $detail_res = $this->saveDetail($mp->id, $detail);
+                if (!$detail_res) {
+                    Db::rollback();
+                    throw new OperationException(
+                        ['code' => 401,
+                            'msg' => '新增接待明细失败',
+                            'errorCode' => 40001
+                        ]);
+
+                }
+            }
+
 
             //启动工作流
             $check_res = (new FlowService())->saveCheck($mp->id, 'meeting_recept_t');
@@ -63,6 +82,63 @@ class MeetingReceptService extends BaseService
 
 
     }
+
+    private
+    function saveUsers($mp_id, $users)
+    {
+        $users_arr = explode('A', $users);
+        $list = [];
+        foreach ($users_arr as $k => $v) {
+            $user = explode(',', $v);
+            $list[$k] = [
+                'unit' => $user[0],
+                'name' => $user[1],
+                'post' => $user[2],
+                'mp_id' => $mp_id
+            ];
+
+        }
+
+        $res = (new MeetingReceptUserT())->saveAll($list);
+        return $res;
+    }
+
+    private
+    function saveDetail($mp_id, $detail)
+    {
+        $detail_arr = explode('A', $detail);
+        $list = [];
+        foreach ($detail_arr as $k => $v) {
+            $d = explode(',', $v);
+            $list[$k] = [
+                'recept_time' => $d[0],
+                'content' => $d[1],
+                'address' => $d[2],
+                'money' => $d[3],
+                'mp_id' => $mp_id
+            ];
+
+        }
+        $res = (new MeetingReceptDetailT())->saveAll($list);
+        return $res;
+    }
+
+
+    private function getMoney($detail)
+    {
+        if (!strlen($detail)) {
+            return 0;
+
+        }
+        $detail_arr = explode('A', $detail);
+        $money = 0;
+        foreach ($detail_arr as $k => $v) {
+            $d = explode(',', $v);
+            $money += $d[3];
+        }
+        return $money;
+    }
+
 
     private
     function saveMeals($mr_id, $meals)
@@ -99,10 +175,11 @@ class MeetingReceptService extends BaseService
         $list = $this->prefixStatus($list);
         $header = array(
             '日期',
-            '公务时间',
             '申请人',
             '部门',
-            '公务活动项目',
+            '公函字号',
+            '公函标题',
+            '陪餐人数',
             '来访单位',
             '领队人',
             '职务',
@@ -110,14 +187,11 @@ class MeetingReceptService extends BaseService
             '厅级人数',
             '处级人数',
             '处级以下人数',
-            '男',
-            '女',
-            '使用会场',
-            '会议时间',
             '会议人数',
-            '拟住宿酒店',
-            '用餐信息（用餐日期,餐次,用餐人数,就餐地点,费用）',
-            '拟陪同人员名单',
+            '陪同人员名单',
+            '接待对象(单位,姓名,职务)',
+            '接待明细(时间,项目,地点,费用)',
+            '费用合计',
             '状态',
         );
         $file_name = '预约申请—会议、接待—导出' . '-' . date('Y-m-d', time()) . '.csv';

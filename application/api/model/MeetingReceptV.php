@@ -19,7 +19,7 @@ class MeetingReceptV extends Model
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', '=', $department);
@@ -43,12 +43,12 @@ class MeetingReceptV extends Model
 
     }
 
-    public static function export( $time_begin, $time_end, $department,
+    public static function export($time_begin, $time_end, $department,
                                   $username, $status)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', '=', $department);
@@ -64,10 +64,9 @@ class MeetingReceptV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->field('create_time,official_time,username,department,project,unit,leader,
-            post,grade,departmental,
-            section,under_section,male,female,meeting_place,meeting_date,meeting_count,hotel,
-            meals,accompany,status')
+            ->field('create_time,username,department,letter_size,letter_title,
+            accompany_count,unit,leader, post,grade,departmental,section,
+            under_section,meeting_count,accompany,users,detail,money,status')
             ->order('create_time desc')
             ->select()
             ->toArray();

@@ -10,6 +10,8 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\AdminT;
+use app\api\model\DepartmentT;
 use app\api\model\Run;
 use app\api\service\FlowService;
 use app\lib\exception\MeetingException;
@@ -158,14 +160,34 @@ class Flow extends BaseController
 
     public function getComplete($type)
     {
-       /*$list = Run::getComplete($type);
-        return json($list);*/
+        /*$list = Run::getComplete($type);
+         return json($list);*/
 
-        throw  new MeetingException([
-            'code' => 401,
-            'msg' => '签到失败',
-            'errorCode' => 80008
-        ]);
+        /* throw  new MeetingException([
+             'code' => 401,
+             'msg' => '签到失败',
+             'errorCode' => 80008
+         ]);*/
+
+ /*       $list = AdminT::where('state', 1)
+            ->field('department')
+            ->group('department')
+            ->select()->toArray();
+
+
+        $list_arr = array();
+        foreach ($list as $k => $v) {
+            $list_arr[] =
+                [
+                    'name' => $v['department'],
+                    'state' => 1
+                ];
+
+        }
+        $department = new DepartmentT();
+        $department->saveAll($list_arr);*/
+
+
     }
 
 }

@@ -29,12 +29,10 @@ class Flowdesign extends Admin
             'space_recreational_t' => '场地使用-文体活动',
             'space_multi_t' => '场地使用-功能室',
             'meetingplace_t' => '教育培训—会场预订',
-            'official_recept_t' => '公务接待',
-            'meeting_recept_t' => '会议接待',
             'car_t' => '公务用车',
-            'car_t' => '领用申请',
-            'car_t' => '借用归还',
-            'car_t' => '采购申请',
+            'meeting_recept_t' => '围餐预定',
+            //'official_recept_t' => '公务接待-围餐预定',
+
 
         ];
         $this->assign('type', $wf_type);

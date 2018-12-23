@@ -9,10 +9,10 @@
 namespace app\api\service;
 
 
-use app\api\model\MeetingplaceReceptT;
+use app\api\model\MeetingReceptUserT;
 use app\api\model\MeetingplaceT;
 use app\api\model\MeetingplaceV;
-use app\api\model\ReceptDetailT;
+use app\api\model\MeetingReceptDetailT;
 use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use think\Db;
@@ -124,44 +124,5 @@ class MeetingPlaceService extends BaseService
         return $money;
     }
 
-    private
-    function saveUsers($mp_id, $users)
-    {
-        $users_arr = explode('A', $users);
-        $list = [];
-        foreach ($users_arr as $k => $v) {
-            $user = explode(',', $v);
-            $list[$k] = [
-                'unit' => $user[0],
-                'name' => $user[1],
-                'post' => $user[2],
-                'mp_id' => $mp_id
-            ];
-
-        }
-
-        $res = (new MeetingplaceReceptT())->saveAll($list);
-        return $res;
-    }
-
-    private
-    function saveDetail($mp_id, $detail)
-    {
-        $detail_arr = explode('A', $detail);
-        $list = [];
-        foreach ($detail_arr as $k => $v) {
-            $d = explode(',', $v);
-            $list[$k] = [
-                'recept_time' => $d[0],
-                'content' => $d[1],
-                'address' => $d[2],
-                'money' => $d[3],
-                'mp_id' => $mp_id
-            ];
-
-        }
-        $res = (new ReceptDetailT())->saveAll($list);
-        return $res;
-    }
 
 }
