@@ -207,7 +207,7 @@ class Flow extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/flow/ready 59-微信-我的-待办
+     * @api {GET} /api/v1/flow/ready 60-微信-我的-待办
      * @apiGroup  WX
      * @apiVersion 1.0.1
      * @apiDescription 微信-我的-待办
