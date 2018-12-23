@@ -57,6 +57,7 @@ class Car extends BaseController
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['source'] =TokenService::getCurrentTokenVar('category');
         (new CarService())->save($params);
         return json(new SuccessMessage());
 
