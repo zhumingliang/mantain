@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mingliang
- * Date: 2018/12/6
- * Time: 1:25 AM
+ * Date: 2018/12/23
+ * Time: 11:58 PM
  */
 
 namespace app\api\model;
@@ -11,7 +11,7 @@ namespace app\api\model;
 
 use think\Model;
 
-class SpaceMultiT  extends Model
+class RunReadyV extends Model
 {
 
 }
