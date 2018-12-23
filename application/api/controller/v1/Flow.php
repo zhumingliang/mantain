@@ -206,6 +206,11 @@ class Flow extends BaseController
 
     }
 
+    public function getReady($wf_type, $page = 1, $size = 10)
+    {
+
+
+    }
 
 
 }
