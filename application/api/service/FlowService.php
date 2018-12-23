@@ -10,6 +10,8 @@ namespace app\api\service;
 
 
 use app\api\model\Flow;
+use app\api\model\Run;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\FlowException;
 use think\Db;
 use workflow\workflow;
@@ -165,7 +167,7 @@ class FlowService
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
         if ($submit_to_save == 'cancel') {
-            $this->flowCancel($data['wf_fid'], $data['wf_type']);
+            $this->flowCancel($data['wf_fid'], $data['wf_type'], $data['run_id']);
             return 1;
 
         } else {
@@ -176,17 +178,37 @@ class FlowService
     }
 
 
-    private function flowCancel($wf_fid, $wf_type)
+    /**
+     * 取消流程
+     * @param $wf_fid
+     * @param $wf_type
+     * @param $run_id
+     * @throws FlowException
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    private function flowCancel($wf_fid, $wf_type, $run_id)
     {
         $res = Db::name($wf_type)->where('id', $wf_fid)->update(['state' => 2]);
         if (!$res) {
             throw new FlowException(
                 [
                     'code' => 401,
-                    'msg' => '取消流程失败',
+                    'msg' => '取消流程申请失败',
                     'errorCode' => 70002
                 ]
             );
+        }
+        $run_res = Run::update(['is_del' => CommonEnum::COMPLETE], ['id' => $run_id]);
+        if (!$run_res) {
+            throw new FlowException(
+                [
+                    'code' => 401,
+                    'msg' => '取消流程失败',
+                    'errorCode' => 70003
+                ]
+            );
+
         }
 
 

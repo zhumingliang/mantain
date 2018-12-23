@@ -151,7 +151,7 @@ class ProcessDb
     {
 
         $run_log = Db::name('run_log')
-            ->where('btn','eq', 'ok')
+           // ->where('btn','eq', 'ok')
             ->where('from_id', 'eq', $wf_fid)
             ->where('from_table', 'eq', $wf_type)->select();
         if (count($run_log)) {

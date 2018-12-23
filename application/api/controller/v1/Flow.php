@@ -170,36 +170,42 @@ class Flow extends BaseController
 
     }
 
-    public function getComplete($type)
+    /**
+     * @api {GET} /api/v1/flow/complete 59-微信-我的-历史记录
+     * @apiGroup  WX
+     * @apiVersion 1.0.1
+     * @apiDescription 微信-我的-历史记录
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/flow/complete?wf_type=access_control_t&page=1&size=10
+     * @apiParam (请求参数说明) {String}  wf_type 流程类别：
+     * 门禁申请：access_control_t；
+     * 场地使用-文体活动：space_recreational_t；
+     * 场地使用-功能室：space_multi_t；
+     * 教育培训—会场预订:meetingplace_t;
+     * 公务接待-围餐预定:meeting_recept_t;
+     * 公务用车:car_t
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":1,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":120,"from_table":"access_control_t","from_id":77,"uid":1,"status":0,"flow":{"id":77,"admin_id":1,"access":"301号科室","deadline":"2018-12-24 00:00:00","status":1,"create_time":"2018-12-23 17:56:23","update_time":"2018-12-23 17:56:23","user_type":"干部职工","state":1,"members":null,"source":"pc"},"process":[{"id":261,"uid":1,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"同意","dateline":1545558984,"btn":"ok","art":"","admin":{"id":1,"username":"朱明良"}},{"id":262,"uid":2,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"1","dateline":1545559027,"btn":"ok","art":"","admin":{"id":2,"username":"部门负责人"}},{"id":263,"uid":3,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"2222","dateline":1545559041,"btn":"ok","art":"","admin":{"id":3,"username":"机服中心"}}]}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {Obj} flow 申请信息（具体字段含义参考对应申请信息）
+     * @apiSuccess (返回参数说明) {Obj} process 申请流程信息（具体字段含义参考其他接口）
+     * @param $wf_type
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getComplete($wf_type, $page = 1, $size = 10)
     {
-        /*$list = Run::getComplete($type);
-         return json($list);*/
-
-        /* throw  new MeetingException([
-             'code' => 401,
-             'msg' => '签到失败',
-             'errorCode' => 80008
-         ]);*/
-
-        /*       $list = AdminT::where('state', 1)
-                   ->field('department')
-                   ->group('department')
-                   ->select()->toArray();
-
-
-               $list_arr = array();
-               foreach ($list as $k => $v) {
-                   $list_arr[] =
-                       [
-                           'name' => $v['department'],
-                           'state' => 1
-                       ];
-
-               }
-               $department = new DepartmentT();
-               $department->saveAll($list_arr);*/
-
+        $list = Run::getComplete($wf_type, $page, $size);
+        return json($list);
 
     }
+
+
 
 }
