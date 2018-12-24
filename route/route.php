@@ -91,3 +91,14 @@ Route::post('api/:version/category/handel', 'api/:version.Category/handel');
 Route::post('api/:version/category/update', 'api/:version.Category/update');
 Route::get('api/:version/category/list', 'api/:version.Category/getList');
 Route::get('api/:version/category', 'api/:version.Category/getTheCategory');
+
+Route::post('api/:version/buffet/save', 'api/:version.Buffet/save');
+Route::get('api/:version/buffet/list', 'api/:version.Buffet/getList');
+Route::get('api/:version/buffet/export', 'api/:version.Buffet/export');
+
+Route::post('api/:version/hotel/save', 'api/:version.Hotel/save');
+Route::get('api/:version/hotel/list', 'api/:version.Hotel/getList');
+Route::get('api/:version/hotel/export', 'api/:version.Hotel/export');
+
+
+

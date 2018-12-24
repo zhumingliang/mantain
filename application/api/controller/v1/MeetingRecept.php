@@ -128,7 +128,7 @@ class MeetingRecept extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/meeting/recept/export 27-预约申请—会议、接待列表-导出
+     * @api {GET} /api/v1/meeting/recept/export 27-公务接待-围餐预定列表-导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  预约申请—会议、接待列表-导出
@@ -153,7 +153,7 @@ class MeetingRecept extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/meeting/recept 37-预约申请—会议、接待-详情
+     * @api {GET} /api/v1/meeting/recept 37-公务接待-围餐预定列表-详情
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  预约申请—会议、接待-详情

@@ -31,6 +31,8 @@ class Flowdesign extends Admin
             'meetingplace_t' => '教育培训—会场预订',
             'car_t' => '公务用车',
             'meeting_recept_t' => '围餐预定',
+            'buffet_t' => '自助餐预定',
+            'hotel_t' => '酒店预定',
             //'official_recept_t' => '公务接待-围餐预定',
 
 
