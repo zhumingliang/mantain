@@ -94,6 +94,7 @@ class Run extends Model
             ->where('status', '=', 0)
             ->field('run_id')
             ->select();
+        
         //获取到自己角色审核的流程
         $role = Token::getCurrentTokenVar('role');
         $toReady = RunReadyV::where('from_table', $table)
