@@ -119,10 +119,10 @@ class Hotel extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/hotel/export 63-公务接待-自助餐预定-导出
+     * @api {GET} /api/v1/hotel/export 66-公务接待-酒店预定-导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription 公务接待-自助餐预定
+     * @apiDescription 公务接待-酒店预定-导出
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/hotel/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=1
      * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
