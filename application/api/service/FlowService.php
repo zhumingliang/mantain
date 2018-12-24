@@ -11,9 +11,11 @@ namespace app\api\service;
 
 use app\api\model\Flow;
 use app\api\model\Run;
+use app\api\model\RunProcess;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\FlowException;
 use think\Db;
+use think\Model;
 use workflow\workflow;
 
 class FlowService
@@ -164,6 +166,7 @@ class FlowService
     public function check($data)
     {
 
+        $this->checkAccess($data['run_id']);
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
         if ($submit_to_save == 'cancel') {
@@ -174,6 +177,46 @@ class FlowService
             $workflow->workdoaction($data, Token::getCurrentUid());
             return 1;
         }
+
+    }
+
+    /**
+     * @param $run_id
+     * @throws FlowException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function checkAccess($run_id)
+    {
+        $info = RunProcess::where('run_id', $run_id)
+            ->where('status', '=', 0)
+            ->find();
+        if (!$info) {
+            throw new FlowException(
+                [
+                    'code' => 401,
+                    'msg' => '流程审批失败：流程已完成，不能再次审核',
+                    'errorCode' => 70008
+                ]
+            );
+        }
+
+        $roles = explode(',', $info->sponsor_ids);
+        $role = Token::getCurrentTokenVar('role');
+        if (!in_array($role, $roles)) {
+            throw new FlowException(
+                [
+                    'code' => 401,
+                    'msg' => '流程审批失败：当前审批步骤已被审核，无需再次审核',
+                    'errorCode' => 70009
+                ]
+            );
+
+        }
+
 
     }
 
