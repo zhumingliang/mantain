@@ -74,7 +74,7 @@ class BuffetService extends BaseService
                 'meal_date' => $user[0],
                 'meal_type' => $user[1],
                 'count' => $user[2],
-                'money' => $user[3],
+                'money' => count($user) > 3 ? $user[3] : 0,
                 'mr_id' => $mr_id
             ];
 
