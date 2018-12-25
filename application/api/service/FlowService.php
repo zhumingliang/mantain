@@ -166,9 +166,8 @@ class FlowService
      */
     public function check($data)
     {
-        if ($data['first'] == 1) {
+        if ($data['first'] != 1) {
             $this->checkAccess($data['run_id']);
-
         }
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
