@@ -106,6 +106,7 @@ class Flow extends BaseController
             'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
             'wf_title' => 2,
             'wf_type' => $wf_type,
+            'first' => 2,
         ];
         $res = (new FlowService())->check($data);
         if ($res) {

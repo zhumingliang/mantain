@@ -129,6 +129,7 @@ class FlowService
             'wf_backflow' => "",
             'wf_title' => 2,
             'wf_type' => $wf_type,
+            'first' => 1
         ];
         $res = $this->check($data);
         return $res;
@@ -165,8 +166,10 @@ class FlowService
      */
     public function check($data)
     {
+        if ($data['first'] == 1) {
+            $this->checkAccess($data['run_id']);
 
-        $this->checkAccess($data['run_id']);
+        }
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
         if ($submit_to_save == 'cancel') {
