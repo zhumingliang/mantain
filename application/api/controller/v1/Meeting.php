@@ -323,7 +323,7 @@ class Meeting extends BaseController
      */
     public function getSignInList($time_begin, $time_end,
                                   $department, $username,
-                                  $address, $theme, $page = 1, $size = 0)
+                                  $address, $theme, $page = 1, $size = 20)
     {
         $list = (new MeetingService())->getSignInList($time_begin, $time_end,
             $department, $username,

@@ -67,16 +67,16 @@
               </select>
               <span class="help-inline">*选择人员或者办理的角色！</span>
             </div>
-           
+
 			<div id="auto_person_3" {if condition="$one['auto_person'] neq 3"}class="hide"{/if}>
               <div class="control-group">
                 <label class="control-label">办理人</label>
                 <div class="controls">
                     <input type="hidden" name="range_user_ids" id="range_user_ids" value="{$one.range_user_ids}">
-                    <input class="input-xlarge" readonly="readonly" type="text" placeholder="选择办理人范围" name="range_user_text" id="range_user_text" value="{$one.range_user_text ?? ''}"> 
+                    <input class="input-xlarge" readonly="readonly" type="text" placeholder="选择办理人范围" name="range_user_text" id="range_user_text" value="{$one.range_user_text ?? ''}">
 					<a class="btn" onclick="layer_show('办理人','{:url('super_user',['kid'=>'range_user'])}','600','350')">选择</a>
-					
-                </div> 
+
+                </div>
               </div>
             </div>
             <div id="auto_person_4" {if condition="$one['auto_person'] neq 4"}class="hide"{/if}>
@@ -84,10 +84,10 @@
                 <label class="control-label">办理人</label>
                 <div class="controls">
                     <input type="hidden" name="auto_sponsor_ids" id="auto_sponsor_ids" value="{$one.auto_sponsor_ids}">
-                    <input class="input-xlarge" readonly="readonly" type="text" placeholder="指定办理人" name="auto_sponsor_text" id="auto_sponsor_text" value="{$one.auto_sponsor_text ?? ''}"> 
+                    <input class="input-xlarge" readonly="readonly" type="text" placeholder="指定办理人" name="auto_sponsor_text" id="auto_sponsor_text" value="{$one.auto_sponsor_text ?? ''}">
 					<a class="btn" onclick="layer_show('办理人','{:url('super_user',['kid'=>'auto_sponsor'])}','600','350')">选择</a>
-					
-                </div> 
+
+                </div>
               </div>
             </div>
             <div id="auto_person_5" {if condition="$one['auto_person'] neq 5"}class="hide"{/if}>
@@ -97,7 +97,7 @@
                     <input type="hidden" name="auto_role_ids" id="auto_role_value" value="{$one.auto_role_ids}">
                     <input class="input-xlarge" readonly="readonly" type="text" placeholder="指定角色" name="auto_role_text" id="auto_role_text" value="{$one.auto_role_text ?? ''}">
 					<a class="btn" onclick="layer_show('办理人','{:url('super_role')}','600','350')">选择</a>
-                </div> 
+                </div>
               </div>
             </div>
           </div>
@@ -128,7 +128,7 @@
     </div><!-- attrOperate end -->
     <div class="tab-pane  {if condition="$op eq 'judge'"}active{/if}" id="attrJudge">
 
-       
+
     <table class="table" >
       <thead>
         <tr>
@@ -139,7 +139,7 @@
       <tbody>
 
 <!--模板-->
-<tr id="tpl" class="hide">    
+<tr id="tpl" class="hide">
 <td style="width: 100px;">@text</td>
 <td>
     <table class="table table-condensed">
@@ -152,8 +152,8 @@
 			  <option value="{$key}">{$v}</option>
 			  {/volist}
               <!-- 表单字段 start -->
-             
-              <!-- 表单字段 end -->  
+
+              <!-- 表单字段 end -->
             </select>
             <select id="condition_@a" class="input-small">
 				<option value="=">等于</option>
@@ -285,7 +285,7 @@
 <script type="text/javascript" src="__Flow__/js/flowdesign/attribute.js"></script>
 
 <script type="text/javascript">
-var _out_condition_data = [];
+    var _out_condition_data = {$one.out_condition|raw};
 </script>
 
 <script type="text/javascript" src="__LIB__/Validform/5.3.2/Validform.min.js"></script>

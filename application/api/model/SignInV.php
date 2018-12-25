@@ -40,8 +40,8 @@ class SignInV extends Model
                 }
             })
             ->where(function ($query) use ($theme) {
-                if ($theme) {
-                    $query->where('theme', 'like', $theme);
+                if ($theme && $theme != "全部") {
+                    $query->where('theme', 'like', '%' . $theme . '%');
                 }
             })
             ->order('create_time desc')
