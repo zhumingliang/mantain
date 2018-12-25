@@ -166,9 +166,7 @@ class FlowService
      */
     public function check($data)
     {
-        if ($data['first'] != 1) {
-            $this->checkAccess($data['run_id']);
-        }
+
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
         if ($submit_to_save == 'cancel') {
@@ -176,6 +174,9 @@ class FlowService
             return 1;
 
         } else {
+            if ($data['first'] != 1) {
+                $this->checkAccess($data['run_id']);
+            }
             $workflow->workdoaction($data, Token::getCurrentUid());
             return 1;
         }
