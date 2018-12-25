@@ -86,8 +86,8 @@ class SignInV extends Model
                 }
             })
             ->where(function ($query) use ($theme) {
-                if ($theme) {
-                    $query->where('theme', 'like', $theme);
+                if ($theme && $theme != "全部") {
+                    $query->where('theme', 'like', '%' . $theme . '%');
                 }
             })
             ->field('meeting_date,username,phone,department,address,sign_time,theme,remark')
