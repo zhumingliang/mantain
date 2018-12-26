@@ -9,14 +9,145 @@
 namespace app\api\service;
 
 
-use think\facade\Request;
+use app\api\model\SkuImgT;
+use app\api\model\SkuT;
+use app\api\model\UnitT;
+use app\lib\enum\CommonEnum;
+use app\lib\exception\OperationException;
+use app\lib\exception\SkuException;
+use think\Db;
+use think\Exception;
+
 
 class SkuService extends BaseService
 {
 
+    /**
+     * 保存导入数据
+     * @param $skus
+     * @throws OperationException
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     */
     public function uploadSku($skus)
     {
         $date = $this->saveExcel($skus);
+        $date = $this->prefixData($date);
+        $sku = new SkuT();
+        $res = $sku->saveAll($date);
+        if (!$res) {
+            throw new OperationException();
+        }
+    }
+
+    /**
+     * 新增用品
+     * @param $params
+     * @throws Exception
+     */
+    public  function save($params)
+    {
+        Db::startTrans();
+        try {
+            $res = SkuT::create($params);
+            if (!$res) {
+                Db::rollback();
+                throw new OperationException();
+            }
+            if (isset($params['imgs'])) {
+                $imgs = $params['imgs'];
+                $relation = [
+                    'name' => 'sku_id',
+                    'value' => $res->id
+                ];
+                $imgs_res = self::saveImageRelation($imgs, $relation);
+                if (!$imgs_res) {
+                    Db::rollback();
+                    throw new SkuException(
+                        ['code' => 401,
+                            'msg' => '创建用品图片关联失败',
+                            'errorCode' => 60002
+                        ]
+                    );
+                }
+
+            }
+
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+    }
+
+    /**
+     * 修改用品信息
+     * @param $params
+     * @throws Exception
+     */
+    public  function updateSku($params)
+    {
+
+        Db::startTrans();
+        try {
+            if (isset($params['imgs'])) {
+                $imgs = $params['imgs'];
+                unset($params['imgs']);
+                $relation = [
+                    'name' => 'sku_id',
+                    'value' => $params['id']
+                ];
+                $imgs_res = self::saveImageRelation($imgs, $relation);
+                if (!$imgs_res) {
+                    Db::rollback();
+                    throw new SkuException(
+                        ['code' => 401,
+                            'msg' => '创建用品图片关联失败',
+                            'errorCode' => 60002
+                        ]
+                    );
+                }
+
+            }
+
+
+            $res = SkuT::update($params, ['id' => $params['id']]);
+            if (!$res) {
+                Db::rollback();
+                throw new OperationException(
+                    ['code' => 401,
+                        'msg' => '用品修改失败',
+                        'errorCode' => 600012
+                    ]
+                );
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+
+    /**
+     * 保存申请和图片关联
+     * @param $imgs
+     * @param $relation
+     * @return bool
+     * @throws \Exception
+     */
+    private static function saveImageRelation($imgs, $relation)
+    {
+        $data = ImageService::ImageHandel($imgs, $relation);
+        $demandImgT = new SkuImgT();
+        $res = $demandImgT->saveAll($data);
+        if (!$res) {
+            return false;
+        }
+        return true;
 
     }
 
@@ -39,6 +170,54 @@ class SkuService extends BaseService
         $result_excel = $this->import_excel($file_name);
         return $result_excel;
 
+    }
+
+    private function prefixData($result_excel)
+    {
+        $return_data = array();
+        $categors = (new CategoryService())->getCategorys();
+        $units = UnitT::getList();
+        foreach ($result_excel as $k => $v) {
+            //获取所有分组
+            if ($k > 1 && !empty(preg_replace('# #', '', $v[0]))) {
+                $params['c_id'] = empty($v[1]) ? 0 : $this->prefixValue($v[1], $categors);
+                $params['code'] = empty($v[2]) ? 0 : $v[2];
+                $params['name'] = $v[3];
+                $params['unit_id'] = empty($v[4]) ? 0 : $this->prefixValue($v[4], $units);
+                $params['pack'] = empty($v[5]) ? 0 : $v[5];
+                $params['count'] = empty($v[6]) ? 0 : $v[6];
+                $params['format'] = empty($v[7]) ? 0 : $v[7];
+                $params['use_type'] = empty($v[8]) ? 0 : $v[8];
+                $params['min'] = empty($v[9]) ? 0 : $v[9];
+                $params['max'] = empty($v[10]) ? 0 : $v[10];
+                $params['alert'] = empty($v[11]) ? 2 : $v[11];
+                $params['admin_id'] = Token::getCurrentUid();
+                $params['state'] = CommonEnum::STATE_IS_OK;
+
+                array_push($return_data, $params);
+
+
+            }
+
+        }
+
+        return $return_data;
+
+    }
+
+    private function prefixValue($value, $data)
+    {
+        if (!count($data)) {
+            return 0;
+        }
+
+        foreach ($data as $k => $v) {
+            if ($v['name'] == $value) {
+                return $v['id'];
+            }
+        }
+
+        return 0;
     }
 
 

@@ -15,7 +15,7 @@ use think\Model;
 class AdminV extends Model
 {
 
-    public static function getList($username,$phone,$department,$role,$page,$size)
+    public static function getList($username, $phone, $department, $post, $page, $size)
     {
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
@@ -33,9 +33,9 @@ class AdminV extends Model
                     $query->where('phone', '=', $phone);
                 }
             })
-            ->where(function ($query) use ($role) {
-                if ($role && $role != "全部") {
-                    $query->where('role', '=', $role);
+            ->where(function ($query) use ($post) {
+                if ($post && $post != "全部") {
+                    $query->where('role', 'like', '%' . $post . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])

@@ -92,6 +92,9 @@ Route::post('api/:version/category/update', 'api/:version.Category/update');
 Route::get('api/:version/category/list', 'api/:version.Category/getList');
 Route::get('api/:version/category', 'api/:version.Category/getTheCategory');
 
+Route::post('api/:version/unit/save', 'api/:version.Unit/save');
+Route::get('api/:version/unit/list', 'api/:version.Unit/getList');
+
 Route::post('api/:version/buffet/save', 'api/:version.Buffet/save');
 Route::get('api/:version/buffet/list', 'api/:version.Buffet/getList');
 Route::get('api/:version/buffet/export', 'api/:version.Buffet/export');

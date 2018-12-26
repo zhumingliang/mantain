@@ -177,9 +177,9 @@ class Admin extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  获取用户列表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/admin/list?username=&phone&department=全部&role=全部&page=1&size=20
+     * {"total":440,"per_page":"2","current_page":1,"last_page":220,"data":[{"id":1,"username":"朱明良","phone":"18956225230","post":null,"role":null,"state":1,"department":"办公室","account":"admin"},{"id":2,"username":"部门负责人","phone":"13725305169","post":null,"role":"机服中心负责人","state":1,"department":"办公室","account":"1"}]}
      * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
-     * @apiParam (请求参数说明) {String}  role 角色/默认传入全部
+     * @apiParam (请求参数说明) {String}  post 职务/默认传入全部
      * @apiParam (请求参数说明) {String}  username  姓名
      * @apiParam (请求参数说明) {String}  phone  手机号
      * @apiParam (请求参数说明) {int} page 当前页码
@@ -194,20 +194,21 @@ class Admin extends BaseController
      * @apiSuccess (返回参数说明) {String} username 姓名
      * @apiSuccess (返回参数说明) {String} phone 手机号
      * @apiSuccess (返回参数说明) {String} account 账号
-     * @apiSuccess (返回参数说明) {int} role 角色
-     * @apiSuccess (返回参数说明) {int} department 部门
+     * @apiSuccess (返回参数说明) {String} post 职务
+     * @apiSuccess (返回参数说明) {String} role 角色
+     * @apiSuccess (返回参数说明) {String} department 部门
      *
      * @param $username
      * @param $phone
      * @param $department
-     * @param $role
+     * @param $post
      * @param int $page
      * @param int $size
      * @return \think\response\Json
      */
-    public function getList($username, $phone, $department, $role, $page = 1, $size = 20)
+    public function getList($username, $phone, $department, $post, $page = 1, $size = 20)
     {
-        $list = AdminV::getList($username, $phone, $department, $role, $page, $size);
+        $list = AdminV::getList($username, $phone, $department, $post, $page, $size);
         return json($list);
 
     }

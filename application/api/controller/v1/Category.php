@@ -19,7 +19,7 @@ use app\lib\exception\SuccessMessage;
 class Category extends BaseController
 {
     /**
-     * @api {POST}  52-用品管理-新增分类
+     * @api {POST}  /api/v1/category/save 52-用品管理-新增分类
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  用品管理-新增分类
@@ -161,7 +161,7 @@ class Category extends BaseController
      * @return \think\response\Json
      * @throws \think\exception\DbException
      */
-    public function getList($name='', $code='', $order='', $page = 1, $size = 100)
+    public function getList($name = '', $code = '', $order = '', $page = 1, $size = 100)
     {
         $list = CategoryT::where('state', '=', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($name) {
@@ -210,6 +210,8 @@ class Category extends BaseController
             ->hidden(['create_time', 'update_time', 'state']);
         return json($category);
     }
+
+
 
 
 }
