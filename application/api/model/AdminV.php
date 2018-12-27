@@ -35,7 +35,7 @@ class AdminV extends Model
             })
             ->where(function ($query) use ($post) {
                 if ($post && $post != "全部") {
-                    $query->where('role', 'like', '%' . $post . '%');
+                    $query->where('post', 'like', '%' . $post . '%');
                 }
             })
             ->paginate($size, false, ['page' => $page])
