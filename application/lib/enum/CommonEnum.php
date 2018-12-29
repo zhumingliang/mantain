@@ -28,4 +28,8 @@ class CommonEnum
     const READY_RECORD = 1;
 
     const COMPLETE = 2;
+
+    const BORROW = 1;
+
+    const COLLAR_USE = 2;
 }

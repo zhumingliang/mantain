@@ -103,5 +103,17 @@ Route::post('api/:version/hotel/save', 'api/:version.Hotel/save');
 Route::get('api/:version/hotel/list', 'api/:version.Hotel/getList');
 Route::get('api/:version/hotel/export', 'api/:version.Hotel/export');
 
+Route::post('api/:version/sku/save', 'api/:version.Sku/save');
+Route::post('api/:version/sku/upload', 'api/:version.Sku/upload');
+Route::post('api/:version/sku/update', 'api/:version.Sku/update');
+Route::post('api/:version/sku/image/handel', 'api/:version.Sku/SkuImageHandel');
+Route::get('api/:version/sku', 'api/:version.Sku/getTheSku');
+Route::get('api/:version/stock/list', 'api/:version.Sku/getStockList');
+Route::post('api/:version/stock/save', 'api/:version.Sku/stockSave');
+Route::post('api/:version/stock/handel', 'api/:version.Sku/stockHandel');
+Route::get('api/:version/stock/export', 'api/:version.Sku/exportStock');
+
+
+
 
 

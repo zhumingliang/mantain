@@ -11,8 +11,11 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\SkuImgT;
+use app\api\model\SkuStockT;
 use app\api\model\SkuT;
 use app\api\service\SkuService;
+use app\api\validate\SkuStockValidate;
+use app\index\controller\News;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\SkuException;
@@ -34,7 +37,7 @@ class Sku extends BaseController
      * @throws \PHPExcel_Reader_Exception
      * @throws \app\lib\exception\OperationException
      */
-    public function uploadSku()
+    public function upload()
     {
         $file_excel = request()->file('sku');
         if (is_null($file_excel)) {
@@ -146,7 +149,32 @@ class Sku extends BaseController
     }
 
     /**
-     * 73-用品管理-获取指定用品信息
+     * @api {POST} /api/v1/sku 73-用品管理-获取指定用品信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取指定用品信息
+     * @apiExample {post}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id    SKUid
+     * @apiSuccessExample {json} 返回样例:
+     * {"id":1,"c_id":1,"code":"a1231213","name":"洗手液","unit_id":1,"pack":"箱","count":24,"format":"500ml","use_type":"使用","min":100,"max":500,"alert":1,"imgs":[{"sku_id":1,"img_id":1,"img_url":{"url":"http:\/\/1.png"}},{"sku_id":1,"img_id":2,"img_url":{"url":"httpL\/\/2.png"}},{"sku_id":1,"img_id":3,"img_url":{"url":"http:\/\/3.png"}}]}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {int} id    用品id
+     * @apiSuccess (返回参数说明) {int} c_id    分类id
+     * @apiSuccess (返回参数说明) {String} code    编号
+     * @apiSuccess (返回参数说明) {String} name    名称
+     * @apiSuccess (返回参数说明) {int} unit_id   单位id
+     * @apiSuccess (返回参数说明) {String} pack   进货包装
+     * @apiSuccess (返回参数说明) {int} count   拆箱比
+     * @apiSuccess (返回参数说明) {String} format   规格
+     * @apiSuccess (返回参数说明) {String} use_type   使用方式
+     * @apiSuccess (返回参数说明) {int} alert   是否启动库存警示功能：1 | 启用；2 | 不启用
+     * @apiSuccess (返回参数说明) {int} min   最低警示数量
+     * @apiSuccess (返回参数说明) {int} max   最高警示数量
+     * @apiSuccess (返回参数说明) {String} imgs   物品图片信息
+     * @apiSuccess (返回参数说明) {String} url   图片地址
      * @param $id
      * @return \think\response\Json
      */
@@ -174,7 +202,7 @@ class Sku extends BaseController
      * @return \think\response\Json
      * @throws OperationException
      */
-    public function ShopImageHandel($id)
+    public function SkuImageHandel($id)
     {
         $res = SkuImgT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$res) {
@@ -186,6 +214,165 @@ class Sku extends BaseController
             );
         }
         return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {POST}  /api/v1/sku/save 75-用品管理-新增库存
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用品管理-新增用品
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "sku_id":1,
+     *       "count": 1,
+     *       "all_count": 20,
+     *       "type": 1,
+     *       "stock_code":"11111",
+     *       "price": 1.11,
+     *       "all_money": 22.2
+     *     }
+     * @apiParam (请求参数说明) {int} sku_id    用品id
+     * @apiParam (请求参数说明) {int} count    入库数量
+     * @apiParam (请求参数说明) {int} all_count    入库数量最小存储单位数量：入库数量*拆箱比
+     * @apiParam (请求参数说明) {int} type   入库类别：1 | 新增；2 | 减少
+     * @apiParam (请求参数说明) {String} stock_code  入库单编号
+     * @apiParam (请求参数说明) {int} price   进货单价
+     * @apiParam (请求参数说明) {int} all_money  进货总金额：进货单价*入库数量最小存储单位数量
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @return \think\response\Json
+     * @throws OperationException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function stockSave()
+    {
+        (new SkuStockValidate())->goCheck();
+        $params = $this->request->param();
+        $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['admin_id'] = \app\api\service\Token::getCurrentUid();
+        $params['stock'] = (new SkuService())->getStock($params['sku_id']);
+        $res = SkuStockT::create($params);
+        if (!$res) {
+            throw  new OperationException();
+        }
+        return json(new SuccessMessage());
+
+
+    }
+
+    /**
+     * @api {GET} /api/v1/stock/list 76-用品管理-获取库存记录列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取库存记录列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/stock/list?category=''&order_number=''&category_id=''&page=1&size=20
+     * @apiParam (请求参数说明) {String}  category 类别名称
+     * @apiParam (请求参数说明) {String}  order_number 类别排序
+     * @apiParam (请求参数说明) {String}  category_id 类别id
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"sku_id":1,"sku_name":"洗手液","category_name":"打印机耗材","stock":0,"all_count":20,"stock_date":"2018-12-28","min":100,"max":500,"admin_name":"打印机耗材","create_time":"2018-12-27 23:27:26","state":1,"order_number":"1","category_id":1,"price":1.11},{"id":1,"sku_id":1,"sku_name":"洗手液","category_name":"打印机耗材","stock":0,"all_count":20,"stock_date":"2018-12-28","min":100,"max":500,"admin_name":"打印机耗材","create_time":"2018-12-27 23:26:23","state":1,"order_number":"1","category_id":1,"price":1.11}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 入库记录ID
+     * @apiSuccess (返回参数说明) {String} sku_name  物品名称
+     * @apiSuccess (返回参数说明) {String} category_name  类别
+     * @apiSuccess (返回参数说明) {String} stock  库存
+     * @apiSuccess (返回参数说明) {String} all_count  入库
+     * @apiSuccess (返回参数说明) {String} price  单价
+     * @apiSuccess (返回参数说明) {String} stock_date  入库日期
+     * @apiSuccess (返回参数说明) {String} min  最高警示数量
+     * @apiSuccess (返回参数说明) {String} max  最低警示数量
+     * @apiSuccess (返回参数说明) {String} admin_name  操作员
+     *
+     * @param $category
+     * @param $order_number
+     * @param $category_id
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getStockList($category, $order_number, $category_id, $page = 1, $size = 10)
+    {
+        $list = (new SkuService())->getStockList($category, $order_number, $category_id, $page, $size);
+
+        return json($list);
+
+
+    }
+
+    /**
+     * @api {POST} /api/v1/stock/handel  77-用品管理-删除入库记录
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用品管理-删除入库记录
+     * @apiExample {POST}  请求样例:
+     * {
+     * "id": 1,
+     * }
+     * @apiParam (请求参数说明) {int} id 入库id
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function stockHandel($id)
+    {
+        $id = SkuStockT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
+        if (!$id) {
+            throw new OperationException(['code' => 401,
+                'msg' => '删除操作失败',
+                'errorCode' => 40002
+            ]);
+        }
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {GET} /api/v1/stock/export 78-用品管理-入库记录-导出
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  入库记录-导出
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/stock/export?category=''&order_number=''&category_id=''
+     * @apiParam (请求参数说明) {String}  category 类别名称
+     * @apiParam (请求参数说明) {String}  order_number 类别排序
+     * @apiParam (请求参数说明) {String}  category_id 类别id
+     *
+     * @param $category
+     * @param $order_number
+     * @param $category_id
+     * @return \think\response\Json
+     */
+    public function exportStock($category, $order_number, $category_id)
+    {
+        (new SkuService())->exportStock($category, $order_number, $category_id);
+        return json(new SuccessMessage());
+    }
+
+
+    public function collarUseSave()
+    {
+        $params = $this->request->param();
+        $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['status'] = CommonEnum::READY_RECORD;
+        $params['admin_id'] = \app\api\service\Token::getCurrentUid();
+        (new SkuService())->collarUseSave();
+        return json(new SuccessMessage());
+
 
     }
 

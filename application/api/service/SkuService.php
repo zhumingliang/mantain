@@ -11,9 +11,11 @@ namespace app\api\service;
 
 use app\api\model\SkuImgT;
 use app\api\model\SkuT;
+use app\api\model\StockV;
 use app\api\model\UnitT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
+use app\lib\exception\ParameterException;
 use app\lib\exception\SkuException;
 use think\Db;
 use think\Exception;
@@ -45,7 +47,7 @@ class SkuService extends BaseService
      * @param $params
      * @throws Exception
      */
-    public  function save($params)
+    public function save($params)
     {
         Db::startTrans();
         try {
@@ -86,9 +88,8 @@ class SkuService extends BaseService
      * @param $params
      * @throws Exception
      */
-    public  function updateSku($params)
+    public function updateSku($params)
     {
-
         Db::startTrans();
         try {
             if (isset($params['imgs'])) {
@@ -110,7 +111,6 @@ class SkuService extends BaseService
                 }
 
             }
-
 
             $res = SkuT::update($params, ['id' => $params['id']]);
             if (!$res) {
@@ -268,6 +268,51 @@ class SkuService extends BaseService
             }
         }
         return $data;
+    }
+
+    public function getStock($sku_id)
+    {
+
+        return 100;
+    }
+
+    public function getStockList($category, $order_number, $category_id, $page, $size)
+    {
+        return StockV::getList($category, $order_number, $category_id, $page, $size);
+    }
+
+
+    public function exportStock($category, $order_number, $category_id)
+    {
+        $list = StockV::exportStock($category, $order_number, $category_id);
+        $header = array(
+            '物品名称',
+            '类别',
+            '库存',
+            '入库',
+            '单价',
+            '入库日期',
+            '最高警示数量',
+            '最低警示数量',
+            '操作员'
+        );
+        $file_name = '入库记录—导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
+
+    }
+
+
+    public function collarUseSave($params)
+    {
+        $type = $params['type'];
+        if ($type == CommonEnum::BORROW) {
+
+        } else if ($type == CommonEnum::COLLAR_USE) {
+
+        }
+
+        throw new ParameterException();
+
     }
 
 

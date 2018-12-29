@@ -33,9 +33,8 @@ class Flowdesign extends Admin
             'meeting_recept_t' => '围餐预定',
             'buffet_t' => '自助餐预定',
             'hotel_t' => '酒店预定',
-            //'official_recept_t' => '公务接待-围餐预定',
-
-
+            'collar_use_t' => '用品领用',
+            'borrow_t' => '用品借用',
         ];
         $this->assign('type', $wf_type);
     }

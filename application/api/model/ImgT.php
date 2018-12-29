@@ -13,5 +13,6 @@ use think\Model;
 
 class ImgT extends Model
 {
+    protected $hidden=['create_time','update_time','id'];
 
 }

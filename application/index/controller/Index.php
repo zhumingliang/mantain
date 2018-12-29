@@ -19,7 +19,7 @@ class Index  extends Controller{
       return $this->fetch();
     }
 	public function doc(){
-      return $this->fetch();
+     // return $this->fetch();
     }
 	public function login(){
 		Session::clear();
