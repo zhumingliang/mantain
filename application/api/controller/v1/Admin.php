@@ -293,6 +293,35 @@ class Admin extends BaseController
         return json(new SuccessMessage());
     }
 
+
+    /**
+     * @api {POST} /api/v1/admin/department/update  80-更新用户职务
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 更新用户职务
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "mobile": 18956225230,
+     *       "department":办公室
+     *     }
+     * @apiParam (请求参数说明) {String} mobile   手机号
+     * @apiParam (请求参数说明) {String} department   部门
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg":"ok","errorCode":0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @param $mobile
+     * @param $department
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function updateDepartment($mobile, $department)
+    {
+        AdminService::updateDepartment($mobile, $department);
+        return json(new SuccessMessage());
+    }
+
     /**
      * @api {GET} /api/v1/admins/access 58-新增门禁权限-获取用户列表
      * @apiGroup  CMS

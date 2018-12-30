@@ -9,11 +9,14 @@
 namespace app\api\service;
 
 
+use app\api\model\BorrowT;
+use app\api\model\CollarUseT;
 use app\api\model\SkuImgT;
 use app\api\model\SkuT;
 use app\api\model\StockV;
 use app\api\model\UnitT;
 use app\lib\enum\CommonEnum;
+use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use app\lib\exception\ParameterException;
 use app\lib\exception\SkuException;
@@ -302,16 +305,74 @@ class SkuService extends BaseService
     }
 
 
+    /**
+     * @param $params
+     * @throws Exception
+     * @throws ParameterException
+     */
     public function collarUseSave($params)
     {
         $type = $params['type'];
         if ($type == CommonEnum::BORROW) {
+            $this->saveBorrow($params);
 
         } else if ($type == CommonEnum::COLLAR_USE) {
+            $this->saveCollarUse($params);
 
+        }else{
+            throw new ParameterException();
         }
 
-        throw new ParameterException();
+
+    }
+
+    private function saveBorrow($params)
+    {
+
+        Db::startTrans();
+        try {
+            //新增基本信息
+            $res = BorrowT::create($params);
+            if (!$res) {
+                throw new OperationException();
+            }
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($res->id, 'borrow_t');
+            if (!$check_res == 1) {
+                Db::rollback();
+                throw new FlowException();
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
+
+    }
+
+    private function saveCollarUse($params)
+    {
+
+        Db::startTrans();
+        try {
+            //新增基本信息
+            $res = CollarUseT::create($params);
+            if (!$res) {
+                throw new OperationException();
+            }
+            //启动工作流
+            $check_res = (new FlowService())->saveCheck($res->id, 'collar_use_t');
+            if (!$check_res == 1) {
+                Db::rollback();
+                throw new FlowException();
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+            throw $e;
+        }
+
 
     }
 

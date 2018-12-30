@@ -243,7 +243,6 @@ class Flow extends BaseController
      */
     public function getReady($wf_type)
     {
-
         $list = (new Run())->getReady($wf_type);
         return json($list);
     }

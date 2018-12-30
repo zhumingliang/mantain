@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\Flow;
+use app\api\model\FlowProcess;
 use app\api\model\Run;
 use app\api\model\RunProcess;
 use app\lib\enum\CommonEnum;
@@ -51,8 +52,6 @@ class FlowService
      */
     public function btn($wf_fid, $wf_type, $status)
     {
-        $id = Db::name('log')->insertGetId(['msg' => $wf_fid . '-' . $status]);
-
         switch ($status) {
             case 0:
                 return 2;
@@ -63,7 +62,7 @@ class FlowService
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
-                    if (in_array($this->uid, $user)) {
+                    if (in_array(Token::getCurrentUid(), $user)) {
                         $st = 1;
                     }
                 }
@@ -71,6 +70,7 @@ class FlowService
                     if (in_array(Token::getCurrentTokenVar('role'), $user)) {
                         $st = 1;
                     }
+
                 }
 
 
@@ -132,9 +132,21 @@ class FlowService
             'first' => 1
         ];
         $res = $this->check($data);
+        if ($wf_type=="borrow_t"){
+            $this->updateFlowForBorrow($wf_id);
+        }
         return $res;
     }
 
+    private function updateFlowForBorrow($flow_id)
+    {
+        $data = [
+            'auto_sponsor_ids' => Token::getCurrentUid(),
+            'auto_sponsor_text' => Token::getCurrentTokenVar('username')
+        ];
+        FlowProcess::update($data, ['flow_id' => $flow_id, 'auto_person' => 4]);
+
+    }
 
     /**
      * 获取指定类别的流程id
@@ -178,8 +190,14 @@ class FlowService
                 $this->checkAccess($data['run_id']);
             }
             $workflow->workdoaction($data, Token::getCurrentUid());
+            //检测借用并处理
+
             return 1;
         }
+
+        //1.新增流程信息是修改信息
+        //2.检测btn
+        //微信端处理
 
     }
 

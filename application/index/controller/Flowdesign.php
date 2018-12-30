@@ -534,7 +534,7 @@ class Flowdesign extends Admin
     //用户选择控件
     public function super_user()
     {
-        $this->assign('user',db('user')->field('id,username')->select());
+        $this->assign('user',db('admin_t')->field('id,username')->select());
 
         $this->assign('kid',input('kid'));
         return $this->fetch();
@@ -549,7 +549,7 @@ class Flowdesign extends Admin
     {
         $type = trim(input('type'));
         if($type=='user'){
-            $info =  db('user')->where('username','like','%'.input('key').'%')->field('id as vlaue,username as text')->select();
+            $info =  db('admin_t')->where('username','like','%'.input('key').'%')->field('id as vlaue,username as text')->select();
         }else{
             $info =  db('role')->where('name','like','%'.input('key').'%')->field('id as vlaue,name as text')->select();
         }

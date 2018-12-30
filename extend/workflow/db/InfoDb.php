@@ -91,6 +91,8 @@ class InfoDB
             $sponsor_text = $todo[1];
             $sponsor_ids = $todo[0];
         }
+
+
         $data = array(
             'uid' => $uid,
             'run_id' => $run_id,
@@ -114,7 +116,6 @@ class InfoDB
         }
         return $process_id;
     }
-
     /**
      * 缓存信息
      *
@@ -212,7 +213,6 @@ class InfoDB
     }
 
 
-
     /**
      * 根据单据ID，单据表 获取已经完成流程信息
      *
@@ -241,7 +241,6 @@ class InfoDB
                     ->where('run_flow', 'eq', $result['flow_id'])
                     ->where('run_flow_process', 'eq', $result['run_flow_process'])
                     ->find();
-
 
 
                 if ($result) {
@@ -280,7 +279,6 @@ class InfoDB
         }
         return $workflow;
     }
-
 
 
     /**

@@ -32,37 +32,7 @@ class MeetingPlaceService extends BaseService
             $mp = MeetingplaceT::create($params);
             if (!$mp) {
                 throw new OperationException();
-
             }
-            /* //新增接待对象
-             $users = $params['users'];
-             if (strlen($users)) {
-                 $users_res = $this->saveUsers($mp->id, $users);
-                 if (!$users_res) {
-                     Db::rollback();
-                     throw new OperationException(
-                         ['code' => 401,
-                             'msg' => '新增接待对象失败',
-                             'errorCode' => 40001
-                         ]);
-
-                 }
-             }
-             //新增接待明细
-             $detail = $params['detail'];
-             if (strlen($detail)) {
-                 $detail_res = $this->saveDetail($mp->id, $detail);
-                 if (!$detail_res) {
-                     Db::rollback();
-                     throw new OperationException(
-                         ['code' => 401,
-                             'msg' => '新增接待明细失败',
-                             'errorCode' => 40001
-                         ]);
-
-                 }
-             }*/
-
             //启动工作流
             $check_res = (new FlowService())->saveCheck($mp->id, 'meetingplace_t');
             if (!$check_res == 1) {

@@ -84,6 +84,7 @@ Route::get('api/:version/role/list', 'api/:version.Admin/getRoleList');
 Route::post('api/:version/admin/save', 'api/:version.Admin/save');
 Route::post('api/:version/admin/role/update', 'api/:version.Admin/updateRole');
 Route::post('api/:version/admin/post/update', 'api/:version.Admin/updatePost');
+Route::post('api/:version/admin/department/update', 'api/:version.Admin/updateDepartment');
 
 
 Route::post('api/:version/category/save', 'api/:version.Category/save');
@@ -108,6 +109,7 @@ Route::post('api/:version/sku/upload', 'api/:version.Sku/upload');
 Route::post('api/:version/sku/update', 'api/:version.Sku/update');
 Route::post('api/:version/sku/image/handel', 'api/:version.Sku/SkuImageHandel');
 Route::get('api/:version/sku', 'api/:version.Sku/getTheSku');
+Route::post('api/:version/collar/use/save', 'api/:version.Sku/collarUseSave');
 Route::get('api/:version/stock/list', 'api/:version.Sku/getStockList');
 Route::post('api/:version/stock/save', 'api/:version.Sku/stockSave');
 Route::post('api/:version/stock/handel', 'api/:version.Sku/stockHandel');

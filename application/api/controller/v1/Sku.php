@@ -363,14 +363,41 @@ class Sku extends BaseController
         return json(new SuccessMessage());
     }
 
-
+    /**
+     * @api {POST}  /api/v1/collar/use/save 79-用品管理-新增用品
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用品管理-新增用品
+     * @apiExample {post}  请求样例:
+     *    {
+     *       "sku_id":1,
+     *       "count": 20,
+     *       "time_begin": "2018-12-28",
+     *       "time_end": "2018-12-30",
+     *       "type": 1
+     *     }
+     * @apiParam (请求参数说明) {int} sku_id    用品id
+     * @apiParam (请求参数说明) {int} count    数量
+     * @apiParam (请求参数说明) {String} time_begin    领用日期
+     * @apiParam (请求参数说明) {String} time_end   归还日期： 借用物品需填写
+     * @apiParam (请求参数说明) {int} type   使用方式：1 | 借用；2 | 领用
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     *
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
     public function collarUseSave()
     {
         $params = $this->request->param();
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['status'] = CommonEnum::READY_RECORD;
         $params['admin_id'] = \app\api\service\Token::getCurrentUid();
-        (new SkuService())->collarUseSave();
+        (new SkuService())->collarUseSave($params);
         return json(new SuccessMessage());
 
 

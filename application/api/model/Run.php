@@ -24,12 +24,6 @@ class Run extends Model
             'run_id', 'id');
     }
 
-    /*  public function flow()
-      {
-          return $this->belongsTo($this->table_type, 'from_id', 'id');
-
-      }*/
-
     public function getComplete($table, $page, $size)
     {
         //$this->table_type = $this->getTableName($table);

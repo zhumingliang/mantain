@@ -55,4 +55,14 @@ class AdminService
 
     }
 
+
+    public static function updateDepartment($mobile, $department)
+    {
+        $res = AdminT::update(['department' => $department], ['phone' => $mobile]);
+        if (!$res) {
+            throw new OperationException();
+        }
+
+    }
+
 }
