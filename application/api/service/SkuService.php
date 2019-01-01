@@ -11,6 +11,7 @@ namespace app\api\service;
 
 use app\api\model\BorrowT;
 use app\api\model\CollarUseT;
+use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
 use app\api\model\SkuT;
 use app\api\model\StockV;
@@ -319,7 +320,7 @@ class SkuService extends BaseService
         } else if ($type == CommonEnum::COLLAR_USE) {
             $this->saveCollarUse($params);
 
-        }else{
+        } else {
             throw new ParameterException();
         }
 
@@ -332,6 +333,7 @@ class SkuService extends BaseService
         Db::startTrans();
         try {
             //新增基本信息
+            $params['actual_time'] = $params['time_end'];
             $res = BorrowT::create($params);
             if (!$res) {
                 throw new OperationException();
@@ -374,6 +376,37 @@ class SkuService extends BaseService
         }
 
 
+    }
+
+    public function getListForApply($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category)
+    {
+
+        $list = SkuApplyV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
+        return $list;
+    }
+
+    public function exportApply($time_begin, $time_end, $department, $username, $status, $type, $sku, $category)
+    {
+
+        $list = SkuApplyV::export($time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
+        $list = $this->prefixStatus($list);
+        $header = array(
+            '日期',
+            '申请人',
+            '部门',
+            '手机号码',
+            '品名',
+            '类别',
+            '规格型号',
+            '数量',
+            '使用方式',
+            '领用日期',
+            '归还日期（借用）',
+            '实际归还日期',
+            '状态',
+        );
+        $file_name = '用品管理-用品领用—导出' . '-' . date('Y-m-d', time()) . '.csv';
+        $this->put_csv($list, $header, $file_name);
     }
 
 

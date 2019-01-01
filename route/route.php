@@ -109,7 +109,11 @@ Route::post('api/:version/sku/upload', 'api/:version.Sku/upload');
 Route::post('api/:version/sku/update', 'api/:version.Sku/update');
 Route::post('api/:version/sku/image/handel', 'api/:version.Sku/SkuImageHandel');
 Route::get('api/:version/sku', 'api/:version.Sku/getTheSku');
+Route::get('api/:version/sku/list', 'api/:version.Sku/getSkuList');
+Route::get('api/:version/sku/apply/list', 'api/:version.Sku/getListForApply');
+Route::get('api/:version/sku/apply/export', 'api/:version.Sku/exportApply');
 Route::post('api/:version/collar/use/save', 'api/:version.Sku/collarUseSave');
+
 Route::get('api/:version/stock/list', 'api/:version.Sku/getStockList');
 Route::post('api/:version/stock/save', 'api/:version.Sku/stockSave');
 Route::post('api/:version/stock/handel', 'api/:version.Sku/stockHandel');

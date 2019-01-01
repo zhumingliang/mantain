@@ -75,8 +75,9 @@ class InfoDB
         //非自由
         if ($todo == '') {
             if ($wf_process['auto_person'] == 3) { //办理人员
-                $sponsor_ids = $wf_process['range_user_ids'];
-                $sponsor_text = $wf_process['range_user_text'];
+                $user=self::checkBorrow($run_id,$wf_process['range_user_ids'],$wf_process['range_user_text']);
+                $sponsor_ids = $user['ids'];
+                $sponsor_text = $user['text'];
             }
             if ($wf_process['auto_person'] == 4) { //办理人员
                 $sponsor_ids = $wf_process['auto_sponsor_ids'];
@@ -116,6 +117,30 @@ class InfoDB
         }
         return $process_id;
     }
+
+    private static function checkBorrow($run_id, $sponsor_ids, $sponsor_text)
+    {
+        $info = Db::name('run')->where('id', $run_id)->find();
+        if ($info->from_table == "borrow_t") {
+            $borrow = Db::name('borrow_t')->where('id', $info->from_id)->find();
+            $admin_id = $borrow->admin_id;
+            $admin = Db::name('admin_t')->where('id', $admin_id)->find();
+            return[
+                'ids' => $admin_id,
+                'text' => $admin->username
+            ];
+
+
+        } else {
+            return [
+                'ids' => $sponsor_ids,
+                'text' => $sponsor_text
+            ];
+        }
+
+    }
+
+
     /**
      * 缓存信息
      *

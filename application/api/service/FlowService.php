@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\BorrowT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
 use app\api\model\Run;
@@ -132,7 +133,7 @@ class FlowService
             'first' => 1
         ];
         $res = $this->check($data);
-        if ($wf_type=="borrow_t"){
+        if ($wf_type == "borrow_t") {
             $this->updateFlowForBorrow($wf_id);
         }
         return $res;
@@ -187,22 +188,18 @@ class FlowService
 
         } else {
             if ($data['first'] != 1) {
-                $this->checkAccess($data['run_id']);
+                $this->checkAccess($data['run_id'], $data['wf_type'], $data['wf_fid']);
             }
-            $workflow->workdoaction($data, Token::getCurrentUid());
-            //检测借用并处理
 
+            $workflow->workdoaction($data, Token::getCurrentUid());
             return 1;
         }
-
-        //1.新增流程信息是修改信息
-        //2.检测btn
-        //微信端处理
-
     }
 
     /**
      * @param $run_id
+     * @param $wf_type
+     * @param $wf_fid
      * @throws FlowException
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
@@ -210,7 +207,7 @@ class FlowService
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function checkAccess($run_id)
+    private function checkAccess($run_id, $wf_type, $wf_fid)
     {
         $info = RunProcess::where('run_id', $run_id)
             ->where('status', '=', 0)
@@ -235,6 +232,12 @@ class FlowService
                     'errorCode' => 70009
                 ]
             );
+
+        }
+
+        if ($wf_type == "borrow_t" && $info->auto_person == 3 && ($info->sponsor_ids == Token::getCurrentUid())) {
+            //借用修改归还时间
+            BorrowT::update(['actual_time' => date("Y-m-d H:i:s")], ['id' => $wf_fid]);
 
         }
 

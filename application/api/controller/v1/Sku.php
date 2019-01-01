@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\SkuImgT;
 use app\api\model\SkuStockT;
+use app\api\model\SkuStockV;
 use app\api\model\SkuT;
 use app\api\service\SkuService;
 use app\api\validate\SkuStockValidate;
@@ -364,10 +365,10 @@ class Sku extends BaseController
     }
 
     /**
-     * @api {POST}  /api/v1/collar/use/save 79-用品管理-新增用品
+     * @api {POST}  /api/v1/collar/use/save 79-用品管理-领用申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription  用品管理-新增用品
+     * @apiDescription  用品管理-领用申请
      * @apiExample {post}  请求样例:
      *    {
      *       "sku_id":1,
@@ -403,8 +404,119 @@ class Sku extends BaseController
 
     }
 
-    public function getList()
+    /**
+     * @api {GET} /api/v1/sku/apply/list 81-用品管理-领用列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用品管理-领用列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/apply/list?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=1&page=1&size=20&sku=黑色签字笔&category=笔&type=borrow_t
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  category 分类
+     * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
+     * @apiParam (请求参数说明) {String}  sku 用品名称
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":2,"per_page":"20","current_page":1,"last_page":1,"data":[{"id":3,"create_time":"2018-12-29 17:02:28","username":"朱明良","department":"办公室","phone":"18956225230","sku":"洗手液","category":"打印机耗材","format":"500ml","count":10,"type":"borrow_t","time_begin":"2018-12-29","time_end":"2018-12-30","admin_id":1,"state":1,"status":1},{"id":2,"create_time":"2018-12-29 17:02:17","username":"朱明良","department":"办公室","phone":"18956225230","sku":"洗手液","category":"打印机耗材","format":"500ml","count":10,"type":"borrow_t","time_begin":"2018-12-29","time_end":"2018-12-30","admin_id":1,"state":1,"status":1}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 申请id
+     * @apiSuccess (返回参数说明) {String} create_time 日期
+     * @apiSuccess (返回参数说明) {String} username 申请人
+     * @apiSuccess (返回参数说明) {String} department 部门
+     * @apiSuccess (返回参数说明) {String} phone 手机号码
+     * @apiSuccess (返回参数说明) {String} sku  品名
+     * @apiSuccess (返回参数说明) {String} category  类别
+     * @apiSuccess (返回参数说明) {String} format  规格型号
+     * @apiSuccess (返回参数说明) {int} count  数量
+     * @apiSuccess (返回参数说明) {String} type  使用方式
+     * @apiSuccess (返回参数说明) {String} time_begin   领用日期
+     * @apiSuccess (返回参数说明) {String} time_end   归还日期（借用
+     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
+     * @apiSuccess (返回参数说明) {int} admin_id  发起人id
+     * @param $time_begin
+     * @param $time_end
+     * @param string $department
+     * @param string $username
+     * @param string $status
+     * @param string $type
+     * @param string $sku
+     * @param string $category
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
+                                    $sku = '', $category = '', $page = 1, $size = 20)
     {
+        $list = (new SkuService())->getListForApply($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
+        return json($list);
+
+    }
+
+    /**
+     * @api {GET} /api/v1/sku/apply/export 82-用品管理-领用列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用品管理-领用列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/apply/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=1&sku=黑色签字笔&category=笔&type=borrow_t
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  category 分类
+     * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
+     * @apiParam (请求参数说明) {String}  sku 用品名称
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @param $time_begin
+     * @param $time_end
+     * @param string $department
+     * @param string $username
+     * @param string $status
+     * @param string $type
+     * @param string $sku
+     * @param string $category
+     * @return \think\response\Json
+     */
+    public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
+                                $sku = '', $category = '')
+    {
+        (new SkuService())->exportApply($time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
+        return json(new SuccessMessage());
+
+    }
+
+    /**
+     * @api {GET} /api/v1/sku/list 83-用品管理-获取用品列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用品管理-获取用品列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/list?c_id=1&name=
+     * @apiParam (请求参数说明) {int}  c_id 类别id
+     * @apiParam (请求参数说明) {String}  name 用品名称/默认为空
+     * @apiSuccessExample {json}返回样例:
+     * [{"id":1,"name":"洗手液","category":"打印机耗材","stock":"20"}]
+     * @apiSuccess (返回参数说明) {int} id 用品 Id
+     * @apiSuccess (返回参数说明) {String} name  用品名称
+     * @apiSuccess (返回参数说明) {String} category  类别
+     * @apiSuccess (返回参数说明) {String} stock  库存
+     * @param $c_id
+     * @param string $name
+     * @return \think\response\Json
+     */
+    public function getSkuList($c_id, $name = '')
+    {
+        $list = SkuStockV::getList($c_id, $name);
+        return json($list);
 
     }
 
