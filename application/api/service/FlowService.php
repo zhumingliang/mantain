@@ -165,14 +165,14 @@ class FlowService
                     $repair = 3;
                     //信息中心/电工组组长人员
                 }
+
+                return [
+                    'check' => 1,
+                    'repair' => $repair
+                ];
             }
-            return [
-                'check' => 1,
-                'repair' => $repair
-            ];
 
         }
-
 
         return [
             'check' => 2,
