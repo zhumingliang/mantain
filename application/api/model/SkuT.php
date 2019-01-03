@@ -9,6 +9,7 @@
 namespace app\api\model;
 
 
+use app\lib\enum\CommonEnum;
 use think\Model;
 
 class SkuT extends Model
@@ -32,6 +33,15 @@ class SkuT extends Model
             ->hidden(['state', 'create_time', 'update_time', 'admin_id'])
             ->find();
         return $info;
+
+    }
+
+    public static function getListForUse()
+    {
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->field('id,name,use_type')
+            ->select();
+        return $list;
 
     }
 

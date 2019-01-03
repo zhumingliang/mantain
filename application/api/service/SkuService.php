@@ -13,6 +13,7 @@ use app\api\model\BorrowT;
 use app\api\model\CollarUseT;
 use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
+use app\api\model\SkuStockV;
 use app\api\model\SkuT;
 use app\api\model\StockV;
 use app\api\model\UnitT;
@@ -313,6 +314,7 @@ class SkuService extends BaseService
      */
     public function collarUseSave($params)
     {
+        $this->checkStock($params['sku_id'], $params['count']);
         $type = $params['type'];
         if ($type == CommonEnum::BORROW) {
             $this->saveBorrow($params);
@@ -324,6 +326,21 @@ class SkuService extends BaseService
             throw new ParameterException();
         }
 
+
+    }
+
+    private function checkStock($sku_id, $count)
+    {
+        $stock = SkuStockV::getSkuStock($sku_id);
+        if ($count - $stock < 0) {
+            throw  new SkuException(
+                ['code' => 401,
+                    'msg' => '领用失败,库存不足',
+                    'errorCode' => 60002
+                ]
+            );
+
+        }
 
     }
 

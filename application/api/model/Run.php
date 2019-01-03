@@ -142,17 +142,4 @@ class Run extends Model
         return $list;
 
     }
-
-    private function getTableName($table)
-    {
-        $arr = explode('_', $table);
-        $name = array();
-        foreach ($arr as $v) {
-            array_push($name, ucfirst($v));
-        }
-        return implode('', $name);
-
-    }
-
-
 }

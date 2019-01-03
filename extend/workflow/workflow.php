@@ -87,15 +87,16 @@ require_once BEASE_URL . '/msg/mail.php';
 			
 			return ['run_id'=>$wf_run,'msg'=>'success','code'=>'1'];
 		}
-		/**
-		  * 流程状态查询
-		  *
-		  * @$wf_fid 单据编号
-		  * @$wf_type 单据表 
-		  **/
+
+        /**
+         * 流程状态查询
+         * @param $wf_fid
+         * @param $wf_type
+         * @return array
+         * @throws \think\Exception
+         */
 		function workflowInfo($wf_fid,$wf_type)
 		{
-			$workflowInfo = array ();
 			if ($wf_fid == '' || $wf_type == '') {
 				return ['msg'=>'单据编号，单据表不可为空！','code'=>'-1'];
 			}
@@ -104,16 +105,15 @@ require_once BEASE_URL . '/msg/mail.php';
 		}
 
 
-
         /**
          * 流程状态查询
-         *
-         * @$wf_fid 单据编号
-         * @$wf_type 单据表
-         **/
+         * @param $wf_fid
+         * @param $wf_type
+         * @return array
+         * @throws \think\Exception
+         */
         function workflowInfoForComplete($wf_fid,$wf_type)
         {
-            $workflowInfo = array ();
             if ($wf_fid == '' || $wf_type == '') {
                 return ['msg'=>'单据编号，单据表不可为空！','code'=>'-1'];
             }

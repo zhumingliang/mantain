@@ -520,5 +520,25 @@ class Sku extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/sku/list/use 89-用品管理-领用申请-获取用品列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用品管理-获取用品列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/list/use
+     * @apiSuccessExample {json}返回样例:
+     * [{"id":1,"name":"洗手液","use_type":"使用"}]
+     * @apiSuccess (返回参数说明) {int} id 用品 Id
+     * @apiSuccess (返回参数说明) {String} name  用品名称
+     * @apiSuccess (返回参数说明) {String} use_type  使用类别（用户发起申请需要匹配此参数和用户选择使用方式是否一致）
+     * @return \think\response\Json
+     */
+    public function getSkuForUse()
+    {
+        $list = SkuT::getListForUse();
+        return json($list);
+    }
+
 
 }

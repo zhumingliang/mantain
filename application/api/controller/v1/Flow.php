@@ -290,12 +290,10 @@ class Flow extends BaseController
 
         } else {
             $cancel = (new FlowService())->checkCancelAccess($wf_fid, $wf_type);
-            $check_res = (new FlowService())->btn($wf_fid, $wf_type, $status = 1);
-            $check = $check_res['btn'];
+            $check_res = (new FlowService())->getFlowStatus($wf_fid, $wf_type);
+            $check = $check_res['check'];
             $repair = $check_res['repair'];
-            $info = (new FlowService())->getInfo($wf_fid, $wf_type);
-
-
+            $info =  $check_res['info'];
         }
         return json([
             'cancel' => $cancel,

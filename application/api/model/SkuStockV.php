@@ -28,4 +28,13 @@ class SkuStockV extends Model
 
     }
 
+
+    public static function getSkuStock($id)
+    {
+        $count = self::where('id', $id)
+            ->sum('count');
+
+        return $count;
+
+    }
 }

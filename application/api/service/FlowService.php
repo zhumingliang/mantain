@@ -114,6 +114,73 @@ class FlowService
     }
 
     /**
+     * 获取指定流程信息
+     * @param $wf_fid
+     * @param $wf_type
+     * @return array
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    public function getFlowStatus($wf_fid, $wf_type)
+    {
+        $workflow = new workflow();
+        $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
+        $checkRole = $this->getCheckRole($flowinfo);
+        return [
+            'check' => $checkRole['check'],
+            'repair' => $checkRole['repair'],
+            'info' => $flowinfo,
+        ];
+
+    }
+
+    /**
+     * 获取当前用户对流程处理权限
+     * @param $flowinfo
+     * @return array
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     */
+    private function getCheckRole($flowinfo)
+    {
+        $repair = 1;
+        $role = Token::getCurrentTokenVar('role');
+        $user = explode(",", $flowinfo['status']['sponsor_ids']);
+        $user_text = $flowinfo['status']['sponsor_text'];
+        if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
+            if (in_array(Token::getCurrentUid(), $user)) {
+                return [
+                    'check' => 1,
+                    'repair' => $repair
+                ];
+            }
+        }
+        if ($flowinfo['status']['auto_person'] == 5) {
+            if (in_array($role, $user)) {
+                if (in_array($user_text, $this->repair_role)) {
+                    $repair = 2;
+                    //跟进人员
+
+                } else if (in_array($user_text, $this->select_role)) {
+                    $repair = 3;
+                    //信息中心/电工组组长人员
+                }
+            }
+            return [
+                'check' => 1,
+                'repair' => $repair
+            ];
+
+        }
+
+
+        return [
+            'check' => 2,
+            'repair' => $repair
+        ];
+    }
+
+    /**
      * 用户发起流程并进行初步审核
      * @param $wf_fid
      * @param string $wf_type
