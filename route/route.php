@@ -119,6 +119,11 @@ Route::post('api/:version/stock/save', 'api/:version.Sku/stockSave');
 Route::post('api/:version/stock/handel', 'api/:version.Sku/stockHandel');
 Route::get('api/:version/stock/export', 'api/:version.Sku/exportStock');
 
+Route::post('api/:version/repair/save', 'api/:version.Repair/save');
+Route::get('api/:version/repair/check/info', 'api/:version.Repair/getInfo');
+Route::get('api/:version/repair/list', 'api/:version.Repair/getList');
+Route::get('api/:version/repair/export', 'api/:version.Repair/export');
+Route::get('api/:version/repair/image', 'api/:version.Repair/getImage');
 
 
 

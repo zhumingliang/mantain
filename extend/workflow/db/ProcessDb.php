@@ -36,10 +36,6 @@ class ProcessDb
         return $info;
     }
 
-    private function checkBorrow($pid)
-    {
-
-    }
 
     /**
      * 获取下个审批流信息
@@ -55,7 +51,7 @@ class ProcessDb
         if ($nex['process_to'] != '') {
             $nex_pid = explode(",", $nex['process_to']);
             $out_condition = json_decode($nex['out_condition'], true);
-            if (count($nex_pid) >= 2) {
+            if (count($nex_pid) >= 2){
                 //多个审批流
                 foreach ($out_condition as $key => $val) {
                     $where = implode(",", $val['condition']);

@@ -8,11 +8,11 @@
 
 namespace app\api\model;
 
-
-use think\Model;
-
-class ImgT extends Model
+class ImgT extends BaseModel
 {
     protected $hidden=['create_time','update_time','id'];
+    public function getUrlAttr($value, $data){
+        return $this->prefixImgUrl($value, $data);
+    }
 
 }

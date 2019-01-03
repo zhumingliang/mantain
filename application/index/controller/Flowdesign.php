@@ -19,12 +19,12 @@ class Flowdesign extends Admin
      */
     protected function type()
     {
-        /*      $wf_type = [
-                   'news' => '新闻信息',
-                   'cnt' => '合同信息',
-                   'paper' => '证件信息'
-               ];*/
-        $wf_type = [
+//              $wf_type = [
+//                   'news' => '新闻信息',
+//                   'cnt' => '合同信息',
+//                   'paper' => '证件信息'
+//               ];
+       $wf_type = [
             'access_control_t' => '门禁权限',
             'space_recreational_t' => '场地使用-文体活动',
             'space_multi_t' => '场地使用-功能室',
@@ -35,6 +35,8 @@ class Flowdesign extends Admin
             'hotel_t' => '酒店预定',
             'collar_use_t' => '用品领用',
             'borrow_t' => '用品借用',
+            'repair_machine_t' => '电脑/打印机报修',
+            'repair_other_t' => '其他物品报修',
         ];
         $this->assign('type', $wf_type);
     }

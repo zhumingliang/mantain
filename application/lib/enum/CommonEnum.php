@@ -32,4 +32,7 @@ class CommonEnum
     const BORROW = 1;
 
     const COLLAR_USE = 2;
+
+    const MACHINE = 1;
+
 }

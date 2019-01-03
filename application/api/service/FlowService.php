@@ -17,11 +17,17 @@ use app\api\model\RunProcess;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\FlowException;
 use think\Db;
-use think\Model;
 use workflow\workflow;
 
 class FlowService
 {
+    private $repair_role = [
+        '水电', '电器维修', '家具维修', '门窗五金', '电子设备'
+    ];
+
+    private $select_role = [
+        '信息中心', '电工组组长'
+    ];
 
     /*正式发起工作流*/
     public function statr_save($data)
@@ -43,11 +49,10 @@ class FlowService
     }
 
     /**
-     * 获取当前角色-审核-状态
      * @param $wf_fid
      * @param $wf_type
      * @param $status
-     * @return int|string
+     * @return array|int
      * @throws \app\lib\exception\TokenException
      * @throws \think\Exception
      */
@@ -55,34 +60,56 @@ class FlowService
     {
         switch ($status) {
             case 0:
-                return 2;
+                return [
+                    'btn' => 2,
+                    'repair' => 1
+                ];
                 break;
             case 1:
-                $st = 0;
+                $repair = 1;
                 $workflow = new workflow();
                 $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
+                $role = Token::getCurrentTokenVar('role');
                 $user = explode(",", $flowinfo['status']['sponsor_ids']);
+                $user_text = $flowinfo['status']['sponsor_text'];
                 if ($flowinfo['status']['auto_person'] == 3 || $flowinfo['status']['auto_person'] == 4) {
                     if (in_array(Token::getCurrentUid(), $user)) {
-                        $st = 1;
+                        //$st = 1;
+                        return [
+                            'btn' => 1,
+                            'repair' => $repair
+                        ];
                     }
                 }
                 if ($flowinfo['status']['auto_person'] == 5) {
-                    if (in_array(Token::getCurrentTokenVar('role'), $user)) {
-                        $st = 1;
+                    if (in_array($role, $user)) {
+                        if (in_array($user_text, $this->repair_role)) {
+                            $repair = 2;
+                            //跟进人员
+
+                        } else if (in_array($user_text, $this->select_role)) {
+                            $repair = 3;
+                            //信息中心/电工组组长人员
+                        }
                     }
+                    return [
+                        'btn' => 1,
+                        'repair' => $repair
+                    ];
 
                 }
 
 
-                if ($st == 1) {
-                    return 1;
-                } else {
-                    return 2;
-                }
+                return [
+                    'btn' => 2,
+                    'repair' => $repair
+                ];
                 break;
             default:
-                return '';
+                return [
+                    'btn' => 2,
+                    'repair' => 1
+                ];
         }
     }
 
@@ -289,7 +316,6 @@ class FlowService
      */
     public function getInfo($wf_fid, $wf_type)
     {
-        $info = ['wf_title' => input('wf_title'), 'wf_fid' => $wf_fid, 'wf_type' => $wf_type];
         $workflow = new workflow();
         $flowinfo = $workflow->workflowInfo($wf_fid, $wf_type);
         return $flowinfo;

@@ -55,6 +55,32 @@ class ImageService
         return $arr;
     }
 
+    /**
+     * 组装图片关联表
+     * @param $imgs
+     * @param $relation
+     * @return array
+     */
+    public static function ImageHandelWithType($imgs, $relation, $type)
+    {
+        $img_arr = explode(',', $imgs);
+        $arr = array();
+        if (count($img_arr)) {
+            foreach ($img_arr as $v) {
+                $item = [
+                    'img_id' => $v,
+                    $relation['name'] => $relation['value'],
+                    'type' => $type,
+                    'state' => CommonEnum::STATE_IS_OK
+
+                ];
+                array_push($arr, $item);
+
+            }
+        }
+        return $arr;
+    }
+
     public static function getImageUrl($id)
     {
         $img = ImgT::where('id', $id)
@@ -94,7 +120,7 @@ class ImageService
             }
             return [
                 'id' => $img->id,
-                'url' => config('setting.img_prefix') . 'static/imgs' . '/' . $info->getSaveName()
+                'url' => config('setting.domain') . 'static/imgs' . '/' . $info->getSaveName()
             ];
 
         } else {

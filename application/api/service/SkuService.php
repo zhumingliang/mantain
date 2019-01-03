@@ -60,7 +60,7 @@ class SkuService extends BaseService
                 Db::rollback();
                 throw new OperationException();
             }
-            if (isset($params['imgs'])) {
+            if (isset($params['imgs']) && strlen($params['imgs'])) {
                 $imgs = $params['imgs'];
                 $relation = [
                     'name' => 'sku_id',
@@ -96,7 +96,7 @@ class SkuService extends BaseService
     {
         Db::startTrans();
         try {
-            if (isset($params['imgs'])) {
+            if (isset($params['imgs']) && strlen($params['imgs'])) {
                 $imgs = $params['imgs'];
                 unset($params['imgs']);
                 $relation = [

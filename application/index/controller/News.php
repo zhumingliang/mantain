@@ -34,7 +34,6 @@ class News extends Admin
         if ($this->request->param("new_title")) $map[] = ['new_title','like',"%" . $this->request->param("new_title") . "%"];
         $list=controller('Base', 'event')->commonlist('news',$map);
 
-        print_r($list);
         $this->assign('list', $list);
 		return $this->fetch();
     }
