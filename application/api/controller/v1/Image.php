@@ -25,7 +25,7 @@ class Image extends BaseController
      * @api {POST} /api/v1/image/upload  70-上传用品图片
      * @apiGroup  CMS
      * @apiVersion 1.0.1
-     * @apiDescription
+     * @apiDescription 图片名称为file
      * @apiSuccessExample {json} 返回样例:
      *{"id":17}
      * @apiSuccess (返回参数说明) {int} id 图片id

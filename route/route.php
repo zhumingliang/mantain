@@ -127,5 +127,9 @@ Route::get('api/:version/repair/export', 'api/:version.Repair/export');
 Route::get('api/:version/repair/image', 'api/:version.Repair/getImage');
 
 
+Route::post('api/:version/image/upload', 'api/:version.Image/upload');
+
+
+
 
 
