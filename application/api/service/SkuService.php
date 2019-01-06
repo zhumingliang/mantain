@@ -317,6 +317,7 @@ class SkuService extends BaseService
         $this->checkStock($params['sku_id'], $params['count']);
         $type = $params['type'];
         if ($type == CommonEnum::BORROW) {
+            $params['borrow_return'] = 2;
             $this->saveBorrow($params);
 
         } else if ($type == CommonEnum::COLLAR_USE) {

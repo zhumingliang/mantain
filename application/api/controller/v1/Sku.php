@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
 use app\api\model\SkuStockT;
 use app\api\model\SkuStockV;
@@ -539,6 +540,14 @@ class Sku extends BaseController
         $list = SkuT::getListForUse();
         return json($list);
     }
+
+/*    public function getCollarInfo($wf_fid)
+    {
+        $info = SkuApplyV::where('id', $wf_fid)->where('type', 'borrow_t')
+            ->field('time_begin,sku,category,format,count,time_end')->find();
+        return json($info);
+
+    }*/
 
 
 }

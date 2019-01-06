@@ -78,24 +78,48 @@ class Flow extends BaseController
      */
     public function checkPass($check_con, $flow_id, $flow_process, $npid, $run_id, $run_process, $wf_fid, $wf_type, $submit_to_save = 'ok')
     {
-        $data = [
-            'art' => "",
-            'btodo' => "",
-            'check_con' => $check_con,
-            'flow_id' => $flow_id,
-            'flow_process' => $flow_process,
-            'npid' => $npid,
-            'run_id' => $run_id,
-            'run_process' => $run_process,
-            'sing_st' => 0,
-            'submit_to_save' => $submit_to_save,
-            'wf_fid' => $wf_fid,
-            'wf_singflow' => "",
-            'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
-            'wf_title' => 2,
-            'wf_type' => $wf_type,
-            'first' => 2,
-        ];
+        $params = $this->request->param();
+        if (isset($params['borrow_return'])) {
+            $data = [
+                'art' => "",
+                'btodo' => "",
+                'check_con' => $check_con,
+                'flow_id' => $flow_id,
+                'flow_process' => $flow_process,
+                'npid' => $npid,
+                'run_id' => $run_id,
+                'run_process' => $run_process,
+                'sing_st' => 0,
+                'submit_to_save' => $submit_to_save,
+                'wf_fid' => $wf_fid,
+                'wf_singflow' => "",
+                'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
+                'wf_title' => 2,
+                'wf_type' => $wf_type,
+                'first' => 2,
+                'borrow_return' => $params['borrow_return']
+            ];
+        } else {
+            $data = [
+                'art' => "",
+                'btodo' => "",
+                'check_con' => $check_con,
+                'flow_id' => $flow_id,
+                'flow_process' => $flow_process,
+                'npid' => $npid,
+                'run_id' => $run_id,
+                'run_process' => $run_process,
+                'sing_st' => 0,
+                'submit_to_save' => $submit_to_save,
+                'wf_fid' => $wf_fid,
+                'wf_singflow' => "",
+                'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
+                'wf_title' => 2,
+                'wf_type' => $wf_type,
+                'first' => 2,
+            ];
+        }
+
         $res = (new FlowService())->check($data);
         if ($res) {
             return json(new SuccessMessage());
@@ -293,7 +317,7 @@ class Flow extends BaseController
             $check_res = (new FlowService())->getFlowStatus($wf_fid, $wf_type);
             $check = $check_res['check'];
             $repair = $check_res['repair'];
-            $info =  $check_res['info'];
+            $info = $check_res['info'];
         }
         return json([
             'cancel' => $cancel,

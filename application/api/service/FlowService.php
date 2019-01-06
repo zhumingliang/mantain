@@ -285,6 +285,11 @@ class FlowService
                 $this->checkAccess($data['run_id'], $data['wf_type'], $data['wf_fid']);
             }
 
+
+            if (isset($data['borrow_return'])) {
+                BorrowT::update(['borrow_return' => $data['borrow_return']], ['id' => $data['wf_fid']]);
+                unset($data['borrow_return']);
+            }
             $workflow->workdoaction($data, Token::getCurrentUid());
             return 1;
         }
@@ -332,12 +337,8 @@ class FlowService
         if ($wf_type == "borrow_t" && $info->auto_person == 3 && ($info->sponsor_ids == Token::getCurrentUid())) {
             //借用修改归还时间
             BorrowT::update(['actual_time' => date("Y-m-d H:i:s")], ['id' => $wf_fid]);
-
         }
-
-
     }
-
 
     /**
      * 取消流程
