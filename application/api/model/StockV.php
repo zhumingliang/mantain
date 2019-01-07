@@ -46,7 +46,7 @@ class StockV extends Model
         $list = self::where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($category) {
                 if ($category && $category != "") {
-                    $query->where('category', '=', $category);
+                    $query->where('category_name', '=', $category);
                 }
             })
             ->where(function ($query) use ($order_number) {
