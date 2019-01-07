@@ -25,6 +25,6 @@ return [
 
     'user_info_url' => "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=%s&userid=%s",
 
-    'msg_url' => " https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s",
+    'msg_url' => "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s",
 
 ];
