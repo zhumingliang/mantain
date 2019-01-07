@@ -28,7 +28,7 @@ class MsgService
     public function sendMsg($touser, $content)
     {
         $data = $this->preData($touser, $content);
-        $res = Curl::postToData($this->msgUrl, $data);
+        $res = Curl::post($this->msgUrl, $data);
         LogT::create(['msg' => $res]);
         if (!$res) {
             throw new Exception('获取用户信息异常');
