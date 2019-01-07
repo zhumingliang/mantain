@@ -94,7 +94,6 @@ class UserTokenService extends Token
         if (!empty($token['errcode'])) {
             throw new Exception($token['errmsg']);
         }
-        LogT::create(['msg' => 'userId:' . $user_info]);
         $user_info = json_decode($user_info);
         $userId = $user_info->UserId;
         return $userId;
@@ -106,7 +105,7 @@ class UserTokenService extends Token
         $token = (new AccessToken())->get();
         $url = sprintf(config('wx.user_info_url'), $token, $userId);
         $user_info = Curl::get($url);
-        if (!$token) {
+        if (!$user_info) {
             throw new Exception('获取用户信息异常');
         }
         if (!empty($token['errcode'])) {

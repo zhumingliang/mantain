@@ -1,0 +1,22 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: mingliang
+ * Date: 2019/1/7
+ * Time: 11:03 AM
+ */
+
+namespace app\api\controller\v1;
+
+
+use app\api\service\MsgService;
+use think\Controller;
+
+class Index extends Controller
+{
+    public function index()
+    {
+        (new MsgService())->sendMsg("ZhuMingLiang", "测试");
+    }
+
+}
