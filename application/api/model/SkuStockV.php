@@ -29,6 +29,17 @@ class SkuStockV extends Model
     }
 
 
+    public static function getListWithCategory()
+    {
+        $list = self::field('id,name,c_id,category,sum(count) as stock')
+            ->group('id,c_id')
+            ->select();
+        return $list;
+
+
+    }
+
+
     public static function getSkuStock($id)
     {
         $count = self::where('id', $id)

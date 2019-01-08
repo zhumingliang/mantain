@@ -273,7 +273,7 @@ class Sku extends BaseController
      * @apiVersion 1.0.1
      * @apiDescription  获取库存记录列表
      * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/stock/list?category=''&order_number=''&category_id=''&page=1&size=20
+     * http://maintain.mengant.cn/api/v1/stock/list?category=&order_number=&category_id=&page=1&size=20
      * @apiParam (请求参数说明) {String}  category 类别名称
      * @apiParam (请求参数说明) {String}  order_number 类别排序
      * @apiParam (请求参数说明) {String}  category_id 类别id
@@ -541,13 +541,39 @@ class Sku extends BaseController
         return json($list);
     }
 
-/*    public function getCollarInfo($wf_fid)
-    {
-        $info = SkuApplyV::where('id', $wf_fid)->where('type', 'borrow_t')
-            ->field('time_begin,sku,category,format,count,time_end')->find();
-        return json($info);
+    /*    public function getCollarInfo($wf_fid)
+        {
+            $info = SkuApplyV::where('id', $wf_fid)->where('type', 'borrow_t')
+                ->field('time_begin,sku,category,format,count,time_end')->find();
+            return json($info);
 
-    }*/
+        }*/
+
+
+    /**
+     * @api {GET} /api/v1/sku/list 90-用品管理-获取用品列表-导航
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用品管理-获取用品列表-导航
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/nav
+     * @apiSuccessExample {json}返回样例:
+     * [{"c_id":1,"category":"打印机耗材","skus":[{"id":1,"name":"洗手液","c_id":1,"category":"打印机耗材","stock":"20"},{"id":2,"name":"纸巾","c_id":1,"category":"打印机耗材","stock":"0"},{"id":3,"name":"纸巾","c_id":1,"category":"打印机耗材","stock":"0"}]},{"c_id":2,"category":"笔","skus":[]},{"c_id":3,"category":"本子","skus":[]},{"c_id":4,"category":"办公用品","skus":[]},{"c_id":5,"category":"清洁用品","skus":[]}]
+     * @apiSuccess (返回参数说明) {int} c_id  类别id
+     * @apiSuccess (返回参数说明) {String} category  类别
+     * @apiSuccess (返回参数说明) {String} skus  类别下商品信息
+     * @apiSuccess (返回参数说明) {int} id  用品id
+     * @apiSuccess (返回参数说明) {String} name  用品名称
+     * @apiSuccess (返回参数说明) {String} stock  库存
+     * @return \think\response\Json
+     */
+    public function getNav()
+    {
+        $list = (new SkuService())->getNav();
+        return json($list);
+
+
+    }
 
 
 }

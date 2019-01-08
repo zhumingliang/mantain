@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\BorrowT;
+use app\api\model\CategoryT;
 use app\api\model\CollarUseT;
 use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
@@ -425,6 +426,39 @@ class SkuService extends BaseService
         );
         $file_name = '用品管理-用品领用—导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
+    }
+
+    public function getNav()
+    {
+        $category = CategoryT::where('state', CommonEnum::STATE_IS_OK)
+            ->field('id as c_id,name as category')
+            ->select();
+
+        $skus = SkuStockV::getListWithCategory();
+
+        if (count($category) && count($skus)) {
+            $category = $this->prefixSkuStock($category, $skus);
+        }
+
+        return $category;
+    }
+
+    private function prefixSkuStock($category, $skus)
+    {
+        foreach ($category as $k => $v) {
+            $sku = array();
+            foreach ($skus as $k2 => $v2) {
+                if ($v2['c_id'] == $v['c_id']) {
+                    array_push($sku, $skus[$k2]);
+                    unset($skus[$k2]);
+                }
+
+            }
+            $category[$k]['skus'] = $sku;
+
+        }
+        return $category;
+
     }
 
 
