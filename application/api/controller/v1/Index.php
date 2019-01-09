@@ -11,12 +11,15 @@ namespace app\api\controller\v1;
 
 use app\api\service\MsgService;
 use think\Controller;
+use think\Db;
 
 class Index extends Controller
 {
     public function index()
     {
-        (new MsgService())->sendMsg("ZhuMingLiang", "测试");
+
+
+        //(new MsgService())->sendMsg("ZhuMingLiang", "测试");
     }
 
 }

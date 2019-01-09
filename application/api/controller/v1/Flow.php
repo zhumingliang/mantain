@@ -170,14 +170,14 @@ class Flow extends BaseController
      *       "wf_type": "access_control_t",
      *       "submit_to_save": "ok",
      *       "repair": 2,
-     *       "type": 1,
+     *       "type": a,
      *       "feedback": "已修好",
      *       "imgs": 1,2,3
      *     }
      * @apiParam (请求参数说明) {String} check_con   审核意见/默认同意
      * @apiParam (请求参数说明) {String} wf_type   流程类别
      * @apiParam (请求参数说明) {int} repair   由info接口返回：2 | 跟进人员处理操作；3 | 电工组选择跟进人员操作
-     * @apiParam (请求参数说明) {int} type  跟进人员类别（repair=3时传入该参数：1-水电;2-电器维修;3-家具维修;4-门窗五金;5-电子设备）
+     * @apiParam (请求参数说明) {int} type  跟进人员类别（repair=3时传入该参数：a-水电;b-电器维修;c-家具维修;d-门窗五金;e-电子设备）
      * @apiParam (请求参数说明) {String} feedback 反馈 （repair=2时传入该参数）
      * @apiParam (请求参数说明) {String} imgs 反馈图片 （repair=2时传入该参数）
      * 报修-电脑/打印机:repair_machine_t
