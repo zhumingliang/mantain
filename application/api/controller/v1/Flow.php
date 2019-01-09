@@ -99,6 +99,30 @@ class Flow extends BaseController
                 'first' => 2,
                 'borrow_return' => $params['borrow_return']
             ];
+        }
+        if (isset($params['car_info'])) {
+            $data = [
+                'art' => "",
+                'btodo' => "",
+                'check_con' => $check_con,
+                'flow_id' => $flow_id,
+                'flow_process' => $flow_process,
+                'npid' => $npid,
+                'run_id' => $run_id,
+                'run_process' => $run_process,
+                'sing_st' => 0,
+                'submit_to_save' => $submit_to_save,
+                'wf_fid' => $wf_fid,
+                'wf_singflow' => "",
+                'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
+                'wf_title' => 2,
+                'wf_type' => $wf_type,
+                'first' => 2,
+                'car_info' => $params['car_info'],
+                'type' => $params['type'],
+                'driver' => $params['driver']
+            ];
+
         } else {
             $data = [
                 'art' => "",

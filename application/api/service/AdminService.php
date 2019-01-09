@@ -65,4 +65,30 @@ class AdminService
 
     }
 
+    public static function getUserIdWithID($u_id)
+    {
+        $user = AdminT::get($u_id);
+        return $user->user_id;
+
+
+    }
+
+    public static function getUserIdWithPhone($phone)
+    {
+        $user = AdminT::where('phone', $phone)->find();
+        return $user->user_id;
+
+
+    }
+
+    public static function getUserIdWithDepartment($department)
+    {
+        $users = AdminT::where('department', 'in', $department)->field('user_id')->select();
+
+        if (!count($users)) {
+            return '';
+        }
+        return implode(',', $users);
+    }
+
 }

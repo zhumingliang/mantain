@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\LogT;
+use think\Exception;
 use zml\tp_tools\Curl;
 
 class MsgService
@@ -25,18 +26,15 @@ class MsgService
         $this->agentid = config('wx.app_agent_id');
     }
 
-    public function sendMsg($touser, $content)
+    public  function sendMsg($touser, $content)
     {
         $data = $this->preData($touser, $content);
         $res = Curl::post($this->msgUrl, $data);
         LogT::create(['msg' => $res]);
-        if (!$res) {
-            throw new Exception('获取用户信息异常');
+        $res_obj = json_decode($res);
+        if ($res_obj->errcode != 0) {
+            LogT::create(['msg' => $res]);
         }
-        if (!empty($token['errcode'])) {
-            throw new Exception($token['errmsg']);
-        }
-
 
     }
 

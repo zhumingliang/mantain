@@ -16,6 +16,7 @@ use app\api\model\SignInT;
 use app\api\model\SignInV;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\MeetingException;
+
 class MeetingService extends BaseService
 {
     public function signIn($id, $card, $mobile)
@@ -46,12 +47,26 @@ class MeetingService extends BaseService
                 'errorCode' => 80008
             ]);
         }
+
+        $this->sendMsg(date('Y-m-d H:i'), $meeting->address, $mobile);
+
         return [
             'all' => $this->getMeetingMembers($department),
             'sign_in' => $this->getSignInMembers($id)
 
         ];
 
+    }
+
+    private function sendMsg($sign_date, $address, $phone)
+    {
+        $msg = "您%s于%s签到成功！";
+        $msg = sprintf($msg, $sign_date, $address);
+        $user_id = AdminService::getUserIdWithPhone($phone);
+        if ($user_id) {
+            (new MsgService())->sendMsg($user_id, $msg);
+
+        }
     }
 
 

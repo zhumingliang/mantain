@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\BorrowT;
+use app\api\model\CarT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
 use app\api\model\Run;
@@ -290,9 +291,20 @@ class FlowService
                 BorrowT::update(['borrow_return' => $data['borrow_return']], ['id' => $data['wf_fid']]);
                 unset($data['borrow_return']);
             }
+            if (isset($data['car_info'])) {
+                CarT::update(['car_info' => $data['car_info'], 'type' => $data['type'], 'driver' => $data['driver']], ['id' => $data['wf_fid']]);
+                unset($data['car_info']);
+                unset($data['type']);
+                unset($data['driver']);
+            }
             $workflow->workdoaction($data, Token::getCurrentUid());
             return 1;
         }
+    }
+
+    private function sendMsgForCar()
+    {
+
     }
 
     /**
