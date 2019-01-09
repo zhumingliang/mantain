@@ -13,6 +13,7 @@ use app\api\model\BorrowT;
 use app\api\model\CarT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
+use app\api\model\MeetingReceptT;
 use app\api\model\Run;
 use app\api\model\RunProcess;
 use app\lib\enum\CommonEnum;
@@ -298,11 +299,32 @@ class FlowService
                 unset($data['driver']);
             }
             $workflow->workdoaction($data, Token::getCurrentUid());
+
+            //检测并发送数据
             return 1;
         }
     }
 
-    private function sendMsgForCar()
+
+    private function checkComplete($npid, $wf_type, $wf_fid)
+    {
+        if ($npid == '') {
+            if ($wf_type == "meeting_recept_t") {
+                $this->sendMsgForRecept($wf_fid);
+            }
+
+        }
+
+    }
+
+    private function sendMsgForRecept($wf_fid)
+    {
+        $info=MeetingReceptT::get($wf_fid);
+        $msg = "中国移动于%s在我局进行围餐预订，就餐总人数为%s人，陪同人员有:%s，请相关饭堂人员提前备餐。";
+
+    }
+
+    private function sendMsgForCar($wf_fid)
     {
 
     }

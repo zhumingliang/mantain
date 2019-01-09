@@ -39,13 +39,14 @@ class RepairService extends BaseService
             $type = $params['type'];
             if ($type == CommonEnum::MACHINE) {
                 $table_model = new RepairMachineT();
-                $table_name="repair_machine_t";
+                $table_name = "repair_machine_t";
+                $params['role'] = 1;
             } else {
                 $table_model = new RepairOtherT();
-                $table_name="repair_other_t";
+                $table_name = "repair_other_t";
             }
-            $repair =$table_model->create($params);
-            $repair_id=$repair->id;
+            $repair = $table_model->create($params);
+            $repair_id = $repair->id;
             if (!$repair_id) {
                 throw new OperationException();
             }

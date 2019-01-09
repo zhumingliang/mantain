@@ -69,6 +69,7 @@ Route::get('api/:version/recreational/export', 'api/:version.Recreational/export
 
 
 Route::post('api/:version/flow/check/pass', 'api/:version.Flow/checkPass');
+Route::post('api/:version/flow/check/pass/repair', 'api/:version.Flow/checkPassForRepair');
 Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
 Route::get('api/:version/flow/complete', 'api/:version.Flow/getComplete');
 Route::get('api/:version/flow/ready', 'api/:version.Flow/getReady');
