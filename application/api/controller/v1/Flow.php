@@ -170,7 +170,7 @@ class Flow extends BaseController
      *       "wf_type": "access_control_t",
      *       "submit_to_save": "ok",
      *       "repair": 2,
-     *       "type": a,
+     *       "type": "a",
      *       "feedback": "已修好",
      *       "imgs": 1,2,3
      *     }
@@ -228,9 +228,10 @@ class Flow extends BaseController
                 //多个审批流
                 foreach ($out_condition as $key => $val) {
                     $where = implode(",", $val['condition']);
-                    $role = implode('=', $where);
-                    if ($role[1] == $type) {
-                        $npid = $key;
+                    //根据条件寻找匹配符合的工作流id
+                    $info = Db::name($wf_type)->where($where)->where('id', 'eq', $wf_fid)->find();
+                    if ($info) {
+                        $npid = $key; //获得下一个流程的id
                         break;
                     }
                 }
