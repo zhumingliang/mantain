@@ -319,9 +319,11 @@ class FlowService
 
     private function sendMsgForRecept($wf_fid)
     {
-        $info=MeetingReceptT::get($wf_fid);
-        $msg = "中国移动于%s在我局进行围餐预订，就餐总人数为%s人，陪同人员有:%s，请相关饭堂人员提前备餐。";
-
+        $info = MeetingReceptT::get($wf_fid);
+        $msg = "%s于%s在我局进行围餐预订，就餐总人数为%s人，陪同人员有:%s，请相关饭堂人员提前备餐。";
+        $msg = sprintf($msg, $info->unit, $info->meal_time, $info->meeting_count + $info->accompany_count, $info->accompany);
+        $users = "";
+        (new MsgService())->sendMsg($users, $msg);
     }
 
     private function sendMsgForCar($wf_fid)

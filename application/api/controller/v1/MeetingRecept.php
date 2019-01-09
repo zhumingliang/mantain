@@ -33,6 +33,7 @@ class MeetingRecept extends BaseController
      *       "departmental": 1,
      *       "section": 1,
      *       "under_section": 10,
+     *       "meal_time": "2019-10-10 09:00",
      *       "meeting_count": 20,
      *       "accompany": "张三，李四",
      *       "accompany_count":2,
