@@ -220,6 +220,23 @@ class Flow extends BaseController
                     ]
                 );
             }
+
+            $nex = Db::name('flow_process')->find($run_process);
+            $nex_pid = explode(",", $nex['process_to']);
+            $out_condition = json_decode($nex['out_condition'], true);
+            if (count($nex_pid) >= 2) {
+                //多个审批流
+                foreach ($out_condition as $key => $val) {
+                    $where = implode(",", $val['condition']);
+                    $role = implode('=', $where);
+                    if ($role[1] == $type) {
+                        $npid = $key;
+                        break;
+                    }
+                }
+            }
+
+
         }
 
         if ($repair == 2) {
