@@ -26,6 +26,7 @@ Route::get('api/:version/access', 'api/:version.AccessControl/getTheAccess');
 
 Route::post('api/:version/meeting/save', 'api/:version.Meeting/save');
 Route::get('api/:version/meeting', 'api/:version.Meeting/getMeetingInfo');
+Route::get('api/:version/meeting/push', 'api/:version.Meeting/checkMeetingPush');
 Route::post('api/:version/meeting/update', 'api/:version.Meeting/update');
 Route::post('api/:version/meeting/delete', 'api/:version.Meeting/delete');
 Route::post('api/:version/meeting/sign/in', 'api/:version.Meeting/signIn');

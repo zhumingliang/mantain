@@ -45,5 +45,16 @@ class AdminV extends Model
 
     }
 
+    public static function getAdminsForMeeting($department)
+    {
+        $sql = 'role = "部门负责人" OR (post="科长" OR post="副科长")';
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->where('department', $department)
+            ->whereRaw($sql)
+            ->field('user_id')
+            ->select();
+        return $list;
+    }
+
 
 }

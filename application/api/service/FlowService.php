@@ -9,11 +9,13 @@
 namespace app\api\service;
 
 
+use app\api\model\AccessControlT;
 use app\api\model\BorrowT;
 use app\api\model\CarT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
 use app\api\model\MeetingReceptT;
+use app\api\model\RepairV;
 use app\api\model\Run;
 use app\api\model\RunProcess;
 use app\lib\enum\CommonEnum;
@@ -299,35 +301,96 @@ class FlowService
                 unset($data['driver']);
             }
             $workflow->workdoaction($data, Token::getCurrentUid());
-
             //检测并发送数据
+            $this->checkComplete($data['npid'], $data['wf_type'], $data['wf_fid'],$data['run_id']);
             return 1;
         }
     }
 
 
-    private function checkComplete($npid, $wf_type, $wf_fid)
+    private function checkComplete($npid, $wf_type, $wf_fid, $run_id)
     {
         if ($npid == '') {
             if ($wf_type == "meeting_recept_t") {
                 $this->sendMsgForRecept($wf_fid);
+            }
+            if ($wf_type == "car_t") {
+                $this->sendMsgForCar($wf_fid);
+            }
+            if ($wf_type == "repair_machine_t" || $wf_type == "repair_other_t") {
+
+                $this->sendMsgForRepair($wf_fid, $wf_type, $run_id);
+            }
+
+            if ($wf_type == "access_control_t") {
+
+                $this->sendMsgForAccess($wf_fid);
+
             }
 
         }
 
     }
 
+    /**
+     * 权限控制-发送通知
+     * @param $wf_fid
+     * @throws \think\exception\DbException
+     */
+    private function sendMsgForAccess($wf_fid)
+    {
+        $info = AccessControlT::get($wf_fid);
+        $msg = "%s的%s于%s申请开通的功能为:%s，开通人员类型是：%s，工作截止时间为:%s，名单有：%s，请负责门禁系统的人员及时为其开通相关权限。";
+        $msg = sprintf($msg, $info->department, $info->username, $info->create_time, $info->access, $info->user_type,
+            $info->deadline, $info->members);
+        $users = AdminService::getUserIdWithRole("门禁权限管理员");
+        (new MsgService())->sendMsg($users, $msg);
+    }
+
+    /**
+     * 围餐流程走完给厨房发送通知
+     * @param $wf_fid
+     * @throws \think\exception\DbException
+     */
     private function sendMsgForRecept($wf_fid)
     {
         $info = MeetingReceptT::get($wf_fid);
         $msg = "%s于%s在我局进行围餐预订，就餐总人数为%s人，陪同人员有:%s，请相关饭堂人员提前备餐。";
         $msg = sprintf($msg, $info->unit, $info->meal_time, $info->meeting_count + $info->accompany_count, $info->accompany);
-        $users = "";
+        $users = AdminService::getUserIdWithRole("厨房");
         (new MsgService())->sendMsg($users, $msg);
     }
 
+    /**
+     * 结束流程给申请用车用户发送信息
+     * @param $wf_fid
+     * @throws \think\exception\DbException
+     */
     private function sendMsgForCar($wf_fid)
     {
+        $info = CarT::get($wf_fid);
+        $msg = "您申请的%s出发的用车已通过审核，车辆信息为:%s，%s，请提前联系司机出车。";
+        $msg = sprintf($msg, $info->create_time, $info->car_info, $info->driver);
+        $users = AdminService::getUserIdWithID($info->admin_id);
+        (new MsgService())->sendMsg($users, $msg);
+    }
+
+    /**
+     * 报修流程-发送给每一个用户推送信息
+     * @param $wf_fid
+     * @param $wf_type
+     * @param $run_id
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function sendMsgForRepair($wf_fid, $wf_type, $run_id)
+    {
+        $info = RepairV::where('wf_type', $wf_type)->where('id', $wf_fid)->find();
+        $msg = "%s的%s于%s报修的在%s的%s已处理，反馈结果为:%s。";
+        $msg = sprintf($msg, $info->department, $info->username, $info->create_time, $info->address, $info->name, $info->feedback);
+        $users = AdminService::getUserIdWithRunProcess($run_id);
+        (new MsgService())->sendMsg($users, $msg);
 
     }
 
@@ -438,7 +501,6 @@ class FlowService
         $flowinfo = $workflow->workflowInfoForComplete($wf_fid, $wf_type);
         return $flowinfo;
     }
-
 
     /**
      * 判断当前用户有无取消流程权限

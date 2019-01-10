@@ -192,3 +192,27 @@ function makeOrderNo()
     return $orderSn;
 }
 
+/**
+ * 日期加上指定时间
+ * @param $count
+ * @param $time_old
+ * @param $time_type
+ * @return false|string
+ */
+function addTime($count, $time_old, $time_type)
+{
+    $time_new = date('Y-m-d H:i:s', strtotime('+' . $count . $time_type,
+        strtotime($time_old)));
+    return $time_new;
+
+}
+
+function reduceTime($count, $time_old, $time_type)
+{
+    $time_new = date('Y-m-d H:i:s', strtotime('-' . $count . $time_type,
+        strtotime($time_old)));
+    return $time_new;
+
+}
+
+

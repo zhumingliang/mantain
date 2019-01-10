@@ -257,7 +257,7 @@ class Sku extends BaseController
         $params = $this->request->param();
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['admin_id'] = \app\api\service\Token::getCurrentUid();
-        $params['stock'] = (new SkuService())->getStock($params['sku_id']);
+        $params['stock'] = (new SkuService())->getStock($params['sku_id'], $params['type'], $params['count']);
         $res = SkuStockT::create($params);
         if (!$res) {
             throw  new OperationException();

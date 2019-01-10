@@ -17,8 +17,6 @@ class Index extends Controller
 {
     public function index()
     {
-        $a='';
-          echo strlen($a) ;
 
         //(new MsgService())->sendMsg("ZhuMingLiang", "测试");
     }

@@ -14,7 +14,7 @@ use think\Model;
 
 class MeetingT extends Model
 {
-    public static function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size,$host)
+    public static function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -63,5 +63,18 @@ class MeetingT extends Model
             ->toArray();
         return $list;
     }
+
+    public static function getMeetingToPush()
+    {
+        $time_end = addTime(15, date('Y-m-d H:i:s'), 'minute');
+        $time_begin = date('Y-m-d H:i:s');
+        $list = self::whereBetweenTime('meeting_begin', $time_begin, $time_end)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->where('pushed', 1)
+            ->order('meeting_begin desc')
+            ->select();
+        return $list;
+    }
+
 
 }

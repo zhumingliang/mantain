@@ -268,5 +268,22 @@ class MeetingService extends BaseService
 
     }
 
+    public function checkMeetingPush()
+    {
+        $meeting = MeetingT::getMeetingToPush();
+        if (count($meeting)) {
+            foreach ($meeting as $k => $v) {
+                $msg = "%s在%s举办会议：%s。会议时间为%s到%s，签到时间为%s到%s，请相关参会人员按时在:%s进行签到。";
+                $msg = sprintf($msg, $v['host'], $v['meeting_date'], $v['theme'],
+                    $v['meeting_begin'], $v['meeting_end'], $v['time_begin'], $v['time_end'], $v['address']);
+                $user_ids = AdminService::getUserIdWithMeeting($v['push']);
+                (new MsgService())->sendMsg($user_ids, $msg);
+                MeetingT::update(['pushed' => 2], ['id' => $v['id']]);
+            }
+
+        }
+
+    }
+
 
 }

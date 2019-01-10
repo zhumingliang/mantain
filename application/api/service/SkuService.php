@@ -276,10 +276,73 @@ class SkuService extends BaseService
         return $data;
     }
 
-    public function getStock($sku_id)
+    /**
+     * 获取实时库存
+     * @param $sku_id
+     * @param $type
+     * @param $count
+     * @return float|int
+     * @throws \think\exception\DbException
+     */
+    public function getStock($sku_id, $type, $count)
     {
+        if ($type == 2) {
+            $count = 0 - $count;
+        }
+        $stock_old = SkuStockV::getSkuStock($sku_id);
+        $stock = $stock_old + $count;
+        $this->checkStockToSendMsg($sku_id, $stock);
+        return $stock;
+    }
 
-        return 100;
+
+    /**
+     * 检测库存是否超出提醒值
+     * @param $sku_id
+     * @param $stock
+     * @return int
+     * @throws \think\exception\DbException
+     */
+    private function checkStockToSendMsg($sku_id, $stock)
+    {
+        $info = SkuT::get($sku_id);
+        if ($info->alert == 1) {
+            $min = $info->min;
+            $max = $info->max;
+
+            if ($stock < $min) {
+                $this->sendMsgWithStock($info->name, $stock, 1, $min);
+                return 1;
+            }
+            if ($stock > $max) {
+                $this->sendMsgWithStock($info->name, $stock, 1, $max);
+                return 1;
+            }
+        }
+
+    }
+
+    /**
+     * 发送库存提醒
+     * @param $name
+     * @param $stock
+     * @param $type
+     * @param $stander
+     */
+    private function sendMsgWithStock($name, $stock, $type, $stander)
+    {
+        if ($type == 1) {
+            //库存不足
+            $msg = "当前库存的%s量为%s瓶，低于最低警示数量%s瓶，请及时采购物品。";
+        } else {
+            $msg = "当前库存的%s量为%s瓶，高于最高警示数量%s瓶，请及时处理。";
+
+        }
+        $msg = sprintf($msg, $name, $stock, $stander);
+        $user_ids = AdminService::getUserIdWithRole('管理员');
+        (new MsgService())->sendMsg($user_ids, $msg);
+
+
     }
 
     public function getStockList($category, $order_number, $category_id, $page, $size)
@@ -315,7 +378,7 @@ class SkuService extends BaseService
      */
     public function collarUseSave($params)
     {
-        $this->checkStock($params['sku_id'], $params['count']);
+        $stock = $this->checkStock($params['sku_id'], $params['count']);
         $type = $params['type'];
         if ($type == CommonEnum::BORROW) {
             $params['borrow_return'] = 2;
@@ -327,6 +390,8 @@ class SkuService extends BaseService
         } else {
             throw new ParameterException();
         }
+
+        $this->checkStockToSendMsg($params['sku_id'], $stock);
 
 
     }
@@ -341,9 +406,9 @@ class SkuService extends BaseService
                     'errorCode' => 60002
                 ]
             );
-
         }
 
+        return $count - $stock;
     }
 
     private function saveBorrow($params)

@@ -10,7 +10,10 @@ namespace app\api\service;
 
 
 use app\api\model\AdminT;
+use app\api\model\AdminV;
 use app\api\model\Role;
+use app\api\model\RunProcess;
+use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\ParameterException;
 
@@ -83,8 +86,50 @@ class AdminService
 
     public static function getUserIdWithDepartment($department)
     {
-        $users = AdminT::where('department', 'in', $department)->field('user_id')->select();
+        $users = AdminT::where('department', 'in', $department)
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->field('user_id')->select();
 
+        if (!count($users)) {
+            return '';
+        }
+        return implode(',', $users);
+    }
+
+
+    public static function getUserIdWithRole($role)
+    {
+        $users = AdminV::where('role', 'in', $role)->field('user_id')
+            ->where('state', CommonEnum::STATE_IS_OK)
+            ->select();
+
+        if (!count($users)) {
+            return '';
+        }
+        return implode(',', $users);
+
+    }
+
+
+    public static function getUserIdWithRunProcess($run_id)
+    {
+        $info = RunProcess::where('run_id', $run_id)->field('uid')->select();
+        if (!count($info)) {
+            return '';
+        }
+        $ids = implode(',', $info);
+        $users = AdminT::where('id', 'in', $ids)
+            ->field('user_id')->select();
+        if (!count($users)) {
+            return '';
+        }
+        return implode(',', $users);
+
+    }
+
+    public static function getUserIdWithMeeting($department)
+    {
+        $users = AdminV::getAdminsForMeeting($department);
         if (!count($users)) {
             return '';
         }

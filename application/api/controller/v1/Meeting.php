@@ -75,7 +75,7 @@ class Meeting extends BaseController
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['source'] =TokenService::getCurrentTokenVar('category');
+        $params['source'] = TokenService::getCurrentTokenVar('category');
         $id = MeetingT::create($params);
         if (!$id) {
             throw new OperationException();
@@ -279,7 +279,6 @@ class Meeting extends BaseController
 
     }
 
-
     /**
      * @api {GET} /api/v1/meeting/sign/in/list 32-会议签到列表
      * @apiGroup  CMS
@@ -467,6 +466,20 @@ class Meeting extends BaseController
             ->find();
         return json($info);
 
+    }
+
+
+    /**
+     * @api {GET} /api/v1/meeting/push 91-检测需要推送通知的会议并推送
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取指定会议室会议信息
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/meeting/push
+     */
+    public function checkMeetingPush()
+    {
+        (new MeetingService())->checkMeetingPush();
     }
 
 
