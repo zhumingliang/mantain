@@ -89,11 +89,7 @@ class AdminService
         $users = AdminT::where('department', 'in', $department)
             ->where('state', CommonEnum::STATE_IS_OK)
             ->field('user_id')->select();
-
-        if (!count($users)) {
-            return '';
-        }
-        return implode(',', $users);
+        return self::preUsers($users);
     }
 
 
@@ -101,12 +97,10 @@ class AdminService
     {
         $users = AdminV::where('role', 'in', $role)->field('user_id')
             ->where('state', CommonEnum::STATE_IS_OK)
-            ->select();
+            ->select()->toArray();
 
-        if (!count($users)) {
-            return '';
-        }
-        return implode(',', $users);
+        return self::preUsers($users);
+
 
     }
 
@@ -120,20 +114,32 @@ class AdminService
         $ids = implode(',', $info);
         $users = AdminT::where('id', 'in', $ids)
             ->field('user_id')->select();
-        if (!count($users)) {
-            return '';
-        }
-        return implode(',', $users);
+        return self::preUsers($users);
 
     }
 
     public static function getUserIdWithMeeting($department)
     {
         $users = AdminV::getAdminsForMeeting($department);
-        if (!count($users)) {
+        return self::preUsers($users);
+    }
+
+
+    private static function preUsers($users)
+    {
+        $res = array();
+        if ($users) {
+            foreach ($users as $k => $v) {
+                array_push($res, $v['user_id']);
+            }
+
+        }
+
+        if (!count($res)) {
             return '';
         }
-        return implode(',', $users);
+        return implode('|', $res);
+
     }
 
 }

@@ -315,7 +315,7 @@ class SkuService extends BaseService
                 return 1;
             }
             if ($stock > $max) {
-                $this->sendMsgWithStock($info->name, $stock, 1, $max);
+                $this->sendMsgWithStock($info->name, $stock, 2, $max);
                 return 1;
             }
         }

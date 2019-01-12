@@ -20,7 +20,7 @@ use app\lib\exception\SuccessMessage;
 class Unit extends BaseController
 {
     /**
-     * @api {POST}  67-用品管理-新增单位
+     * @api {POST} /api/v1/unit/save  67-用品管理-新增单位
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  用品管理-新增单位

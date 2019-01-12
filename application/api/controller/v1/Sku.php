@@ -220,7 +220,7 @@ class Sku extends BaseController
     }
 
     /**
-     * @api {POST}  /api/v1/sku/save 75-用品管理-新增库存
+     * @api {POST}  /api/v1/stock/save 75-用品管理-新增库存
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  用品管理-新增用品
