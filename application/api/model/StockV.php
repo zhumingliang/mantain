@@ -68,4 +68,17 @@ class StockV extends Model
     }
 
 
+    public static function getListForSku($id, $page, $size)
+    {
+        $list = self::where('state', CommonEnum::STATE_IS_OK)
+            ->where('sku_id', $id)
+            ->order('create_time desc')
+            ->paginate($size, false, ['page' => $page])
+            ->toArray();
+        return $list;
+
+
+    }
+
+
 }

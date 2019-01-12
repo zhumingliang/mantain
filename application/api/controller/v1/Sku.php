@@ -575,5 +575,43 @@ class Sku extends BaseController
 
     }
 
+    /**
+     * @api {GET} /api/v1/sku/stock/list 92-用品管理-获取指定sku库存记录列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  获取指定sku库存记录列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/stock/list?id=&page=1&size=20
+     * @apiParam (请求参数说明) {String}  id SKUid
+     * @apiParam (请求参数说明) {int} page 当前页码
+     * @apiParam (请求参数说明) {int} size 每页多少条数据
+     * @apiSuccessExample {json}返回样例:
+     * {"total":2,"per_page":10,"current_page":1,"last_page":1,"data":[{"id":2,"sku_id":1,"sku_name":"洗手液","category_name":"打印机耗材","stock":0,"all_count":20,"stock_date":"2018-12-28","min":100,"max":500,"admin_name":"打印机耗材","create_time":"2018-12-27 23:27:26","state":1,"order_number":"1","category_id":1,"price":1.11},{"id":1,"sku_id":1,"sku_name":"洗手液","category_name":"打印机耗材","stock":0,"all_count":20,"stock_date":"2018-12-28","min":100,"max":500,"admin_name":"打印机耗材","create_time":"2018-12-27 23:26:23","state":1,"order_number":"1","category_id":1,"price":1.11}]}
+     * @apiSuccess (返回参数说明) {int} total 数据总数
+     * @apiSuccess (返回参数说明) {int} per_page 每页多少条数据
+     * @apiSuccess (返回参数说明) {int} current_page 当前页码
+     * @apiSuccess (返回参数说明) {int} last_page 最后页码
+     * @apiSuccess (返回参数说明) {int} id 入库记录ID
+     * @apiSuccess (返回参数说明) {String} sku_name  物品名称
+     * @apiSuccess (返回参数说明) {String} category_name  类别
+     * @apiSuccess (返回参数说明) {String} stock  库存
+     * @apiSuccess (返回参数说明) {String} all_count  入库
+     * @apiSuccess (返回参数说明) {String} price  单价
+     * @apiSuccess (返回参数说明) {String} stock_date  入库日期
+     * @apiSuccess (返回参数说明) {String} min  最高警示数量
+     * @apiSuccess (返回参数说明) {String} max  最低警示数量
+     * @apiSuccess (返回参数说明) {String} admin_name  操作员
+     * @param $id
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     */
+    public function getSkuStockList($id,$page=1,$size=20)
+    {
+        $list = (new SkuService())->getSkuStockList($id,$page,$size);
+        return json($list);
+
+    }
+
 
 }

@@ -526,5 +526,11 @@ class SkuService extends BaseService
 
     }
 
+    public function getSkuStockList($id, $page, $size)
+    {
+        return StockV::getListForSku($id, $page, $size);
+
+    }
+
 
 }
