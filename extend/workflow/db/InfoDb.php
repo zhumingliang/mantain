@@ -331,7 +331,6 @@ class InfoDB
         $result = Db::name($wf_type)
             ->where('id', 'eq', $wf_fid)
             ->update(['status' => $status]);
-
         if (!$result) {
             return false;
         }

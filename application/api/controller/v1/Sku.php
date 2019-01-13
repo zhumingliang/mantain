@@ -397,7 +397,7 @@ class Sku extends BaseController
     {
         $params = $this->request->param();
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['status'] = CommonEnum::READY_RECORD;
+        $params['status'] = CommonEnum::SAVE;
         $params['admin_id'] = \app\api\service\Token::getCurrentUid();
         (new SkuService())->collarUseSave($params);
         return json(new SuccessMessage());
