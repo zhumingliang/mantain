@@ -207,7 +207,7 @@ class FlowService
             'check_con' => '发起申请成功',
         ];
         $res = $this->statr_save($flow_date);
-        if (!$res == 1) {
+        if (!($res == 1)) {
             return -1;
         }
 
@@ -302,7 +302,7 @@ class FlowService
             }
             $workflow->workdoaction($data, Token::getCurrentUid());
             //检测并发送数据
-            $this->checkComplete($data['npid'], $data['wf_type'], $data['wf_fid'],$data['run_id']);
+            $this->checkComplete($data['npid'], $data['wf_type'], $data['wf_fid'], $data['run_id']);
             return 1;
         }
     }
