@@ -48,4 +48,13 @@ class SkuStockV extends Model
         return $count;
 
     }
+
+    public static function getListForUse()
+    {
+        $info = self::field('id,name,category,use_type,format,sum(count) as stock')
+            ->group('id')
+            ->select();
+
+        return $info;
+    }
 }

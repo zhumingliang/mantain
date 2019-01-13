@@ -529,15 +529,17 @@ class Sku extends BaseController
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/sku/list/use
      * @apiSuccessExample {json}返回样例:
-     * [{"id":1,"name":"洗手液","use_type":"使用"}]
+     * [{"id":1,"name":"洗手液","category":"打印机耗材","use_type":"使用","format":"500ml","stock":"20"},{"id":2,"name":"纸巾","category":"打印机耗材","use_type":"借用","format":"500ml","stock":"200"},{"id":3,"name":"纸巾","category":"打印机耗材","use_type":"借用","format":"500ml","stock":"-1"},{"id":4,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"-1"},{"id":5,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"0"},{"id":6,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"0"},{"id":7,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"0"},{"id":8,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"0"},{"id":9,"name":"手机","category":"笔","use_type":"借用","format":"500ml","stock":"0"},{"id":10,"name":"手纸","category":"清洁用品","use_type":"借用","format":"500ml","stock":"0"},{"id":11,"name":"","category":null,"use_type":"","format":"","stock":"0"},{"id":12,"name":"屈臣氏苏打水","category":"办公用品","use_type":"领用","format":"500ml","stock":"0"},{"id":13,"name":"去城市汤力水","category":"本子","use_type":"领用","format":"250ml","stock":"72"},{"id":14,"name":"扫把","category":"清洁用品","use_type":"借用","format":"无","stock":"0"},{"id":15,"name":"扫把","category":"清洁用品","use_type":"借用","format":"无","stock":"0"},{"id":16,"name":"A4纸","category":"本子","use_type":"领用","format":"A4纸","stock":"0"},{"id":17,"name":"三菱水彩笔","category":"笔","use_type":"领用","format":"无","stock":"0"},{"id":18,"name":"超威洁厕精","category":"清洁用品","use_type":"领用","format":"500ml","stock":"0"}]
      * @apiSuccess (返回参数说明) {int} id 用品 Id
-     * @apiSuccess (返回参数说明) {String} name  用品名称
+     * @apiSuccess (返回参数说明) {String} category  用品类别
+     * @apiSuccess (返回参数说明) {String} format  规格
+     * @apiSuccess (返回参数说明) {String} stock  库存
      * @apiSuccess (返回参数说明) {String} use_type  使用类别（用户发起申请需要匹配此参数和用户选择使用方式是否一致）
      * @return \think\response\Json
      */
     public function getSkuForUse()
     {
-        $list = SkuT::getListForUse();
+        $list = SkuStockV::getListForUse();
         return json($list);
     }
 
@@ -606,9 +608,9 @@ class Sku extends BaseController
      * @param int $size
      * @return \think\response\Json
      */
-    public function getSkuStockList($id,$page=1,$size=20)
+    public function getSkuStockList($id, $page = 1, $size = 20)
     {
-        $list = (new SkuService())->getSkuStockList($id,$page,$size);
+        $list = (new SkuService())->getSkuStockList($id, $page, $size);
         return json($list);
 
     }
