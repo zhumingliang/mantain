@@ -111,7 +111,7 @@ class AdminService
         if (!count($info)) {
             return '';
         }
-        $ids = implode(',', $info);
+        $ids = self::preRunId($info);
         $users = AdminT::where('id', 'in', $ids)
             ->field('user_id')->select();
         return self::preUsers($users);
@@ -141,5 +141,23 @@ class AdminService
         return implode('|', $res);
 
     }
+
+    private static function preRunId($info)
+    {
+        $res = array();
+        if ($info) {
+            foreach ($info as $k => $v) {
+                array_push($res, $v['run_id']);
+            }
+
+        }
+
+        if (!count($res)) {
+            return '';
+        }
+        return implode(',', $res);
+
+    }
+
 
 }

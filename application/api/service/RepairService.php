@@ -44,6 +44,7 @@ class RepairService extends BaseService
             } else {
                 $table_model = new RepairOtherT();
                 $table_name = "repair_other_t";
+                $params['role'] = "a";
             }
             $repair = $table_model->create($params);
             $repair_id = $repair->id;
