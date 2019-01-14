@@ -206,7 +206,7 @@ class Flow extends BaseController
      */
     public function checkPassForRepair($flow_id, $flow_process, $npid, $run_id, $run_process,
                                        $wf_fid, $wf_type,
-                                       $repair = 0, $type = 1, $feedback = '',
+                                       $repair = 0, $type = "a", $feedback = '',
                                        $imgs = '', $submit_to_save = 'ok', $check_con = "同意")
     {
         if ($repair == 3) {
