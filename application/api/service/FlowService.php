@@ -386,11 +386,11 @@ class FlowService
      */
     private function sendMsgForRepair($wf_fid, $wf_type, $run_id)
     {
-/*        $info = RepairV::where('wf_type', $wf_type)->where('id', $wf_fid)->find();
+        $info = RepairV::where('wf_type', $wf_type)->where('id', $wf_fid)->find();
         $msg = "%s的%s于%s报修的在%s的%s已处理，反馈结果为:%s。";
         $msg = sprintf($msg, $info->department, $info->username, $info->create_time, $info->address, $info->name, $info->feedback);
         $users = AdminService::getUserIdWithRunProcess($run_id);
-        (new MsgService())->sendMsg($users, $msg);*/
+        (new MsgService())->sendMsg($users, $msg);
 
     }
 

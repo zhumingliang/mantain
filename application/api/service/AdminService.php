@@ -147,7 +147,7 @@ class AdminService
         $res = array();
         if ($info) {
             foreach ($info as $k => $v) {
-                array_push($res, $v['run_id']);
+                array_push($res, $v['u_id']);
             }
 
         }
