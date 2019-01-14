@@ -36,15 +36,14 @@ class RepairService extends BaseService
             $params['admin_id'] = Token::getCurrentUid();
             $params['status'] = CommonEnum::SAVE;
             $params['state'] = CommonEnum::STATE_IS_OK;
+            $params['role'] = "a";
             $type = $params['type'];
             if ($type == CommonEnum::MACHINE) {
                 $table_model = new RepairMachineT();
                 $table_name = "repair_machine_t";
-                $params['role'] = "a";
             } else {
                 $table_model = new RepairOtherT();
                 $table_name = "repair_other_t";
-                $params['role'] = "a";
             }
             $repair = $table_model->create($params);
             $repair_id = $repair->id;
