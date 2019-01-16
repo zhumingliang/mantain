@@ -26,11 +26,11 @@ class MsgService
         $this->agentid = config('wx.app_agent_id');
     }
 
-    public  function sendMsg($touser, $content)
+    public function sendMsg($touser, $content)
     {
         $data = $this->preData($touser, $content);
         $res = Curl::post($this->msgUrl, $data);
-        LogT::create(['msg' => $res]);
+        LogT::create(['msg' => 'content:' . $content . 'res:' . $res]);
         $res_obj = json_decode($res);
         if ($res_obj->errcode != 0) {
             LogT::create(['msg' => $res]);
