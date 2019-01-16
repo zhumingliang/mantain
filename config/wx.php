@@ -7,12 +7,12 @@
  */
 
 return [
-    //'app_id' => 'wwe1e15b3f8a6d5a90',
-    'app_id' => 'wwffcc8e626d73e98f',
+    'app_id' => 'wwe1e15b3f8a6d5a90',
+    //'app_id' => 'wwffcc8e626d73e98f',
 
-    //'app_secret' => 'ZF-3iBv-qrn96WEIWAtRUWHdcQp7kCw1HkWb7YIEmrI',
+    'app_secret' => 'ZF-3iBv-qrn96WEIWAtRUWHdcQp7kCw1HkWb7YIEmrI',
 
-    'app_secret' => 'cqJl6DmpJKktD4zGn6DhcCObrchr6QLWYw2HHvyo5fM',
+    //'app_secret' => 'cqJl6DmpJKktD4zGn6DhcCObrchr6QLWYw2HHvyo5fM',
 
     'app_agent_id' => '1000028',
 
