@@ -399,7 +399,7 @@ class SkuService extends BaseService
     private function checkStock($sku_id, $count)
     {
         $stock = SkuStockV::getSkuStock($sku_id);
-        if ($count - $stock < 0) {
+        if ($stock - $count < 0) {
             throw  new SkuException(
                 ['code' => 401,
                     'msg' => '领用失败,库存不足',
@@ -531,7 +531,6 @@ class SkuService extends BaseService
         return StockV::getListForSku($id, $page, $size);
 
     }
-
 
 
 }
