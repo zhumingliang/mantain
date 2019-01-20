@@ -160,4 +160,15 @@ class AdminService
     }
 
 
+    public static function checkUserJiFu()
+    {
+        $department = Token::getCurrentTokenVar('department');
+        if ($department == "机关服务中心") {
+            return 1;
+        }
+        return 2;
+
+    }
+
+
 }

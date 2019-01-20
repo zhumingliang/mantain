@@ -398,12 +398,7 @@ class Meeting extends BaseController
      * @apiDescription  会议签到列表
      * @apiExample {get} 请求样例:
      * http://maintain.mengant.cn/api/v1/meeting/sign/in/list/wx?meeting_date=2018-10-01&page=1&size=20
-     * @apiParam (请求参数说明) {String}  address 签到地点
-     * @apiParam (请求参数说明) {String}  theme 会议主题
-     * @apiParam (请求参数说明) {String}  time_begin 开始时间
-     * @apiParam (请求参数说明) {String}  time_end 截止时间
-     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
-     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  meeting_date 会议时间
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
@@ -467,7 +462,6 @@ class Meeting extends BaseController
         return json($info);
 
     }
-
 
     /**
      * @api {GET} /api/v1/meeting/push 91-检测需要推送通知的会议并推送

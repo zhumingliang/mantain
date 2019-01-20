@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\CarT;
+use app\api\service\AdminService;
 use app\api\service\CarService;
 use app\api\validate\CarValidate;
 use app\api\service\Token as TokenService;
@@ -55,9 +56,10 @@ class Car extends BaseController
         $admin_id = TokenService::getCurrentUid();
         $params = $this->request->param();
         $params['admin_id'] = $admin_id;
+        $params['jifu'] = AdminService::checkUserJiFu();
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['source'] =TokenService::getCurrentTokenVar('category');
+        $params['source'] = TokenService::getCurrentTokenVar('category');
         (new CarService())->save($params);
         return json(new SuccessMessage());
 
