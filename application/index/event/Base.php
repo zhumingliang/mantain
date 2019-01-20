@@ -18,13 +18,13 @@ class Base
 	* field 筛选字段
 	* order_by 字段排序
 	**/
-    public function commonlist($table,$map='',$field='',$limit='',$order_by='id')
+    public function commonlist($table,$map='',$field='',$limit=20,$order_by='id')
     {
 		$list = Db::name($table)
                 ->field($field)
                 ->where($map)
                 ->order($order_by)
-				->limit($limit)
+				->limit(20)
 				->paginate('10');
         return $list;
 	}
