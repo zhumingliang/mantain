@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/event/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/event/Base.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/Run.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/Run.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +47,7 @@
           <entry key="HTML" value="26" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="3" />
-          <entry key="PHP" value="1284" />
+          <entry key="PHP" value="1299" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
@@ -62,7 +63,7 @@
         <counts>
           <entry key="HTML" value="3" />
           <entry key="JSON" value="26" />
-          <entry key="PHP" value="35730" />
+          <entry key="PHP" value="35755" />
           <entry key="PLAIN_TEXT" value="51" />
         </counts>
       </usages-collector>
@@ -76,11 +77,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/index/event/Base.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Flow.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+            <state relative-caret-position="536">
+              <caret line="406" column="34" lean-forward="true" selection-start-line="406" selection-start-column="34" selection-end-line="406" selection-end-column="34" />
+              <folding>
+                <element signature="e#637#2215#0#PHP" />
+                <element signature="e#2220#4889#0#PHP" />
+                <element signature="e#4896#6651#0#PHP" />
+                <element signature="e#6656#10051#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/api/model/Run.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="582">
+              <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -144,7 +160,6 @@
         <option value="$PROJECT_DIR$/application/api/model/RepairImgT.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Repair.php" />
         <option value="$PROJECT_DIR$/application/api/model/SkuT.php" />
-        <option value="$PROJECT_DIR$/application/api/model/Run.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Image.php" />
         <option value="$PROJECT_DIR$/extend/zml/tp_tools/Curl.php" />
         <option value="$PROJECT_DIR$/application/api/service/UserTokenService.php" />
@@ -163,8 +178,6 @@
         <option value="$PROJECT_DIR$/extend/workflow/db/InfoDb.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Sku.php" />
         <option value="$PROJECT_DIR$/application/api/service/RepairService.php" />
-        <option value="$PROJECT_DIR$/application/api/controller/v1/Flow.php" />
-        <option value="$PROJECT_DIR$/application/api/service/FlowService.php" />
         <option value="$PROJECT_DIR$/config/wx.php" />
         <option value="$PROJECT_DIR$/application/api/service/MsgService.php" />
         <option value="$PROJECT_DIR$/application/api/service/SkuService.php" />
@@ -178,6 +191,9 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Official.php" />
         <option value="$PROJECT_DIR$/application/index/event/Base.php" />
+        <option value="$PROJECT_DIR$/application/api/service/FlowService.php" />
+        <option value="$PROJECT_DIR$/application/api/controller/v1/Flow.php" />
+        <option value="$PROJECT_DIR$/application/api/model/Run.php" />
       </list>
     </option>
   </component>
@@ -337,21 +353,7 @@
       <workItem from="1546589931824" duration="1145000" />
       <workItem from="1546708480266" duration="7281000" />
       <workItem from="1546868542130" duration="44645000" />
-      <workItem from="1547614332724" duration="4027000" />
-    </task>
-    <task id="LOCAL-00104" summary="初始化">
-      <created>1545748919522</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1545748919522</updated>
-    </task>
-    <task id="LOCAL-00105" summary="初始化">
-      <created>1545751549193</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1545751549193</updated>
+      <workItem from="1547614332724" duration="6745000" />
     </task>
     <task id="LOCAL-00106" summary="初始化">
       <created>1545753828635</created>
@@ -682,11 +684,25 @@
       <option name="project" value="LOCAL" />
       <updated>1547972340930</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="初始化">
+      <created>1547972409912</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1547972409912</updated>
+    </task>
+    <task id="LOCAL-00154" summary="初始化">
+      <created>1547973037890</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1547973037891</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="388711000" />
+    <option name="totallyTimeSpent" value="391429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -723,21 +739,18 @@
     <MESSAGE value="初始化" />
     <option name="LAST_COMMIT_MESSAGE" value="初始化" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/extend/workflow/class/command/BackFlow.php</url>
+          <line>40</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/db/Query.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="2732" column="20" selection-start-line="2732" selection-start-column="20" selection-end-line="2732" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/common.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
@@ -808,13 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extend/workflow/db/InfoDb.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="333" selection-start-line="333" selection-end-line="333" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/BaseService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-634">
@@ -847,13 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extend/workflow/class/TaskService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -979,38 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Flow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="447" column="33" selection-start-line="447" selection-start-column="33" selection-end-line="447" selection-end-column="33" />
-          <folding>
-            <element signature="e#613#2191#0#PHP" />
-            <element signature="e#2196#4866#0#PHP" />
-            <element signature="e#4873#6628#0#PHP" />
-            <element signature="e#6633#10028#0#PHP" />
-            <element signature="e#10035#12952#0#PHP" />
-            <element signature="e#12957#13897#0#PHP" />
-            <element signature="e#13903#16007#0#PHP" />
-            <element signature="e#16012#16179#0#PHP" />
-            <element signature="e#16185#18194#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/model/Run.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="78" column="20" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/lib/enum/CommonEnum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/AdminService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="763">
@@ -1022,29 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="29" column="51" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/FlowService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-          <folding>
-            <element signature="e#125#158#0#PHP" expanded="true" />
-            <element signature="e#1300#3205#0#PHP" />
-            <element signature="e#3211#3385#0#PHP" />
-            <element signature="e#3390#3755#0#PHP" />
-            <element signature="e#3761#3919#0#PHP" />
-            <element signature="e#5087#5271#0#PHP" />
-            <element signature="e#6569#6869#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extend/workflow/workflow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1119,29 +1063,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Buffet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="76" column="38" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Multi.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Official.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="73" column="38" selection-start-line="73" selection-start-column="38" selection-end-line="73" selection-end-column="38" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recreational.php">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1157,6 +1080,102 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Buffet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/OfficialService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Official.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="76" column="34" lean-forward="true" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+          <folding>
+            <element signature="e#542#2010#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="76" column="38" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/lib/enum/CommonEnum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/workflow/workflow.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="141" column="44" selection-start-line="141" selection-start-column="44" selection-end-line="141" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/workflow/class/TaskService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/workflow/class/command/BackFlow.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extend/workflow/db/InfoDb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="334" column="25" lean-forward="true" selection-start-line="334" selection-start-column="25" selection-end-line="334" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/FlowService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="454" column="61" selection-start-line="454" selection-start-column="61" selection-end-line="454" selection-end-column="61" />
+          <folding>
+            <element signature="e#125#158#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Flow.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="406" column="34" lean-forward="true" selection-start-line="406" selection-start-column="34" selection-end-line="406" selection-end-column="34" />
+          <folding>
+            <element signature="e#637#2215#0#PHP" />
+            <element signature="e#2220#4889#0#PHP" />
+            <element signature="e#4896#6651#0#PHP" />
+            <element signature="e#6656#10051#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/model/Run.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
         </state>
       </provider>
     </entry>

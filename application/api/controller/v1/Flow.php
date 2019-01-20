@@ -13,6 +13,7 @@ use app\api\controller\BaseController;
 use app\api\model\AdminT;
 use app\api\model\DepartmentT;
 use app\api\model\FeedbackT;
+use app\api\model\LogT;
 use app\api\model\Run;
 use app\api\service\FlowService;
 use app\api\service\RepairService;
@@ -143,13 +144,10 @@ class Flow extends BaseController
                 'first' => 2,
             ];
         }
-
         $res = (new FlowService())->check($data);
         if ($res) {
             return json(new SuccessMessage());
         }
-
-
     }
 
 

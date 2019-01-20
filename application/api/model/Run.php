@@ -57,7 +57,8 @@ class Run extends Model
                 'process' => function ($query) {
                     $query->with(['admin' => function ($query) {
                         $query->field('id,username');
-                    }])->where('btn', 'ok');
+                  //  }])->where('btn', 'ok');
+                    }]);
                 }
             ])
             ->field('id,from_table,from_id,uid,status')
