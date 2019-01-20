@@ -162,7 +162,7 @@ class Flow extends Controller {
 		$data = $this->request->param();
 		$workflow = new workflow();
 		$flowinfo = $workflow->workdoaction($data,$this->uid);
-		print_r($flowinfo);
+		//print_r($flowinfo);
 	}
 	public function ajax_back(){
 		$pid = input('back_id');

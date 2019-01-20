@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\MeetingReceptT;
+use app\api\service\AdminService;
 use app\api\service\MeetingReceptService;
 use app\api\validate\MeetingReceptValidate;
 use app\api\service\Token as TokenService;
@@ -73,6 +74,7 @@ class MeetingRecept extends BaseController
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['jifu'] = AdminService::checkUserJiFu();
         $params['source'] =TokenService::getCurrentTokenVar('category');
         (new MeetingReceptService())->save($params);
         return json(new SuccessMessage());

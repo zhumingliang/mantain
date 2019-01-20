@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\service\AdminService;
 use app\api\service\BuffetService;
 use app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
@@ -52,6 +53,7 @@ class Buffet extends BaseController
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['jifu'] = AdminService::checkUserJiFu();
         $params['source'] = TokenService::getCurrentTokenVar('category');
         (new BuffetService())->save($params);
         return json(new SuccessMessage());
