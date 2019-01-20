@@ -10,6 +10,7 @@ namespace app\api\service;
 
 
 use app\api\model\AccessControlT;
+use app\api\model\AdminT;
 use app\api\model\BorrowT;
 use app\api\model\CarT;
 use app\api\model\Flow;
@@ -340,8 +341,9 @@ class FlowService
     private function sendMsgForAccess($wf_fid)
     {
         $info = AccessControlT::get($wf_fid);
+        $user=AdminT::get($info->u_id);
         $msg = "%s的%s于%s申请开通的功能为:%s，开通人员类型是：%s，工作截止时间为:%s，名单有：%s，请负责门禁系统的人员及时为其开通相关权限。";
-        $msg = sprintf($msg, $info->department, $info->username, $info->create_time, $info->access, $info->user_type,
+        $msg = sprintf($msg, $user->department, $user->username, $info->create_time, $info->access, $info->user_type,
             $info->deadline, $info->members);
         $users = AdminService::getUserIdWithRole("门禁权限管理员");
         (new MsgService())->sendMsg($users, $msg);
