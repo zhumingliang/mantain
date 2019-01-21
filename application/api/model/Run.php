@@ -28,10 +28,11 @@ class Run extends Model
     {
         //$this->table_type = $this->getTableName($table);
         //获取用户发起或者参与的已完成的流程
+        $table = $table == "repair_t" ? "repair_machine_t,repair_other_t" : $table;
         $uid = Token::getCurrentUid();
         $sql = "(parent_id=" . $uid . "  AND status=1) OR (parent_id<>" . $uid . ")";
         $complete = FlowCompleteV::where('uid', $uid)
-            ->where('from_table', $table)
+            ->where('from_table', 'in',$table)
             ->whereRaw($sql)
             ->field('run_id')
             ->select();
@@ -57,7 +58,7 @@ class Run extends Model
                 'process' => function ($query) {
                     $query->with(['admin' => function ($query) {
                         $query->field('id,username');
-                  //  }])->where('btn', 'ok');
+                        //  }])->where('btn', 'ok');
                     }]);
                 }
             ])
@@ -67,7 +68,7 @@ class Run extends Model
         $data = $list['data'];
         if (count($data)) {
             foreach ($data as $k => $v) {
-                $data[$k]['flow'] = Db::name($table)->where('id', $v['from_id'])->find();
+                $data[$k]['flow'] = Db::name($v['from_table'])->where('id', $v['from_id'])->find();
             }
             $list['data'] = $data;
         }
@@ -81,18 +82,19 @@ class Run extends Model
     {
         // $this->table_type = $this->getTableName($table);
 
+        $table = $table == "repair_t" ? "repair_machine_t,repair_other_t" : $table;
         //获取用户发起未完成
         $uid = Token::getCurrentUid();
-        $ready = FlowCompleteV::where('from_table', $table)
+        $ready = FlowCompleteV::where('from_table', 'in', $table)
             ->where('parent_id', $uid)
             ->where('uid', $uid)
             ->where('status', '=', 0)
             ->field('run_id')
             ->select();
-        
+
         //获取到自己角色审核的流程
         $role = Token::getCurrentTokenVar('role');
-        $toReady = RunReadyV::where('from_table', $table)
+        $toReady = RunReadyV::where('from_table', 'in', $table)
             ->select();
 
         $run_arr = array();
@@ -131,7 +133,7 @@ class Run extends Model
         if (count($list)) {
             foreach ($list as $k => $v) {
 
-                $list[$k]['flow'] = Db::name($table)->where('id', $v['from_id'])->find();
+                $list[$k]['flow'] = Db::name($v['from_table'])->where('id', $v['from_id'])->find();
 
                 if ($v['uid'] == $uid) {
                     $list[$k]['btn'] = 'cancel';

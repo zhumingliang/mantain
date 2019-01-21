@@ -427,8 +427,7 @@ class Flow extends BaseController
      * 公务用车:car_t
      * 用品借用:borrow_t
      * 用品领用:collar_use_t
-     * 报修-电脑/打印机:repair_machine_t
-     * 报修-其他:repair_other_t
+     * 报修:repair_t
      * @apiSuccessExample {json}返回样例:
      * [{"id":120,"from_table":"access_control_t","from_id":77,"uid":1,"status":0,"btn":"cancel","flow":{"id":77,"admin_id":1,"access":"301号科室","deadline":"2018-12-24 00:00:00","status":1,"create_time":"2018-12-23 17:56:23","update_time":"2018-12-23 17:56:23","user_type":"干部职工","state":1,"members":null,"source":"pc"},"process":[{"id":261,"uid":1,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"同意","dateline":1545558984,"btn":"ok","art":"","admin":{"id":1,"username":"朱明良"}},{"id":262,"uid":2,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"1","dateline":1545559027,"btn":"ok","art":"","admin":{"id":2,"username":"部门负责人"}},{"id":263,"uid":3,"from_id":77,"from_table":"access_control_t","run_id":120,"run_flow":0,"content":"2222","dateline":1545559041,"btn":"ok","art":"","admin":{"id":3,"username":"机服中心"}}]}]
      * @apiSuccess (返回参数说明) {int} total 数据总数
