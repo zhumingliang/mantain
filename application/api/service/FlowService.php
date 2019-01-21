@@ -421,7 +421,7 @@ class FlowService
                 ]
             );
         }
-        if ($info->person == 5) {
+        if ($info->auto_person == 5) {
             $roles = explode(',', $info->sponsor_ids);
             $role = Token::getCurrentTokenVar('role');
             if (!in_array($role, $roles)) {
