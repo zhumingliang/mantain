@@ -341,7 +341,7 @@ class FlowService
     private function sendMsgForAccess($wf_fid)
     {
         $info = AccessControlT::get($wf_fid);
-        $user=AdminT::get($info->u_id);
+        $user = AdminT::get($info->u_id);
         $msg = "%s的%s于%s申请开通的功能为:%s，开通人员类型是：%s，工作截止时间为:%s，名单有：%s，请负责门禁系统的人员及时为其开通相关权限。";
         $msg = sprintf($msg, $user->department, $user->username, $info->create_time, $info->access, $info->user_type,
             $info->deadline, $info->members);
@@ -421,19 +421,21 @@ class FlowService
                 ]
             );
         }
+        if ($info->person == 5) {
+            $roles = explode(',', $info->sponsor_ids);
+            $role = Token::getCurrentTokenVar('role');
+            if (!in_array($role, $roles)) {
+                throw new FlowException(
+                    [
+                        'code' => 401,
+                        'msg' => '流程审批失败：当前审批步骤已被审核，无需再次审核',
+                        'errorCode' => 70009
+                    ]
+                );
 
-        $roles = explode(',', $info->sponsor_ids);
-        $role = Token::getCurrentTokenVar('role');
-        if (!in_array($role, $roles)) {
-            throw new FlowException(
-                [
-                    'code' => 401,
-                    'msg' => '流程审批失败：当前审批步骤已被审核，无需再次审核',
-                    'errorCode' => 70009
-                ]
-            );
-
+            }
         }
+
 
         if ($wf_type == "borrow_t" && $info->auto_person == 3 && ($info->sponsor_ids == Token::getCurrentUid())) {
             //借用修改归还时间
