@@ -43,7 +43,6 @@ class AdminToken extends Token
 
             $admin = AdminT::where('account', '=', $this->account)
                 ->find();
-
             if (is_null($admin)) {
                 throw new TokenException([
                     'code' => 401,

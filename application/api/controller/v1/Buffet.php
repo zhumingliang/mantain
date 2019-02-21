@@ -105,6 +105,10 @@ class Buffet extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new BuffetService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return json($list);
     }

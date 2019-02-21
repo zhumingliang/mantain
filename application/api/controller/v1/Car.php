@@ -112,6 +112,10 @@ class Car extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $reason, $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new CarService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $reason);
         return json($list);
     }

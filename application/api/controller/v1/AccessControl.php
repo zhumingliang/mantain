@@ -109,6 +109,10 @@ class AccessControl extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $access, $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new AccessService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $access);
         return json($list);
     }

@@ -108,6 +108,10 @@ class MeetingPlace extends BaseController
      */
     public function getList($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3, $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new MeetingPlaceService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size);
         return json($list);
     }

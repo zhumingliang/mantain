@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\service\AdminService;
 use app\api\service\HotelService;
 use app\api\service\Token as TokenService;
 use app\lib\enum\CommonEnum;
@@ -114,6 +115,10 @@ class Hotel extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new HotelService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return json($list);
     }

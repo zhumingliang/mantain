@@ -170,5 +170,18 @@ class AdminService
 
     }
 
+    public static function checkUserRole()
+    {
+        $role = Token::getCurrentTokenVar('role');
+        $role_info = Role::where('id', $role)->find();
+        if ($role_info['name'] === "部门负责人") {
+            return [
+                'res' => true,
+                'department' => Token::getCurrentTokenVar('department')
+            ];
+        }
+        return ['res' => false];
+    }
+
 
 }

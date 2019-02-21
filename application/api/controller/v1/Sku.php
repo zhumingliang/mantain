@@ -15,6 +15,7 @@ use app\api\model\SkuImgT;
 use app\api\model\SkuStockT;
 use app\api\model\SkuStockV;
 use app\api\model\SkuT;
+use app\api\service\AdminService;
 use app\api\service\SkuService;
 use app\api\validate\SkuStockValidate;
 use app\index\controller\News;
@@ -457,6 +458,10 @@ class Sku extends BaseController
     public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                     $sku = '', $category = '', $page = 1, $size = 20)
     {
+        $check = AdminService::checkUserRole();
+        if ($check['res']) {
+            $department = $check['department'];
+        }
         $list = (new SkuService())->getListForApply($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
         return json($list);
 
