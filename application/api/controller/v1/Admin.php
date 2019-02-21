@@ -164,7 +164,14 @@ class Admin extends BaseController
         $params['account'] = $params['phone'];
         $params['pwd'] = sha1('a111111');
         //$params['role'] = AdminService::getAdminRoleID($params['role']);
-        $res = AdminT::create($params);
+        //检测用户是否存在
+        $count = AdminT::where('phone', $params['phone'])->count();
+        if (!$count) {
+            $res = AdminT::create($params);
+
+        } else {
+            $res = AdminT::update($params, ['phone' => $params['phone']]);
+        }
         if (!$res) {
             throw new OperationException();
         }
