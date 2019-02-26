@@ -12,6 +12,7 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\api\model\FeedbackImgT;
 use app\api\model\RepairImgT;
+use app\api\service\AdminService;
 use app\api\service\RepairService;
 use app\api\validate\RepairValidate;
 use app\lib\exception\SuccessMessage;
@@ -123,6 +124,7 @@ class Repair extends BaseController
      */
     public function getList($time_begin, $time_end, $department, $username, $status, $page = 1, $size = 20)
     {
+        $department = AdminService::checkUserRole($department);
         $list = (new RepairService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return json($list);
     }
@@ -148,6 +150,7 @@ class Repair extends BaseController
      */
     public function export($time_begin, $time_end, $department, $username, $status)
     {
+        $department = AdminService::checkUserRole($department);
         (new RepairService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
     }

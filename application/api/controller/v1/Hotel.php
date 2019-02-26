@@ -115,10 +115,7 @@ class Hotel extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)
     {
-        $check = AdminService::checkUserRole();
-        if ($check['res']) {
-            $department = $check['department'];
-        }
+        $department = AdminService::checkUserRole($department);
         $list = (new HotelService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status);
         return json($list);
     }
@@ -144,6 +141,7 @@ class Hotel extends BaseController
      */
     public function export($time_begin, $time_end, $department, $username, $status)
     {
+        $department = AdminService::checkUserRole($department);
         (new HotelService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
 

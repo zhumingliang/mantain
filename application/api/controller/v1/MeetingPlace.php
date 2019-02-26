@@ -108,10 +108,7 @@ class MeetingPlace extends BaseController
      */
     public function getList($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3, $page = 1, $size = 20)
     {
-        $check = AdminService::checkUserRole();
-        if ($check['res']) {
-            $department = $check['department'];
-        }
+        $department = AdminService::checkUserRole($department);
         $list = (new MeetingPlaceService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size);
         return json($list);
     }
@@ -137,6 +134,7 @@ class MeetingPlace extends BaseController
      */
     public function export($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3)
     {
+        $department = AdminService::checkUserRole($department);
         (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
     }

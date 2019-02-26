@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\SpaceMultiT;
+use app\api\service\AdminService;
 use app\api\service\MultiService;
 use app\api\validate\MultiValidate;
 use app\api\service\Token as TokenService;
@@ -109,7 +110,7 @@ class Multi extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $space, $page = 1, $size = 20)
     {
-
+        $department = AdminService::checkUserRole($department);
         $list = (new MultiService())->getList($time_begin, $time_end, $department, $username, $status, $page, $size, $space);
         return json($list);
     }
@@ -141,6 +142,7 @@ class Multi extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $space)
     {
+        $department = AdminService::checkUserRole($department);
         (new MultiService())->export($time_begin, $time_end, $department, $username, $status, $space);
         return json(new SuccessMessage());
     }

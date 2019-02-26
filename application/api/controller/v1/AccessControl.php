@@ -57,7 +57,7 @@ class AccessControl extends BaseController
         $params['jifu'] = AdminService::checkUserJiFu();
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
-        $params['source'] =TokenService::getCurrentTokenVar('category');
+        $params['source'] = TokenService::getCurrentTokenVar('category');
         (new AccessService())->save($params);
         return json(new SuccessMessage());
 
@@ -95,7 +95,6 @@ class AccessControl extends BaseController
      * @apiSuccess (返回参数说明) {String} deadline 工作截止时间
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -105,14 +104,16 @@ class AccessControl extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $access, $page = 1, $size = 20)
     {
-        $check = AdminService::checkUserRole();
-        if ($check['res']) {
-            $department = $check['department'];
-        }
+        $department = AdminService::checkUserRole($department);
         $list = (new AccessService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $access);
         return json($list);
     }
@@ -138,10 +139,16 @@ class AccessControl extends BaseController
      * @param $status
      * @param $access
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function export($time_begin, $time_end, $department, $username, $status,
                            $access)
     {
+        $department = AdminService::checkUserRole($department);
         (new AccessService())->export($time_begin, $time_end, $department, $username, $status, $access);
         return json(new SuccessMessage());
     }
@@ -192,7 +199,7 @@ class AccessControl extends BaseController
      */
     public function getListForWx($type = 1, $page = 1, $size = 20)
     {
-        $list = (new AccessService())->getListForWX($type,$page, $size);
+        $list = (new AccessService())->getListForWX($type, $page, $size);
         return json($list);
     }
 

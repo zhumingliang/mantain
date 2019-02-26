@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\SpaceRecreationalT;
+use app\api\service\AdminService;
 use app\api\service\RecreationalService;
 use app\api\validate\RecreationalValidate;
 use app\api\service\Token as TokenService;
@@ -112,7 +113,7 @@ class Recreational extends BaseController
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $space, $page = 1, $size = 20)
     {
-
+        $department = AdminService::checkUserRole($department);
         $list = (new RecreationalService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $space);
         return json($list);
     }
@@ -142,6 +143,7 @@ class Recreational extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $space)
     {
+        $department = AdminService::checkUserRole($department);
         (new RecreationalService())->export($time_begin, $time_end, $department, $username, $status, $space);
         return json(new SuccessMessage());
     }

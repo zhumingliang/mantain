@@ -129,6 +129,7 @@ class Official extends BaseController
      */
     public function getList($time_begin, $time_end, $department, $username, $status, $meal_type, $page = 1, $size = 20)
     {
+        $department = AdminService::checkUserRole($department);
         $list = (new OfficialService())->getList($page, $size, $time_begin, $time_end, $department, $username, $status, $meal_type);
         return json($list);
     }
@@ -157,6 +158,7 @@ class Official extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $meal_type)
     {
+        $department = AdminService::checkUserRole($department);
         (new OfficialService())->export($time_begin, $time_end, $department, $username, $status, $meal_type);
         return json(new SuccessMessage());
     }
