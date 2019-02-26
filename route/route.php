@@ -79,6 +79,7 @@ Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
 Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');
 
 Route::get('api/:version/department/list', 'api/:version.Department/getList');
+Route::get('api/:version/departments', 'api/:version.Department/getDepartments');
 
 Route::get('api/:version/admin/list', 'api/:version.Admin/getList');
 Route::get('api/:version/admins/access', 'api/:version.Admin/getListForAccess');
@@ -87,6 +88,7 @@ Route::post('api/:version/admin/save', 'api/:version.Admin/save');
 Route::post('api/:version/admin/role/update', 'api/:version.Admin/updateRole');
 Route::post('api/:version/admin/post/update', 'api/:version.Admin/updatePost');
 Route::post('api/:version/admin/department/update', 'api/:version.Admin/updateDepartment');
+Route::post('api/:version/admin/department/bind', 'api/:version.Admin/bindDepartment');
 
 
 Route::post('api/:version/category/save', 'api/:version.Category/save');

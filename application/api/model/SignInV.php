@@ -26,7 +26,7 @@ class SignInV extends Model
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
-                    $query->where('department', '=', $department);
+                    $query->where('department', 'in', $department);
                 }
             })
             ->where(function ($query) use ($username) {
@@ -72,7 +72,7 @@ class SignInV extends Model
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
-                    $query->where('department', '=', $department);
+                    $query->where('department', 'in', $department);
                 }
             })
             ->where(function ($query) use ($username) {

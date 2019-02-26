@@ -14,6 +14,7 @@ use app\api\model\AdminJoinT;
 use app\api\model\AdminT;
 use app\api\model\AdminV;
 use app\api\model\Role;
+use app\api\model\UserDepartmentT;
 use app\api\model\UserT;
 use app\api\service\AdminService;
 use app\api\validate\AdminValidate;
@@ -350,6 +351,21 @@ class Admin extends BaseController
         $admins = AdminT::getAdminsForAccess($key);
         return json($admins);
 
+    }
+
+
+    /**
+     * 绑定部门分管领导管理部门
+     * @param $u_id
+     * @param $d_name
+     * @return \think\response\Json
+     * @throws OperationException
+     */
+    public function bindDepartment($u_id, $d_name)
+    {
+
+        (new AdminService())->bindDepartment($u_id, $d_name);
+        return json(new SuccessMessage());
 
     }
 

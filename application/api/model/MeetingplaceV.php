@@ -22,7 +22,7 @@ class MeetingplaceV extends Model
             ->where('state',CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
-                    $query->where('department', '=', $department);
+                    $query->where('department', 'in', $department);
                 }
             })
             ->where(function ($query) use ($username) {
@@ -52,7 +52,7 @@ class MeetingplaceV extends Model
             ->where('state',CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
-                    $query->where('department', '=', $department);
+                    $query->where('department', 'in', $department);
                 }
             })
             ->where(function ($query) use ($username) {

@@ -278,19 +278,15 @@ class FlowService
      */
     public function check($data)
     {
-
         $workflow = new workflow();
         $submit_to_save = $data['submit_to_save'];
         if ($submit_to_save == 'cancel') {
             $this->flowCancel($data['wf_fid'], $data['wf_type'], $data['run_id']);
             return 1;
-
         } else {
             if ($data['first'] != 1) {
                 $this->checkAccess($data['run_id'], $data['wf_type'], $data['wf_fid']);
             }
-
-
             if (isset($data['borrow_return'])) {
                 BorrowT::update(['borrow_return' => $data['borrow_return']], ['id' => $data['wf_fid']]);
                 unset($data['borrow_return']);

@@ -11,6 +11,7 @@ namespace app\api\controller\v1;
 
 use app\api\controller\BaseController;
 use app\api\model\DepartmentT;
+use app\api\service\AdminService;
 use app\lib\enum\CommonEnum;
 
 class Department extends BaseController
@@ -40,4 +41,22 @@ class Department extends BaseController
         return json($list);
     }
 
+
+    /**
+     * @api {GET} /api/v1/departments 93-申请流程列表-获取部分筛选条件
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  申请流程列表-获取部分筛选条件
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/departments
+     * @apiSuccessExample {json}返回样例:
+     * [{"name":"办公室"}]
+     * @apiSuccess (返回参数说明) {String} name 部门名称
+     * @return \think\response\Json
+     */
+    public function getDepartments()
+    {
+        $departments = (new AdminService())->getDepartments();
+        return json($departments);
+    }
 }

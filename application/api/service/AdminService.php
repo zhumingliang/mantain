@@ -13,6 +13,7 @@ use app\api\model\AdminT;
 use app\api\model\AdminV;
 use app\api\model\Role;
 use app\api\model\RunProcess;
+use app\api\model\UserDepartmentT;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\OperationException;
 use app\lib\exception\ParameterException;
@@ -179,9 +180,69 @@ class AdminService
                 'res' => true,
                 'department' => Token::getCurrentTokenVar('department')
             ];
+        } elseif ($role_info['name'] = "分管部门局领导") {
+            return [
+                'res' => true,
+                'department' => self::getUserDepartment(Token::getCurrentUid())
+            ];
         }
         return ['res' => false];
     }
 
+    private static function getUserDepartment($u_id)
+    {
+        $department = UserDepartmentT::where('u_id', $u_id)->field('d_name')->select()->toArray();
+        $departments = '';
+        if (count($department)) {
+            $arr = array();
+            foreach ($department as $k => $v) {
+                array_push($arr, $v['d_name']);
+
+            }
+            $departments = implode(',', $arr);
+            return $departments;
+        } else {
+            return $departments;
+        }
+
+    }
+
+    public function bindDepartment($u_id, $d_name)
+    {
+        $name_arr = explode(',', $d_name);
+        $list = array();
+        for ($i = 0; $i < count($name_arr); $i++) {
+            $data = [
+                'u_id' => $u_id,
+                'd_name' => $name_arr[$i],
+                'state' => CommonEnum::STATE_IS_OK
+            ];
+            array_push($list, $data);
+        }
+        $AD = new UserDepartmentT();
+        $res = $AD->saveAll($list);
+        if (!$res) {
+            throw new OperationException();
+        }
+    }
+
+    public function getDepartments()
+    {
+        $role = Token::getCurrentTokenVar('role');
+        $role_info = Role::where('id', $role)->find();
+        if ($role_info['name'] == "分管部门局领导") {
+            return UserDepartmentT::where('u_id', Token::getCurrentUid())
+                ->field('d_name as name')
+                ->select()
+                ->toArray();
+        } else {
+            return [
+                0 => [
+                    'name' => Token::getCurrentTokenVar('department')
+                ]
+            ];
+        }
+
+    }
 
 }
