@@ -9,6 +9,7 @@
 namespace app\api\model;
 
 
+use app\api\service\AdminService;
 use app\api\service\Token;
 use think\Db;
 use think\Model;
@@ -32,7 +33,7 @@ class Run extends Model
         $uid = Token::getCurrentUid();
         $sql = "(parent_id=" . $uid . "  AND status=1) OR (parent_id<>" . $uid . ")";
         $complete = FlowCompleteV::where('uid', $uid)
-            ->where('from_table', 'in',$table)
+            ->where('from_table', 'in', $table)
             ->whereRaw($sql)
             ->field('run_id')
             ->select();
@@ -80,8 +81,6 @@ class Run extends Model
 
     public function getReady($table)
     {
-        // $this->table_type = $this->getTableName($table);
-
         $table = $table == "repair_t" ? "repair_machine_t,repair_other_t" : $table;
         //获取用户发起未完成
         $uid = Token::getCurrentUid();
@@ -94,7 +93,9 @@ class Run extends Model
 
         //获取到自己角色审核的流程
         $role = Token::getCurrentTokenVar('role');
+        $department = AdminService::checkUserRole("全部");
         $toReady = RunReadyV::where('from_table', 'in', $table)
+            ->where('department', 'in', $department)
             ->select();
 
         $run_arr = array();
