@@ -42,6 +42,7 @@ class Token
             throw new TokenException();
         } else {
             if ($key == '') {
+                $vars = json_decode($vars, true);
                 return $vars;
             }
             if (!is_array($vars)) {

@@ -187,7 +187,7 @@ class AdminService
         if ($role_info['name'] == "局长") {
             return $department;
         }
-         elseif ($role_info['name'] = "分管部门局领导") {
+         elseif ($role_info['name'] == "分管部门局领导") {
             return $department == "全部" ? self::getUserDepartment(Token::getCurrentUid()) : $department;
         } else {
             return Token::getCurrentTokenVar('department');
