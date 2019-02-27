@@ -458,10 +458,7 @@ class Sku extends BaseController
     public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                     $sku = '', $category = '', $page = 1, $size = 20)
     {
-        $check = AdminService::checkUserRole();
-        if ($check['res']) {
-            $department = $check['department'];
-        }
+        $department = AdminService::checkUserRole($department);
         $list = (new SkuService())->getListForApply($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
         return json($list);
 
@@ -495,6 +492,7 @@ class Sku extends BaseController
     public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                 $sku = '', $category = '')
     {
+        $department = AdminService::checkUserRole($department);
         (new SkuService())->exportApply($time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
         return json(new SuccessMessage());
 
