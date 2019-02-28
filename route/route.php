@@ -14,6 +14,7 @@ Route::get('think', function () {
 });
 
 Route::get('hello/:name', 'index/hello');
+Route::get('cms/index', 'index/index');
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
 Route::get('api/:version/token/user', 'api/:version.Token/getWXToken');
