@@ -14,7 +14,20 @@ use think\Model;
 
 class SkuApplyV extends Model
 {
-    public static function getList($page, $size, $time_begin, $time_end, $department, $username, $status,$type, $sku, $category)
+
+    public function borrowSku()
+    {
+        return $this->hasMany('BorrowSkuT',
+            'b_id', 'id');
+    }
+
+    public function useSku()
+    {
+        return $this->hasMany('UseSkuT',
+            'c_id', 'id');
+    }
+
+    public static function getList($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
@@ -22,11 +35,6 @@ class SkuApplyV extends Model
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', 'in', $department);
-                }
-            })
-            ->where(function ($query) use ($username) {
-                if ($username && $username != "全部") {
-                    $query->where('username', '=', $username);
                 }
             })
             ->where(function ($query) use ($username) {
@@ -44,16 +52,6 @@ class SkuApplyV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->where(function ($query) use ($sku) {
-                if ($sku && $sku != "") {
-                    $query->where('sku', 'like', "%" . $sku . "%");
-                }
-            })
-            ->where(function ($query) use ($category) {
-                if ($category && $category != "") {
-                    $query->where('category', 'like', "%" . $category . "%");
-                }
-            })
             ->order('create_time desc')
             ->paginate($size, false, ['page' => $page])
             ->toArray();
@@ -63,7 +61,7 @@ class SkuApplyV extends Model
     }
 
 
-    public static function export($time_begin, $time_end, $department, $username, $status,$type, $sku, $category)
+    public static function export($time_begin, $time_end, $department, $username, $status, $type, $sku, $category)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)

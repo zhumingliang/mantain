@@ -118,6 +118,7 @@ Route::get('api/:version/sku', 'api/:version.Sku/getTheSku');
 Route::get('api/:version/sku/list', 'api/:version.Sku/getSkuList');
 Route::get('api/:version/sku/list/use', 'api/:version.Sku/getSkuForUse');
 Route::get('api/:version/sku/apply/list', 'api/:version.Sku/getListForApply');
+Route::get('api/:version/sku/apply/detail', 'api/:version.Sku/applyDetail');
 Route::get('api/:version/sku/apply/export', 'api/:version.Sku/exportApply');
 Route::post('api/:version/collar/use/save', 'api/:version.Sku/collarUseSave');
 

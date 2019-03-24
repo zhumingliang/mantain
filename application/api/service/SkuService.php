@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\BorrowSkuT;
 use app\api\model\BorrowT;
 use app\api\model\CategoryT;
 use app\api\model\CollarUseT;
@@ -18,7 +19,9 @@ use app\api\model\SkuStockV;
 use app\api\model\SkuT;
 use app\api\model\StockV;
 use app\api\model\UnitT;
+use app\api\model\UseSkuT;
 use app\lib\enum\CommonEnum;
+use app\lib\enum\UserEnum;
 use app\lib\exception\FlowException;
 use app\lib\exception\OperationException;
 use app\lib\exception\ParameterException;
@@ -298,27 +301,33 @@ class SkuService extends BaseService
 
     /**
      * 检测库存是否超出提醒值
-     * @param $sku_id
+     * @param $sku
      * @param $stock
      * @return int
      * @throws \think\exception\DbException
      */
-    private function checkStockToSendMsg($sku_id, $stock)
+    private function checkStockToSendMsg($sku)
     {
-        $info = SkuT::get($sku_id);
-        if ($info->alert == 1) {
-            $min = $info->min;
-            $max = $info->max;
 
-            if ($stock < $min) {
-                $this->sendMsgWithStock($info->name, $stock, 1, $min);
-                return 1;
-            }
-            if ($stock > $max) {
-                $this->sendMsgWithStock($info->name, $stock, 2, $max);
-                return 1;
+        foreach ($sku as $k => $v) {
+            $sku_id = $sku_id = $v['sku_id'];
+            $stock = $v['sku_stock'];
+            $info = SkuT::get($sku_id);
+            if ($info->alert == 1) {
+                $min = $info->min;
+                $max = $info->max;
+
+                if ($stock < $min) {
+                    $this->sendMsgWithStock($info->name, $stock, 1, $min);
+                    return 1;
+                }
+                if ($stock > $max) {
+                    $this->sendMsgWithStock($info->name, $stock, 2, $max);
+                    return 1;
+                }
             }
         }
+
 
     }
 
@@ -378,20 +387,46 @@ class SkuService extends BaseService
      */
     public function collarUseSave($params)
     {
-        $stock = $this->checkStock($params['sku_id'], $params['count']);
+        $sku_id = $params['sku_id'];
+        $sku_count = $params['sku_count'];
+
+        $id_arr = explode(',', $sku_id);
+        $count_arr = explode(',', $sku_count);
+
+        if (count($id_arr) != count($count_arr)) {
+            throw  new SkuException(
+                ['code' => 401,
+                    'msg' => '参数错误，商品id数量和商品数量参数位不匹配',
+                    'errorCode' => 60002
+                ]
+            );
+
+        }
+
+        $sku = array();
+        for ($i = 0; $i < count($id_arr); $i++) {
+            $data = [
+                'sku_id' => $id_arr[$i],
+                'sku_count' => $count_arr[$i],
+                'sku_stock' => $this->checkStock($id_arr[$i], $count_arr[$i])
+            ];
+            array_push($sku,$data);
+
+        }
         $type = $params['type'];
         if ($type == CommonEnum::BORROW) {
             $params['borrow_return'] = 2;
-            $this->saveBorrow($params);
+            $this->saveBorrow($params, $sku);
 
         } else if ($type == CommonEnum::COLLAR_USE) {
-            $this->saveCollarUse($params);
+            $this->saveCollarUse($params, $sku);
 
         } else {
             throw new ParameterException();
         }
 
-        $this->checkStockToSendMsg($params['sku_id'], $stock);
+
+        $this->checkStockToSendMsg($sku);
 
 
     }
@@ -408,10 +443,10 @@ class SkuService extends BaseService
             );
         }
 
-        return $count - $stock;
+        return $stock - $count;
     }
 
-    private function saveBorrow($params)
+    private function saveBorrow($params, $sku)
     {
 
         Db::startTrans();
@@ -421,6 +456,16 @@ class SkuService extends BaseService
             $res = BorrowT::create($params);
             if (!$res) {
                 throw new OperationException();
+            }
+            //保存明细
+            foreach ($sku as $k => $v) {
+                $sku[$k]['b_id'] = $res->id;
+            }
+            $id = (new BorrowSkuT())->saveAll($sku);
+            if (!$id) {
+                throw new OperationException([
+                    'msg' => "新增用品借用明细失败"
+                ]);
             }
             //启动工作流
             $check_res = (new FlowService())->saveCheck($res->id, 'borrow_t');
@@ -437,7 +482,7 @@ class SkuService extends BaseService
 
     }
 
-    private function saveCollarUse($params)
+    private function saveCollarUse($params, $sku)
     {
 
         Db::startTrans();
@@ -447,6 +492,17 @@ class SkuService extends BaseService
             if (!$res) {
                 throw new OperationException();
             }
+            //保存明细
+            foreach ($sku as $k => $v) {
+                $sku[$k]['c_id'] = $res->id;
+            }
+            $id = (new UseSkuT())->saveAll($sku);
+            if (!$id) {
+                throw new OperationException([
+                    'msg' => "新增用品借用明细失败"
+                ]);
+            }
+
             //启动工作流
             $check_res = (new FlowService())->saveCheck($res->id, 'collar_use_t');
             if (!$check_res == 1) {

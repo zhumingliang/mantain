@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\ApplyDetailV;
 use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
 use app\api\model\SkuStockT;
@@ -374,14 +375,14 @@ class Sku extends BaseController
      * @apiDescription  用品管理-领用申请
      * @apiExample {post}  请求样例:
      *    {
-     *       "sku_id":1,
-     *       "count": 20,
+     *       "sku_id":1,2,3,
+     *       "sku_count":1,2,3,
      *       "time_begin": "2018-12-28",
      *       "time_end": "2018-12-30",
      *       "type": 1
      *     }
-     * @apiParam (请求参数说明) {int} sku_id    用品id
-     * @apiParam (请求参数说明) {int} count    数量
+     * @apiParam (请求参数说明) {int} sku_id    用品id,多个用逗号隔开
+     * @apiParam (请求参数说明) {int} sku_count 用品数量，多个用逗号隔开
      * @apiParam (请求参数说明) {String} time_begin    领用日期
      * @apiParam (请求参数说明) {String} time_end   归还日期： 借用物品需填写
      * @apiParam (请求参数说明) {int} type   使用方式：1 | 借用；2 | 领用
@@ -418,9 +419,7 @@ class Sku extends BaseController
      * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
-     * @apiParam (请求参数说明) {String}  category 分类
      * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
-     * @apiParam (请求参数说明) {String}  sku 用品名称
      * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
@@ -455,6 +454,11 @@ class Sku extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                     $sku = '', $category = '', $page = 1, $size = 20)
@@ -462,6 +466,37 @@ class Sku extends BaseController
         $department = AdminService::checkUserRole($department);
         $list = (new SkuService())->getListForApply($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
         return json($list);
+
+    }
+
+
+    /**
+     * @api {GET} /api/v1/sku/apply/detail 用品管理-领用列表-用品信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用品管理-领用列表-用品信息
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/apply/detail?type=borrow_t&id=1
+     * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
+     * @apiParam (请求参数说明) {int}  id 申请id
+     * @apiSuccessExample {json}返回样例:
+     * [{"sku_id":1,"sku_name":"洗手液","sku_count":1,"format":"500ml","category_name":"打印机耗材"},{"sku_id":3,"sku_name":"纸巾","sku_count":3,"format":"500ml","category_name":"打印机耗材"},{"sku_id":2,"sku_name":"纸巾","sku_count":2,"format":"500ml","category_name":"打印机耗材"}]
+     * @apiSuccess (返回参数说明) {String} sku_name  用品名称
+     * @apiSuccess (返回参数说明) {String} sku_count  领用/借用数量
+     * @apiSuccess (返回参数说明) {String} format  规格型号
+     * @apiSuccess (返回参数说明) {int} category_name  类别
+     * @param $type
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function applyDetail($type, $id)
+    {
+        $detail = ApplyDetailV::where('type', $type)->where('b_id', $id)
+            ->field('sku_id,sku_name,sku_count,format,category_name')->select();
+        return json($detail);
 
     }
 
@@ -489,6 +524,11 @@ class Sku extends BaseController
      * @param string $sku
      * @param string $category
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                 $sku = '', $category = '')
