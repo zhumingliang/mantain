@@ -18,7 +18,7 @@ class Index extends Controller
     public function index()
     {
 
-        //(new MsgService())->sendMsg("ZhuMingLiang", "测试");
+       $this->redirect('http://jmswj.e-irobot.com:1035/taxs/index.html#/login');
     }
 
 }

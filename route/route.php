@@ -139,6 +139,9 @@ Route::post('api/:version/image/upload', 'api/:version.Image/upload');
 
 Route::post('api/:version/index', 'api/:version.Index/index');
 
+Route::get('/', 'api/Index/index');
+
+
 
 
 
