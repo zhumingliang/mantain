@@ -294,7 +294,11 @@ class SkuService extends BaseService
         }
         $stock_old = SkuStockV::getSkuStock($sku_id);
         $stock = $stock_old + $count;
-        $this->checkStockToSendMsg($sku_id, $stock);
+        $sku = [
+            'sku_id' => $sku_id,
+            'sku_stock' => $stock
+        ];
+        $this->checkStockToSendMsg($sku);
         return $stock;
     }
 
@@ -410,7 +414,7 @@ class SkuService extends BaseService
                 'sku_count' => $count_arr[$i],
                 'sku_stock' => $this->checkStock($id_arr[$i], $count_arr[$i])
             ];
-            array_push($sku,$data);
+            array_push($sku, $data);
 
         }
         $type = $params['type'];
