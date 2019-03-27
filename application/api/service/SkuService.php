@@ -294,33 +294,38 @@ class SkuService extends BaseService
         }
         $stock_old = SkuStockV::getSkuStock($sku_id);
         $stock = $stock_old + $count;
-        $sku = [
+        $sku = array();
+        $info = array(
             'sku_id' => $sku_id,
             'sku_stock' => $stock
-        ];
+        );
+        array_push($sku, $info);
         $this->checkStockToSendMsg($sku);
         return $stock;
     }
 
 
     /**
-     * 检测库存是否超出提醒值
      * @param $sku
-     * @param $stock
      * @return int
+     * @throws SkuException
      * @throws \think\exception\DbException
      */
     private function checkStockToSendMsg($sku)
     {
 
         foreach ($sku as $k => $v) {
-            $sku_id = $sku_id = $v['sku_id'];
+            $sku_id = $v['sku_id'];
             $stock = $v['sku_stock'];
             $info = SkuT::get($sku_id);
+            if (!$info){
+                throw new SkuException([
+                    'msg'=>'指定sku_id不存在'
+                ]);
+            }
             if ($info->alert == 1) {
                 $min = $info->min;
                 $max = $info->max;
-
                 if ($stock < $min) {
                     $this->sendMsgWithStock($info->name, $stock, 1, $min);
                     return 1;
