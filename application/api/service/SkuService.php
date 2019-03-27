@@ -300,7 +300,7 @@ class SkuService extends BaseService
             'sku_stock' => $stock
         );
         array_push($sku, $info);
-        //$this->checkStockToSendMsg($sku);
+       // $this->checkStockToSendMsg($sku);
         return $stock;
     }
 
@@ -435,7 +435,7 @@ class SkuService extends BaseService
         }
 
 
-        $this->checkStockToSendMsg($sku);
+       // $this->checkStockToSendMsg($sku);
 
 
     }
