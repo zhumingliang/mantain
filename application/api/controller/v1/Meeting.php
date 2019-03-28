@@ -248,7 +248,7 @@ class Meeting extends BaseController
      * @param int $size
      * @return \think\response\Json
      */
-    public function getMeetingList($time_begin, $time_end, $address, $theme, $host, $page = 1, $size = 20)
+    public function getMeetingList($time_begin, $time_end, $address="全部", $theme="全部", $host="全部", $page = 1, $size = 20)
     {
         $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host);
         return json($list);
