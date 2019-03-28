@@ -48,7 +48,7 @@ class MeetingService extends BaseService
             ]);
         }
 
-        $this->sendMsg(date('Y-m-d H:i'), $meeting->address, $mobile);
+        //$this->sendMsg(date('Y-m-d H:i'), $meeting->address, $mobile);
 
         return [
             'all' => $this->getMeetingMembers($department),

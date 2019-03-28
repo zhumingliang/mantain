@@ -460,7 +460,8 @@ class Sku extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
+    public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部",
+                                    $status = "3", $type = "全部",
                                     $sku = '', $category = '', $page = 1, $size = 20)
     {
         $department = AdminService::checkUserRole($department);
