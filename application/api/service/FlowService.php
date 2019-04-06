@@ -305,6 +305,58 @@ class FlowService
     }
 
 
+    public function checkListStatus($list, $wf_type, $repair = false, $sku = false)
+    {
+        $data = $list['data'];
+        if (!count($data)) {
+            return $list;
+        }
+        foreach ($data as $k => $v) {
+            if ($repair || $sku) {
+                if ($repair) {
+                    $data[$k]['check'] = $this->checkInfoStatus($v['id'], $v['wf_type']);
+                }
+                if ($sku) {
+                    $data[$k]['check'] = $this->checkInfoStatus($v['id'], $v['type']);
+                }
+            } else {
+                $data[$k]['check'] = $this->checkInfoStatus($v['id'], $wf_type);
+            }
+        }
+        $list['data'] = $data;
+        return $list;
+
+    }
+
+
+    /**
+     * 检测指定流程是否需要审批
+     * @param $wf_fid
+     * @param $wf_type
+     * @return int|mixed
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function checkInfoStatus($wf_fid, $wf_type)
+    {
+        //检查流程是否走完
+        $result = Db::name('run')->where('from_id', 'eq', $wf_fid)
+            ->where('from_table', 'eq', $wf_type)
+            ->where('is_del', 'eq', 0)
+            ->find();
+        if ($result['status'] == 1) {
+            //已经完成审核
+            return 2;
+        }
+        $check_res = $this->getFlowStatus($wf_fid, $wf_type);
+        return $check_res['check'];
+
+    }
+
+
     private function checkComplete($npid, $wf_type, $wf_fid, $run_id)
     {
         if ($npid == '') {

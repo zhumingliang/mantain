@@ -140,6 +140,7 @@ class OfficialService extends BaseService
     public function getList($page, $size, $time_begin, $time_end, $department, $username, $status, $meal_type)
     {
         $list = OfficialReceptV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $meal_type);
+        $list=(new FlowService())->checkListStatus($list,'official_recept_t');
         return $list;
     }
 

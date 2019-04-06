@@ -88,6 +88,7 @@ class BuffetService extends BaseService
     {
 
         $list = BuffetV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
+        $list=(new FlowService())->checkListStatus($list,'buffet_t');
         return $list;
     }
 

@@ -46,6 +46,7 @@ class AccessService extends BaseService
     {
 
         $list = AccessControlV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $access);
+        $list=(new FlowService())->checkListStatus($list,'access_control_t');
         return $list;
     }
 

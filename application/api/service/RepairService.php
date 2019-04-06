@@ -123,6 +123,7 @@ class RepairService extends BaseService
     public function getList($page, $size, $time_begin, $time_end, $department, $username, $status)
     {
         $list = RepairV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
+        $list = (new FlowService())->checkListStatus($list, '', true, false);
         return $list;
     }
 

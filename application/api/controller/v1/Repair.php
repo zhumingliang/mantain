@@ -121,6 +121,11 @@ class Repair extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status, $page = 1, $size = 20)
     {

@@ -531,6 +531,7 @@ class SkuService extends BaseService
     {
 
         $list = SkuApplyV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
+        $list=(new FlowService())->checkListStatus($list,'',false,true);
         return $list;
     }
 

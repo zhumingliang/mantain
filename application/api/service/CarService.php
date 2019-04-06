@@ -43,6 +43,7 @@ class CarService extends BaseService
     public function getList($page, $size, $time_begin, $time_end, $department, $username, $status, $reason)
     {
         $list = CarV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $reason);
+        $list=(new FlowService())->checkListStatus($list,'car_t');
         return $list;
 
     }

@@ -92,7 +92,6 @@ class Buffet extends BaseController
      * @apiSuccess (返回参数说明) {int} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -101,6 +100,11 @@ class Buffet extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)

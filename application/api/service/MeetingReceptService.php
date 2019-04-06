@@ -143,6 +143,7 @@ class MeetingReceptService extends BaseService
     public function getList($time_begin, $time_end, $department, $username, $status, $page, $size)
     {
         $list = MeetingReceptV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
+        $list=(new FlowService())->checkListStatus($list,'meeting_recept_t');
         return $list;
     }
 

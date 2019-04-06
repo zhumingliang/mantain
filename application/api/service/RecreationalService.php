@@ -52,6 +52,7 @@ class RecreationalService extends BaseService
     public function getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space)
     {
         $list = RecreationalV::getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space);
+        $list=(new FlowService())->checkListStatus($list,'space_recreational_t');
         return $list;
     }
 

@@ -51,6 +51,7 @@ class MeetingPlaceService extends BaseService
     public function getList($time_begin, $time_end, $department, $username, $status, $page, $size)
     {
         $list = MeetingplaceV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
+        $list=(new FlowService())->checkListStatus($list,'meetingplace_t');
         return $list;
 
 
