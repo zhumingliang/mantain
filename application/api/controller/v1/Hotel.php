@@ -60,6 +60,7 @@ class Hotel extends BaseController
         $params['admin_id'] = $admin_id;
         $params['status'] = CommonEnum::SAVE;
         $params['state'] = CommonEnum::STATE_IS_OK;
+        $params['jifu'] = AdminService::checkUserJiFu();
         $params['source'] = TokenService::getCurrentTokenVar('category');
         (new HotelService())->save($params);
         return json(new SuccessMessage());
@@ -102,7 +103,6 @@ class Hotel extends BaseController
      * @apiSuccess (返回参数说明) {String} members  人员名单
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -111,6 +111,11 @@ class Hotel extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)

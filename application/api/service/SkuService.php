@@ -140,7 +140,6 @@ class SkuService extends BaseService
 
     }
 
-
     /**
      * 保存申请和图片关联
      * @param $imgs
@@ -229,7 +228,6 @@ class SkuService extends BaseService
         return 0;
     }
 
-
     /**
      * @param $file
      * @return array
@@ -304,7 +302,6 @@ class SkuService extends BaseService
         return $stock;
     }
 
-
     /**
      * @param $sku
      * @return int
@@ -368,7 +365,6 @@ class SkuService extends BaseService
         return StockV::getList($category, $order_number, $category_id, $page, $size);
     }
 
-
     public function exportStock($category, $order_number, $category_id)
     {
         $list = StockV::exportStock($category, $order_number, $category_id);
@@ -387,7 +383,6 @@ class SkuService extends BaseService
         $this->put_csv($list, $header, $file_name);
 
     }
-
 
     /**
      * @param $params
