@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={dede:global.cfg_soft_lang/}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="order by dede58.com/" />
+    <title>{dede:global.cfg_webname/}</title>
+    <meta name="description" content="{dede:global.cfg_description/}" />
+    <meta name="keywords" content="{dede:global.cfg_keywords/}" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/skin/css/swiper.min.css">
+    <link href="/skin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/skin/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/skin/js/html5shiv.min.js"></script>
+    <script src="/skin/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/skin/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/skin/js/bootstrap.min.js"></script>
+    <style>
+        .swiper-slide {
+            float: left;
+            height: auto;
+        }
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            bottom: 0;
+            text-align: right;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            line-height: 40px;
+            height: 40px;
+            padding-right: 30px;
+        }
+        .swiper-pagination-switch {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #222;
+            margin-right: 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+        .swiper-visible-switch {
+            background: #aaa;
+        }
+        .swiper-active-switch {
+            background: #fff;
+        }
+        .swiper-slide2 {
+            float: left;
+            height: auto;
+        }
+        .pagination2 {
+            position: absolute;
+            z-index: 20;
+            bottom: 0;
+            text-align: right;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            line-height: 40px;
+            height: 40px;
+            padding-right: 30px;
+        }
+        .swiper-pagination-switch2 {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #222;
+            margin-right: 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+        .swiper-visible-switch2 {
+            background: #aaa;
+        }
+        .swiper-active-switch2 {
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<script>
+    $(document).ready(
+        function()
+        {
+            $(".nav li").mouseover(
+                function(){
+                    $(".nav li").removeClass('active');
+                    $(this).addClass('active');
+                }
+            );
+        });
+</script>
+<script src="/skin/js/idangerous.swiper.min.js"></script>
+<script src="/skin/js/idangerous.swiper.progress.min.js"></script>
+{dede:include filename="head.htm"/}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="height20 visible-lg visible-md"></div>
+            <div class="height10 visible-lg visible-md"></div>
+            <div class="height20"></div>
+            <div class="main_slide col-xs-12 col-lg-7">
+                <!-- Swiper -->
+
+                <div class="device"> <a class="arrow-left" href="#"></a> <a class="arrow-right" href="#"></a>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper"> {dede:arclist titlelen=80 orderby ='pubdate' row='6' flag='h'}
+                            <div class="swiper-slide"><a href="[field:arcurl/]" class="slide_link">
+                                <div class="slide_title">[field:title/]</div>
+                                <img src="/skin/img/default.png"  style="background-image:url([field:picname/]);display:block;" alt="[field:title/]" class="img-responsive" height="440"></a></div>
+                            {/dede:arclist} </div>
+                    </div>
+                    <div class="pagination"></div>
+                </div>
+
+                <!-- Swiper JS -->
+
+                <!-- Initialize Swiper -->
+                <script>
+                    //swiper banner start
+                    var mySwiper = new Swiper('.swiper-container',{
+                        pagination: '.pagination',
+                        loop:true,//循环模式 是/否
+                        grabCursor: true,//光标属性 当为true时，光标移动到banner上变成手掌的样式
+                        paginationClickable: false,//生成分页控件
+                        calculateHeight:true,//响应式容器高度
+                        autoplay:5000//过度时间
+                    })
+                    $(window).resize(function(){
+                        var h=$(".swiper-slide").find("img").height();
+                        $(".swiper-wrapper,.swiper-slide").css("height",h)
+                    })
+
+                    $('.arrow-left').on('click', function(e){
+                        e.preventDefault()
+                        mySwiper.swipePrev()
+                    })
+                    $('.arrow-right').on('click', function(e){
+                        e.preventDefault()
+                        mySwiper.swipeNext()
+                    })
+
+                </script>
+            </div>
+            <div class="main_news col-xs-12 col-lg-5">
+                <div class="main_search">
+                    <div class="search_bg">
+                        ##form  name="formsearch" action="{dede:global.cfg_cmsurl/}/plus/search.php">
+                        <input name="q" id="q" maxlength="20" type="text">
+                        <input name="se-btn" id="submit" type="submit" value="" class="search_bt">
+                        ##/form>
+                    </div>
+                </div>
+                <div class="height10"></div>
+                <script type="text/javascript" language="javascript">
+                    function setTab(m,n){
+                        var tli=document.getElementById("main_news_tab"+m).getElementsByTagName("span");
+                        var mli=document.getElementById("main_news_tablist"+m).getElementsByTagName("dl");
+                        for(i=0;i<tli.length;i++){
+                            tli[i].className=i==n?"hover":"";
+                            mli[i].style.display=i==n?"block":"none";
+                        }
+                    }
+                </script>
+                {dede:channelartlist typeid='14,0'}
+                <div class="main_news_tab" id="main_news_tab0"> {dede:channel type='son' row='3'} <span class="hover" onMouseOver=" setTab(0,[field:global.autoindex/] )" onclick="location='[field:typeurl/]';">[field:typename/]</span> {/dede:channel} <a href="{dede:field name='typeurl'/}">更多+</a></div>
+                {/dede:channelartlist}
+                <div class="main_news_tablist" id="main_news_tablist0"> {dede:channelartlist typeid='14' type='son'}
+                    <dl {dede:global name=itemindex runphp='yes'}$a="class='block'";$b="";if(@me==1){@me=$a;}else{@me=$b;}{/dede:global}>
+                        <dt class="row"> {dede:arclist titlelen=80 orderby ='pubdate' limit='0,1'}
+                            <div class="col-xs-12">
+                                <div class="main_ntl_title"><a href="[field:arcurl/]">[field:title/]</a></div>
+                                <div class="main_ntl_text">[field:description function="cn_substr(@me,160)"/]...</div>
+                                <div class="main_ntl_more"><a href="[field:arcurl/]">更多+</a></div>
+                            </div>
+                            {/dede:arclist} </dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                {dede:arclist titlelen=80 orderby ='pubdate' limit='1,9'}
+                                <li><a href="[field:arcurl/]">[field:title/]</a>[[field:pubdate function="MyDate('m-d',@me)"/]]</li>
+                                {/dede:arclist}
+                            </ul>
+                        </dd>
+                    </dl>
+                    {/dede:channelartlist} </div>
+            </div>
+            <div class="height10"></div>
+            <script src="/skin/js/scrollpic.js" type="text/javascript" language="javascript"></script>
+            <div class="main_hot col-xs-12 visible-lg">
+                <div class="main_hot_bg">
+                    <div class="main_hot_title"><img src="/skin/img/index_21.jpg" class="img-responsive" alt="热点专题"></div>
+                    <div class="main_hot_list" id="ISL_Cont_1"> {dede:arclist titlelen=80 orderby ='pubdate' flag='a'} <a href="[field:arcurl/]"><img src="[field:picname/]"  alt="[field:title/]" class="img-responsive"></a> {/dede:arclist}
+                        <!-- Add Pagination -->
+                    </div>
+
+                    <!-- Initialize Swiper -->
+                    <script language=javascript type=text/javascript>
+                        var scrollPic_02 = new ScrollPic();
+                        scrollPic_02.scrollContId   = "ISL_Cont_1"; //内容容器ID
+                        //scrollPic_02.arrLeftId      = "LeftArr";//左箭头ID
+                        //scrollPic_02.arrRightId     = "RightArr"; //右箭头ID
+
+                        scrollPic_02.frameWidth     = 920;//显示框宽度
+                        scrollPic_02.pageWidth      = 307; //翻页宽度
+
+                        scrollPic_02.speed          = 10; //移动速度(单位毫秒，越小越快)
+                        scrollPic_02.space          = 10; //每次移动像素(单位px，越大越快)
+                        scrollPic_02.autoPlay       = true; //自动播放
+                        scrollPic_02.autoPlayTime   = 3; //自动播放间隔时间(秒)
+
+                        scrollPic_02.initialize(); //初始化
+                    </script>
+                    <div class="height5"></div>
+                </div>
+            </div>
+            <div class="main_hot col-xs-12 hidden-lg">
+                <div class="main_hot_bg2">
+                    <div class="main_hot_title2">热点专题</div>
+                    <div class="main_hot_list2 row">
+                        <ul class="list-unstyled">
+                            {dede:arclist titlelen=80 orderby ='pubdate' flag='a'}
+                            <li class="col-xs-6"><a href="[field:arcurl/]"><img src="[field:picname/]"  alt="[field:title/]" class="img-responsive"></a></li>
+                            {/dede:arclist}
+                        </ul>
+                    </div>
+
+                    <div class="height5"></div>
+                </div>
+            </div>
+            <div class="main_article"> {dede:channelartlist typeid='8,18,19,23,24,34,36,0'}
+                <div class="main_article_list col-xs-12 col-md-4">
+                    <div class="main_article_bg">
+                        <div class="main_title"><strong>{dede:field name='typename'/}</strong><a href="{dede:field name='typeurl'/}">更多+</a></div>
+                        {dede:arclist titlelen=80 orderby ='pubdate' limit='0,1'}
+                        <div class="main_art_title"><a href="[field:arcurl/]">[field:title/]</a></div>
+                        {/dede:arclist}
+                        <ul class="list-unstyled">
+                            {dede:arclist titlelen=80 orderby ='pubdate' limit='1,7'}
+                            <li><a href="[field:arcurl/]">[field:title/]</a>[[field:pubdate function="MyDate('m-d',@me)"/]]</li>
+                            {/dede:arclist}
+                        </ul>
+                    </div>
+                </div>
+                {/dede:channelartlist} </div>
+            <div class="main_ad col-xs-12"><a href="#"><img src="/skin/img/index_37.gif" class="img-responsive" alt="ad"></a></div>
+            <div class="height10"></div>
+            {dede:channelartlist typeid='6,0'}
+            <div class="main_photo col-xs-12">
+                <div class="main_photo_bg">
+                    <div class="main_title"><strong>{dede:field name='typename'/}</strong><a href="{dede:field name='typeurl'/}">更多+</a></div>
+                    <ul class="list-unstyled">
+                        {dede:arclist titlelen=80 orderby ='pubdate' limit='0,1'}
+                        <li class="col-xs-12 main_photo_big"> <a href="[field:arcurl/]"> <span style="background-image:url([field:picname/]);"><img src="/skin/img/index_49x.png" class="img-responsive"></span>
+                            <p>[field:title/]</p>
+                        </a> </li>
+                        {/dede:arclist}
+                        {dede:arclist titlelen=80 orderby ='pubdate' limit='1,4'}
+                        <li class="col-xs-6"> <a href="[field:arcurl/]"><span style="background-image:url([field:picname/]);"><img src="/skin/img/pic_03x.png"   class="img-responsive"></span>
+                            <p>[field:title/]</p>
+                        </a> </li>
+                        {/dede:arclist}
+                    </ul>
+                    <div class="height5"></div>
+                </div>
+            </div>
+            {/dede:channelartlist}
+
+            {dede:channelartlist typeid='37,0'}
+            <div class="main_photo col-xs-12">
+                <div class="main_photo_bg">
+                    <div class="main_title"><strong>{dede:field name='typename'/}</strong><a href="{dede:field name='typeurl'/}">更多+</a></div>
+                    <ul class="list-unstyled">
+                        {dede:arclist titlelen=80 orderby ='pubdate' limit='0,4'}
+                        <li class="col-xs-6"> <a href="[field:arcurl/]"><span style="background-image:url([field:picname/]);"><img src="/skin/img/pic_03x.png"   class="img-responsive"></span>
+                            <p>[field:title/]</p>
+                        </a> </li>
+                        {/dede:arclist}
+                    </ul>
+                    <div class="height5"></div>
+                </div>
+            </div>
+            {/dede:channelartlist}
+
+
+            <div class="main_ph_right col-xs-12">
+                <div class="row">
+                    <div class="main_fbk col-xs-12  col-md-3">
+                        <div class="main_phright_bg">
+                            <div class="main_title"><strong>园企互动</strong></div>
+                            <ul class="list-unstyled">
+                                <li class="main_fbk_bt1 col-xs-3 col-md-6"><a href="{dede:type typeid='30'}[field:typeurl/]{/dede:type}">我要咨询</a></li>
+                                <li class="main_fbk_bt2 col-xs-3 col-md-6"><a href="{dede:type typeid='30'}[field:typeurl/]{/dede:type}">我要投诉</a></li>
+                                <li class="main_fbk_bt3 col-xs-3 col-md-6"><a href="{dede:type typeid='30'}[field:typeurl/]{/dede:type}">我要建议</a></li>
+                                <li class="main_fbk_bt4 col-xs-3 col-md-6"><a href="{dede:type typeid='30'}[field:typeurl/]{/dede:type}">征集调查</a></li>
+                            </ul>
+                            <div class="height10"></div>
+                        </div>
+                    </div>
+                    {dede:channelartlist typeid='19,0'}
+                    <div class="main_culture col-xs-12  col-md-5">
+                        <div class="main_phright_bg2">
+                            <div class="main_title"><strong>{dede:field name='typename'/}</strong><a href="{dede:field name='typeurl'/}">更多+</a></div>
+                            <ul class="list-unstyled">
+                                {dede:arclist titlelen=80 orderby ='pubdate' row='7'}
+                                <li><a href="[field:arcurl/]">[field:title/]</a>[[field:pubdate function="MyDate('m-d',@me)"/]]</li>
+                                {/dede:arclist}
+                            </ul>
+                        </div>
+                    </div>
+                    {/dede:channelartlist}
+                    {dede:channelartlist typeid='20,0'}
+                    <div class="main_culture col-xs-12  col-md-4">
+                        <div class="main_phright_bg2">
+                            <div class="main_title"><strong>{dede:field name='typename'/}</strong><a href="{dede:field name='typeurl'/}">更多+</a></div>
+                            <ul class="list-unstyled">
+                                {dede:arclist titlelen=80 orderby ='pubdate' row='7'}
+                                <li><a href="[field:arcurl/]">[field:title/]</a>[[field:pubdate function="MyDate('m-d',@me)"/]]</li>
+                                {/dede:arclist}
+                            </ul>
+                        </div>
+                    </div>
+                    {/dede:channelartlist} </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="height20"></div>
+{dede:include filename="footer.htm"/}
+</body>
+</html>

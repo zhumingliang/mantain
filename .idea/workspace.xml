@@ -1,121 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="初始化">
+    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/flow/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/api_data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/api_data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/api_project.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/api_project.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/ca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/de.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/es.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/fr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/it.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/locale.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/nl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/pl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/pt_br.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/ro.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/ru.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/tr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/vi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/zh.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/locales/zh_cn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/utils/handlebars_helper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/utils/send_sample_request.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/diff_match_patch.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/handlebars.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/list.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/lodash.custom.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/path-to-regexp/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/path-to-regexp/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/polyfill.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-Splus.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-aea.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-agc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-apollo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-basic.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-cbm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-cl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-clj.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-css.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-dart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-el.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-erl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-erlang.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-fs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-go.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-hs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lasso.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lassoscript.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-latex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lgt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lisp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-ll.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-llvm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-logtalk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-ls.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lsp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-lua.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-matlab.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-ml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-mumps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-n.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-nemerle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-pascal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-proto.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-r.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-rd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-rkt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-rust.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-s.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-scala.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-scm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-sql.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-ss.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-swift.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-tcl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-tex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-vb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-vbs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-vhd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-vhdl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-wiki.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-xq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-xquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-yaml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/lang-yml.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/prettify/run_prettify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/require.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/semver.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/api/v1/vendor/webfontloader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/ueditor/php/upload/image/20180121/1516535149.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/ueditor/php/upload/image/20180401/1522572550.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/2e80ab571772c07dcedaf6bd1f6b9d82.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/45411a0668b6d18950a6b1b6b028feb0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/a82a7b612556f2ee585554f1289fe271.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/b70f24f7a1ed32b615a60111ab9c9e6c.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/d98228c6cec0fc9ecb64304c79a4865b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/f294d39ab2d4d3110ca6d60da0020091.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_file/uploads/20180411/fc3a3c0b55bf8872462c553f4f260019.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,13 +29,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
               <caret line="250" column="96" selection-start-line="250" selection-start-column="96" selection-end-line="250" selection-end-column="96" />
               <folding>
                 <element signature="e#571#2195#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="12" column="2" selection-start-line="12" selection-end-line="58" />
+              <folding>
+                <element signature="e#596#1645#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -248,12 +147,12 @@
         <option value="$PROJECT_DIR$/application/api/service/RepairService.php" />
         <option value="$PROJECT_DIR$/application/api/service/SkuService.php" />
         <option value="$PROJECT_DIR$/extend/workflow/db/ProcessDb.php" />
-        <option value="$PROJECT_DIR$/config/database.php" />
         <option value="$PROJECT_DIR$/application/api/service/HotelService.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Hotel.php" />
         <option value="$PROJECT_DIR$/application/api/service/FlowService.php" />
         <option value="$PROJECT_DIR$/copy_file/index.html" />
         <option value="$PROJECT_DIR$/config/wx.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
       </list>
     </option>
   </component>
@@ -290,17 +189,18 @@
             <path>
               <item name="mantain" type="b2602c69:ProjectViewProjectNode" />
               <item name="mantain" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mantain" type="b2602c69:ProjectViewProjectNode" />
               <item name="mantain" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="flow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mantain" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mantain" type="462c0819:PsiDirectoryNode" />
+              <item name="flow" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -394,21 +294,7 @@
       <workItem from="1554558809293" duration="7645000" />
       <workItem from="1554785849404" duration="5378000" />
       <workItem from="1556593986661" duration="533000" />
-      <workItem from="1556604472094" duration="939000" />
-    </task>
-    <task id="LOCAL-00141" summary="初始化">
-      <created>1547390807698</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1547390807698</updated>
-    </task>
-    <task id="LOCAL-00142" summary="初始化">
-      <created>1547429807847</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1547429807847</updated>
+      <workItem from="1556604472094" duration="1292000" />
     </task>
     <task id="LOCAL-00143" summary="初始化">
       <created>1547429821801</created>
@@ -739,15 +625,28 @@
       <option name="project" value="LOCAL" />
       <updated>1556604548925</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="初始化">
+      <created>1556633720165</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1556633720165</updated>
+    </task>
+    <task id="LOCAL-00191" summary="初始化">
+      <created>1556633780418</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1556633780418</updated>
+    </task>
+    <option name="localTasksCounter" value="192" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463521000" />
+    <option name="totallyTimeSpent" value="463874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23832923" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1110,16 +1009,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#603#1640#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/api/service/AdminService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -1216,6 +1105,16 @@
           <caret line="250" column="96" selection-start-line="250" selection-start-column="96" selection-end-line="250" selection-end-column="96" />
           <folding>
             <element signature="e#571#2195#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="12" column="2" selection-start-line="12" selection-end-line="58" />
+          <folding>
+            <element signature="e#596#1645#0#PHP" />
           </folding>
         </state>
       </provider>
