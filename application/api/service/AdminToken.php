@@ -17,6 +17,7 @@ use app\api\model\LogT;
 use app\lib\enum\CommonEnum;
 use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
+use think\captcha\Captcha;
 use think\Exception;
 use think\facade\Cache;
 use think\facade\Request;
@@ -25,12 +26,14 @@ class AdminToken extends Token
 {
     protected $account;
     protected $pwd;
+    protected $verify;
 
 
-    function __construct($account, $pwd)
+    function __construct($account, $pwd, $verify = '')
     {
         $this->account = $account;
         $this->pwd = $pwd;
+        $this->verify = $verify;
     }
 
     /**
@@ -40,6 +43,16 @@ class AdminToken extends Token
     public function get()
     {
         try {
+
+            $captcha = new Captcha();
+            if( !$captcha->check($this->verify))
+            {
+                throw new TokenException([
+                    'code' => 401,
+                    'msg' => '验证码不正确，请重新输入',
+                    'errorCode' => 30005
+                ]);
+            }
 
             $admin = AdminT::where('account', '=', $this->account)
                 ->find();
@@ -51,7 +64,7 @@ class AdminToken extends Token
                 ]);
             }
 
-           // if (sha1($this->pwd) != $admin->pwd) {
+            // if (sha1($this->pwd) != $admin->pwd) {
             if ($this->pwd != $admin->pwd) {
                 throw new TokenException([
                     'code' => 401,
@@ -60,7 +73,7 @@ class AdminToken extends Token
                 ]);
             }
 
-            if (($admin->state) !=1) {
+            if (($admin->state) != 1) {
 
                 throw new TokenException([
                     'code' => 401,
@@ -159,20 +172,20 @@ class AdminToken extends Token
 
     }
 
-  /*  private function saveLog($u_id, $user_name)
-    {
-        $data = [
-            'u_id' => $u_id,
-            'user_name' => $user_name,
-            'name' => '用户登录',
-            'state' => CommonEnum::STATE_IS_OK,
-            'ip' => $_SERVER['REMOTE_ADDR'],
-            'remark' => $user_name . '在' . date('Y-m-d H:i') . '登录了后台'
-        ];
+    /*  private function saveLog($u_id, $user_name)
+      {
+          $data = [
+              'u_id' => $u_id,
+              'user_name' => $user_name,
+              'name' => '用户登录',
+              'state' => CommonEnum::STATE_IS_OK,
+              'ip' => $_SERVER['REMOTE_ADDR'],
+              'remark' => $user_name . '在' . date('Y-m-d H:i') . '登录了后台'
+          ];
 
-        BehaviorLogT::create($data);
+          BehaviorLogT::create($data);
 
-    }*/
+      }*/
 
     /**
      * @param $key
@@ -215,7 +228,7 @@ class AdminToken extends Token
             'account' => $admin->account,
             'role' => $admin->role,
             'department' => $admin->department,
-            'category'=>'pc'
+            'category' => 'pc'
         ];
 
         return $cachedValue;

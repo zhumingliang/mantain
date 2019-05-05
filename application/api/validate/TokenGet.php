@@ -14,6 +14,7 @@ class TokenGet extends BaseValidate
     protected $rule = [
         'code' => 'require|isNotEmpty',
         'pwd' => 'require|isNotEmpty',
+        'verify' => 'require|isNotEmpty',
         'account' => 'require|isNotEmpty'
     ];
 
@@ -25,7 +26,7 @@ class TokenGet extends BaseValidate
 
     protected $scene = [
         'wx' => ['code'],
-        'pc' => ['account', 'pwd'],
+        'pc' => ['account', 'pwd','verify'],
     ];
 
 }

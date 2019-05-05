@@ -9,14 +9,9 @@
 namespace app\api\controller\v1;
 
 
-use app\api\model\FormidT;
-use app\api\model\TestT;
-use app\api\model\UserT;
 use app\api\service\AdminToken;
-use app\api\service\UserToken;
 use app\api\service\UserTokenService;
 use app\api\validate\TokenGet;
-use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
 use think\captcha\Captcha;
@@ -36,10 +31,12 @@ class Token extends Controller
      * @apiExample {post}  请求样例:
      *    {
      *       "account": "18956225230",
-     *       "pwd": "a123456"
+     *       "pwd": "a123456",
+     *       "verify":"adasa"
      *     }
      * @apiParam (请求参数说明) {String} account  账号
      * @apiParam (请求参数说明) {String} pwd   用户密码
+     * @apiParam (请求参数说明) {String} verify   验证码
      * @apiSuccessExample {json} 返回样例:
      * {"u_id":1,"username":"朱明良","account":"admin","role":1,"token":"7488c7a7b1f79ed99b319f141637519c"}
      * @apiSuccess (返回参数说明) {int} u_id 用户id
@@ -52,8 +49,9 @@ class Token extends Controller
     {
         $account = $this->request->param('account');
         $pwd = $this->request->param('pwd');
+        $verify = $this->request->param('verify');
         (new TokenGet())->scene('pc')->goCheck();
-        $at = new AdminToken($account, $pwd);
+        $at = new AdminToken($account, $pwd,$verify);
         $token = $at->get();
         return json($token);
     }
@@ -119,21 +117,15 @@ class Token extends Controller
 
     }
 
+    /**
+     * 获取验证码
+     * @return \think\Response
+     */
     public function verify()
     {
         $captcha = new Captcha();
         return $captcha->entry();
     }
 
-    public function captchaCheck($code)
-    {
-        $captcha = new Captcha();
-        if (!$captcha->check($code)) {
-            echo 1;
-            // 验证失败
-        } else {
-            echo 2;
-        }
-    }
 
 }
