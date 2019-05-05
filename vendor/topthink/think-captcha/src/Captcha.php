@@ -118,6 +118,7 @@ class Captcha
             return false;
         }
 
+        echo $secode['verify_code'];
         if ($this->authcode(strtoupper($code)) == $secode['verify_code']) {
             $this->reset && Session::delete($key, '');
             return true;
