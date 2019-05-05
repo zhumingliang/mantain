@@ -125,4 +125,15 @@ class Token extends Controller
         return $captcha->entry();
     }
 
+    public function captchaCheck($code)
+    {
+        $captcha = new Captcha();
+        if (!$captcha->check($code)) {
+            echo 1;
+            // 验证失败
+        } else {
+            echo 2;
+        }
+    }
+
 }

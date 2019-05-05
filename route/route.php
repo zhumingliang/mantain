@@ -19,6 +19,7 @@ Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
 Route::get('api/:version/token/user', 'api/:version.Token/getWXToken');
 Route::get('api/:version/token/verify', 'api/:version.Token/verify');
+Route::get('api/:version/token/verify/check', 'api/:version.Token/captchaCheck');
 
 Route::rule('api/:version/access/save', 'api/:version.AccessControl/save');
 Route::get('api/:version/access/list', 'api/:version.AccessControl/getList');
