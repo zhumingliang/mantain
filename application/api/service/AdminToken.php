@@ -65,6 +65,7 @@ class AdminToken extends Token
             }
 
             // if (sha1($this->pwd) != $admin->pwd) {
+            echo $admin->pwd;
             if ($this->pwd != $admin->pwd) {
                 throw new TokenException([
                     'code' => 401,
