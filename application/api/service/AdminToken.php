@@ -46,16 +46,17 @@ class AdminToken extends Token
             if (is_null($admin)) {
                 throw new TokenException([
                     'code' => 401,
-                    'msg' => '用户不存在',
-                    'errorCode' => 30000
+                    'msg' => '账号或者密码不正确，请检查！',
+                    'errorCode' => 30004
                 ]);
             }
 
-            if (sha1($this->pwd) != $admin->pwd) {
+           // if (sha1($this->pwd) != $admin->pwd) {
+            if ($this->pwd != $admin->pwd) {
                 throw new TokenException([
                     'code' => 401,
-                    'msg' => '密码不正确',
-                    'errorCode' => 30002
+                    'msg' => '账号或者密码不正确，请检查！',
+                    'errorCode' => 30004
                 ]);
             }
 
@@ -63,7 +64,7 @@ class AdminToken extends Token
 
                 throw new TokenException([
                     'code' => 401,
-                    'msg' => '该账号已暂停使用，请联系管理员',
+                    'msg' => '账号或者密码不正确，请检查！',
                     'errorCode' => 30004
                 ]);
             }

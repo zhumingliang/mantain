@@ -25,6 +25,10 @@ use app\lib\exception\SuccessMessage;
 class Meeting extends BaseController
 {
     /**
+     * @return \think\response\Json
+     * @throws OperationException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/save  6-CMS-新增会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -63,10 +67,6 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function save()
     {
@@ -85,6 +85,12 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/update  7-CMS-修改会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -122,13 +128,10 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\ParameterException
      */
     public function update($id)
     {
+        TokenService::getCurrentUid();
         (new MeetingValidate())->goCheck();
         $params = $this->request->param();
         $id = MeetingT::update($params, ['id' => $id]);
@@ -145,6 +148,11 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/delete  8-CMS-删除会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -159,12 +167,10 @@ class Meeting extends BaseController
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
      */
     public function delete($id)
     {
+        TokenService::getCurrentUid();
         $id = MeetingT::update(['state' => CommonEnum::STATE_IS_FAIL], ['id' => $id]);
         if (!$id) {
             throw new OperationException(
@@ -179,6 +185,11 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $card
+     * @param $id
+     * @param $mobile
+     * @return \think\response\Json
+     * @throws MeetingException
      * @api {POST} /api/v1/meeting/sign/in  29-CMS-会议签到
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -196,11 +207,6 @@ class Meeting extends BaseController
      * {"all":33,"sign_in":1}
      * @apiSuccess (返回参数说明) {int} all 应签到人数
      * @apiSuccess (返回参数说明) {int} sign_in 实签到人数
-     * @param $card
-     * @param $id
-     * @param $mobile
-     * @return \think\response\Json
-     * @throws MeetingException
      */
     public function signIn($id, $card, $mobile)
     {
@@ -209,6 +215,16 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $time_begin
+     * @param $time_end
+     * @param string $address
+     * @param string $theme
+     * @param string $host
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/list 30-会议列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -239,22 +255,22 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} host   主办部门
      * @apiSuccess (返回参数说明) {String} push   推送部门
      * @apiSuccess (返回参数说明) {String} remark   备注
-     * @param $time_begin
-     * @param $time_end
-     * @param $address
-     * @param $theme
-     * @param $host
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
-    public function getMeetingList($time_begin, $time_end, $address="全部", $theme="全部", $host="全部", $page = 1, $size = 20)
+    public function getMeetingList($time_begin, $time_end, $address = "全部", $theme = "全部", $host = "全部", $page = 1, $size = 20)
     {
+        TokenService::getCurrentUid();
         $list = (new MeetingService())->getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host);
         return json($list);
     }
 
     /**
+     * @param $time_begin
+     * @param $time_end
+     * @param $address
+     * @param $theme
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/export 31-会议-导出报表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -266,20 +282,25 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {String}  host 部门/默认传入"全部"
-     * @param $time_begin
-     * @param $time_end
-     * @param $address
-     * @param $theme
-     * @return \think\response\Json
      */
     public function exportMeeting($time_begin, $time_end, $address, $theme)
     {
+        TokenService::getCurrentUid();
         (new MeetingService())->exportMeeting($time_begin, $time_end, $address, $theme);
         return json(new SuccessMessage());
 
     }
 
     /**
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $address
+     * @param $theme
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
      * @api {GET} /api/v1/meeting/sign/in/list 32-会议签到列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -309,7 +330,6 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} sign_time 签到时间
      * @apiSuccess (返回参数说明) {String} address 签到地点
      * @apiSuccess (返回参数说明) {String} remark   备注
-     *
      * @param $time_begin
      * @param $time_end
      * @param $department
@@ -319,11 +339,14 @@ class Meeting extends BaseController
      * @param int $page
      * @param int $size
      * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      */
     public function getSignInList($time_begin, $time_end,
                                   $department, $username,
                                   $address, $theme, $page = 1, $size = 20)
     {
+        TokenService::getCurrentUid();
         $list = (new MeetingService())->getSignInList($time_begin, $time_end,
             $department, $username,
             $address, $theme, $page, $size);
@@ -331,6 +354,13 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $address
+     * @param $theme
+     * @return \think\response\Json
      * @api {GET} /api/v1/meeting/sign/in/export 33-会议签到列表-导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -343,19 +373,13 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
      * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $address
-     * @param $theme
-     * @return \think\response\Json
      */
 
     public function exportSignIn($time_begin, $time_end,
                                  $department, $username,
                                  $address, $theme)
     {
+        TokenService::getCurrentUid();
         (new MeetingService())->exportSignIn($time_begin, $time_end,
             $department, $username,
             $address, $theme);
@@ -364,6 +388,9 @@ class Meeting extends BaseController
     }
 
     /**
+     * @param $card
+     * @return \think\response\Json
+     * @throws MeetingException
      * @api {GET} /api/v1/meeting/info 43-获取指定会议室会议信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -380,18 +407,20 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {int} all 需要签到总人数
      * @apiSuccess (返回参数说明) {int} sign_in 已经签到人数
      *
-     * @param $card
-     * @return \think\response\Json
-     * @throws MeetingException
      */
     public function getInfoForMC($card)
     {
+        TokenService::getCurrentUid();
         $info = (new MeetingService())->getInfoForMC($card);
         return json($info);
 
     }
 
     /**
+     * @param $meeting_date
+     * @param $page
+     * @param $size
+     * @return \think\response\Json
      * @api {GET} /api/v1/meeting/sign/in/list/wx 49-微信端-获取会议签到列表
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -413,19 +442,21 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} theme 会议主题
      * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
      * @apiSuccess (返回参数说明) {String} time_end 签到截止时间
-     * @param $meeting_date
-     * @param $page
-     * @param $size
-     * @return \think\response\Json
      */
     public function getSignInListForWx($meeting_date, $page = 1, $size = 10)
     {
+        TokenService::getCurrentUid();
         $list = (new MeetingService())->getSignInListForWx($meeting_date, $page, $size);
         return json($list);
 
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/meeting 50-获取指定会议室会议信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -448,14 +479,10 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} host   主办部门
      * @apiSuccess (返回参数说明) {String} push   推送部门：多个用逗号隔开
      * @apiSuccess (返回参数说明) {String} remark   备注
-     * @param $id
-     * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getMeetingInfo($id)
     {
+        TokenService::getCurrentUid();
         $info = MeetingT::where('id', $id)
             ->hidden(['create_time,update_time,state'])
             ->find();

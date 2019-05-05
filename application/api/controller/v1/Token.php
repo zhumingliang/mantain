@@ -19,6 +19,7 @@ use app\api\validate\TokenGet;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\SuccessMessage;
 use app\lib\exception\TokenException;
+use think\captcha\Captcha;
 use think\Controller;
 use think\facade\Cache;
 use think\facade\Request;
@@ -26,6 +27,8 @@ use think\facade\Request;
 class Token extends Controller
 {
     /**
+     * @return \think\response\Json
+     * @throws \think\Exception
      * @api {GET} /api/v1/token/admin  1-CMS获取登陆token
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -44,8 +47,6 @@ class Token extends Controller
      * @apiSuccess (返回参数说明) {String} account 账号
      * @apiSuccess (返回参数说明) {int} role 用户角色：暂定
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要放在header里传入，有效期 2 hours
-     * @return \think\response\Json
-     * @throws \think\Exception
      */
     public function getAdminToken()
     {
@@ -58,6 +59,7 @@ class Token extends Controller
     }
 
     /**
+     * @return \think\response\Json
      * @api {GET} /api/v1/token/login/out  2-CMS退出登陆
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -69,7 +71,6 @@ class Token extends Controller
      * @apiSuccess (返回参数说明) {int} error_code 错误码： 0表示操作成功无错误
      * @apiSuccess (返回参数说明) {String} msg 信息描述
      *
-     * @return \think\response\Json
      */
     public function loginOut()
     {
@@ -80,6 +81,12 @@ class Token extends Controller
 
 
     /**
+     * @return \think\response\Json
+     * @throws TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/token/user 42-微信端获取授权token
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -93,12 +100,6 @@ class Token extends Controller
      * @apiSuccess (返回参数说明) {String} account 账号
      * @apiSuccess (返回参数说明) {int} role 用户角色：暂定
      * @apiSuccess (返回参数说明) {String} token 口令令牌，每次请求接口需要放在header里传入，有效期 2 hours
-     * @return \think\response\Json
-     * @throws TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getWXToken()
     {
@@ -116,6 +117,12 @@ class Token extends Controller
         }
 
 
+    }
+
+    public function verify()
+    {
+        $captcha = new Captcha();
+        return $captcha->entry();
     }
 
 }
