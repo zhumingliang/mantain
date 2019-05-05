@@ -66,9 +66,6 @@ class AdminToken extends Token
 
             // if (sha1($this->pwd) != $admin->pwd) {
             if ($this->pwd != $admin->pwd) {
-                echo $this->pwd;
-                echo '\n';
-                echo $admin->pwd;
                 throw new TokenException([
                     'code' => 401,
                     'msg' => '账号或者密码不正确，请检查！',
