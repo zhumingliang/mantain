@@ -410,7 +410,6 @@ class Meeting extends BaseController
      */
     public function getInfoForMC($card)
     {
-        TokenService::getCurrentUid();
         $info = (new MeetingService())->getInfoForMC($card);
         return json($info);
 

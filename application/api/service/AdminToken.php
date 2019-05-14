@@ -43,7 +43,6 @@ class AdminToken extends Token
     public function get()
     {
         try {
-
             $captcha = new Captcha();
             if( !$captcha->check($this->verify))
             {
