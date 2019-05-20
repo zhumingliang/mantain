@@ -10,12 +10,8 @@ namespace app\api\service;
 
 
 use app\api\model\AdminT;
-use app\api\model\AuthGroup;
-use app\api\model\AuthGroupAccess;
-use app\api\model\BehaviorLogT;
+
 use app\api\model\LogT;
-use app\lib\enum\CommonEnum;
-use app\lib\enum\UserEnum;
 use app\lib\exception\TokenException;
 use think\captcha\Captcha;
 use think\Exception;
