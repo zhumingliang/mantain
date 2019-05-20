@@ -534,7 +534,7 @@ class Sku extends BaseController
     public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
                                 $sku = '', $category = '')
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new SkuService())->exportApply($time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
         return json(new SuccessMessage());
 

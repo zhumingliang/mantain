@@ -146,7 +146,7 @@ class Hotel extends BaseController
      */
     public function export($time_begin, $time_end, $department, $username, $status)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new HotelService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
 

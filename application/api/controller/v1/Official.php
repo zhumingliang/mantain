@@ -158,7 +158,7 @@ class Official extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $meal_type)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new OfficialService())->export($time_begin, $time_end, $department, $username, $status, $meal_type);
         return json(new SuccessMessage());
     }

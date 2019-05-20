@@ -148,7 +148,7 @@ class AccessControl extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $access)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new AccessService())->export($time_begin, $time_end, $department, $username, $status, $access);
         return json(new SuccessMessage());
     }

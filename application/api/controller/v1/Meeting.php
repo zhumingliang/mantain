@@ -285,7 +285,7 @@ class Meeting extends BaseController
      */
     public function exportMeeting($time_begin, $time_end, $address, $theme)
     {
-       // TokenService::getCurrentUid();
+        TokenService::getCurrentUidWithGet();
         (new MeetingService())->exportMeeting($time_begin, $time_end, $address, $theme);
         return json(new SuccessMessage());
 
@@ -379,7 +379,7 @@ class Meeting extends BaseController
                                  $department, $username,
                                  $address, $theme)
     {
-
+        TokenService::getCurrentUidWithGet();
         (new MeetingService())->exportSignIn($time_begin, $time_end,
             $department, $username,
             $address, $theme);

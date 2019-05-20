@@ -142,7 +142,7 @@ class Car extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $reason)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new CarService())->export($time_begin, $time_end, $department, $username, $status, $reason);
         return json(new SuccessMessage());
 

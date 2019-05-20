@@ -143,7 +143,7 @@ class Recreational extends BaseController
     public function export($time_begin, $time_end, $department, $username, $status,
                            $space)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new RecreationalService())->export($time_begin, $time_end, $department, $username, $status, $space);
         return json(new SuccessMessage());
     }

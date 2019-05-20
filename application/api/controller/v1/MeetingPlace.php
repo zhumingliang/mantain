@@ -134,7 +134,7 @@ class MeetingPlace extends BaseController
      */
     public function export($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3)
     {
-        $department = AdminService::checkUserRole($department);
+        $department = AdminService::checkUserRoleWithGet($department);
         (new MeetingPlaceService())->export($time_begin, $time_end, $department, $username, $status);
         return json(new SuccessMessage());
     }

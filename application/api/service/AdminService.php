@@ -194,6 +194,30 @@ class AdminService
         }
     }
 
+
+    /**
+     * @return array
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function checkUserRoleWithGet($department)
+    {
+        $role = Token::getCurrentTokenVarWithGet('role');
+        $role_info = Role::where('id', $role)->find();
+        if ($role_info['name'] == "局长") {
+            return $department;
+        }
+        elseif ($role_info['name'] == "分管部门局领导") {
+            return $department == "全部" ? self::getUserDepartment(Token::getCurrentUidWithGet()) : $department;
+        } else {
+            return Token::getCurrentTokenVarWithGet('department');
+        }
+    }
+
+
     private static function getUserDepartment($u_id)
     {
         $department = UserDepartmentT::where('u_id', $u_id)->field('d_name')->select()->toArray();

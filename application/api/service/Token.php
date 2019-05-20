@@ -57,6 +57,32 @@ class Token
     }
 
 
+
+    public static function getCurrentTokenVarWithGet($key = '')
+    {
+
+        $token = Request::param('token');
+        //$vars = Redis::instance()->get($token);
+        $vars = \think\facade\Cache::get($token);
+        if (!$vars) {
+            throw new TokenException();
+        } else {
+            if ($key == '') {
+                $vars = json_decode($vars, true);
+                return $vars;
+            }
+            if (!is_array($vars)) {
+                $vars = json_decode($vars, true);
+            }
+            if (array_key_exists($key, $vars)) {
+                return $vars[$key];
+            } else {
+                throw new Exception('尝试获取的Token变量并不存在');
+            }
+        }
+    }
+
+
     /**
      * @param string $key
      * @param $token
@@ -95,6 +121,13 @@ class Token
     {
         //token
         $uid = self::getCurrentTokenVar('u_id');
+        return $uid;
+    }
+
+    public static function getCurrentUidWithGet()
+    {
+        //token
+        $uid = self::getCurrentTokenVarWithGet('u_id');
         return $uid;
     }
 
