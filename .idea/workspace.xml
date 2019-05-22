@@ -3,20 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/AccessControl.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/AccessControl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Car.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Car.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Hotel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Hotel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/MeetingPlace.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/MeetingPlace.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Multi.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Multi.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Official.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Official.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Recreational.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Recreational.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Repair.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Repair.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/AdminService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AdminService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,13 +17,25 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="621">
+              <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+              <folding>
+                <element signature="e#128#159#0#PHP" expanded="true" />
+                <element signature="e#442#1366#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
+            <state relative-caret-position="5476">
               <caret line="287" column="33" selection-start-line="287" selection-start-column="33" selection-end-line="287" selection-end-column="33" />
               <folding>
                 <element signature="e#130#168#0#PHP" expanded="true" />
-                <element signature="e#571#2195#0#PHP" />
                 <element signature="e#2200#2698#0#PHP" />
               </folding>
             </state>
@@ -44,82 +43,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingPlace.php">
+        <entry file="file://$PROJECT_DIR$/config/database.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="137" column="43" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="152" column="26" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/MeetingRoom.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Multi.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="123" column="53" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Official.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="160" column="57" selection-start-line="160" selection-start-column="57" selection-end-line="160" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Recreational.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="145" column="57" selection-start-line="145" selection-start-column="57" selection-end-line="145" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Repair.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="142" column="54" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Sku.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="536" column="57" selection-start-line="536" selection-start-column="57" selection-end-line="536" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/api/service/SkuService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="367" column="20" selection-start-line="367" selection-start-column="20" selection-end-line="367" selection-end-column="20" />
+            <state relative-caret-position="108">
+              <caret line="12" selection-start-line="12" selection-end-line="58" />
             </state>
           </provider>
         </entry>
@@ -208,7 +135,6 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Token.php" />
         <option value="$PROJECT_DIR$/application/api/validate/TokenGet.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/config/database.php" />
         <option value="$PROJECT_DIR$/application/api/service/AdminToken.php" />
         <option value="$PROJECT_DIR$/application/api/service/Token.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" />
@@ -224,6 +150,7 @@
         <option value="$PROJECT_DIR$/application/api/controller/v1/Recreational.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Repair.php" />
         <option value="$PROJECT_DIR$/application/api/controller/v1/Sku.php" />
+        <option value="$PROJECT_DIR$/config/database.php" />
       </list>
     </option>
   </component>
@@ -239,6 +166,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,7 +220,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -384,14 +311,9 @@
       <workItem from="1557067830371" duration="5339000" />
       <workItem from="1557847937742" duration="914000" />
       <workItem from="1558341373580" duration="824000" />
-      <workItem from="1558363809044" duration="582000" />
-    </task>
-    <task id="LOCAL-00152" summary="初始化">
-      <created>1547972340930</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
-      <option name="project" value="LOCAL" />
-      <updated>1547972340930</updated>
+      <workItem from="1558363809044" duration="715000" />
+      <workItem from="1558406170521" duration="304000" />
+      <workItem from="1558412302270" duration="484000" />
     </task>
     <task id="LOCAL-00153" summary="初始化">
       <created>1547972409912</created>
@@ -729,17 +651,24 @@
       <option name="project" value="LOCAL" />
       <updated>1558341881109</updated>
     </task>
-    <option name="localTasksCounter" value="201" />
+    <task id="LOCAL-00201" summary="初始化">
+      <created>1558364405822</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1558364405822</updated>
+    </task>
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="471752000" />
+    <option name="totallyTimeSpent" value="472673000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25307125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26044226" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -930,16 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-          <folding>
-            <element signature="e#596#1645#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/thinkphp/library/think/facade/Cache.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
@@ -975,37 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1647">
           <caret line="66" column="33" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="51" column="3" selection-start-line="51" selection-start-column="3" selection-end-line="51" selection-end-column="3" />
-          <folding>
-            <element signature="e#128#159#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/Token.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/AccessControl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="150" column="57" selection-start-line="150" selection-start-column="57" selection-end-line="150" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/service/AdminService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="182" column="27" selection-start-line="182" selection-start-column="27" selection-end-line="182" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1055,18 +943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="287" column="33" selection-start-line="287" selection-start-column="33" selection-end-line="287" selection-end-column="33" />
-          <folding>
-            <element signature="e#130#168#0#PHP" expanded="true" />
-            <element signature="e#571#2195#0#PHP" />
-            <element signature="e#2200#2698#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1128,8 +1004,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Sku.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="536" column="57" selection-start-line="536" selection-start-column="57" selection-end-line="536" selection-end-column="57" />
+        <state relative-caret-position="288">
+          <caret line="349" column="38" selection-start-line="349" selection-start-column="32" selection-end-line="349" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/AccessControl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3672">
+          <caret line="150" column="43" selection-start-line="150" selection-start-column="43" selection-end-line="150" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/AdminService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5238">
+          <caret line="207" column="36" lean-forward="true" selection-start-line="207" selection-start-column="36" selection-end-line="207" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/service/Token.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="12" selection-start-line="12" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Token.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+          <folding>
+            <element signature="e#128#159#0#PHP" expanded="true" />
+            <element signature="e#442#1366#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/api/controller/v1/Meeting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5476">
+          <caret line="287" column="33" selection-start-line="287" selection-start-column="33" selection-end-line="287" selection-end-column="33" />
+          <folding>
+            <element signature="e#130#168#0#PHP" expanded="true" />
+            <element signature="e#2200#2698#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>
