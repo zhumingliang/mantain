@@ -86,17 +86,7 @@ class SkuApplyV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->where(function ($query) use ($sku) {
-                if ($sku && $sku != "") {
-                    $query->where('sku', 'like', "%" . $sku . "%");
-                }
-            })
-            ->where(function ($query) use ($category) {
-                if ($category && $category != "") {
-                    $query->where('category', 'like', "%" . $category . "%");
-                }
-            })
-            ->field('create_time,username,department,phone,sku,category,format,count,IF(type="borrow_t","借用","领用") as type
+            ->field('id,create_time,username,department,phone,"" as sku,type as sub_type,IF(type="borrow_t","借用","领用") as type
            ,time_begin,time_end,actual_time,status')
             ->order('create_time desc')
             ->select()

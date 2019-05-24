@@ -531,7 +531,8 @@ class Sku extends BaseController
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部", $status = "3", $type = "全部",
+    public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部",
+                                $status = "3", $type = "全部",
                                 $sku = '', $category = '')
     {
         $department = AdminService::checkUserRoleWithGet($department);

@@ -9,6 +9,7 @@
 namespace app\api\service;
 
 
+use app\api\model\ApplyDetailV;
 use app\api\model\BorrowSkuT;
 use app\api\model\BorrowT;
 use app\api\model\CategoryT;
@@ -298,7 +299,7 @@ class SkuService extends BaseService
             'sku_stock' => $stock
         );
         array_push($sku, $info);
-       // $this->checkStockToSendMsg($sku);
+        // $this->checkStockToSendMsg($sku);
         return $stock;
     }
 
@@ -315,9 +316,9 @@ class SkuService extends BaseService
             $sku_id = $v['sku_id'];
             $stock = $v['sku_stock'];
             $info = SkuT::get($sku_id);
-            if (!$info){
+            if (!$info) {
                 throw new SkuException([
-                    'msg'=>'指定sku_id不存在'
+                    'msg' => '指定sku_id不存在'
                 ]);
             }
             if ($info->alert == 1) {
@@ -430,7 +431,7 @@ class SkuService extends BaseService
         }
 
 
-       // $this->checkStockToSendMsg($sku);
+        // $this->checkStockToSendMsg($sku);
 
 
     }
@@ -526,7 +527,7 @@ class SkuService extends BaseService
     {
 
         $list = SkuApplyV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
-        $list=(new FlowService())->checkListStatus($list,'',false,true);
+        $list = (new FlowService())->checkListStatus($list, '', false, true);
         return $list;
     }
 
@@ -534,16 +535,16 @@ class SkuService extends BaseService
     {
 
         $list = SkuApplyV::export($time_begin, $time_end, $department, $username, $status, $type, $sku, $category);
-        $list = $this->prefixStatus($list);
+
+
+        $list = $this->prefixSku($list);
         $header = array(
+            'ID',
             '日期',
             '申请人',
             '部门',
             '手机号码',
-            '品名',
-            '类别',
-            '规格型号',
-            '数量',
+            '商品信息（品名-类别-规格型号-数量）',
             '使用方式',
             '领用日期',
             '归还日期（借用）',
@@ -552,6 +553,32 @@ class SkuService extends BaseService
         );
         $file_name = '用品管理-用品领用—导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
+    }
+
+
+    private function prefixSku($list)
+    {
+        $status = [-1 => '回退修改', 0 => '保存中', 1 => '流程中', 2 => '通过'];
+        if (count($list)) {
+            foreach ($list as $k => $v) {
+                $sku_info = '';
+                $sku = ApplyDetailV::where('type', $v['sub_type'])
+                    ->where('b_id', $v['id'])
+                    ->field('sku_name,sku_count,format,category_name')->select();
+                foreach ($sku as $k2 => $v2) {
+                    $sku_info .= $v2['sku_name'].'-'. $v2['sku_count'].'-'.$v2['format'].'-'.$v2['category_name']. '   ';
+
+                }
+
+                $list[$k]['sku'] = $sku_info;
+                $list[$k]['status']=$status[$v['status']];
+                unset($list[$k]['sub_type']);
+
+            }
+
+        }
+        return $list;
+
     }
 
     public function getNav()

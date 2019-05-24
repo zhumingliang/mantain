@@ -40,8 +40,7 @@ class AdminToken extends Token
     {
         try {
             $captcha = new Captcha();
-            if( !$captcha->check($this->verify))
-            {
+            if (!$captcha->check($this->verify)) {
                 throw new TokenException([
                     'code' => 401,
                     'msg' => '验证码不正确，请重新输入',

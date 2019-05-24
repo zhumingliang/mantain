@@ -55,8 +55,8 @@
     'sql_explain' => false,
     // Query类
     'query' => '\\think\\db\\Query',
-];
-*/
+];*/
+
 
 return [
     // 数据库类型
