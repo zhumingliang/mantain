@@ -300,7 +300,18 @@ class Meeting extends BaseController
      * @param $theme
      * @param int $page
      * @param int $size
+     * @param $time_begin
+     * @param $time_end
+     * @param $department
+     * @param $username
+     * @param $address
+     * @param $theme
+     * @param int $page
+     * @param int $size
      * @return \think\response\Json
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/sign/in/list 32-会议签到列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -330,17 +341,6 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {String} sign_time 签到时间
      * @apiSuccess (返回参数说明) {String} address 签到地点
      * @apiSuccess (返回参数说明) {String} remark   备注
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $address
-     * @param $theme
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function getSignInList($time_begin, $time_end,
                                   $department, $username,
@@ -419,7 +419,13 @@ class Meeting extends BaseController
      * @param $meeting_date
      * @param $page
      * @param $size
+     * @param $meeting_date
+     * @param int $page
+     * @param int $size
      * @return \think\response\Json
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/sign/in/list/wx 49-微信端-获取会议签到列表
      * @apiGroup  WX
      * @apiVersion 1.0.1

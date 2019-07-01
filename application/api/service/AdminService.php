@@ -195,14 +195,6 @@ class AdminService
     }
 
 
-    /**
-     * @return array
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
     public static function checkUserRoleWithGet($department)
     {
         $role = Token::getCurrentTokenVarWithGet('role');

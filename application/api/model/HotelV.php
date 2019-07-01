@@ -66,7 +66,7 @@ class HotelV extends Model
                 }
             })
             ->field('create_time,username,department,
-            CONCAT_WS("-",time_begin,time_end),unit,hotel,male,female,
+            CONCAT_WS("-",time_begin,time_end),unit,hotel,hotel,guesthouse,male,female,
             single_room,double_room,members,status')
             ->order('create_time desc')
             ->select()

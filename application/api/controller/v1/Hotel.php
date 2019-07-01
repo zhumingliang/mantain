@@ -29,6 +29,7 @@ class Hotel extends BaseController
      *       "time_begin": 2018-12-25,
      *       "time_end": "2018-12-26",
      *       "hotel": "瑞金大酒店",
+     *       "guesthouse": "**招待所",
      *       "male": 1,
      *       "female": 2,
      *       "single_room":1,
@@ -39,6 +40,7 @@ class Hotel extends BaseController
      * @apiParam (请求参数说明) {String} time_begin   开始时间
      * @apiParam (请求参数说明) {String} time_end   结束时间
      * @apiParam (请求参数说明) {String} hotel   酒店
+     * @apiParam (请求参数说明) {String} guesthouse  招待所
      * @apiParam (请求参数说明) {int} male   男性人数
      * @apiParam (请求参数说明) {int} female   女性人数
      * @apiParam (请求参数说明) {int} single_room   单间数
@@ -49,9 +51,6 @@ class Hotel extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function save()
     {
@@ -96,6 +95,7 @@ class Hotel extends BaseController
      * @apiSuccess (返回参数说明) {String} time_begin   开始时间
      * @apiSuccess (返回参数说明) {String} time_end   结束时间
      * @apiSuccess (返回参数说明) {String} hotel   酒店
+     * @apiSuccess (返回参数说明) {String} guesthouse   招待所
      * @apiSuccess (返回参数说明) {int} male   男性人数
      * @apiSuccess (返回参数说明) {int} female   女性人数
      * @apiSuccess (返回参数说明) {int} single_room   单间数
@@ -103,19 +103,6 @@ class Hotel extends BaseController
      * @apiSuccess (返回参数说明) {String} members  人员名单
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $status
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)
@@ -137,12 +124,6 @@ class Hotel extends BaseController
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
      * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $status
-     * @return \think\response\Json
      */
     public function export($time_begin, $time_end, $department, $username, $status)
     {

@@ -66,6 +66,7 @@ class HotelService extends BaseService
             '公务时间',
             '来访单位',
             '拟入住酒店',
+            '拟入住招待所',
             '男',
             '女',
             '单人房',
