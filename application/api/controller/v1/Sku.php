@@ -272,10 +272,10 @@ class Sku extends BaseController
      */
     public function uploadExcelToSaveStock()
     {
-        $file_excel = '';//request()->file('stock');
-       /* if (is_null($file_excel)) {
+        $file_excel = request()->file('stock');
+        if (is_null($file_excel)) {
             throw  new SkuException();
-        }*/
+        }
         (new SkuService())->uploadStock($file_excel);
         return json(new SuccessMessage());
     }
