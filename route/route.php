@@ -114,6 +114,7 @@ Route::get('api/:version/hotel/export', 'api/:version.Hotel/export');
 Route::post('api/:version/sku/save', 'api/:version.Sku/save');
 Route::get('api/:version/sku/nav', 'api/:version.Sku/getNav');
 Route::post('api/:version/sku/upload', 'api/:version.Sku/upload');
+Route::post('api/:version/stock/upload', 'api/:version.Sku/uploadExcelToSaveStock');
 Route::post('api/:version/sku/update', 'api/:version.Sku/update');
 Route::post('api/:version/sku/image/handel', 'api/:version.Sku/SkuImageHandel');
 Route::get('api/:version/sku', 'api/:version.Sku/getTheSku');

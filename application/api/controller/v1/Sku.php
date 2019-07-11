@@ -36,10 +36,6 @@ class Sku extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @throws SkuException
-     * @throws \PHPExcel_Exception
-     * @throws \PHPExcel_Reader_Exception
-     * @throws \app\lib\exception\OperationException
      */
     public function upload()
     {
@@ -52,6 +48,9 @@ class Sku extends BaseController
     }
 
     /**
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST}  /api/v1/sku/save 71-用品管理-新增用品
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -88,9 +87,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
 
     public function save()
@@ -104,6 +100,8 @@ class Sku extends BaseController
     }
 
     /**
+     * @return \think\response\Json
+     * @throws \think\Exception
      * @api {POST} /api/v1/sku/update  72-用品管理-修改用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -142,8 +140,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @return \think\response\Json
-     * @throws \think\Exception
      */
     public function update()
     {
@@ -153,6 +149,8 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
      * @api {POST} /api/v1/sku 73-用品管理-获取指定用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -179,8 +177,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {int} max   最高警示数量
      * @apiSuccess (返回参数说明) {String} imgs   物品图片信息
      * @apiSuccess (返回参数说明) {String} url   图片地址
-     * @param $id
-     * @return \think\response\Json
      */
     public function getTheSku($id)
     {
@@ -189,6 +185,9 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
      * @api {POST} /api/v1/sku/image/handel  74-用品管理-删除指定用关联图片
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -202,9 +201,6 @@ class Sku extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
      */
     public function SkuImageHandel($id)
     {
@@ -247,11 +243,6 @@ class Sku extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function stockSave()
     {
@@ -259,7 +250,7 @@ class Sku extends BaseController
         $params = $this->request->param();
         $params['state'] = CommonEnum::STATE_IS_OK;
         $params['stock_date'] = date('Y-m-d');
-        $params['admin_id'] =\app\api\service\Token::getCurrentUid();
+        $params['admin_id'] = \app\api\service\Token::getCurrentUid();
         $params['stock'] = (new SkuService())->getStock($params['sku_id'], $params['type'], $params['count']);
         $res = SkuStockT::create($params);
         if (!$res) {
@@ -267,8 +258,28 @@ class Sku extends BaseController
         }
         return json(new SuccessMessage());
 
-
     }
+
+    /**
+     * @api {POST}  /api/v1/stock/upload 用品管理-入库信息-批量导入
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  用file控件上传excel ，文件名称为：stock
+     * @apiSuccessExample {json} 返回样例:
+     * {"msg": "ok","error_code": 0}
+     * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
+     * @apiSuccess (返回参数说明) {String} msg 操作结果描述
+     */
+    public function uploadExcelToSaveStock()
+    {
+        $file_excel = '';//request()->file('stock');
+       /* if (is_null($file_excel)) {
+            throw  new SkuException();
+        }*/
+        (new SkuService())->uploadStock($file_excel);
+        return json(new SuccessMessage());
+    }
+
 
     /**
      * @api {GET} /api/v1/stock/list 76-用品管理-获取库存记录列表
@@ -299,12 +310,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} max  最低警示数量
      * @apiSuccess (返回参数说明) {String} admin_name  操作员
      *
-     * @param $category
-     * @param $order_number
-     * @param $category_id
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
     public function getStockList($category, $order_number, $category_id, $page = 1, $size = 10)
     {
@@ -316,6 +321,9 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $id
+     * @return \think\response\Json
+     * @throws OperationException
      * @api {POST} /api/v1/stock/handel  77-用品管理-删除入库记录
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -329,9 +337,6 @@ class Sku extends BaseController
      * {"msg": "ok","error_code": 0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
      */
     public function stockHandel($id)
     {
@@ -347,6 +352,10 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $category
+     * @param $order_number
+     * @param $category_id
+     * @return \think\response\Json
      * @api {GET} /api/v1/stock/export 78-用品管理-入库记录-导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -357,10 +366,6 @@ class Sku extends BaseController
      * @apiParam (请求参数说明) {String}  order_number 类别排序
      * @apiParam (请求参数说明) {String}  category_id 类别id
      *
-     * @param $category
-     * @param $order_number
-     * @param $category_id
-     * @return \think\response\Json
      */
     public function exportStock($category, $order_number, $category_id)
     {
@@ -369,6 +374,10 @@ class Sku extends BaseController
     }
 
     /**
+     * @return \think\response\Json
+     * @throws \app\lib\exception\ParameterException
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST}  /api/v1/collar/use/save 79-用品管理-领用申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -391,10 +400,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function collarUseSave()
     {
@@ -409,6 +414,22 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $time_begin
+     * @param $time_end
+     * @param string $department
+     * @param string $username
+     * @param string $status
+     * @param string $type
+     * @param string $sku
+     * @param string $category
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/sku/apply/list 81-用品管理-领用列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -443,22 +464,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} time_end   归还日期（借用
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     * @param $time_begin
-     * @param $time_end
-     * @param string $department
-     * @param string $username
-     * @param string $status
-     * @param string $type
-     * @param string $sku
-     * @param string $category
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getListForApply($time_begin, $time_end, $department = "全部", $username = "全部",
                                     $status = "3", $type = "全部",
@@ -472,6 +477,12 @@ class Sku extends BaseController
 
 
     /**
+     * @param $type
+     * @param $id
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/sku/apply/detail 用品管理-领用列表-用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -486,12 +497,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} sku_count  领用/借用数量
      * @apiSuccess (返回参数说明) {String} format  规格型号
      * @apiSuccess (返回参数说明) {int} category_name  类别
-     * @param $type
-     * @param $id
-     * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function applyDetail($type, $id)
     {
@@ -502,20 +507,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @api {GET} /api/v1/sku/apply/export 82-用品管理-领用列表
-     * @apiGroup  CMS
-     * @apiVersion 1.0.1
-     * @apiDescription 用品管理-领用列表
-     * @apiExample {get} 请求样例:
-     * http://maintain.mengant.cn/api/v1/sku/apply/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=1&sku=黑色签字笔&category=笔&type=borrow_t
-     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
-     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
-     * @apiParam (请求参数说明) {String}  time_begin 开始时间
-     * @apiParam (请求参数说明) {String}  time_end 截止时间
-     * @apiParam (请求参数说明) {String}  category 分类
-     * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
-     * @apiParam (请求参数说明) {String}  sku 用品名称
-     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
      * @param $time_begin
      * @param $time_end
      * @param string $department
@@ -530,6 +521,20 @@ class Sku extends BaseController
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
+     * @api {GET} /api/v1/sku/apply/export 82-用品管理-领用列表
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription 用品管理-领用列表
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/sku/apply/export?department=全部&username=朱明良&time_begin=2018-10-01&time_end=2018-12-31&status=1&sku=黑色签字笔&category=笔&type=borrow_t
+     * @apiParam (请求参数说明) {String}  department 部门/默认传入全部
+     * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
+     * @apiParam (请求参数说明) {String}  time_begin 开始时间
+     * @apiParam (请求参数说明) {String}  time_end 截止时间
+     * @apiParam (请求参数说明) {String}  category 分类
+     * @apiParam (请求参数说明) {String}  type 使用方式/默认传入全部：borrow_t 借用；collar_use_t 领用
+     * @apiParam (请求参数说明) {String}  sku 用品名称
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
      */
     public function exportApply($time_begin, $time_end, $department = "全部", $username = "全部",
                                 $status = "3", $type = "全部",
@@ -542,6 +547,9 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $c_id
+     * @param string $name
+     * @return \think\response\Json
      * @api {GET} /api/v1/sku/list 83-用品管理-获取用品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -556,9 +564,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} name  用品名称
      * @apiSuccess (返回参数说明) {String} category  类别
      * @apiSuccess (返回参数说明) {String} stock  库存
-     * @param $c_id
-     * @param string $name
-     * @return \think\response\Json
      */
     public function getSkuList($c_id, $name = '')
     {
@@ -568,6 +573,7 @@ class Sku extends BaseController
     }
 
     /**
+     * @return \think\response\Json
      * @api {GET} /api/v1/sku/list/use 89-用品管理-领用申请-获取用品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -581,7 +587,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} format  规格
      * @apiSuccess (返回参数说明) {String} stock  库存
      * @apiSuccess (返回参数说明) {String} use_type  使用类别（用户发起申请需要匹配此参数和用户选择使用方式是否一致）
-     * @return \think\response\Json
      */
     public function getSkuForUse()
     {
@@ -599,6 +604,7 @@ class Sku extends BaseController
 
 
     /**
+     * @return \think\response\Json
      * @api {GET} /api/v1/sku/list 90-用品管理-获取用品列表-导航
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -613,7 +619,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {int} id  用品id
      * @apiSuccess (返回参数说明) {String} name  用品名称
      * @apiSuccess (返回参数说明) {String} stock  库存
-     * @return \think\response\Json
      */
     public function getNav()
     {
@@ -624,6 +629,10 @@ class Sku extends BaseController
     }
 
     /**
+     * @param $id
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
      * @api {GET} /api/v1/sku/stock/list 92-用品管理-获取指定sku库存记录列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -649,10 +658,6 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} min  最高警示数量
      * @apiSuccess (返回参数说明) {String} max  最低警示数量
      * @apiSuccess (返回参数说明) {String} admin_name  操作员
-     * @param $id
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
     public function getSkuStockList($id, $page = 1, $size = 20)
     {

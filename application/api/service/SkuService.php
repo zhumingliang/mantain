@@ -16,6 +16,7 @@ use app\api\model\CategoryT;
 use app\api\model\CollarUseT;
 use app\api\model\SkuApplyV;
 use app\api\model\SkuImgT;
+use app\api\model\SkuStockT;
 use app\api\model\SkuStockV;
 use app\api\model\SkuT;
 use app\api\model\StockV;
@@ -47,6 +48,17 @@ class SkuService extends BaseService
         $date = $this->prefixData($date);
         $sku = new SkuT();
         $res = $sku->saveAll($date);
+        if (!$res) {
+            throw new OperationException();
+        }
+    }
+
+    public function uploadStock($stocks)
+    {
+        $date = $this->saveExcel($stocks);
+        $date = $this->prefixStockData($date);
+        $stock = new SkuStockT();
+        $res = $stock->saveAll($date);
         if (!$res) {
             throw new OperationException();
         }
@@ -169,6 +181,7 @@ class SkuService extends BaseService
      */
     private function saveExcel($skus)
     {
+        //$path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/test.xlsx';
         $path = dirname($_SERVER['SCRIPT_FILENAME']) . '/static/excel';
         if (!is_dir($path)) {
             mkdir(iconv("UTF-8", "GBK", $path), 0777, true);
@@ -177,6 +190,7 @@ class SkuService extends BaseService
         $info = $skus->move($path);
         $file_name = $info->getPathname();
         $result_excel = $this->import_excel($file_name);
+        //$result_excel = $this->import_excel($path);
         return $result_excel;
 
     }
@@ -203,6 +217,44 @@ class SkuService extends BaseService
                 $params['admin_id'] = Token::getCurrentUid();
                 $params['state'] = CommonEnum::STATE_IS_OK;
 
+                array_push($return_data, $params);
+
+
+            }
+
+        }
+
+        return $return_data;
+
+    }
+
+    private function prefixStockData($result_excel)
+    {
+        $return_data = array();
+        foreach ($result_excel as $k => $v) {
+
+            //获取所有分组
+            if ($k > 1 && !empty(preg_replace('# #', '', $v[0]))) {
+                if (empty($v[1])) {
+                    continue;
+                }
+
+                $sku = SkuT::where('name', $v[1])->find();
+                if (!$sku) {
+                    continue;
+                }
+                $sku_id = $sku->id;
+                $params['stock_code'] = $v[0];
+                $params['sku_id'] = $sku_id;
+                $params['price'] = $v[2];
+                $params['count'] = $v[3];
+                $params['all_count'] = $v[4];
+                $params['type'] = $v[5];
+                $params['all_money'] = $v[6];
+                $params['state'] = CommonEnum::STATE_IS_OK;
+                $params['stock_date'] = date('Y-m-d');
+                $params['admin_id'] = Token::getCurrentUid();
+                $params['stock'] = (new SkuService())->getStock($sku_id, $v[5], $v[4]);
                 array_push($return_data, $params);
 
 
@@ -566,12 +618,12 @@ class SkuService extends BaseService
                     ->where('b_id', $v['id'])
                     ->field('sku_name,sku_count,format,category_name')->select();
                 foreach ($sku as $k2 => $v2) {
-                    $sku_info .= $v2['sku_name'].'-'. $v2['sku_count'].'-'.$v2['format'].'-'.$v2['category_name']. '   ';
+                    $sku_info .= $v2['sku_name'] . '-' . $v2['sku_count'] . '-' . $v2['format'] . '-' . $v2['category_name'] . '   ';
 
                 }
 
                 $list[$k]['sku'] = $sku_info;
-                $list[$k]['status']=$status[$v['status']];
+                $list[$k]['status'] = $status[$v['status']];
                 unset($list[$k]['sub_type']);
 
             }

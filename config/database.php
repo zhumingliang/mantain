@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 
 
-/*return [
+return [
     // 数据库类型
     'type' => 'mysql',
     // 服务器地址
@@ -55,9 +55,9 @@
     'sql_explain' => false,
     // Query类
     'query' => '\\think\\db\\Query',
-];*/
+];
 
-
+/*
 return [
     // 数据库类型
     'type' => 'mysql',
@@ -107,4 +107,4 @@ return [
     'sql_explain' => false,
     // Query类
     'query' => '\\think\\db\\Query',
-];
+];*/
