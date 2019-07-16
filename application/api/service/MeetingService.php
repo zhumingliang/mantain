@@ -140,7 +140,7 @@ class MeetingService extends BaseService
                 [
                     'code' => 401,
                     'msg' => '签到失败，您不在本次会议名单之中！',
-                    'errorCode' => 80004
+                    'errorCode' => 80005
                 ]
             );
         }

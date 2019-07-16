@@ -148,11 +148,6 @@ class Meeting extends BaseController
     }
 
     /**
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/delete  8-CMS-删除会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -185,11 +180,6 @@ class Meeting extends BaseController
     }
 
     /**
-     * @param $card
-     * @param $id
-     * @param $mobile
-     * @return \think\response\Json
-     * @throws MeetingException
      * @api {POST} /api/v1/meeting/sign/in  29-CMS-会议签到
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -292,26 +282,6 @@ class Meeting extends BaseController
     }
 
     /**
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $address
-     * @param $theme
-     * @param int $page
-     * @param int $size
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $address
-     * @param $theme
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/sign/in/list 32-会议签到列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
