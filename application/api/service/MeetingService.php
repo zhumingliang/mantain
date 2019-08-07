@@ -96,7 +96,7 @@ class MeetingService extends BaseService
 
         if (time() < strtotime($meeting->time_begin)) {
             throw new MeetingException(
-                ['code' => 401,
+                [   'code' => 401,
                     'msg' => '签到未开始，请耐心等候！',
                     'errorCode' => 80009
                 ]
