@@ -7,14 +7,14 @@
  */
 
 return [
-    'app_id' => 'ww5ba6682f8deeae73',
+    'app_id' => 'wwdfcb0c134ab7dc75',
     //'app_id' => 'wwffcc8e626d73e98f',
 
-    'app_secret' => 'is0kqT_ba0J39FngF5ZsKPSuvNBQEkvZwBqZQilcW2o',
+    'app_secret' => 'RHyquXfMA2wo0vZZQAvp_4m0jgqDTj_FqaTedUH1sV8',
 
     //'app_secret' => 'cqJl6DmpJKktD4zGn6DhcCObrchr6QLWYw2HHvyo5fM',
 
-    'app_agent_id' => '1000002',
+    'app_agent_id' => '1000003',
 
     'wx_code_url' => 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=SCOPE&state=STATE#wechat_redirect',
 
