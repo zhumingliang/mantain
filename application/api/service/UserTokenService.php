@@ -94,6 +94,7 @@ class UserTokenService extends Token
         if (!empty($token['errcode'])) {
             throw new Exception($token['errmsg']);
         }
+        LogT::create(['msg'=>$user_info]);
         $user_info = json_decode($user_info);
         $userId = $user_info->UserId;
         return $userId;
