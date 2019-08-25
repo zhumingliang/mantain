@@ -95,7 +95,6 @@ class UserTokenService extends Token
             throw new Exception($token['errmsg']);
         }
         $user_info = json_decode($user_info);
-        print_r($user_info);
         $userId = $user_info->UserId;
         return $userId;
 
