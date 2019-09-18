@@ -28,6 +28,18 @@ use workflow\workflow;
 class Flow extends BaseController
 {
     /**
+     * @param $check_con
+     * @param $flow_id
+     * @param $flow_process
+     * @param $npid
+     * @param $run_id
+     * @param $run_process
+     * @param $wf_fid
+     * @param $wf_type
+     * @param string $submit_to_save
+     * @return Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
      * @api {POST} /api/v1/flow/check/pass  35-CMS-流程审核-通过/不同意/取消
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -64,20 +76,8 @@ class Flow extends BaseController
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
      *
-     * @param $check_con
-     * @param $flow_id
-     * @param $flow_process
-     * @param $npid
-     * @param $run_id
-     * @param $run_process
-     * @param $wf_fid
-     * @param $wf_type
-     * @param string $submit_to_save
-     * @return Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
-    public function checkPass($check_con, $flow_id, $flow_process, $npid, $run_id, $run_process, $wf_fid, $wf_type, $submit_to_save = 'ok')
+    public function checkPass($flow_id, $flow_process, $npid, $run_id, $run_process, $wf_fid, $wf_type, $submit_to_save = 'ok', $check_con = "同意")
     {
         $params = $this->request->param();
         if (isset($params['borrow_return'])) {
@@ -100,50 +100,50 @@ class Flow extends BaseController
                 'first' => 2,
                 'borrow_return' => $params['borrow_return']
             ];
-        }else
-        if (isset($params['car_info'])) {
-            $data = [
-                'art' => "",
-                'btodo' => "",
-                'check_con' => $check_con,
-                'flow_id' => $flow_id,
-                'flow_process' => $flow_process,
-                'npid' => $npid,
-                'run_id' => $run_id,
-                'run_process' => $run_process,
-                'sing_st' => 0,
-                'submit_to_save' => $submit_to_save,
-                'wf_fid' => $wf_fid,
-                'wf_singflow' => "",
-                'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
-                'wf_title' => 2,
-                'wf_type' => $wf_type,
-                'first' => 2,
-                'car_info' => $params['car_info'],
-                'type' => $params['type'],
-                'driver' => $params['driver']
-            ];
+        } else
+            if (isset($params['car_info'])) {
+                $data = [
+                    'art' => "",
+                    'btodo' => "",
+                    'check_con' => $check_con,
+                    'flow_id' => $flow_id,
+                    'flow_process' => $flow_process,
+                    'npid' => $npid,
+                    'run_id' => $run_id,
+                    'run_process' => $run_process,
+                    'sing_st' => 0,
+                    'submit_to_save' => $submit_to_save,
+                    'wf_fid' => $wf_fid,
+                    'wf_singflow' => "",
+                    'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
+                    'wf_title' => 2,
+                    'wf_type' => $wf_type,
+                    'first' => 2,
+                    'car_info' => $params['car_info'],
+                    'type' => $params['type'],
+                    'driver' => $params['driver']
+                ];
 
-        } else {
-            $data = [
-                'art' => "",
-                'btodo' => "",
-                'check_con' => $check_con,
-                'flow_id' => $flow_id,
-                'flow_process' => $flow_process,
-                'npid' => $npid,
-                'run_id' => $run_id,
-                'run_process' => $run_process,
-                'sing_st' => 0,
-                'submit_to_save' => $submit_to_save,
-                'wf_fid' => $wf_fid,
-                'wf_singflow' => "",
-                'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
-                'wf_title' => 2,
-                'wf_type' => $wf_type,
-                'first' => 2,
-            ];
-        }
+            } else {
+                $data = [
+                    'art' => "",
+                    'btodo' => "",
+                    'check_con' => $check_con,
+                    'flow_id' => $flow_id,
+                    'flow_process' => $flow_process,
+                    'npid' => $npid,
+                    'run_id' => $run_id,
+                    'run_process' => $run_process,
+                    'sing_st' => 0,
+                    'submit_to_save' => $submit_to_save,
+                    'wf_fid' => $wf_fid,
+                    'wf_singflow' => "",
+                    'wf_backflow' => $submit_to_save == 'ok' ? "" : 0,
+                    'wf_title' => 2,
+                    'wf_type' => $wf_type,
+                    'first' => 2,
+                ];
+            }
         $res = (new FlowService())->check($data);
         if ($res) {
             return json(new SuccessMessage());
@@ -152,6 +152,22 @@ class Flow extends BaseController
 
 
     /**
+     * @param $flow_id
+     * @param $flow_process
+     * @param $npid
+     * @param $run_id
+     * @param $run_process
+     * @param $wf_fid
+     * @param $wf_type
+     * @param int $repair
+     * @param int $type
+     * @param string $feedback
+     * @param string $imgs
+     * @param string $submit_to_save
+     * @param string $check_con
+     * @return \think\response\Json
+     * @throws TokenException
+     * @throws \think\Exception
      * @api {POST} /api/v1/flow/check/pass/repair  85-报修流程审核-通过
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -185,22 +201,6 @@ class Flow extends BaseController
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     * @param $flow_id
-     * @param $flow_process
-     * @param $npid
-     * @param $run_id
-     * @param $run_process
-     * @param $wf_fid
-     * @param $wf_type
-     * @param int $repair
-     * @param int $type
-     * @param string $feedback
-     * @param string $imgs
-     * @param string $submit_to_save
-     * @param string $check_con
-     * @return \think\response\Json
-     * @throws TokenException
-     * @throws \think\Exception
      */
     public function checkPassForRepair($flow_id, $flow_process, $npid, $run_id, $run_process,
                                        $wf_fid, $wf_type,
@@ -304,6 +304,14 @@ class Flow extends BaseController
 
 
     /**
+     * @param $wf_fid
+     * @param $wf_type
+     * @return Json
+     * @throws \app\lib\exception\TokenException
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/flow/info 34-获取预约申请—查看审核
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -329,14 +337,6 @@ class Flow extends BaseController
      * @apiSuccess (返回参数说明) {int} check 是否显示审批按钮 ：1 | 显示；2 | 不显示
      * @apiSuccess (返回参数说明) {int} cancel 是否有取消权限 ：1 | 有；2 | 无
      * @apiSuccess (返回参数说明) {int} repair 报修提交类型 ：1 | 无需特殊处理；2 | 跟进人员处理操作；3 | 电工组选择跟进人员操作
-     * @param $wf_fid
-     * @param $wf_type
-     * @return Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getInfo($wf_fid, $wf_type)
     {
@@ -370,6 +370,10 @@ class Flow extends BaseController
     }
 
     /**
+     * @param $wf_type
+     * @param int $page
+     * @param int $size
+     * @return \think\response\Json
      * @api {GET} /api/v1/flow/complete 59-微信-我的-历史记录
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -397,10 +401,6 @@ class Flow extends BaseController
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {Obj} flow 申请信息（具体字段含义参考对应申请信息）
      * @apiSuccess (返回参数说明) {Obj} process 申请流程信息（具体字段含义参考其他接口）
-     * @param $wf_type
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
     public function getComplete($wf_type, $page = 1, $size = 10)
     {
@@ -410,6 +410,8 @@ class Flow extends BaseController
     }
 
     /**
+     * @param $wf_type
+     * @return \think\response\Json
      * @api {GET} /api/v1/flow/ready 60-微信-我的-待办
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -437,8 +439,6 @@ class Flow extends BaseController
      * @apiSuccess (返回参数说明) {String} btn cancel:显示取消按钮；check:显示审核按钮
      * @apiSuccess (返回参数说明) {Obj} flow 申请信息（具体字段含义参考对应申请信息）
      * @apiSuccess (返回参数说明) {Obj} process 申请流程信息（具体字段含义参考其他接口）
-     * @param $wf_type
-     * @return \think\response\Json
      */
     public function getReady($wf_type)
     {

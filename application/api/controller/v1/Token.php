@@ -22,9 +22,7 @@ use think\facade\Request;
 class Token extends Controller
 {
     /**
-     * @return \think\response\Json
-     * @throws \think\Exception
-     * @api {GET} /api/v1/token/admin  1-CMS获取登陆token
+     * @api {POST} /api/v1/token/admin  1-CMS获取登陆token
      * @apiGroup  CMS
      * @apiVersion 1.0.1
      * @apiDescription  后台用户登录
