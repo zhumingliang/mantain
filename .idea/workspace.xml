@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/MeetingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MeetingService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,40 +24,6 @@
         <option value="HTML File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>$repair_role</find>
-      <find>$select_role</find>
-      <find>select_role</find>
-      <find>preData</find>
-      <find>$table</find>
-      <find>preRunId</find>
-      <find>/meeting/info</find>
-      <find>admi</find>
-      <find>list/use</find>
-      <find>sku/apply/detail?type=borrow_t&amp;id=1</find>
-      <find>sto</find>
-      <find>stock/sa</find>
-      <find>apply</find>
-      <find>api/v1/stoc</find>
-      <find>exp</find>
-      <find>sign/in</find>
-      <find>btn</find>
-      <find>http_exception_template</find>
-      <find>checkSign</find>
-      <find>sign</find>
-      <find>sku/apply/detail</find>
-      <find>detail</find>
-      <find>export</find>
-      <find>upload</find>
-      <find>saveExcel</find>
-      <find>import_excel</find>
-      <find>meeting/info</find>
-      <find>checkRoom</find>
-      <find>checkMeeting</find>
-      <find>checkUser</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -181,13 +148,7 @@
       <workItem from="1566728374610" duration="2032000" />
       <workItem from="1566751130330" duration="898000" />
       <workItem from="1568690627990" duration="416000" />
-    </task>
-    <task id="LOCAL-00167" summary="初始化">
-      <created>1551248919566</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1551248919566</updated>
+      <workItem from="1568796133959" duration="1426000" />
     </task>
     <task id="LOCAL-00168" summary="初始化">
       <created>1551256580058</created>
@@ -525,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566751794766</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL-00216" summary="初始化">
+      <created>1568796302734</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1568796302735</updated>
+    </task>
+    <option name="localTasksCounter" value="217" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
