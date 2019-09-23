@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/MeetingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MeetingService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/BuffetV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BuffetV.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/BuffetService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/BuffetService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,14 +149,8 @@
       <workItem from="1566728374610" duration="2032000" />
       <workItem from="1566751130330" duration="898000" />
       <workItem from="1568690627990" duration="416000" />
-      <workItem from="1568796133959" duration="1426000" />
-    </task>
-    <task id="LOCAL-00168" summary="初始化">
-      <created>1551256580058</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1551256580058</updated>
+      <workItem from="1568796133959" duration="2011000" />
+      <workItem from="1569206363462" duration="1303000" />
     </task>
     <task id="LOCAL-00169" summary="初始化">
       <created>1551363851449</created>
@@ -493,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568796302735</updated>
     </task>
-    <option name="localTasksCounter" value="217" />
+    <task id="LOCAL-00217" summary="初始化">
+      <created>1568856948485</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1568856948486</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

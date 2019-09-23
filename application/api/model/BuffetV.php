@@ -64,7 +64,7 @@ class BuffetV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-            ->field('create_time,username,department,
+            ->field('create_time,username,department,count,
             CONCAT_WS("-",time_begin,time_end),unit,project,meals,status')
             ->order('create_time desc')
             ->select()

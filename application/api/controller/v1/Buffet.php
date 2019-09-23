@@ -29,12 +29,15 @@ class Buffet extends BaseController
      *       "project": "考察",
      *       "time_begin": 2018-12-25,
      *       "time_end": "2018-12-26",
+     *       "time_end": "2018-12-26",
+     *       "count": 1,
      *       "meals": "2018-10-12,早餐,3,200A2018-10-12,中餐,3,200"
      *     }
      * @apiParam (请求参数说明) {String} unit 来访单位
      * @apiParam (请求参数说明) {String} project  目的地
      * @apiParam (请求参数说明) {String} time_begin  开始时间
      * @apiParam (请求参数说明) {String} time_end   结束时间
+     * @apiParam (请求参数说明) {int} 人数   结束时间
      * @apiParam (请求参数说明) {int} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
      *
      * @apiSuccessExample {json} 返回样例:
@@ -88,23 +91,11 @@ class Buffet extends BaseController
      * @apiSuccess (返回参数说明) {String} unit 用车时间
      * @apiSuccess (返回参数说明) {String} project  目的地
      * @apiSuccess (返回参数说明) {String} time_begin   人数
+     * @apiSuccess (返回参数说明) {String} count   人数
      * @apiSuccess (返回参数说明) {String} time_end   用车原因
      * @apiSuccess (返回参数说明) {int} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $status
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $page = 1, $size = 20)

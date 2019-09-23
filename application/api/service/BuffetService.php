@@ -101,6 +101,7 @@ class BuffetService extends BaseService
             '日期',
             '申请人',
             '部门',
+            '人数',
             '公务时间',
             '来访单位',
             '公务活动项目',
