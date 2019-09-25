@@ -114,15 +114,6 @@ class MeetingRecept extends BaseController
      * @apiSuccess (返回参数说明) {String} accompany   陪同人员名单
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
-     * @param $time_begin
-     * @param $time_end
-     * @param string $department
-     * @param string $username
-     * @param $status
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
     public function getList($time_begin, $time_end, $department = '全部', $username = '全部', $status = 3, $page = 1, $size = 20)
     {

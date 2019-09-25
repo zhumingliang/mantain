@@ -172,22 +172,14 @@ class AdminService
 
     }
 
-    /**
-     * @return array
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
+
     public static function checkUserRole($department)
     {
         $role = Token::getCurrentTokenVar('role');
         $role_info = Role::where('id', $role)->find();
-        if ($role_info['name'] == "局长") {
+        if ($role_info['name'] == "局长" || $role_info['name'] == "机服中心管理员" || $role_info['name'] == "机服中心负责人") {
             return $department;
-        }
-         elseif ($role_info['name'] == "分管部门局领导") {
+        } elseif ($role_info['name'] == "分管部门局领导") {
             return $department == "全部" ? self::getUserDepartment(Token::getCurrentUid()) : $department;
         } else {
             return Token::getCurrentTokenVar('department');
@@ -199,10 +191,9 @@ class AdminService
     {
         $role = Token::getCurrentTokenVarWithGet('role');
         $role_info = Role::where('id', $role)->find();
-        if ($role_info['name'] == "局长") {
+        if ($role_info['name'] == "局长" || $role_info['name'] == "机服中心管理员" || $role_info['name'] == "机服中心负责人") {
             return $department;
-        }
-        elseif ($role_info['name'] == "分管部门局领导") {
+        } elseif ($role_info['name'] == "分管部门局领导") {
             return $department == "全部" ? self::getUserDepartment(Token::getCurrentUidWithGet()) : $department;
         } else {
             return Token::getCurrentTokenVarWithGet('department');
@@ -247,20 +238,19 @@ class AdminService
         }
     }
 
-    /**
-     * @return array
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
     public function getDepartments()
     {
         $role = Token::getCurrentTokenVar('role');
         $role_info = Role::where('id', $role)->find();
-        if ($role_info['name'] == "分管部门局领导" || $role_info['name'] == "局长") {
+        if ($role_info['name'] == "局长" || $role_info['name'] == "机服中心管理员" || $role_info['name'] == "机服中心负责人") {
+            return UserDepartmentT::where('state', '=', 1)
+                ->field('d_name as name')
+                ->select()
+                ->toArray();
+        }
+        if ($role_info['name'] == "分管部门局领导") {
             return UserDepartmentT::where('u_id', Token::getCurrentUid())
+                ->where('state', '=', 1)
                 ->field('d_name as name')
                 ->select()
                 ->toArray();

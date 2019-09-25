@@ -17,6 +17,10 @@ use app\lib\enum\CommonEnum;
 class Department extends BaseController
 {
     /**
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      * @api {GET} /api/v1/department/list 44-获取部门列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -28,10 +32,6 @@ class Department extends BaseController
      * @apiSuccess (返回参数说明) {int} id 部门id
      * @apiSuccess (返回参数说明) {String} name 部门名称
      *
-     * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function getList()
     {
@@ -52,8 +52,7 @@ class Department extends BaseController
      * @apiSuccessExample {json}返回样例:
      * [{"name":"办公室"}]
      * @apiSuccess (返回参数说明) {String} name 部门名称
-     * @return \think\response\Json
-     */
+     **/
     public function getDepartments()
     {
         $departments = (new AdminService())->getDepartments();
