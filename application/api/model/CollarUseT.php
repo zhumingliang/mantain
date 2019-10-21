@@ -13,5 +13,16 @@ use think\Model;
 
 class CollarUseT extends Model
 {
+    public function admin()
+    {
+        return $this->belongsTo('AdminT', 'admin_id', 'id');
+    }
 
+    public static function info($id)
+    {
+        return self::where('id', $id)
+            ->with('admin')
+            ->find();
+
+    }
 }

@@ -12,13 +12,16 @@ namespace app\api\service;
 use app\api\model\AccessControlT;
 use app\api\model\AdminT;
 use app\api\model\BorrowT;
+use app\api\model\BuffetT;
 use app\api\model\CarT;
+use app\api\model\CollarUseT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
 use app\api\model\MeetingReceptT;
 use app\api\model\RepairV;
 use app\api\model\Run;
 use app\api\model\RunProcess;
+use app\common\controller\Admin;
 use app\lib\enum\CommonEnum;
 use app\lib\exception\FlowException;
 use think\Db;
@@ -362,29 +365,84 @@ class FlowService
         if ($npid == '') {
             if ($wf_type == "meeting_recept_t") {
                 $this->sendMsgForRecept($wf_fid);
-            }
-            if ($wf_type == "car_t") {
-                $this->sendMsgForCar($wf_fid);
-            }
-            if ($wf_type == "repair_machine_t" || $wf_type == "repair_other_t") {
+            } else
+                if ($wf_type == "car_t") {
+                    $this->sendMsgForCar($wf_fid);
+                } else
+                    if ($wf_type == "repair_machine_t" || $wf_type == "repair_other_t") {
+                        $this->sendMsgForRepair($wf_fid, $wf_type, $run_id);
+                    } else
+                        if ($wf_type == "access_control_t") {
+                            $this->sendMsgForAccess($wf_fid);
+                        } else
+                            if ($wf_type == "space_recreational_t" || $wf_type == "space_multi_t" ||
+                                $wf_type == "meetingplace_t") {
+                                $this->sendMsgForBookingPlace($wf_type, $wf_fid);
 
-                $this->sendMsgForRepair($wf_fid, $wf_type, $run_id);
-            }
-
-            if ($wf_type == "access_control_t") {
-
-                $this->sendMsgForAccess($wf_fid);
-
-            }
+                            } else if ($wf_type == "buffet_t" || $wf_type == "collar_use_t" || $wf_type == "borrow_t") {
+                                $this->sendMsgForDinnerAndProduct($wf_type, $wf_fid);
+                            }
 
         }
 
     }
 
+    //围餐预订、自助餐预订、物品领用、物品借用--推给凌丽珠
+    private function sendMsgForDinnerAndProduct($wf_type, $wf_fid)
+    {
+        if ($wf_type == "buffet_t") {
+            $info = BuffetT::info($wf_fid);
+            if ($info) {
+                $msg = "%s于%s申请自助餐,公务时间:%s-%s,来访单位：%s；公务活动项目:%s";
+                $msg = sprintf($msg, $info->admin->username, $info->create_time, $info->time_begin, $info->time_end,
+                    $info->unit, $info->project);
+                $msg .= "请机服中心相关人员进行跟进。";
+            }
+        } else if ($wf_type == "collar_use_t") {
+            $info = CollarUseT::info($wf_fid);
+            if ($info) {
+                $msg = "%s于%s发起%s申请";
+                $msg = sprintf($msg, $info->admin->username, $info->create_time, "领用");
+                $msg .= "请机服中心相关人员进行跟进。";
+            }
+        } else {
+            $info = BorrowT::info($wf_fid);
+            if ($info) {
+                $msg = "%s于%s发起%s申请";
+                $msg = sprintf($msg, $info->admin->username, $info->create_time, "借用");
+                $msg .= "请机服中心相关人员进行跟进。";
+            }
+        }
+
+        //$user = AdminT::getUserIdWithUserName("凌丽珠");
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
+        }
+
+
+    }
+
+    //预定场地-发送信息给指定用户：李景文
+    private function sendMsgForBookingPlace($wf_type, $wf_fid)
+    {
+        $info = Db::table('maintain_' . $wf_type)->where('id', $wf_fid)->find();
+        if ($info) {
+            $admin = AdminT::get($info->admin_id);
+            $msg = "%s的%s于%s申请场地:%s。";
+            $msg = sprintf($msg, $info->department, $admin->username, $info->create_time, $info->place);
+            $msg .= "请机服中心相关人员进行跟进。";
+           // $user = AdminT::getUserIdWithUserName("李景文");
+            $user = AdminT::getUserIdWithUserName("黄锐芝");
+            if (!empty($user['user_id'])) {
+                (new MsgService())->sendMsg($user['user_id'], $msg);
+            }
+
+        }
+    }
+
     /**
      * 权限控制-发送通知
-     * @param $wf_fid
-     * @throws \think\exception\DbException
      */
     private function sendMsgForAccess($wf_fid)
     {
@@ -394,13 +452,21 @@ class FlowService
         $msg = sprintf($msg, $user->department, $user->username, $info->create_time, $info->access, $info->user_type,
             $info->deadline, $info->members);
         $users = AdminService::getUserIdWithRole("门禁权限管理员");
-        (new MsgService())->sendMsg($users, $msg);
+        if (strlen($users)) {
+            (new MsgService())->sendMsg($users, $msg);
+        }
+
+        //发送给张海滨
+        $msg .= "请机服中心相关人员进行跟进。";
+       // $user = AdminT::getUserIdWithUserName("张海滨");
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
+        }
     }
 
     /**
      * 围餐流程走完给厨房发送通知
-     * @param $wf_fid
-     * @throws \think\exception\DbException
      */
     private function sendMsgForRecept($wf_fid)
     {
@@ -409,12 +475,18 @@ class FlowService
         $msg = sprintf($msg, $info->unit, $info->meal_time, $info->meeting_count + $info->accompany_count, $info->accompany);
         $users = AdminService::getUserIdWithRole("厨房");
         (new MsgService())->sendMsg($users, $msg);
+
+        //推送给凌丽珠
+        $msg .= "请机服中心相关人员进行跟进。";
+       // $user = AdminT::getUserIdWithUserName("凌丽珠");
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
+        }
     }
 
     /**
      * 结束流程给申请用车用户发送信息
-     * @param $wf_fid
-     * @throws \think\exception\DbException
      */
     private function sendMsgForCar($wf_fid)
     {
@@ -422,17 +494,21 @@ class FlowService
         $msg = "您申请的%s出发的用车已通过审核，车辆信息为:%s，%s，请提前联系司机出车。";
         $msg = sprintf($msg, $info->create_time, $info->car_info, $info->driver);
         $users = AdminService::getUserIdWithID($info->admin_id);
-        (new MsgService())->sendMsg($users, $msg);
+        if (strlen($users)) {
+            (new MsgService())->sendMsg($users, $msg);
+        }
+
+        //发送给李康
+        $msg .= "请机服中心相关人员进行跟进。";
+       // $user = AdminT::getUserIdWithUserName("李康");
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
+        }
     }
 
     /**
      * 报修流程-发送给每一个用户推送信息
-     * @param $wf_fid
-     * @param $wf_type
-     * @param $run_id
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     private function sendMsgForRepair($wf_fid, $wf_type, $run_id)
     {
@@ -440,9 +516,26 @@ class FlowService
         $msg = "%s的%s于%s报修的在%s的%s已处理，反馈结果为:%s。";
         $msg = sprintf($msg, $info->department, $info->username, $info->create_time, $info->address, $info->name, $info->feedback);
         $users = AdminService::getUserIdWithRunProcess($run_id);
-        (new MsgService())->sendMsg($users, $msg);
+        if (strlen($users)) {
+            (new MsgService())->sendMsg($users, $msg);
+        }
+
+        //推送给张灵学
+        $msg .= "请机服中心相关人员进行跟进。";
+       // $user = AdminT::getUserIdWithUserName("张灵学");
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
+        }
 
     }
+
+    /* private function sendMsgToUser($wf_type)
+     {
+         if ($wf_type==""){
+
+         }
+     }*/
 
     /**
      * @param $run_id

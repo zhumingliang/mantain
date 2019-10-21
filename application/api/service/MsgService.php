@@ -30,13 +30,13 @@ class MsgService
     {
         $data = $this->preData($touser, $content);
         $res = Curl::post($this->msgUrl, $data);
-        LogT::create(['msg' => 'content:' . $content . 'res:' . $res]);
         $res_obj = json_decode($res);
         if ($res_obj->errcode != 0) {
             LogT::create(['msg' => $res]);
         }
-
     }
+
+
 
 
     /**

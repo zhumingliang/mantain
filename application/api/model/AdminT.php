@@ -30,4 +30,13 @@ class AdminT extends Model
 
     }
 
+    public static function getUserIdWithUserName($username)
+    {
+        $user = self::where('username', $username)
+            ->field('user_id')->find();
+        return $user;
+
+    }
+
+
 }

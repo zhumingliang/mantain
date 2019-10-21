@@ -48,9 +48,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST}  /api/v1/sku/save 71-用品管理-新增用品
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -100,8 +97,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @return \think\response\Json
-     * @throws \think\Exception
      * @api {POST} /api/v1/sku/update  72-用品管理-修改用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -149,8 +144,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $id
-     * @return \think\response\Json
      * @api {POST} /api/v1/sku 73-用品管理-获取指定用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -185,8 +178,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $id
-     * @return \think\response\Json
      * @throws OperationException
      * @api {POST} /api/v1/sku/image/handel  74-用品管理-删除指定用关联图片
      * @apiGroup  CMS
@@ -352,10 +343,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $category
-     * @param $order_number
-     * @param $category_id
-     * @return \think\response\Json
      * @api {GET} /api/v1/stock/export 78-用品管理-入库记录-导出
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -374,10 +361,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST}  /api/v1/collar/use/save 79-用品管理-领用申请
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -414,22 +397,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $time_begin
-     * @param $time_end
-     * @param string $department
-     * @param string $username
-     * @param string $status
-     * @param string $type
-     * @param string $sku
-     * @param string $category
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      * @api {GET} /api/v1/sku/apply/list 81-用品管理-领用列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -477,12 +444,6 @@ class Sku extends BaseController
 
 
     /**
-     * @param $type
-     * @param $id
-     * @return \think\response\Json
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      * @api {GET} /api/v1/sku/apply/detail 用品管理-领用列表-用品信息
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -507,20 +468,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $time_begin
-     * @param $time_end
-     * @param string $department
-     * @param string $username
-     * @param string $status
-     * @param string $type
-     * @param string $sku
-     * @param string $category
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      * @api {GET} /api/v1/sku/apply/export 82-用品管理-领用列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -547,9 +494,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $c_id
-     * @param string $name
-     * @return \think\response\Json
      * @api {GET} /api/v1/sku/list 83-用品管理-获取用品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1

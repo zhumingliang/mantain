@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Department.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/MeetingRecept.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/AdminService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AdminService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/AdminT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/AdminT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/BorrowT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BorrowT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/BuffetT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BuffetT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/CollarUseT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/CollarUseT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/FlowService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/FlowService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/service/MsgService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MsgService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -152,14 +158,10 @@
       <workItem from="1568796133959" duration="2011000" />
       <workItem from="1569206363462" duration="1435000" />
       <workItem from="1569378456456" duration="2979000" />
-      <workItem from="1569419101022" duration="947000" />
-    </task>
-    <task id="LOCAL-00170" summary="初始化">
-      <created>1551369898188</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1551369898189</updated>
+      <workItem from="1569419101022" duration="1120000" />
+      <workItem from="1570762175441" duration="1285000" />
+      <workItem from="1570764496423" duration="870000" />
+      <workItem from="1571621381561" duration="6927000" />
     </task>
     <task id="LOCAL-00171" summary="初始化">
       <created>1551371702021</created>
@@ -497,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569208010240</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <task id="LOCAL-00219" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1569420414608</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1569420414608</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +527,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="初始化" />
-    <option name="LAST_COMMIT_MESSAGE" value="初始化" />
+    <MESSAGE value="修复-机服中心负责人/管理员不可见流程问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复-机服中心负责人/管理员不可见流程问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -530,7 +540,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/application/api/service/FlowService.php</url>
-          <line>342</line>
+          <line>345</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

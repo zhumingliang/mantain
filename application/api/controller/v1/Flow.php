@@ -28,18 +28,6 @@ use workflow\workflow;
 class Flow extends BaseController
 {
     /**
-     * @param $check_con
-     * @param $flow_id
-     * @param $flow_process
-     * @param $npid
-     * @param $run_id
-     * @param $run_process
-     * @param $wf_fid
-     * @param $wf_type
-     * @param string $submit_to_save
-     * @return Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST} /api/v1/flow/check/pass  35-CMS-流程审核-通过/不同意/取消
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -301,7 +289,6 @@ class Flow extends BaseController
 
 
     }
-
 
     /**
      * @param $wf_fid

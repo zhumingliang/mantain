@@ -10,9 +10,11 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\AdminT;
 use app\api\model\MeetingRoomT;
 use app\api\model\MeetingT;
 use app\api\service\MeetingService;
+use app\api\service\MsgService;
 use app\api\validate\MeetingValidate;
 use app\api\service\Token as TokenService;
 use app\index\controller\News;
@@ -79,6 +81,15 @@ class Meeting extends BaseController
         $id = MeetingT::create($params);
         if (!$id) {
             throw new OperationException();
+        }
+        $username = \app\api\service\Token::getCurrentTokenVar('username');
+        $msg = "%s于%s发起会议申请，会议主题:%s;会议地点:%s；会议时间:%s-%s。";
+        $msg = sprintf($msg, $username, date('Y-m-d H:i:s'), $params['theme'], $params['address'], $params['meeting_begin'], $params['meeting_end']);
+        $msg .= "请机服中心相关人员进行跟进。";
+        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        //$user = AdminT::getUserIdWithUserName("李景文");
+        if (!empty($user['user_id'])) {
+            (new MsgService())->sendMsg($user['user_id'], $msg);
         }
         return json(new SuccessMessage());
 
