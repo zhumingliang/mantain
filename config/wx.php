@@ -6,7 +6,7 @@
  * Time: 4:24 PM
  */
 
-/*return [
+return [
     'app_id' => 'wwdfcb0c134ab7dc75',
 
     'app_secret' => 'RHyquXfMA2wo0vZZQAvp_4m0jgqDTj_FqaTedUH1sV8',
@@ -23,9 +23,9 @@
 
     'msg_url' => "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s",
 
-];*/
+];
 
-return [
+/*return [
     'app_id' => 'wwffcc8e626d73e98f',
 
     'app_secret' => 'bSJSQAy_aWakifiNMl9i33OdPf51dungRj5lLYRuDrM',
@@ -42,4 +42,4 @@ return [
 
     'msg_url' => "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s",
 
-];
+];*/

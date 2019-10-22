@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Meeting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/AdminT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/AdminT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/BorrowT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BorrowT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/BuffetT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BuffetT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/CollarUseT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/CollarUseT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/FlowService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/FlowService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/MsgService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MsgService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,14 +153,7 @@
       <workItem from="1569419101022" duration="1120000" />
       <workItem from="1570762175441" duration="1285000" />
       <workItem from="1570764496423" duration="870000" />
-      <workItem from="1571621381561" duration="6927000" />
-    </task>
-    <task id="LOCAL-00171" summary="初始化">
-      <created>1551371702021</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1551371702021</updated>
+      <workItem from="1571621381561" duration="7534000" />
     </task>
     <task id="LOCAL-00172" summary="初始化">
       <created>1551691580550</created>
@@ -506,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569420414608</updated>
     </task>
-    <option name="localTasksCounter" value="220" />
+    <task id="LOCAL-00220" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1571669096959</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1571669096959</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
