@@ -21,7 +21,7 @@ class MsgService
     public function __construct()
     {
         $url = config('wx.msg_url');
-        $url = sprintf($url, (new AccessToken())->get());
+        $url = sprintf($url, (new AccessToken('msg'))->get());
         $this->msgUrl = $url;
         $this->agentid = config('wx.app_msg_agent_id');
     }

@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/AccessToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AccessToken.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/service/MsgService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MsgService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/wx.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/wx.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,14 +154,7 @@
       <workItem from="1569419101022" duration="1120000" />
       <workItem from="1570762175441" duration="1285000" />
       <workItem from="1570764496423" duration="870000" />
-      <workItem from="1571621381561" duration="11530000" />
-    </task>
-    <task id="LOCAL-00178" summary="初始化">
-      <created>1553663622126</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1553663622127</updated>
+      <workItem from="1571621381561" duration="11914000" />
     </task>
     <task id="LOCAL-00179" summary="初始化">
       <created>1553665223786</created>
@@ -500,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571753286867</updated>
     </task>
-    <option name="localTasksCounter" value="227" />
+    <task id="LOCAL-00227" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1571756056040</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1571756056040</updated>
+    </task>
+    <option name="localTasksCounter" value="228" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -20,10 +20,14 @@ class AccessToken
     const TOKEN_CACHED_KEY = 'access_token';
     const TOKEN_EXPIRE_IN = 7000;
 
-    function __construct()
+    function __construct($type = "info")
     {
         $url = config('wx.access_token_url');
-        $url = sprintf($url, config('wx.app_id'), config('wx.app_msg_secret'));
+        if ($type == "info") {
+            $url = sprintf($url, config('wx.app_id'), config('wx.app_secret'));
+        } else {
+            $url = sprintf($url, config('wx.app_id'), config('wx.app_msg_secret'));
+        }
         $this->tokenUrl = $url;
     }
 
@@ -33,13 +37,13 @@ class AccessToken
      */
     public function get()
     {
-         return $this->getFromWxServer();
-       /* $cache_token = $this->getFromCache();
-        if (!$cache_token) {
-            return $this->getFromWxServer();
-        } else {
-            return $cache_token;
-        }*/
+        return $this->getFromWxServer();
+        /* $cache_token = $this->getFromCache();
+         if (!$cache_token) {
+             return $this->getFromWxServer();
+         } else {
+             return $cache_token;
+         }*/
     }
 
     private function getFromCache()
