@@ -31,6 +31,8 @@ class MsgService
         $data = $this->preData($touser, $content);
         $res = Curl::post($this->msgUrl, $data);
         $res_obj = json_decode($res);
+        print_r($data);
+        print_r($res_obj);
         if ($res_obj->errcode != 0) {
             LogT::create(['msg' => $res]);
         }
