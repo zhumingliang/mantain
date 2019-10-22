@@ -426,14 +426,11 @@ class FlowService
     //预定场地-发送信息给指定用户：李景文
     private function sendMsgForBookingPlace($wf_type, $wf_fid)
     {
-        echo $wf_fid;
-        echo $wf_type;
         $info = Db::table('maintain_' . $wf_type)->where('id', $wf_fid)->find();
-        print_r($info);
         if ($info) {
-            $admin = AdminT::get($info->admin_id);
+            $admin = AdminT::get($info['admin_id']);
             $msg = "%s的%s于%s申请场地:%s。";
-            $msg = sprintf($msg, $info->department, $admin->username, $info->create_time, $info->place);
+            $msg = sprintf($msg, $info['department'], $admin->username, $info['create_time'], $info['place']);
             $msg .= "请机服中心相关人员进行跟进。";
             // $user = AdminT::getUserIdWithUserName("李景文");
             $user = AdminT::getUserIdWithUserName("黄锐芝");

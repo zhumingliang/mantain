@@ -153,14 +153,7 @@
       <workItem from="1569419101022" duration="1120000" />
       <workItem from="1570762175441" duration="1285000" />
       <workItem from="1570764496423" duration="870000" />
-      <workItem from="1571621381561" duration="8424000" />
-    </task>
-    <task id="LOCAL-00173" summary="初始化">
-      <created>1551863780893</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1551863780893</updated>
+      <workItem from="1571621381561" duration="8650000" />
     </task>
     <task id="LOCAL-00174" summary="初始化">
       <created>1553436951175</created>
@@ -498,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571735277364</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1571745979613</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1571745979613</updated>
+    </task>
+    <option name="localTasksCounter" value="223" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
