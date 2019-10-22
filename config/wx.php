@@ -13,6 +13,10 @@ return [
 
     'app_agent_id' => '1000003',
 
+    'app_msg_agent_id' => '1000008',
+
+    'app_msg_secret' => 'P3p7oL5-l3znXVVS7FheZjMpyIGEwvqn7HJOby15kNA',
+
     'wx_code_url' => 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=SCOPE&state=STATE#wechat_redirect',
 
     'access_token_url' => "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s",

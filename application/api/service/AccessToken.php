@@ -23,7 +23,7 @@ class AccessToken
     function __construct()
     {
         $url = config('wx.access_token_url');
-        $url = sprintf($url, config('wx.app_id'), config('wx.app_secret'));
+        $url = sprintf($url, config('wx.app_id'), config('wx.app_msg_secret'));
         $this->tokenUrl = $url;
     }
 
