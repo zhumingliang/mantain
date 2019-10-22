@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/FlowService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/FlowService.php" afterDir="false" />
-    </list>
+    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,14 +150,7 @@
       <workItem from="1569419101022" duration="1120000" />
       <workItem from="1570762175441" duration="1285000" />
       <workItem from="1570764496423" duration="870000" />
-      <workItem from="1571621381561" duration="8650000" />
-    </task>
-    <task id="LOCAL-00174" summary="初始化">
-      <created>1553436951175</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1553436951175</updated>
+      <workItem from="1571621381561" duration="9122000" />
     </task>
     <task id="LOCAL-00175" summary="初始化">
       <created>1553522379955</created>
@@ -498,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571745979613</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1571751202647</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1571751202647</updated>
+    </task>
+    <option name="localTasksCounter" value="224" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

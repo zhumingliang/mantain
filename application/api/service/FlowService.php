@@ -429,8 +429,8 @@ class FlowService
         $info = Db::table('maintain_' . $wf_type)->where('id', $wf_fid)->find();
         if ($info) {
             $admin = AdminT::get($info['admin_id']);
-            $msg = "%s的%s于%s申请场地:%s。";
-            $msg = sprintf($msg, $info['department'], $admin->username, $info['create_time'], $info['place']);
+            $msg = "%s于%s申请场地:%s。";
+            $msg = sprintf($msg, $admin->username, $info['create_time'], $info['place']);
             $msg .= "请机服中心相关人员进行跟进。";
             // $user = AdminT::getUserIdWithUserName("李景文");
             $user = AdminT::getUserIdWithUserName("黄锐芝");
