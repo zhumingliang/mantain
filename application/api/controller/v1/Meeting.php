@@ -83,7 +83,7 @@ class Meeting extends BaseController
             throw new OperationException();
         }
         $username = \app\api\service\Token::getCurrentTokenVar('username');
-        $msg = "%s于%s发起会议申请，会议主题:%s;会议地点:%s；会议时间:%s-%s。";
+        $msg = "%s于%s发起会议申请\n，会议主题:%s;\n会议地点:%s；\n会议时间:%s-%s。\n";
         $msg = sprintf($msg, $username, date('Y-m-d H:i:s'), $params['theme'], $params['address'], $params['meeting_begin'], $params['meeting_end']);
         $msg .= "请机服中心相关人员进行跟进。";
         $user = AdminT::getUserIdWithUserName("黄锐芝");
