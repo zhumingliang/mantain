@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/MeetingT.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/MeetingT.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +32,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -153,14 +155,8 @@
       <workItem from="1570762175441" duration="1285000" />
       <workItem from="1570764496423" duration="870000" />
       <workItem from="1571621381561" duration="12129000" />
-      <workItem from="1571792074474" duration="1096000" />
-    </task>
-    <task id="LOCAL-00181" summary="初始化">
-      <created>1553666152832</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1553666152832</updated>
+      <workItem from="1571792074474" duration="2071000" />
+      <workItem from="1571841006573" duration="365000" />
     </task>
     <task id="LOCAL-00182" summary="初始化">
       <created>1553666284453</created>
@@ -498,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571792123994</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="修复-机服中心负责人/管理员不可见流程问题">
+      <created>1571796942440</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1571796942440</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,6 +521,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初始化" />
     <MESSAGE value="修复-机服中心负责人/管理员不可见流程问题" />
     <option name="LAST_COMMIT_MESSAGE" value="修复-机服中心负责人/管理员不可见流程问题" />
@@ -534,15 +538,6 @@
           <url>file://$PROJECT_DIR$/application/api/service/FlowService.php</url>
           <line>345</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/application/api/service/FlowService.php</url>
-          <line>426</line>
-          <properties>
-            <option name="className" value="\app\api\service\FlowService" />
-            <option name="methodName" value="sendMsgForBookingPlace" />
-          </properties>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
