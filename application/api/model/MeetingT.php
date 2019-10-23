@@ -14,15 +14,6 @@ use think\Model;
 
 class MeetingT extends Model
 {
-    public function setThemeAttr($value)
-    {
-        return base64_encode($value);
-    }
-
-    public function getThemeAttr($value)
-    {
-        return base64_decode($value);
-    }
 
     public static function getMeetingList($time_begin, $time_end, $address, $theme, $page, $size, $host)
     {
