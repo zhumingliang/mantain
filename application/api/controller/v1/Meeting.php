@@ -87,9 +87,9 @@ class Meeting extends BaseController
         $msg = sprintf($msg, $username, date('Y-m-d H:i:s'), $params['theme'], $params['address'], $params['meeting_begin'], $params['meeting_end']);
         $msg .= "请机服中心相关人员进行跟进。";
         $user = AdminT::getUserIdWithUserName("黄锐芝");
-        //$user = AdminT::getUserIdWithUserName("李景文");
-        if (!empty($user['user_id'])) {
-            (new MsgService())->sendMsg($user['user_id'], $msg);
+        //$user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
+        if (!empty($user)) {
+            (new MsgService())->sendMsg($user, $msg);
         }
         return json(new SuccessMessage());
 

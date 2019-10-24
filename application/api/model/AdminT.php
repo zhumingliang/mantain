@@ -32,9 +32,13 @@ class AdminT extends Model
 
     public static function getUserIdWithUserName($username)
     {
-        $user = self::where('username', $username)
-            ->field('user_id')->find();
-        return $user;
+        $user = self::whereIn('username', $username)
+            ->field('user_id')->select()->toArray();
+        $user_ids = array();
+        foreach ($user as $k => $v) {
+            array_push($user_ids, $v['user_id']);
+        }
+        return implode('|', $user_ids);
 
     }
 

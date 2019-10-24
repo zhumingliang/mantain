@@ -17,6 +17,7 @@ use app\api\model\CarT;
 use app\api\model\CollarUseT;
 use app\api\model\Flow;
 use app\api\model\FlowProcess;
+use app\api\model\HotelT;
 use app\api\model\MeetingReceptT;
 use app\api\model\RepairV;
 use app\api\model\Run;
@@ -379,8 +380,8 @@ class FlowService
                                 $wf_type == "meetingplace_t") {
                                 $this->sendMsgForBookingPlace($wf_type, $wf_fid);
 
-                            } else if ($wf_type == "buffet_t" || $wf_type == "collar_use_t" || $wf_type == "borrow_t") {
-                                $this->sendMsgForDinnerAndProduct($wf_type, $wf_fid);
+                            } else if ($wf_type == "buffet_t" || $wf_type == "collar_use_t" || $wf_type == "borrow_t" || $wf_type == "hotel_t") {
+                                $this->sendMsgForDinnerAndProductAndHotel($wf_type, $wf_fid);
                             }
 
         }
@@ -388,7 +389,7 @@ class FlowService
     }
 
     //围餐预订、自助餐预订、物品领用、物品借用--推给凌丽珠
-    private function sendMsgForDinnerAndProduct($wf_type, $wf_fid)
+    private function sendMsgForDinnerAndProductAndHotel($wf_type, $wf_fid)
     {
         if ($wf_type == "buffet_t") {
             $info = BuffetT::info($wf_fid);
@@ -405,6 +406,13 @@ class FlowService
                 $msg = sprintf($msg, $info->admin->username, $info->create_time, "领用");
                 $msg .= "请机服中心相关人员进行跟进。";
             }
+        } else if ($wf_type == "hotel_t") {
+            $info = HotelT::info($wf_fid);
+            if ($info) {
+                $msg = "来访单位： %s拟入住酒店： %s";
+                $msg = sprintf($msg, $info->admin->username, $info->create_time, "领用");
+                $msg .= "请机服中心相关人员进行跟进。";
+            }
         } else {
             $info = BorrowT::info($wf_fid);
             if ($info) {
@@ -416,14 +424,14 @@ class FlowService
 
         //$user = AdminT::getUserIdWithUserName("凌丽珠");
         $user = AdminT::getUserIdWithUserName("黄锐芝");
-        if (!empty($user['user_id'])) {
-            (new MsgService())->sendMsg($user['user_id'], $msg);
+        if (strlen($user)) {
+            (new MsgService())->sendMsg($user, $msg);
         }
 
 
     }
 
-    //预定场地-发送信息给指定用户：李景文
+    //预定场地-发送信息给指定用户：李景文,凌丽珠
     private function sendMsgForBookingPlace($wf_type, $wf_fid)
     {
         $info = Db::table('maintain_' . $wf_type)->where('id', $wf_fid)->find();
@@ -432,10 +440,10 @@ class FlowService
             $msg = "%s于%s申请场地:%s。";
             $msg = sprintf($msg, $admin->username, $info['create_time'], $wf_type == "meetingplace_t" ? $info['space'] : $info['place']);
             $msg .= "请机服中心相关人员进行跟进。";
-            // $user = AdminT::getUserIdWithUserName("李景文");
+            // $user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
             $user = AdminT::getUserIdWithUserName("黄锐芝");
-            if (!empty($user['user_id'])) {
-                (new MsgService())->sendMsg($user['user_id'], $msg);
+            if (strlen($user)) {
+                (new MsgService())->sendMsg($user, $msg);
             }
 
         }
@@ -456,12 +464,12 @@ class FlowService
             (new MsgService())->sendMsg($users, $msg);
         }
 
-        //发送给张海滨
+        //发送给张海滨,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("张海滨");
+        // $user = AdminT::getUserIdWithUserName("张海滨,凌丽珠");
         $user = AdminT::getUserIdWithUserName("黄锐芝");
-        if (!empty($user['user_id'])) {
-            (new MsgService())->sendMsg($user['user_id'], $msg);
+        if (!empty($user)) {
+            (new MsgService())->sendMsg($user, $msg);
         }
     }
 
@@ -498,12 +506,12 @@ class FlowService
             (new MsgService())->sendMsg($users, $msg);
         }
 
-        //发送给李康
+        //发送给李康,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("李康");
+        // $user = AdminT::getUserIdWithUserName("李康,凌丽珠");
         $user = AdminT::getUserIdWithUserName("黄锐芝");
-        if (!empty($user['user_id'])) {
-            (new MsgService())->sendMsg($user['user_id'], $msg);
+        if (!empty($user)) {
+            (new MsgService())->sendMsg($user, $msg);
         }
     }
 
@@ -520,12 +528,12 @@ class FlowService
             (new MsgService())->sendMsg($users, $msg);
         }
 
-        //推送给张灵学
+        //推送给张灵学,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("张灵学");
+        // $user = AdminT::getUserIdWithUserName("张灵学,凌丽珠");
         $user = AdminT::getUserIdWithUserName("黄锐芝");
-        if (!empty($user['user_id'])) {
-            (new MsgService())->sendMsg($user['user_id'], $msg);
+        if (strlen($user)) {
+            (new MsgService())->sendMsg($user, $msg);
         }
 
     }
