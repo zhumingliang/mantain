@@ -430,7 +430,7 @@ class FlowService
         if ($info) {
             $admin = AdminT::get($info['admin_id']);
             $msg = "%s于%s申请场地:%s。";
-            $msg = sprintf($msg, $admin->username, $info['create_time'], $info['space']);
+            $msg = sprintf($msg, $admin->username, $info['create_time'], $wf_type == "meetingplace_t" ? $info['space'] : $info['place']);
             $msg .= "请机服中心相关人员进行跟进。";
             // $user = AdminT::getUserIdWithUserName("李景文");
             $user = AdminT::getUserIdWithUserName("黄锐芝");
@@ -447,7 +447,7 @@ class FlowService
     private function sendMsgForAccess($wf_fid)
     {
         $info = AccessControlT::get($wf_fid);
-        $user = AdminT::get($info->u_id);
+        $user = AdminT::get($info->admin_id);
         $msg = "%s的%s于%s申请开通的功能为:%s，开通人员类型是：%s，工作截止时间为:%s，名单有：%s，请负责门禁系统的人员及时为其开通相关权限。";
         $msg = sprintf($msg, $user->department, $user->username, $info->create_time, $info->access, $info->user_type,
             $info->deadline, $info->members);
