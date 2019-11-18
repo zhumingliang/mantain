@@ -1,35 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="修复-推送问题">
+    <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Flow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Sku.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/AccessControlV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/AccessControlV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/BuffetV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/BuffetV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/CarV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/CarV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/HotelV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/HotelV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/MeetingReceptV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/MeetingReceptV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/MeetingplaceV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/MeetingplaceV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/RecreationalV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/RecreationalV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/RunLog.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/RunLog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/SkuApplyV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/SkuApplyV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/SpaceMultiV.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/SpaceMultiV.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/AccessService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/AccessService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/BuffetService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/BuffetService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/CarService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/CarService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/FlowService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/FlowService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/HotelService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/HotelService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/MeetingPlaceService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MeetingPlaceService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/MeetingReceptService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MeetingReceptService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/MultiService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/MultiService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/RecreationalService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/RecreationalService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/service/SkuService.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/service/SkuService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extend/workflow/db/ProcessDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/extend/workflow/db/ProcessDb.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/route/route.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +27,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
   <component name="ProjectId" id="1OqnhJ6kGUTwJa3H4KbHJ6lLmF8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -185,14 +161,7 @@
       <workItem from="1571841006573" duration="1053000" />
       <workItem from="1571842464012" duration="9071000" />
       <workItem from="1573896800495" duration="1011000" />
-      <workItem from="1573920156534" duration="13432000" />
-    </task>
-    <task id="LOCAL-00185" summary="初始化">
-      <created>1553781212304</created>
-      <option name="number" value="00185" />
-      <option name="presentableId" value="LOCAL-00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1553781212304</updated>
+      <workItem from="1573920156534" duration="13643000" />
     </task>
     <task id="LOCAL-00186" summary="初始化">
       <created>1554566860404</created>
@@ -530,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571895873253</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary="电子报表接口">
+      <created>1574099742369</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1574099742369</updated>
+    </task>
+    <option name="localTasksCounter" value="235" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +530,8 @@
     <MESSAGE value="初始化" />
     <MESSAGE value="修复-机服中心负责人/管理员不可见流程问题" />
     <MESSAGE value="修复-推送问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复-推送问题" />
+    <MESSAGE value="电子报表接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="电子报表接口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
