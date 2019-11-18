@@ -113,5 +113,9 @@ class BuffetService extends BaseService
 
     }
 
+    public function infoForReport($wf_fid){
+        return BuffetV::infoForReport($wf_fid);
+    }
+
 
 }

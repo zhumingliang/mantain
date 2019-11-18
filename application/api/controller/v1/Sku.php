@@ -178,7 +178,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @throws OperationException
      * @api {POST} /api/v1/sku/image/handel  74-用品管理-删除指定用关联图片
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -312,9 +311,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
      * @api {POST} /api/v1/stock/handel  77-用品管理-删除入库记录
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -517,7 +513,6 @@ class Sku extends BaseController
     }
 
     /**
-     * @return \think\response\Json
      * @api {GET} /api/v1/sku/list/use 89-用品管理-领用申请-获取用品列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1

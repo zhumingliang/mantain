@@ -14,7 +14,6 @@ Route::get('think', function () {
 });
 
 Route::get('hello/:name', 'index/hello');
-Route::get('cms/index', 'index/index');
 Route::get('api/:version/token/admin', 'api/:version.Token/getAdminToken');
 Route::get('api/:version/token/login/out', 'api/:version.Token/loginOut');
 Route::get('api/:version/token/user', 'api/:version.Token/getWXToken');
@@ -77,6 +76,7 @@ Route::post('api/:version/flow/check/pass/repair', 'api/:version.Flow/checkPassF
 Route::get('api/:version/flow/info', 'api/:version.Flow/getInfo');
 Route::get('api/:version/flow/complete', 'api/:version.Flow/getComplete');
 Route::get('api/:version/flow/ready', 'api/:version.Flow/getReady');
+Route::get('api/:version/flow/report/info', 'api/:version.Flow/Report');
 
 Route::get('api/:version/meeting/rooms', 'api/:version.MeetingRoom/getRooms');
 Route::get('api/:version/meeting/room/check', 'api/:version.MeetingRoom/checkRooms');

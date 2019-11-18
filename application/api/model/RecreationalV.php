@@ -82,6 +82,14 @@ class RecreationalV extends Model
             ->toArray();
         return $list;
 
+    }
+
+    public static function infoToReport($id)
+    {
+        $access = self::where('id', $id)
+            ->field('id,username,unit,user_count,CONCAT_WS("-",time_begin,time_end) as use_time,space,status')
+            ->find();
+        return $access;
 
     }
 

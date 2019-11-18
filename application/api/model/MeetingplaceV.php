@@ -65,13 +65,19 @@ class MeetingplaceV extends Model
                     $query->where('status', '=', $status);
                 }
             })
-             ->field('create_time,username,unit,CONCAT_WS("-",time_begin,time_end),reason,purpose,status')
+             ->field('create_time,username,unit,CONCAT_WS("-",time_begin,time_end) as use_time,reason,purpose,status')
             ->order('create_time desc')
             ->select()
             ->toArray();
         return $list;
 
+    }
 
+    public static function infoForReport($wf_fid)
+    {
+        return self::where('id', $wf_fid)
+            ->field('id,username,unit,CONCAT_WS("-",time_begin,time_end) as use_time,reason,place,purpose,status')
+            ->find();
     }
 
 }

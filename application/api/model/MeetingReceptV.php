@@ -14,6 +14,11 @@ use think\Model;
 
 class MeetingReceptV extends Model
 {
+    public function detail()
+    {
+        return $this->hasMany('MeetingReceptDetailT', 'mp_id', 'id');
+    }
+
     public static function getList($page, $size, $time_begin, $time_end, $department,
                                    $username, $status)
     {
@@ -72,6 +77,17 @@ class MeetingReceptV extends Model
             ->toArray();
         return $list;
 
+    }
 
+    public static function infoForReport($wf_fid)
+    {
+        return self::where('id', $wf_fid)
+            ->with(['detail' => function ($query) {
+                $query->field('mp_id,recept_time,content,address,money');
+            }])
+            ->field('id,username,department,letter_size,letter_title,
+            accompany_count,unit,leader, post,grade,departmental,section,
+            under_section,meeting_count,accompany,users,money,status')
+            ->find();
     }
 }

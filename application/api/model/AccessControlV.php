@@ -20,7 +20,7 @@ class AccessControlV extends Model
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', 'in', $department);
@@ -50,12 +50,12 @@ class AccessControlV extends Model
     }
 
 
-    public static function export( $time_begin, $time_end, $department,
-                                   $username, $status, $access)
+    public static function export($time_begin, $time_end, $department,
+                                  $username, $status, $access)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', 'in', $department);
@@ -81,7 +81,14 @@ class AccessControlV extends Model
             ->select()
             ->toArray();
         return $list;
+    }
 
+    public static function infoToReport($id)
+    {
+        $access = self::where('id', $id)
+            ->field('id,username,access,user_type,members,deadline,status')
+            ->find();
+        return $access;
 
     }
 

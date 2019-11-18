@@ -21,6 +21,7 @@ use app\api\model\HotelT;
 use app\api\model\MeetingReceptT;
 use app\api\model\RepairV;
 use app\api\model\Run;
+use app\api\model\RunLog;
 use app\api\model\RunProcess;
 use app\common\controller\Admin;
 use app\lib\enum\CommonEnum;
@@ -254,11 +255,6 @@ class FlowService
 
     /**
      * 获取指定类别的流程id
-     * @param $wf_type
-     * @return int|mixed
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     private function getWfId($wf_type)
     {
@@ -538,24 +534,6 @@ class FlowService
 
     }
 
-    /* private function sendMsgToUser($wf_type)
-     {
-         if ($wf_type==""){
-
-         }
-     }*/
-
-    /**
-     * @param $run_id
-     * @param $wf_type
-     * @param $wf_fid
-     * @throws FlowException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
     private function checkAccess($run_id, $wf_type, $wf_fid)
     {
         $info = RunProcess::where('run_id', $run_id)
@@ -644,9 +622,6 @@ class FlowService
 
     /**
      * 流程完成式-获取流程信息
-     * @param $wf_fid
-     * @param $wf_type
-     * @return array
      */
     public function getInfoForComplete($wf_fid, $wf_type)
     {
@@ -657,14 +632,6 @@ class FlowService
 
     /**
      * 判断当前用户有无取消流程权限
-     * @param $wf_fid
-     * @param $wf_type
-     * @return int
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      */
     public function checkCancelAccess($wf_fid, $wf_type)
     {
@@ -674,7 +641,51 @@ class FlowService
             ->find();
         return $count ? 1 : 2;
 
+    }
 
+    public function report($wf_fid, $wf_type)
+    {
+        $info = array();
+        switch ($wf_type) {
+            case 'access_control_t':
+                $info = (new AccessService())->infoForReport($wf_fid);
+                break;
+            case 'space_recreational_t':
+                $info = (new RecreationalService())->infoForReport($wf_fid);
+                break;
+            case 'space_multi_t':
+                $info = (new MultiService())->infoForReport($wf_fid);
+                break;
+            case 'meetingplace_t':
+                $info = (new MeetingPlaceService())->infoForReport($wf_fid);
+                break;
+            case 'meeting_recept_t':
+                $info = (new MeetingReceptService())->infoForReport($wf_fid);
+                break;
+            case 'buffet_t':
+                $info = (new BuffetService())->infoForReport($wf_fid);
+                break;
+            case 'hotel_t':
+                $info = (new HotelService())->infoForReport($wf_fid);
+                break;
+            case 'car_t':
+                $info = (new CarService())->infoForReport($wf_fid);
+                break;
+            case 'borrow_t':
+                $info = (new SkuService())->infoForReport($wf_fid,'borrow_t');
+                break;
+            case 'collar_use_t':
+                $info = (new SkuService())->infoForReport($wf_fid,'collar_use_t');
+                break;
+            default:
+                return $info;
+        }
+        //获取审批信息
+        $flow = RunLog::RunLogToReport($wf_fid, $wf_type);
+        return [
+            'info'=>$info,
+            'flow'=>$flow
+        ];
     }
 
 }

@@ -51,7 +51,7 @@ class ProcessDb
         if ($nex['process_to'] != '') {
             $nex_pid = explode(",", $nex['process_to']);
             $out_condition = json_decode($nex['out_condition'], true);
-            if (count($nex_pid) >= 2){
+            if (count($nex_pid) >= 2) {
                 //多个审批流
                 foreach ($out_condition as $key => $val) {
                     $where = implode(",", $val['condition']);
@@ -144,9 +144,6 @@ class ProcessDb
 
     /**
      * 流程日志
-     *
-     * @param $wf_fid
-     * @param $wf_type
      */
     public static function RunLog($wf_fid, $wf_type)
     {
@@ -165,5 +162,7 @@ class ProcessDb
 
         return $run_log;
     }
+
+
 
 }

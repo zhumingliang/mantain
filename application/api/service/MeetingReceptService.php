@@ -143,7 +143,7 @@ class MeetingReceptService extends BaseService
     public function getList($time_begin, $time_end, $department, $username, $status, $page, $size)
     {
         $list = MeetingReceptV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
-        $list=(new FlowService())->checkListStatus($list,'meeting_recept_t');
+        $list = (new FlowService())->checkListStatus($list, 'meeting_recept_t');
         return $list;
     }
 
@@ -176,6 +176,12 @@ class MeetingReceptService extends BaseService
         $file_name = '公务接待-围餐预定列表—导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
 
+    }
+
+
+    public function infoForReport($wf_fid)
+    {
+        return MeetingReceptV::infoForReport($wf_fid);
     }
 
 

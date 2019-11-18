@@ -46,7 +46,7 @@ class MultiService extends BaseService
     public function getList($time_begin, $time_end, $department, $username, $status, $page, $size, $space)
     {
         $list = SpaceMultiV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $space);
-        $list=(new FlowService())->checkListStatus($list,'space_multi_t');
+        $list = (new FlowService())->checkListStatus($list, 'space_multi_t');
         return $list;
 
 
@@ -68,5 +68,11 @@ class MultiService extends BaseService
         $file_name = '功能室申请导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
 
+    }
+
+    public function infoForReport($wf_fid)
+    {
+        $info = SpaceMultiV::infoForReport($wf_fid);
+        return $info;
     }
 }

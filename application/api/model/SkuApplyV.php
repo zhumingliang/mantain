@@ -93,7 +93,13 @@ class SkuApplyV extends Model
             ->toArray();
         return $list;
 
+    }
 
+    public static function infoForReport($wf_fid)
+    {
+        return self::where('id', $wf_fid)
+            ->field('id,username,department,phone,time_begin,time_end,actual_time,status')
+            ->find();
     }
 
 

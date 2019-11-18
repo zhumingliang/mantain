@@ -37,7 +37,7 @@ class Buffet extends BaseController
      * @apiParam (请求参数说明) {String} project  目的地
      * @apiParam (请求参数说明) {String} time_begin  开始时间
      * @apiParam (请求参数说明) {String} time_end   结束时间
-     * @apiParam (请求参数说明) {int} 人数   结束时间
+     * @apiParam (请求参数说明) {int} count 人数
      * @apiParam (请求参数说明) {int} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
      *
      * @apiSuccessExample {json} 返回样例:
@@ -75,7 +75,7 @@ class Buffet extends BaseController
      * @apiParam (请求参数说明) {String}  username 申请人/默认传入全部
      * @apiParam (请求参数说明) {String}  time_begin 开始时间
      * @apiParam (请求参数说明) {String}  time_end 截止时间
-     * @apiParam (请求参数说明) {int}  status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过；3 | 获取全部
+     * @apiParam (请求参数说明) {int}  status 流程状态：-1 ; 不通过；0 ; 保存中；1 ;流程中； 2 ;通过；3 ; 获取全部
      * @apiParam (请求参数说明) {int} page 当前页码
      * @apiParam (请求参数说明) {int} size 每页多少条数据
      * @apiSuccessExample {json}返回样例:
@@ -90,11 +90,11 @@ class Buffet extends BaseController
      * @apiSuccess (返回参数说明) {String} department 部门
      * @apiSuccess (返回参数说明) {String} unit 用车时间
      * @apiSuccess (返回参数说明) {String} project  目的地
-     * @apiSuccess (返回参数说明) {String} time_begin   人数
-     * @apiSuccess (返回参数说明) {String} count   人数
-     * @apiSuccess (返回参数说明) {String} time_end   用车原因
-     * @apiSuccess (返回参数说明) {int} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
-     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
+     * @apiSuccess (返回参数说明) {String} time_begin 开始时间
+     * @apiSuccess (返回参数说明) {int} count 人数
+     * @apiSuccess (返回参数说明) {String} time_end  用车原因
+     * @apiSuccess (返回参数说明) {string} meals  订餐信息：数据格式：就餐日期,餐次,用餐人数,费用A就餐日期,餐次,用餐人数,费用
+     * @apiSuccess (返回参数说明) {int} status 流程状态：-1 ; 不通过；0 ; 保存中；1 ;流程中； 2 ; 通过
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
      */
     public function getList($time_begin, $time_end, $department, $username, $status,

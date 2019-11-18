@@ -140,22 +140,6 @@ class Flow extends BaseController
 
 
     /**
-     * @param $flow_id
-     * @param $flow_process
-     * @param $npid
-     * @param $run_id
-     * @param $run_process
-     * @param $wf_fid
-     * @param $wf_type
-     * @param int $repair
-     * @param int $type
-     * @param string $feedback
-     * @param string $imgs
-     * @param string $submit_to_save
-     * @param string $check_con
-     * @return \think\response\Json
-     * @throws TokenException
-     * @throws \think\Exception
      * @api {POST} /api/v1/flow/check/pass/repair  85-报修流程审核-通过
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -291,14 +275,6 @@ class Flow extends BaseController
     }
 
     /**
-     * @param $wf_fid
-     * @param $wf_type
-     * @return Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
      * @api {GET} /api/v1/flow/info 34-获取预约申请—查看审核
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -357,10 +333,6 @@ class Flow extends BaseController
     }
 
     /**
-     * @param $wf_type
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      * @api {GET} /api/v1/flow/complete 59-微信-我的-历史记录
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -397,8 +369,6 @@ class Flow extends BaseController
     }
 
     /**
-     * @param $wf_type
-     * @return \think\response\Json
      * @api {GET} /api/v1/flow/ready 60-微信-我的-待办
      * @apiGroup  WX
      * @apiVersion 1.0.1
@@ -431,6 +401,44 @@ class Flow extends BaseController
     {
         $list = (new Run())->getReady($wf_type);
         return json($list);
+    }
+
+    /**
+     * @api {GET} /api/v1/flow/report/info 获取电子报表信息
+     * @apiGroup  CMS
+     * @apiVersion 1.0.1
+     * @apiDescription  电子报表信息
+     * @apiExample {get} 请求样例:
+     * http://maintain.mengant.cn/api/v1/flow/report/info?wf_fid=48&wf_type=collar_use_t
+     * @apiParam (请求参数说明) {String}  wf_type 流程类别：
+     * 门禁申请：access_control_t；
+     * 场地使用-文体活动：space_recreational_t；
+     * 场地使用-功能室：space_multi_t；
+     * 教育培训—会场预订:meetingplace_t;
+     * 公务接待-围餐预定:meeting_recept_t;
+     * 公务接待-自助餐预定:buffet_t;
+     * 公务接待-酒店预定:hotel_t;
+     * 公务用车:car_t
+     * 用品借用:borrow_t
+     * 用品领用:collar_use_t
+     * 报修:repair_t
+     * @apiSuccessExample {json}返回样例:
+     * {"info":{"id":48,"username":"马达","department":"办公室","phone":"13709610338","time_begin":"2019-04-03","time_end":"2019-04-03","actual_time":"2019-04-03 00:00:00","status":1,"detail":[{"sku_id":23,"sku_name":"签字笔","sku_count":0,"format":"","category_name":"书写修正用品"}]},"flow":[{"uid":57,"content":"发起申请成功","user":{"id":57,"username":"陈伟民","phone":"13802609226","role":"干部职工","department":"法制科"}},{"uid":57,"content":"同意","user":{"id":57,"username":"陈伟民","phone":"13802609226","role":"干部职工","department":"法制科"}},{"uid":56,"content":"同意","user":{"id":56,"username":"林超凡","phone":"13702280500","role":"部门负责人","department":"法制科"}},{"uid":396,"content":"同意","user":{"id":396,"username":"凌丽珠","phone":"15219148433","role":"机服中心管理员","department":"机关服务中心"}}]}
+     * @apiSuccess (返回参数说明) {obj} info 流程信息（具体字段含义参考对应申请信息）
+     * @apiSuccess (返回参数说明) {int} status 流程审批状态：-1：回退修改；0 ：保存中；1：流程中；2：通过
+     * @apiSuccess (返回参数说明) {obj} flow 流程审批信息
+     * @apiSuccess (返回参数说明) {string} content 流程审批意见
+     * @apiSuccess (返回参数说明) {obj} user 流程审批人员信息
+     * @apiSuccess (返回参数说明) {string} username 用户名称
+     * @apiSuccess (返回参数说明) {string} phone 用户手机号
+     * @apiSuccess (返回参数说明) {string} role 用户角色
+     * @apiSuccess (返回参数说明) {string} department 用户所属部门
+     */
+    public function Report($wf_fid, $wf_type)
+    {
+        $info = (new FlowService())->report($wf_fid, $wf_type);
+        return json($info);
+
     }
 
 

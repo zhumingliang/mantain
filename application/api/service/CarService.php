@@ -65,6 +65,9 @@ class CarService extends BaseService
         );
         $file_name = '用车申请导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
+    }
 
+    public function infoForReport($wf_fid){
+        return CarV::infoForReport($wf_fid);
     }
 }

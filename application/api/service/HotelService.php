@@ -50,7 +50,7 @@ class HotelService extends BaseService
     {
 
         $list = HotelV::getList($page, $size, $time_begin, $time_end, $department, $username, $status);
-        $list=(new FlowService())->checkListStatus($list,'hotel_t');
+        $list = (new FlowService())->checkListStatus($list, 'hotel_t');
         return $list;
     }
 
@@ -79,5 +79,9 @@ class HotelService extends BaseService
 
     }
 
+    public function infoForReport($wf_fid)
+    {
+        return HotelV::infoForReport($wf_fid);
+    }
 
 }

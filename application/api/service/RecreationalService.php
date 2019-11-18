@@ -49,17 +49,17 @@ class RecreationalService extends BaseService
 
     }
 
-    public function getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space)
+    public function getList($page, $size, $time_begin, $time_end, $department, $username, $status, $space)
     {
-        $list = RecreationalV::getList($page,$size,$time_begin, $time_end, $department, $username, $status, $space);
-        $list=(new FlowService())->checkListStatus($list,'space_recreational_t');
+        $list = RecreationalV::getList($page, $size, $time_begin, $time_end, $department, $username, $status, $space);
+        $list = (new FlowService())->checkListStatus($list, 'space_recreational_t');
         return $list;
     }
 
     public function export($time_begin, $time_end, $department, $username, $status, $space)
     {
         $list = RecreationalV::export($time_begin, $time_end, $department, $username, $status, $space);
-        $list=$this->prefixStatus($list);
+        $list = $this->prefixStatus($list);
         $header = array(
             '日期',
             '申请人',
@@ -72,6 +72,11 @@ class RecreationalService extends BaseService
         $file_name = '文体活动场地导出' . '-' . date('Y-m-d', time()) . '.csv';
         $this->put_csv($list, $header, $file_name);
 
+    }
+
+    public function infoForReport($wf_fid)
+    {
+        return RecreationalV::infoToReport($wf_fid);
     }
 
 }

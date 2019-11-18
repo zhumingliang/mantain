@@ -81,6 +81,13 @@ class CarV extends Model
             ->select()->toArray();
         return $list;
 
+    }
+
+    public static function infoForReport($wf_fid)
+    {
+        return self::where('id', $wf_fid)
+            ->field('id,username,department,apply_date,address,count,reason,members,status')
+            ->find();
 
     }
 

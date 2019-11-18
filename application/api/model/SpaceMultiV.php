@@ -19,7 +19,7 @@ class SpaceMultiV extends Model
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', 'in', $department);
@@ -62,11 +62,11 @@ class SpaceMultiV extends Model
      * @throws \think\exception\DbException
      */
     public static function export($time_begin, $time_end, $department,
-                                   $username, $status, $space)
+                                  $username, $status, $space)
     {
         $time_end = addDay(1, $time_end);
         $list = self::whereBetweenTime('create_time', $time_begin, $time_end)
-            ->where('state',CommonEnum::STATE_IS_OK)
+            ->where('state', CommonEnum::STATE_IS_OK)
             ->where(function ($query) use ($department) {
                 if ($department && $department != "全部") {
                     $query->where('department', 'in', $department);
@@ -92,8 +92,13 @@ class SpaceMultiV extends Model
             ->select()
             ->toArray();
         return $list;
+    }
 
-
+    public static function infoForReport($wf_fid)
+    {
+        return self::where('id', $wf_fid)
+            ->field('id,username,unit,CONCAT_WS("-",time_begin,time_end) as use_time,reason,space,status')
+            ->find();
     }
 
 }
