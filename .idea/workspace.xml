@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b68c3f37-1d41-4596-b539-9449d74e0e53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/v1/Buffet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,14 +159,9 @@
       <workItem from="1571841006573" duration="1053000" />
       <workItem from="1571842464012" duration="9071000" />
       <workItem from="1573896800495" duration="1011000" />
-      <workItem from="1573920156534" duration="13643000" />
-    </task>
-    <task id="LOCAL-00186" summary="初始化">
-      <created>1554566860404</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1554566860406</updated>
+      <workItem from="1573920156534" duration="14706000" />
+      <workItem from="1574124759327" duration="530000" />
+      <workItem from="1574313871552" duration="634000" />
     </task>
     <task id="LOCAL-00187" summary="初始化">
       <created>1554599440766</created>
@@ -506,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574099742369</updated>
     </task>
-    <option name="localTasksCounter" value="235" />
+    <task id="LOCAL-00235" summary="电子报表接口">
+      <created>1574099780487</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1574099780487</updated>
+    </task>
+    <option name="localTasksCounter" value="236" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,11 +540,6 @@
           <url>file://$PROJECT_DIR$/extend/workflow/class/command/BackFlow.php</url>
           <line>39</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/application/api/service/FlowService.php</url>
-          <line>342</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

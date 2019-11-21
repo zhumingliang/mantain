@@ -418,8 +418,8 @@ class FlowService
             }
         }
 
-        //$user = AdminT::getUserIdWithUserName("凌丽珠");
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
+        $user = AdminT::getUserIdWithUserName("凌丽珠");
+       // $user = AdminT::getUserIdWithUserName("黄锐芝");
         if (strlen($user)) {
             (new MsgService())->sendMsg($user, $msg);
         }
@@ -436,8 +436,8 @@ class FlowService
             $msg = "%s于%s申请场地:%s。";
             $msg = sprintf($msg, $admin->username, $info['create_time'], $wf_type == "meetingplace_t" ? $info['space'] : $info['place']);
             $msg .= "请机服中心相关人员进行跟进。";
-            // $user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
-            $user = AdminT::getUserIdWithUserName("黄锐芝");
+             $user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
+            //$user = AdminT::getUserIdWithUserName("黄锐芝");
             if (strlen($user)) {
                 (new MsgService())->sendMsg($user, $msg);
             }
@@ -462,8 +462,8 @@ class FlowService
 
         //发送给张海滨,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("张海滨,凌丽珠");
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
+         $user = AdminT::getUserIdWithUserName("张海滨,凌丽珠");
+        //$user = AdminT::getUserIdWithUserName("黄锐芝");
         if (!empty($user)) {
             (new MsgService())->sendMsg($user, $msg);
         }
@@ -482,8 +482,8 @@ class FlowService
 
         //推送给凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("凌丽珠");
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
+         $user = AdminT::getUserIdWithUserName("凌丽珠");
+        //$user = AdminT::getUserIdWithUserName("黄锐芝");
         if (!empty($user['user_id'])) {
             (new MsgService())->sendMsg($user['user_id'], $msg);
         }
@@ -504,8 +504,8 @@ class FlowService
 
         //发送给李康,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("李康,凌丽珠");
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
+         $user = AdminT::getUserIdWithUserName("李康,凌丽珠");
+       // $user = AdminT::getUserIdWithUserName("黄锐芝");
         if (!empty($user)) {
             (new MsgService())->sendMsg($user, $msg);
         }
@@ -526,8 +526,8 @@ class FlowService
 
         //推送给张灵学,凌丽珠
         $msg .= "请机服中心相关人员进行跟进。";
-        // $user = AdminT::getUserIdWithUserName("张灵学,凌丽珠");
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
+         $user = AdminT::getUserIdWithUserName("张灵学,凌丽珠");
+        //$user = AdminT::getUserIdWithUserName("黄锐芝");
         if (strlen($user)) {
             (new MsgService())->sendMsg($user, $msg);
         }
