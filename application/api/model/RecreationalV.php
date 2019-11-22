@@ -87,7 +87,7 @@ class RecreationalV extends Model
     public static function infoToReport($id)
     {
         $access = self::where('id', $id)
-            ->field('id,username,unit,user_count,CONCAT_WS("-",time_begin,time_end) as use_time,space,status')
+            ->field('id,create_time,username,unit,user_count,CONCAT_WS("-",time_begin,time_end) as use_time,space,status,outside_count,outside')
             ->find();
         return $access;
 

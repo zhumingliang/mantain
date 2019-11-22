@@ -13,6 +13,9 @@ use think\Model;
 
 class RunLog extends Model
 {
+    public function getDatelineAttr($value){
+        return date('Y-m-d H:i:s',$value);
+    }
     public function admin()
     {
         return $this->belongsTo('AdminT',
@@ -33,7 +36,7 @@ class RunLog extends Model
             ->with(['user' => function ($query) {
                 $query->field('id,username,phone,role,department');
             }])
-            ->field('uid,content')
+            ->field('uid,content,dateline')
             ->select();
 
         return $run_log;

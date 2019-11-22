@@ -14,7 +14,6 @@ class MeetingPlaceValidate extends BaseValidate
     protected $rule = [
         'unit' => 'require|isNotEmpty',
         'place' => 'require|isNotEmpty',
-        'purpose' => 'require|isNotEmpty',
         'reason' => 'require|isNotEmpty',
         'time_begin' => 'require|isNotEmpty',
         'time_end' => 'require|isNotEmpty'

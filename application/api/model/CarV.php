@@ -86,7 +86,7 @@ class CarV extends Model
     public static function infoForReport($wf_fid)
     {
         return self::where('id', $wf_fid)
-            ->field('id,username,department,apply_date,address,count,reason,members,status')
+            ->field('id,create_time,username,department,apply_date,address,count,reason,members,status')
             ->find();
 
     }

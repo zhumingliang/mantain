@@ -17,8 +17,7 @@ class MeetingValidate extends BaseValidate
         'time_begin' => 'require|isNotEmpty',
         'time_end' => 'require|isNotEmpty',
         'meeting_begin' => 'require|isNotEmpty',
-        'theme' => 'require|isNotEmpty',
-        'outline' => 'require|isNotEmpty',
+        'theme' => 'require|isNotEmpty'
     ];
 
 }

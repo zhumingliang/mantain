@@ -86,7 +86,7 @@ class AccessControlV extends Model
     public static function infoToReport($id)
     {
         $access = self::where('id', $id)
-            ->field('id,username,access,user_type,members,deadline,status')
+            ->field('id,create_time,username,access,user_type,members,deadline,status,apply_unit,borrow_unit')
             ->find();
         return $access;
 

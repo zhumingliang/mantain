@@ -677,7 +677,7 @@ class SkuService extends BaseService
         $info = SkuApplyV::infoForReport($wf_fid);
         //获取详情
         $detail = ApplyDetailV::where('type', $type)->where('b_id', $wf_fid)
-            ->field('sku_id,sku_name,sku_count,format,category_name')->select();
+            ->field('create_time,sku_id,sku_name,sku_count,format,category_name')->select();
         $info['detail'] = $detail;
         return $info;
 

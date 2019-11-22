@@ -365,6 +365,7 @@ class Sku extends BaseController
      *    {
      *       "sku_id":1,2,3,
      *       "sku_count":1,2,3,
+     *       "purpose":"申请使用事由",
      *       "time_begin": "2018-12-28",
      *       "time_end": "2018-12-30",
      *       "type": 1
@@ -372,6 +373,7 @@ class Sku extends BaseController
      * @apiParam (请求参数说明) {int} sku_id    用品id,多个用逗号隔开
      * @apiParam (请求参数说明) {int} sku_count 用品数量，多个用逗号隔开
      * @apiParam (请求参数说明) {String} time_begin    领用日期
+     * @apiParam (请求参数说明) {String} purpose    申请使用事由
      * @apiParam (请求参数说明) {String} time_end   归还日期： 借用物品需填写
      * @apiParam (请求参数说明) {int} type   使用方式：1 | 借用；2 | 领用
      * @apiSuccessExample {json} 返回样例:
@@ -422,6 +424,7 @@ class Sku extends BaseController
      * @apiSuccess (返回参数说明) {String} category  类别
      * @apiSuccess (返回参数说明) {String} format  规格型号
      * @apiSuccess (返回参数说明) {int} count  数量
+     * @apiSuccess (返回参数说明) {int} purpose  申请使用事由
      * @apiSuccess (返回参数说明) {String} type  使用方式
      * @apiSuccess (返回参数说明) {String} time_begin   领用日期
      * @apiSuccess (返回参数说明) {String} time_end   归还日期（借用

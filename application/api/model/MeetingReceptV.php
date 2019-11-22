@@ -85,7 +85,7 @@ class MeetingReceptV extends Model
             ->with(['detail' => function ($query) {
                 $query->field('mp_id,recept_time,content,address,money');
             }])
-            ->field('id,username,department,letter_size,letter_title,
+            ->field('id,create_time,username,department,letter_size,letter_title,
             accompany_count,unit,leader, post,grade,departmental,section,
             under_section,meeting_count,accompany,users,money,status')
             ->find();

@@ -77,7 +77,7 @@ class BuffetV extends Model
     public static function infoForReport($wf_fid)
     {
         return self::where('id', $wf_fid)
-            ->field('id,username,department,
+            ->field('id,create_time,username,department,
             CONCAT_WS("-",time_begin,time_end) as use_time,unit,project,meals,status')
             ->find();
     }

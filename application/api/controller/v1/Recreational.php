@@ -33,24 +33,21 @@ class Recreational extends BaseController
      *       "space": "篮球场",
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 12：00",
-     *       "user_count": 10
+     *       "user_count": 10,
+     *       "outside": 1,
+     *       "outside_count": 10,
      *     }
      * @apiParam (请求参数说明) {String} unit 申请单位
      * @apiParam (请求参数说明) {String} space  场地名称
      * @apiParam (请求参数说明) {String} time_begin   使用开始时间
      * @apiParam (请求参数说明) {String} time_end   使用结束时间
      * @apiParam (请求参数说明) {int} user_count   使用人数
-     *
+     * @apiParam (请求参数说明) {int} outside   是否有外来人员：1｜是；2｜否
+     * @apiParam (请求参数说明) {int} outside_count  外来人员数量
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
-     *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function save()
     {
@@ -99,16 +96,6 @@ class Recreational extends BaseController
      * @apiSuccess (返回参数说明) {int} status 流程状态：-1 | 不通过；0 | 保存中；1 | 流程中； 2 | 通过
      * @apiSuccess (返回参数说明) {int} user_count   使用人数
      * @apiSuccess (返回参数说明) {int} admin_id  发起人id
-     *
-     * @param $time_begin
-     * @param $time_end
-     * @param $department
-     * @param $username
-     * @param $status
-     * @param $space
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
      */
     public function getList($time_begin, $time_end, $department, $username, $status,
                             $space, $page = 1, $size = 20)

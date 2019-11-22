@@ -33,20 +33,20 @@ class AccessControl extends BaseController
      *       "deadline": "2018-12-30"
      *       "user_type": "干部职工"
      *       "members": "张三-副主任,李四-主任"
+     *       "apply_unit": "所属市区，局"
+     *       "borrow_unit": "所属科，股室"
      *     }
      * @apiParam (请求参数说明) {String} access   申请功能
      * @apiParam (请求参数说明) {String} deadline   截止时间
      * @apiParam (请求参数说明) {String} user_type   人员类型
+     * @apiParam (请求参数说明) {String} apply_unit   所属市区，局
+     * @apiParam (请求参数说明) {String} apply_unit   所属科，股室
      * @apiParam (请求参数说明) {String} members   申请人员名单-职务，数据格式：姓名-职务,姓名-职务;多个人员信息用逗号隔开
      *
      * @apiSuccessExample {json} 返回样例:
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function save()
     {

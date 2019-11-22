@@ -97,7 +97,7 @@ class SpaceMultiV extends Model
     public static function infoForReport($wf_fid)
     {
         return self::where('id', $wf_fid)
-            ->field('id,username,unit,CONCAT_WS("-",time_begin,time_end) as use_time,reason,space,status')
+            ->field('id,create_time,username,unit,CONCAT_WS("-",time_begin,time_end) as use_time,reason,space,status')
             ->find();
     }
 

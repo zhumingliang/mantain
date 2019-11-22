@@ -27,10 +27,6 @@ use app\lib\exception\SuccessMessage;
 class Meeting extends BaseController
 {
     /**
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/save  6-CMS-新增会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -58,8 +54,7 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String} time_end   签到截止时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议截止时间
-     * @apiParam (请求参数说明) {String} theme   会议主题
-     * @apiParam (请求参数说明) {String} outline   内容概要
+     * @apiParam (请求参数说明) {String} theme   申请使用是由
      * @apiParam (请求参数说明) {String} host   主办部门
      * @apiParam (请求参数说明) {String} push   推送部门：多个用逗号隔开
      * @apiParam (请求参数说明) {String} remark   备注
@@ -86,8 +81,8 @@ class Meeting extends BaseController
         $msg = "%s于%s发起会议申请\n，会议主题:%s;\n会议地点:%s；\n会议时间:%s-%s。\n";
         $msg = sprintf($msg, $username, date('Y-m-d H:i:s'), $params['theme'], $params['address'], $params['meeting_begin'], $params['meeting_end']);
         $msg .= "请机服中心相关人员进行跟进。";
-        $user = AdminT::getUserIdWithUserName("黄锐芝");
-        //$user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
+       // $user = AdminT::getUserIdWithUserName("黄锐芝");
+        $user = AdminT::getUserIdWithUserName("李景文,凌丽珠");
         if (!empty($user)) {
             (new MsgService())->sendMsg($user, $msg);
         }
@@ -96,12 +91,6 @@ class Meeting extends BaseController
     }
 
     /**
-     * @param $id
-     * @return \think\response\Json
-     * @throws OperationException
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {POST} /api/v1/meeting/update  7-CMS-修改会议
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -115,8 +104,7 @@ class Meeting extends BaseController
      *       "time_begin": "2018-12-30 09：00",
      *       "time_end": "2018-12-30 09：30",
      *       "meeting_begin": "2018-12-30 10：00",
-     *       "theme": "全体职工大会",
-     *       "outline": "年终总结",
+     *       "theme": "全体职工大会"
      *       "remark": "必须参加",
      *       "host": "办公室",
      *       "push": "稽查局,财务管理科",
@@ -128,8 +116,7 @@ class Meeting extends BaseController
      * @apiParam (请求参数说明) {String} time_begin   签到开始时间
      * @apiParam (请求参数说明) {String} time_end   签到截止时间
      * @apiParam (请求参数说明) {String} meeting_begin   会议开始时间
-     * @apiParam (请求参数说明) {String} theme   会议主题
-     * @apiParam (请求参数说明) {String} outline   内容概要
+     * @apiParam (请求参数说明) {String} theme  申请使用是由
      * @apiParam (请求参数说明) {String} host   主办部门
      * @apiParam (请求参数说明) {String} push   推送部门：多个用逗号隔开
      * @apiParam (请求参数说明) {String} remark   备注
@@ -216,16 +203,6 @@ class Meeting extends BaseController
     }
 
     /**
-     * @param $time_begin
-     * @param $time_end
-     * @param string $address
-     * @param string $theme
-     * @param string $host
-     * @param int $page
-     * @param int $size
-     * @return \think\response\Json
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      * @api {GET} /api/v1/meeting/list 30-会议列表
      * @apiGroup  CMS
      * @apiVersion 1.0.1
@@ -247,8 +224,7 @@ class Meeting extends BaseController
      * @apiSuccess (返回参数说明) {int} last_page 最后页码
      * @apiSuccess (返回参数说明) {int} id 会议id
      * @apiSuccess (返回参数说明) {String} create_time 日期
-     * @apiSuccess (返回参数说明) {String} theme 会议主题
-     * @apiSuccess (返回参数说明) {String} outline 会议概要
+     * @apiSuccess (返回参数说明) {String} theme 申请使用是由
      * @apiSuccess (返回参数说明) {String} address 签到地点
      * @apiSuccess (返回参数说明) {String} time_begin 签到开始时间
      * @apiSuccess (返回参数说明) {String} time_end 签到截止时间

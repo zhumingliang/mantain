@@ -78,7 +78,7 @@ class HotelV extends Model
 
     public static function infoForReport($wf_fid)
     {
-        return self::where('id', $wf_fid)->field('id,username,department,
+        return self::where('id', $wf_fid)->field('id,create_time,username,department,
             CONCAT_WS("-",time_begin,time_end) as use_time,unit,hotel,hotel,guesthouse,male,female,
             single_room,double_room,members,status')
             ->find();

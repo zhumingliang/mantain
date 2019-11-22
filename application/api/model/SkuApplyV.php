@@ -87,7 +87,7 @@ class SkuApplyV extends Model
                 }
             })
             ->field('id,create_time,username,department,phone,"" as sku,type as sub_type,IF(type="borrow_t","借用","领用") as type
-           ,time_begin,time_end,actual_time,status')
+           ,time_begin,time_end,actual_time,status,purpose')
             ->order('create_time desc')
             ->select()
             ->toArray();
@@ -98,7 +98,7 @@ class SkuApplyV extends Model
     public static function infoForReport($wf_fid)
     {
         return self::where('id', $wf_fid)
-            ->field('id,username,department,phone,time_begin,time_end,actual_time,status')
+            ->field('id,username,department,phone,time_begin,time_end,actual_time,status,purpose')
             ->find();
     }
 

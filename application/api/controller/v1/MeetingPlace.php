@@ -30,14 +30,12 @@ class MeetingPlace extends BaseController
      *    {
      *       "unit": "税务局",
      *       "place": "202会议室",
-     *       "purpose": "会议",
      *       "reason": 开会,
      *       "time_begin": "2018-12-22 09:00",
      *       "time_end": "2018-12-22 12:00",
      *     }
      * @apiParam (请求参数说明) {String} unit   申请单位
      * @apiParam (请求参数说明) {String} place  场地名称
-     * @apiParam (请求参数说明) {String} purpose   用途
      * @apiParam (请求参数说明) {int} reason   使用事由
      * @apiParam (请求参数说明) {String} time_begin   开始时间
      * @apiParam (请求参数说明) {String} time_end   结束时间
@@ -46,11 +44,6 @@ class MeetingPlace extends BaseController
      * {"msg":"ok","errorCode":0}
      * @apiSuccess (返回参数说明) {int} error_code 错误代码 0 表示没有错误
      * @apiSuccess (返回参数说明) {String} msg 操作结果描述
-     *
-     * @return \think\response\Json
-     * @throws \app\lib\exception\ParameterException
-     * @throws \app\lib\exception\TokenException
-     * @throws \think\Exception
      */
     public function save()
     {
